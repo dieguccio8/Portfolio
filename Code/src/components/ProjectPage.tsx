@@ -32,6 +32,11 @@ import UserJourney from './UserJourney';
 import ProjectRightColumn from './ProjectRightColumn';
 import KineticsLowerSections from './KineticsLowerSections';
 import ChronosLowerSections from './ChronosLowerSections';
+import { CustomCursor } from './CustomCursor';
+import { SmoothScroll } from './SmoothScroll';
+import { ScrollProgress } from './ScrollProgress';
+import { ScrollReveal } from './ScrollReveal';
+import { FloatingPaths } from './ui/background-paths';
 
 function BeforeAfterSlider() {
   const [sliderPos, setSliderPos] = useState(50);
@@ -196,10 +201,23 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
   const isChronos = project.id === 'chronos';
   const isDetailed = isAetheris || isKinetics || isChronos;
 
+  const primaryColor = isAetheris ? '#068B35' : isKinetics ? '#FCD306' : isChronos ? '#9E1C1F' : '#E8302A';
+
   return (
-    <div id="project-page-root" className={`min-h-screen pb-24 relative ${isKinetics ? 'font-urbanist bg-[#0D0D0D] text-[#F5F5F0] selection:bg-[#FCD306] selection:text-[#0D0D0D]' : isAetheris ? 'font-raleway bg-[#121312] text-white selection:bg-[#068B35]/30 selection:text-white' : isChronos ? 'font-sans bg-black text-white selection:bg-[#9E1C1F] selection:text-white' : 'font-sans bg-black text-white selection:bg-[#E8302A] selection:text-white'}`}>
+    <SmoothScroll>
+      <CustomCursor color={primaryColor} />
+      <ScrollProgress color={primaryColor} />
+      <ScrollReveal />
+      <div id="project-page-root" className={`min-h-screen pb-24 relative ${isKinetics ? 'font-urbanist bg-[#0D0D0D] text-[#F5F5F0] selection:bg-[#FCD306] selection:text-[#0D0D0D]' : isAetheris ? 'font-raleway bg-[#121312] text-white selection:bg-[#068B35]/30 selection:text-white' : isChronos ? 'font-sans bg-black text-white selection:bg-[#9E1C1F] selection:text-white' : 'font-sans bg-black text-white selection:bg-[#E8302A] selection:text-white'}`}>
       
       {/* Ambient soft primary glows */}
+      {!isAetheris && (
+        <div className="fixed inset-0 pointer-events-none opacity-20 scale-[2.2] -translate-y-[35%] md:translate-y-0 md:scale-100 origin-center z-0">
+          <FloatingPaths position={1} />
+          <FloatingPaths position={-1} />
+        </div>
+      )}
+
       {isKinetics ? (
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {/* Subtle concrete grain noise overlay */}
@@ -245,7 +263,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
       >
         {/* Left Area: Language Selector & Logo/Brand (returns to Home on click) */}
         <div className="flex justify-start items-center gap-3">
-          {setLang && (
+          {!isAetheris && setLang && (
             <button 
               onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
               className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
@@ -309,10 +327,19 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
             target="_blank"
             rel="noreferrer"
-            className="bg-[#E8302A] hover:bg-[#c9221d] text-white px-3 sm:px-5 py-2 rounded-full font-bold transition-all duration-300 shadow-[0_0_15px_rgba(232,48,42,0.3)] hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-[10px] uppercase text-center"
+            className={`text-white px-3 sm:px-5 py-2 rounded-full font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-[10px] uppercase text-center shrink-0 ${isAetheris ? 'bg-[#068B35] hover:bg-[#057A2E] shadow-[0_0_15px_rgba(6,139,53,0.3)]' : 'bg-[#E8302A] hover:bg-[#c9221d] shadow-[0_0_15px_rgba(232,48,42,0.3)]'}`}
           >
-            {lang === 'it' ? 'Lavoriamo' : "Let's work"}
+            {isAetheris ? (lang === 'it' ? 'Contattami' : 'Contact me') : (lang === 'it' ? 'Lavoriamo' : "Let's work")}
           </a>
+          {isAetheris && setLang && (
+            <button 
+              onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+              title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
+            >
+              {lang.toUpperCase()}
+            </button>
+          )}
         </div>
       </header>
       {isKinetics ? (
@@ -2767,5 +2794,6 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
       </section>
 
     </div>
+    </SmoothScroll>
   );
 }

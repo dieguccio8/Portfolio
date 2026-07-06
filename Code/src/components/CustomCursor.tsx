@@ -5,7 +5,7 @@ type CursorMode = 'default' | 'button' | 'image' | 'text';
 
 const RING_SPRING = { stiffness: 120, damping: 18, mass: 0.8 };
 
-export function CustomCursor() {
+export function CustomCursor({ color = '#E8302A' }: { color?: string }) {
   const [mode, setMode] = useState<CursorMode>('default');
   const [isVisible, setIsVisible] = useState(false);
   const dotX = useMotionValue(0);
@@ -57,7 +57,7 @@ export function CustomCursor() {
       <motion.div
         className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999]"
         style={{ x: dotX, y: dotY, translateX: '-50%', translateY: '-50%' }}
-        animate={{ width: dotSize, height: dotSize, opacity: isVisible ? 1 : 0, backgroundColor: mode === 'image' ? '#ffffff' : '#E8302A' }}
+        animate={{ width: dotSize, height: dotSize, opacity: isVisible ? 1 : 0, backgroundColor: mode === 'image' ? '#ffffff' : color }}
         transition={{ duration: 0.12 }}
       />
       <motion.div
@@ -67,8 +67,8 @@ export function CustomCursor() {
           width: ringSize,
           height: ringSize,
           opacity: isVisible ? 1 : 0,
-          borderColor: mode === 'button' ? '#E8302A' : mode === 'image' ? '#ffffff' : 'rgba(255,255,255,0.35)',
-          backgroundColor: mode === 'button' ? 'rgba(232,48,42,0.07)' : 'transparent',
+          borderColor: mode === 'button' ? color : mode === 'image' ? '#ffffff' : 'rgba(255,255,255,0.35)',
+          backgroundColor: mode === 'button' ? `${color}12` : 'transparent',
         }}
         transition={{ duration: 0.18 }}
       >
