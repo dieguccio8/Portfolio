@@ -635,6 +635,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             </h1>
             {isAetheris && (
               <div className="flex flex-col gap-1 w-full items-center justify-center mb-4">
+                <div className="bg-black/30 backdrop-blur-xl rounded-3xl p-6 sm:p-8 md:p-10 mb-8 border border-white/15 shadow-[0_15px_40px_rgba(0,0,0,0.6)] flex items-center justify-center">
+                  <img 
+                    src="/logo_orto_botanico_testo_bianco.png" 
+                    alt="Orto Botanico" 
+                    className="w-[250px] sm:w-[320px] md:w-[400px] object-contain"
+                  />
+                </div>
                 {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}
                 <div className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 w-full">
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
