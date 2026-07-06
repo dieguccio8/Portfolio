@@ -855,7 +855,7 @@ export default function App() {
         {/* COMBINED WRAPPER FOR PROJECTS AND CONTACTS (To share the continuous BackgroundPaths effect) */}
         <div className="relative w-full bg-[#050505] overflow-hidden border-t border-[#2A2A2A]">
           {/* Shared Floating Paths background spanning both sections */}
-          <div className="absolute inset-0 pointer-events-none opacity-40 scale-[1.3] md:scale-100 origin-center">
+          <div className="absolute inset-0 pointer-events-none opacity-40 scale-[2.2] -translate-y-[35%] md:translate-y-0 md:scale-100 origin-center">
             <FloatingPaths position={1} />
             <FloatingPaths position={-1} />
           </div>
@@ -896,7 +896,7 @@ export default function App() {
                   <img
                     src="/project_cards_cover/orto_botanico.svg"
                     alt="Orto Botanico"
-                    className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                    className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6 text-left">
@@ -921,7 +921,7 @@ export default function App() {
                   <img
                     src="/project_cards_cover/uss.svg"
                     alt="Urban StreetArt Sicily"
-                    className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                    className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6 text-left">
@@ -946,7 +946,7 @@ export default function App() {
                   <img
                     src="/project_cards_cover/italo.svg"
                     alt="Italo Treni"
-                    className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                    className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6 text-left">
