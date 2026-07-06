@@ -601,7 +601,7 @@ export default function App() {
           </div>
 
           {/* Top Row: Portrait image & text description beautifully balanced in a 50/50 side-by-side layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 sm:gap-16 lg:gap-24 items-center max-w-5xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 sm:gap-20 lg:gap-32 items-center max-w-5xl mx-auto w-full">
             
             {/* LEFT COLUMN: Silhouette Rounded Art Portrait only */}
             <div className="relative my-12 lg:my-10 w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] lg:w-[500px] lg:h-[500px] aspect-square mx-auto lg:ml-auto lg:mr-0 group select-none overflow-hidden rounded-full bg-[#141414] border border-[#2A2A2A] shadow-2xl custom-card-transition duration-500 hover:scale-[1.02] hover:border-white/20" id="about-left-column" data-reveal="scale" data-delay="100">
