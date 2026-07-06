@@ -35,6 +35,24 @@ import { SmoothScroll } from './components/SmoothScroll.tsx';
 import { ScrollProgress } from './components/ScrollProgress.tsx';
 import { ScrollReveal } from './components/ScrollReveal.tsx';
 
+const PenNibIcon = ({ className, strokeWidth = 2 }: { className?: string; strokeWidth?: number }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth={strokeWidth} 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M6 13l1.5-7.5L22 2l-3.5 14.5L11 18l-5-5z" />
+    <circle cx="13" cy="11" r="2.5" />
+    <path d="M14.768 9.232L22 2" />
+    <path d="M11 18l-4 4" />
+    <path d="M6 13l-4 4" />
+  </svg>
+);
 export default function App() {
   const [lang, setLang] = useState<'it' | 'en'>('it');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -740,98 +758,77 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full" id="competencies-grid">
-
-                  {/* UX / Product Design column */}
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E8302A]">
-                      <span>UX / Product Design</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full" id="competencies-grid">
+                  
+                  {/* Card 1: UX/UI */}
+                  <div className="bg-white/[0.02] border border-white/5 backdrop-blur-sm rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 group transition-all duration-500 hover:border-white/20 hover:bg-white/[0.04] shadow-lg">
+                    {/* Icon in bottom left, rotated towards center */}
+                    <PenNibIcon 
+                      className="absolute -bottom-10 -left-10 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] text-white opacity-[0.03] pointer-events-none group-hover:scale-105 group-hover:opacity-[0.06] transition-all duration-700 ease-out" 
+                      strokeWidth={0.5}
+                    />
+                    
+                    <div className="flex items-center gap-3 z-10">
+                      <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight uppercase">UX / UI</h4>
                     </div>
-                    <ul className="flex flex-col gap-2.5 text-xs text-white/70">
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'User Research (interviste, osservazione, test di usabilità)' : 'User Research (interviews, observation, usability testing)'}</span>
+                    
+                    <ul className="flex flex-col gap-3.5 z-10 text-xs sm:text-sm text-white/70 font-light leading-relaxed">
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
+                        <span>User Research, Analisi dei bisogni e del comportamento utente</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'Analisi dei bisogni e comportamento utente' : 'User needs and behavior analysis'}</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
+                        <span>Information Architecture, User Flow e Journey Mapping</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>Information Architecture</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
+                        <span>Wireframing, UI Design e Prototipazione interattiva</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'User Flow e Journey Mapping' : 'User Flow & Journey Mapping'}</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
+                        <span>Creazione e gestione di Design Systems (componenti, coerenza visiva, pattern)</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>Wireframing</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
+                        <span>Visual Hierarchy e Data Visualization</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'Prototipazione interattiva' : 'Interactive prototyping'}</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
+                        <span>UX Writing base</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'UX Writing base' : 'Basic UX Writing'}</span>
-                      </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>Usability testing</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
+                        <span>Fondamenti di Motion Design e 3D Graphics</span>
                       </li>
                     </ul>
                   </div>
 
-                  {/* UI / Visual Design column */}
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E8302A]">
-                      <span>UI / Visual Design</span>
+                  {/* Card 2: Tecnologie & Digital */}
+                  <div className="bg-white/[0.02] border border-white/5 backdrop-blur-sm rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 group transition-all duration-500 hover:border-white/20 hover:bg-white/[0.04] shadow-lg">
+                    {/* Icon in bottom left, rotated towards center */}
+                    <Layers 
+                      className="absolute -bottom-16 -left-16 w-72 h-72 text-white opacity-[0.03] pointer-events-none group-hover:scale-105 group-hover:opacity-[0.06] transition-all duration-700 ease-out rotate-[15deg]" 
+                      strokeWidth={0.5}
+                    />
+                    
+                    <div className="flex items-center gap-3 z-10">
+                      <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight uppercase">
+                        {lang === 'it' ? 'Tecnologie & Digital' : 'Technologies & Digital'}
+                      </h4>
                     </div>
-                    <ul className="flex flex-col gap-2.5 text-xs text-white/70">
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>UI Design</span>
-                      </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'Design Systems (componenti, coerenza visiva, pattern)' : 'Design Systems (components, visual consistency, patterns)'}</span>
-                      </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>Visual hierarchy</span>
-                      </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>Data Visualization</span>
-                      </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'Fondamenti di Motion Design' : 'Fundamentals of Motion Design'}</span>
-                      </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
-                        <span>{lang === 'it' ? 'Fondamenti di 3D Graphics' : 'Fundamentals of 3D Graphics'}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Tecnologie & Digital column */}
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#E8302A]">
-                      <span>{lang === 'it' ? 'Tecnologie & Digital' : 'Technologies & Digital'}</span>
-                    </div>
-                    <ul className="flex flex-col gap-2.5 text-xs text-white/70">
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
+                    
+                    <ul className="flex flex-col gap-3.5 z-10 text-xs sm:text-sm text-white/70 font-light leading-relaxed">
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
                         <span>{lang === 'it' ? 'Fondamenti di HTML e CSS' : 'Fundamentals of HTML & CSS'}</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
                         <span>{lang === 'it' ? 'IA Generativa applicata al design' : 'Generative AI applied to design'}</span>
                       </li>
-                      <li className="flex items-start gap-2 group-hover:text-white transition-colors">
-                        <span className="text-[#E8302A] mt-0.5">•</span>
+                      <li className="flex items-start gap-2">
+                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
                         <span>{lang === 'it' ? 'Prototipazione assistita da AI' : 'AI-assisted prototyping'}</span>
                       </li>
                     </ul>
