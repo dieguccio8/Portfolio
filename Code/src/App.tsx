@@ -606,7 +606,7 @@ export default function App() {
             {/* LEFT COLUMN: Silhouette Rounded Art Portrait only */}
             <div className="relative my-12 lg:my-10 w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] lg:w-[500px] lg:h-[500px] aspect-square mx-auto lg:ml-auto lg:mr-0 group select-none overflow-hidden rounded-full bg-[#141414] border border-[#2A2A2A] shadow-2xl custom-card-transition duration-500 hover:scale-[1.02] hover:border-white/20" id="about-left-column" data-reveal="scale" data-delay="100">
               <img 
-                src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80"
+                src="/pic_about_me.jpg"
                 alt="Diego Portrait"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale brightness-90 contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
