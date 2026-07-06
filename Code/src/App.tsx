@@ -671,10 +671,10 @@ export default function App() {
             {/* Under Row: Strumenti & Competenze Cards placed full-width underneath */}
             <div className="flex flex-col gap-8 w-full" id="about-subsections-container">
 
-              {/* Card 1: Strumenti (Tools) Cards */}
+              {/* Single Card: Strumenti & Competenze */}
               <div
-                id="about-card-tools"
-                className="bg-white/[0.03] border border-white/10 backdrop-blur-md rounded-[2rem] p-6 sm:p-8 flex flex-col gap-6 shadow-2xl relative overflow-hidden custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:scale-[1.02] hover:border-white/20 group"
+                id="about-card-combined"
+                className="bg-white/[0.03] border border-white/10 backdrop-blur-md rounded-[2rem] p-6 sm:p-8 flex flex-col gap-8 shadow-2xl relative overflow-hidden custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:scale-[1.01] hover:border-white/20 group"
                 data-reveal data-delay="0"
               >
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -732,15 +732,8 @@ export default function App() {
                   </div>
 
                 </div>
-              </div>
 
-              {/* Card 2: Competenze (Skills) Card */}
-              <div
-                id="about-card-skills"
-                className="bg-white/[0.03] border border-white/10 backdrop-blur-md rounded-[2rem] p-6 sm:p-8 flex flex-col gap-6 shadow-2xl relative overflow-hidden custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:scale-[1.02] hover:border-white/20 group"
-                data-reveal data-delay="120"
-              >
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4 mt-6">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
                     <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white">{lang === 'it' ? 'Competenze' : 'Skills'}</h3>
