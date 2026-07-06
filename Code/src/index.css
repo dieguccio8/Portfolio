@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fragment+Mono:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Outfit:wght@100..900&family=Space+Grotesk:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700;800&family=Urbanist:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Kreatives';
+  src: url('/fonts/Kreatives-Free.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "Fragment Mono", monospace;
+  --font-space: "Space Grotesk", system-ui, sans-serif;
+  --font-urbanist: "Urbanist", system-ui, sans-serif;
+  --font-raleway: "Raleway", system-ui, sans-serif;
+  --font-kreatives: "Kreatives", sans-serif;
+
+
+  --color-bg: #050505;
+  --color-bg-elevated: #141414;
+  --color-bg-card: #1A1A1A;
+  --color-surface: #222222;
+  --color-border: #2A2A2A;
+  --color-border-subtle: #1E1E1E;
+
+  --color-accent: #E8302A;
+  --color-accent-dark: #B52420;
+  --color-accent-muted: #3D1210;
+
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #AAAAAA;
+  --color-text-muted: #666666;
+  --color-text-accent: #E8302A;
+}
+
+/* Base custom styles to respect selection and overall dark theme */
+::selection {
+  background: #E8302A;
+  color: #FFFFFF;
+}
+
+body {
+  background-color: #050505;
+  color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style scrollbar to match the dark premium aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E8302A;
+}
+
+/* ─── Custom Cursor: hide native on desktop ─────────────────────────────── */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+/* ─── Noise Grain Texture (fixed, behind everything except cursor) ────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  background-repeat: repeat;
+}
+
+/* ─── Hero parallax image setup ─────────────────────────────────────────── */
+.hero-bg-img {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ─── Scroll-triggered element prep ────────────────────────────────────── */
+.gsap-reveal {
+  will-change: transform, opacity;
+}
+
+/* ─── Prefers reduced motion: disable all animations ────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Scroll Reveal System ──────────────────────────────────────────────── */
+/* Elements with [data-reveal] are hidden by default and revealed via JS */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0ms;
+}
+
+[data-reveal="scale"] {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal="fade"] {
+  opacity: 0;
+  transform: none;
+  transition: opacity 0.8s ease;
+}
+
+[data-reveal].is-revealed,
+[data-reveal="scale"].is-revealed,
+[data-reveal="fade"].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─── Safe Custom Transition for Cards (Avoids transition-all jitter) ───── */
+.custom-card-transition {
+  transition-property: transform, scale, rotate, translate, box-shadow, border-color, background-color, opacity, color;
+  will-change: transform, scale, rotate;
+}
+
+
+
+
