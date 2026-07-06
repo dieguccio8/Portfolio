@@ -258,7 +258,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
       
       {/* 1. FIXED TOP HEADER (Pill shape, matches home navbar) */}
       <header 
-        className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl grid grid-cols-3 items-center text-xs uppercase tracking-widest font-normal border border-white/10 rounded-full px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
+        className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl grid grid-cols-3 items-center text-xs uppercase tracking-widest font-normal border border-white/15 rounded-full px-6 py-2.5 bg-black/50 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
         id="project-header"
       >
         {/* Left Area: Language Selector & Logo/Brand (returns to Home on click) */}
@@ -266,7 +266,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           {!isAetheris && setLang && (
             <button 
               onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
-              className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+              className="flex items-center justify-center w-8 h-8 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/40 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
               title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
             >
               {lang.toUpperCase()}
@@ -278,43 +278,26 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             className="flex justify-start items-center gap-2.5 group/logo cursor-pointer" 
             title={lang === 'it' ? 'Torna alla Home' : 'Back to Home'}
           >
-            <svg 
-              viewBox="0 0 100 100" 
-              className="w-7 h-7 text-[#E8302A] transition-all duration-300 hover:scale-105"
-              aria-label="Diego Cavallaro Logo"
-            >
-              <path 
-                d="M 25 20 H 55 C 75 20, 75 50, 55 50 H 25" 
-                stroke="#E8302A" 
-                strokeWidth="10" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                fill="none" 
-              />
-              <path 
-                d="M 25 50 H 55 C 75 50, 75 80, 55 80 H 25" 
-                stroke="white" 
-                strokeWidth="10" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                fill="none" 
-              />
-            </svg>
+            <img
+              src="/logo_diego_cavallaro.png"
+              className="w-5 h-5 object-contain transition-all duration-300 hover:scale-105"
+              alt="Diego Cavallaro Logo"
+            />
             <span className="text-white font-sans font-bold tracking-tight text-sm uppercase group-hover/logo:text-[#E8302A] transition-colors hidden md:inline-block font-sans">Diego Cavallaro</span>
           </div>
         </div>
 
         {/* Center Area: Global Navigation (Back to Home button and current project tag) */}
         <div className="flex justify-center items-center gap-4 sm:gap-6 col-start-2">
-          <nav className="flex justify-center items-center gap-4 sm:gap-6 text-white/50">
+          <nav className="flex justify-center items-center gap-4 sm:gap-6 text-white/80">
             <button 
               onClick={onClose}
-              className="transition-colors duration-300 hover:text-white cursor-pointer text-white/50 flex items-center gap-1.5 font-medium relative group"
+              className="transition-colors duration-300 hover:text-white cursor-pointer text-white/80 flex items-center gap-1.5 font-medium relative group"
             >
               <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
               <span>Home</span>
             </button>
-            <span className="text-white/20 hidden sm:inline">|</span>
+            <span className="text-white/40 hidden sm:inline">|</span>
             <span className="text-white font-semibold font-mono tracking-wider hidden sm:inline truncate max-w-[150px]">
               {project.title}
             </span>
@@ -624,10 +607,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         <section className={`relative w-full pt-20 h-[50vh] sm:h-[60vh] md:h-[70vh] flex flex-col justify-end p-6 sm:p-12 md:p-16 overflow-hidden ${isKinetics ? 'bg-[#0D0D0D]' : ''}`}>
           <div className="absolute inset-0 z-0">
             <img 
-              src={wireframeImages[`hero_${project.id}`] || project.heroImage} 
+              src={isAetheris ? '/project-01-hero.jpg' : (wireframeImages[`hero_${project.id}`] || project.heroImage)} 
               alt={project.title}
               referrerPolicy="no-referrer"
-              className={`w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] ${isKinetics ? 'grayscale brightness-[0.3] contrast-[1.15] hover:grayscale-0' : 'grayscale brightness-[0.4] hover:grayscale-0'}`}
+              className={`w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] ${isKinetics ? 'grayscale brightness-[0.3] contrast-[1.15] hover:grayscale-0' : isAetheris ? '' : 'grayscale brightness-[0.4] hover:grayscale-0'}`}
             />
             <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
           </div>
@@ -648,33 +631,26 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     </svg>
                   </span>
                 </>
-              ) : project.title}
+              ) : !isAetheris ? project.title : null}
             </h1>
             {isAetheris && (
-              <div className="flex flex-col gap-1 -mt-2">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-raleway text-white/90 tracking-wide font-semibold">
-                  Bussola Verde
-                </h2>
-                <p className="text-xs sm:text-sm text-[#068B35] font-mono mt-1 tracking-wider uppercase">
-                  {getLocalizedField('category')}
-                </p>
-
-                {/* Sleek Horizontal Project Ledger for Aetheris */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 mt-4 border-t border-white/10 max-w-xl">
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-400 tracking-wider block mb-1">Client</span>
+              <div className="flex flex-col gap-1 w-full items-center justify-center mb-4">
+                {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}
+                <div className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 w-full">
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
+                    <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Client:</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">{project.client}</span>
                   </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-400 tracking-wider block mb-1">Year</span>
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
+                    <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Year:</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">{project.year}</span>
                   </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-400 tracking-wider block mb-1">My Role</span>
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
+                    <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Role:</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">{project.role}</span>
                   </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-400 tracking-wider block mb-1">Project Type</span>
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
+                    <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Type:</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">Team Project</span>
                   </div>
                 </div>

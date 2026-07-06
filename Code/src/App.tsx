@@ -328,8 +328,8 @@ export default function App() {
               {/* Desktop Only Logo - Diego Cavallaro Premium Monogram with red accent */}
               <div className="hidden md:flex justify-start items-center gap-2.5 group/logo cursor-pointer" onClick={() => scrollToSection('hero-section')}>
                 <img
-                  src="/logo.png"
-                  className="w-6 h-6 object-contain transition-all duration-300 hover:scale-105"
+                  src="/logo_diego_cavallaro.png"
+                  className="w-5 h-5 object-contain transition-all duration-300 hover:scale-105"
                   alt="Diego Cavallaro Logo"
                   id="header-logo-img"
                 />
@@ -342,8 +342,8 @@ export default function App() {
               {/* Mobile Only Center Logo */}
               <div className="flex md:hidden justify-center items-center cursor-pointer" onClick={() => { scrollToSection('hero-section'); setMobileMenuOpen(false); }}>
                 <img
-                  src="/logo.png"
-                  className="w-6 h-6 object-contain"
+                  src="/logo_diego_cavallaro.png"
+                  className="w-5 h-5 object-contain"
                   alt="Diego Cavallaro Logo"
                 />
               </div>
