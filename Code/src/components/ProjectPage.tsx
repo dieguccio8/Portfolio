@@ -32,6 +32,7 @@ import UserJourney from './UserJourney';
 import ProjectRightColumn from './ProjectRightColumn';
 import KineticsLowerSections from './KineticsLowerSections';
 import ChronosLowerSections from './ChronosLowerSections';
+import { AetherisLowerSections } from './AetherisLowerSections';
 import { CustomCursor } from './CustomCursor';
 import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from './ScrollProgress';
@@ -764,26 +765,38 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col gap-10">
-                  {/* Descrizione Orto Botanico con immagine accanto */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    <div className="md:col-span-7 flex flex-col gap-4">
-                      <span className={`text-[10px] font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>01 / Introduzione</span>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
-                        Situato nel cuore di Catania, l'Orto Botanico unisce la bellezza dell'architettura ottocentesca alla ricchezza della natura.
-                      </h3>
-                      <p className="text-sm sm:text-base leading-relaxed text-neutral-400 font-light">
-                        Le sue grandi serre storiche custodiscono sia piante siciliane che specie tropicali, confermandosi un luogo dove la tradizione universitaria incontra la meraviglia del mondo vegetale.
-                      </p>
+                <div className="flex flex-col gap-16 w-full">
+                  {/* Visual Intro Grid for Orto Botanico */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    <div className="md:col-span-5 flex flex-col gap-8">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">01 / Introduzione</span>
+                      
+                      <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-1 border-l-2 border-[#068B35]/30 pl-4 transition-colors hover:border-[#068B35]">
+                          <h3 className="text-xl font-bold text-white tracking-tight leading-snug">Cuore di Catania</h3>
+                          <p className="text-sm leading-relaxed text-neutral-400 font-light">Architettura dell'Ottocento immersa nel verde urbano.</p>
+                        </div>
+                        
+                        <div className="flex flex-col gap-1 border-l-2 border-[#068B35]/30 pl-4 transition-colors hover:border-[#068B35]">
+                          <h3 className="text-xl font-bold text-white tracking-tight leading-snug">Biodiversità</h3>
+                          <p className="text-sm leading-relaxed text-neutral-400 font-light">Collezioni di flora siciliana e specie tropicali.</p>
+                        </div>
+
+                        <div className="flex flex-col gap-1 border-l-2 border-[#068B35]/30 pl-4 transition-colors hover:border-[#068B35]">
+                          <h3 className="text-xl font-bold text-white tracking-tight leading-snug">Ricerca</h3>
+                          <p className="text-sm leading-relaxed text-neutral-400 font-light">La tradizione universitaria incontra la meraviglia botanica.</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="md:col-span-5 h-56 sm:h-64 rounded-2xl overflow-hidden border border-white/10 shadow-xl relative group bg-[#1A1A1A]">
+                    
+                    <div className="md:col-span-7 h-64 sm:h-80 md:h-[400px] rounded-[2rem] overflow-hidden border border-[#068B35]/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative group bg-[#1A1A1A]">
                       <img 
                         src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=600&auto=format&fit=crop" 
                         alt="Orto Botanico Catania" 
                         referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-1000 ease-[0.16,1,0.3,1] group-hover:scale-[1.03]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                     </div>
                   </div>
                 </div>
@@ -849,6 +862,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           <ChronosLowerSections
             copiedColor={copiedColor}
             handleCopyHex={handleCopyHex}
+          />
+        ) : isAetheris ? (
+          <AetherisLowerSections
+            project={project}
+            activeResearchTab={activeResearchTab}
+            setActiveResearchTab={setActiveResearchTab}
+            lang={lang}
           />
         ) : (
           isDetailed && (
