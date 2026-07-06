@@ -309,6 +309,17 @@ export function AetherisLowerSections({
         </div>
       </div>
 
+      {/* MOCKUP MOBILE */}
+      <div className="pt-16 pb-8 w-full">
+        <div className="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]">
+          <img 
+            src="/project-01-mockup-mobile.jpg" 
+            alt="Bussola Verde Mobile Mockup"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+      </div>
+
       {/* 04 / USER PERSONA */}
       <div className="pt-16 border-t border-white/5 flex flex-col gap-12 pb-16">
         <div className="flex flex-col gap-4 text-center items-center">
