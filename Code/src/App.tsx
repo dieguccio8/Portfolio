@@ -590,7 +590,7 @@ export default function App() {
         <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col gap-12 sm:gap-20">
           
           {/* Header Block: Full width master section title */}
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center text-center">
             <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono" data-reveal data-delay="0">
               <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
               <span>{lang === 'it' ? 'About' : 'About me'}</span>
@@ -604,7 +604,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 sm:gap-16 lg:gap-24 items-center max-w-5xl mx-auto w-full">
             
             {/* LEFT COLUMN: Silhouette Rounded Art Portrait only */}
-            <div className="relative w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[440px] lg:h-[440px] aspect-square mx-auto lg:ml-auto lg:mr-0 group select-none overflow-hidden rounded-full bg-[#141414] border border-[#2A2A2A] shadow-2xl custom-card-transition duration-500 hover:scale-[1.02] hover:border-white/20" id="about-left-column" data-reveal="scale" data-delay="100">
+            <div className="relative my-12 lg:my-10 w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] lg:w-[500px] lg:h-[500px] aspect-square mx-auto lg:ml-auto lg:mr-0 group select-none overflow-hidden rounded-full bg-[#141414] border border-[#2A2A2A] shadow-2xl custom-card-transition duration-500 hover:scale-[1.02] hover:border-white/20" id="about-left-column" data-reveal="scale" data-delay="100">
               <img 
                 src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80"
                 alt="Diego Portrait"

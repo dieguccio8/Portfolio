@@ -25,7 +25,7 @@ export function FloatingPaths({ position }: { position: number }) {
                 viewBox="0 0 696 316"
                 fill="none"
             >
-                <g transform="translate(0, -60)">
+                <g transform="translate(0, -120)">
                 <title>Background Paths</title>
                 {paths.map((path) => (
                     <motion.path
