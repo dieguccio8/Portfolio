@@ -105,6 +105,19 @@ export const GooeyProjectsBackground: React.FC = () => {
         </defs>
       </svg>
 
+      <style>
+        {`
+          @media (max-width: 768px) {
+            #text1, #text2 {
+              font-size: clamp(7rem, 30vw, 10rem) !important;
+              white-space: normal !important;
+              width: 90vw !important;
+              max-width: 80vw !important;
+              line-height: 0.8 !important;
+            }
+          }
+        `}
+      </style>
       <div
         id="container"
         className="absolute inset-0 pointer-events-none select-none z-0"

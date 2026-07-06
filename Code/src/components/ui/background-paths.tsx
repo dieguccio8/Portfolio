@@ -20,16 +20,48 @@ export function FloatingPaths({ position }: { position: number }) {
 
     return (
         <div className="absolute inset-0 pointer-events-none">
+            {/* Mobile SVG (Uses default aspect ratio to fit within width but visible in both sections) */}
             <svg
-                className="w-full h-full text-white/50"
+                className="w-full h-full text-white/50 block md:hidden"
                 viewBox="0 0 696 316"
                 fill="none"
             >
                 <g transform="translate(0, -120)">
-                <title>Background Paths</title>
+                <title>Background Paths Mobile</title>
                 {paths.map((path) => (
                     <motion.path
-                        key={path.id}
+                        key={`mob-${path.id}`}
+                        d={path.d}
+                        stroke="currentColor"
+                        strokeWidth={path.width}
+                        strokeOpacity={0.1 + path.id * 0.03}
+                        initial={{ pathLength: 0.3, opacity: 0.6 }}
+                        animate={{
+                            pathLength: 1,
+                            opacity: [0.3, 0.6, 0.3],
+                            pathOffset: [0, 1, 0],
+                        }}
+                        transition={{
+                            duration: 20 + Math.random() * 10,
+                            repeat: Number.POSITIVE_INFINITY,
+                            ease: "linear",
+                        }}
+                    />
+                ))}
+                </g>
+            </svg>
+
+            {/* Desktop SVG (Original behavior, untouched) */}
+            <svg
+                className="w-full h-full text-white/50 hidden md:block"
+                viewBox="0 0 696 316"
+                fill="none"
+            >
+                <g transform="translate(0, -120)">
+                <title>Background Paths Desktop</title>
+                {paths.map((path) => (
+                    <motion.path
+                        key={`desk-${path.id}`}
                         d={path.d}
                         stroke="currentColor"
                         strokeWidth={path.width}

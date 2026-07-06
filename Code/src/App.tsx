@@ -293,7 +293,7 @@ export default function App() {
             <img
               src="/hero.jpg"
               alt="Diego Cavallaro - Junior UX/UI & Visual Designer Portrait"
-              className="hero-bg-img w-full h-full object-cover scale-110"
+              className="hero-bg-img w-full h-full object-cover scale-110 object-[65%_top] md:object-center"
               data-cursor="image"
             />
             {/* Custom dual-tone red neon studio lighting overlays */}
@@ -308,11 +308,23 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl flex md:grid md:grid-cols-3 items-center justify-between text-xs uppercase tracking-widest font-normal border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
+            className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl grid grid-cols-3 items-center justify-between text-xs uppercase tracking-widest font-normal border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
             id="app-header"
           >
             {/* Left Area: Logo/Brand */}
             <div className="flex justify-start items-center gap-3 md:col-start-1">
+              {/* Mobile Only Language Switcher (Left Side) */}
+              <button
+                onClick={() => {
+                  setLang(lang === 'it' ? 'en' : 'it');
+                  setMobileMenuOpen(false);
+                }}
+                className="flex md:hidden items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+                title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
+              >
+                {lang.toUpperCase()}
+              </button>
+
               {/* Desktop Only Logo - Diego Cavallaro Premium Monogram with red accent */}
               <div className="hidden md:flex justify-start items-center gap-2.5 group/logo cursor-pointer" onClick={() => scrollToSection('hero-section')}>
                 <img
@@ -385,13 +397,13 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Language Switcher */}
+              {/* Language Switcher (Desktop Only on the right) */}
               <button
                 onClick={() => {
                   setLang(lang === 'it' ? 'en' : 'it');
                   setMobileMenuOpen(false);
                 }}
-                className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+                className="hidden md:flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
@@ -604,15 +616,17 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 sm:gap-20 lg:gap-32 items-center max-w-5xl mx-auto w-full">
 
               {/* LEFT COLUMN: Silhouette Rounded Art Portrait only */}
-              <div className="relative my-12 lg:my-10 w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] lg:w-[500px] lg:h-[500px] aspect-square mx-auto lg:ml-auto lg:mr-0 group select-none overflow-hidden rounded-full bg-[#141414] border border-[#2A2A2A] shadow-2xl custom-card-transition duration-500 hover:scale-[1.02] hover:border-white/20" id="about-left-column" data-reveal="scale" data-delay="100">
-                <img
-                  src="/pic_about_me.jpg"
-                  alt="Diego Portrait"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover grayscale brightness-90 contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute inset-0 bg-[#E8302A]/5 mix-blend-color-dodge pointer-events-none" />
+              <div className="flex justify-center w-full lg:block">
+                <div className="relative my-12 lg:my-10 w-[75vw] h-[75vw] max-w-[340px] max-h-[340px] sm:max-w-none sm:max-h-none sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] lg:w-[500px] lg:h-[500px] aspect-square mx-auto lg:ml-auto lg:mr-0 group select-none overflow-hidden rounded-full bg-[#141414] border border-[#2A2A2A] shadow-2xl custom-card-transition duration-500 hover:scale-[1.02] hover:border-white/20 shrink-0" id="about-left-column" data-reveal="scale" data-delay="100">
+                  <img
+                    src="/pic_about_me.jpg"
+                    alt="Diego Portrait"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover grayscale brightness-90 contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-[#E8302A]/5 mix-blend-color-dodge pointer-events-none" />
+                </div>
               </div>
 
               {/* RIGHT COLUMN: Narrative text only next to the image */}
@@ -841,7 +855,7 @@ export default function App() {
         {/* COMBINED WRAPPER FOR PROJECTS AND CONTACTS (To share the continuous BackgroundPaths effect) */}
         <div className="relative w-full bg-[#050505] overflow-hidden border-t border-[#2A2A2A]">
           {/* Shared Floating Paths background spanning both sections */}
-          <div className="absolute inset-0 pointer-events-none opacity-40">
+          <div className="absolute inset-0 pointer-events-none opacity-40 scale-[1.3] md:scale-100 origin-center">
             <FloatingPaths position={1} />
             <FloatingPaths position={-1} />
           </div>
@@ -850,361 +864,361 @@ export default function App() {
           <section className="relative w-full text-white py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-14" id="collaboration-section">
 
 
-          <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col items-center text-center">
+            <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col items-center text-center">
 
-            {/* Header Block: Centered master section title */}
-            <div className="flex flex-col items-center mb-16 sm:mb-24">
-              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono" data-reveal data-delay="0">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
-                <span>Portfolio</span>
+              {/* Header Block: Centered master section title */}
+              <div className="flex flex-col items-center mb-16 sm:mb-24">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono" data-reveal data-delay="0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
+                  <span>Portfolio</span>
+                </div>
+                <h2 className="text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
+                  {lang === 'it' ? 'I miei progetti' : 'My Projects'}
+                </h2>
               </div>
-              <h2 className="text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
-                {lang === 'it' ? 'I miei progetti' : 'My Projects'}
-              </h2>
-            </div>
 
-            {/* THE 3 STYLISH ROTATED / HOVER-EXPANDABLE CARDS */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-8 w-full max-w-[1440px] mb-16 sm:mb-24 justify-center items-center" id="collaboration-cards-container">
+              {/* THE 3 STYLISH ROTATED / HOVER-EXPANDABLE CARDS */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-8 w-full max-w-[1440px] mb-16 sm:mb-24 justify-center items-center" id="collaboration-cards-container">
 
-              {/* Card 1: Left Card (Slightly tilted on desktop) */}
-              <GlowCard
-                id="collab-card-1"
-                customSize={true}
-                glowColor="red"
-                radius={32}
-                className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-neutral-950 ring-1 ring-[#05903C]/60 group shadow-2xl cursor-pointer md:-rotate-3 hover:rotate-0 hover:scale-105 custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:z-20 hover:ring-[#05903C]"
-                onClick={() => {
-                  setActiveProjectPage(PROJECTS[0]);
-                }}
-                data-reveal
-                data-delay="0"
-              >
-                <img
-                  src="/project_cards_cover/orto_botanico.svg"
-                  alt="Orto Botanico"
-                  className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                <div className="absolute bottom-6 left-6 right-6 text-left">
-                  <span className="text-[9px] font-mono uppercase text-[#05903C] tracking-widest block mb-1">{lang === 'it' ? 'Progetto 01' : 'Project 01'}</span>
-                  <h4 className="text-sm font-bold tracking-[-0.02em] text-white uppercase font-jakarta">Orto Botanico</h4>
-                </div>
-              </GlowCard>
-
-              {/* Card 2: Center Card (Flat & Raised slightly) */}
-              <GlowCard
-                id="collab-card-2"
-                customSize={true}
-                glowColor="red"
-                radius={32}
-                className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-neutral-950 ring-1 ring-[#FCD306]/60 group shadow-2xl cursor-pointer md:-translate-y-4 hover:scale-105 custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:z-20 hover:ring-[#FCD306]"
-                onClick={() => {
-                  setActiveProjectPage(PROJECTS[1]);
-                }}
-                data-reveal
-                data-delay="120"
-              >
-                <img
-                  src="/project_cards_cover/uss.svg"
-                  alt="Urban StreetArt Sicily"
-                  className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                <div className="absolute bottom-6 left-6 right-6 text-left">
-                  <span className="text-[9px] font-mono uppercase text-[#FCD306] tracking-widest block mb-1">{lang === 'it' ? 'Progetto 02' : 'Project 02'}</span>
-                  <h4 className="text-sm font-bold tracking-[-0.02em] text-white uppercase font-jakarta">Urban StreetArt Sicily</h4>
-                </div>
-              </GlowCard>
-
-              {/* Card 3: Right Card (Slightly tilted opposite on desktop) */}
-              <GlowCard
-                id="collab-card-3"
-                customSize={true}
-                glowColor="red"
-                radius={32}
-                className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-neutral-950 ring-1 ring-[#AA1136]/60 group shadow-2xl cursor-pointer md:rotate-3 hover:rotate-0 hover:scale-105 custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:z-20 hover:ring-[#AA1136]"
-                onClick={() => {
-                  setActiveProjectPage(PROJECTS[2]);
-                }}
-                data-reveal
-                data-delay="240"
-              >
-                <img
-                  src="/project_cards_cover/italo.svg"
-                  alt="Italo Treni"
-                  className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                <div className="absolute bottom-6 left-6 right-6 text-left">
-                  <span className="text-[9px] font-mono uppercase text-[#AA1136] tracking-widest block mb-1">{lang === 'it' ? 'Progetto 03' : 'Project 03'}</span>
-                  <h4 className="text-sm font-bold tracking-[-0.02em] text-white uppercase font-jakarta">Italo Treni</h4>
-                </div>
-              </GlowCard>
-
-            </div>
-
-            {/* LOWER HEADER CALL TO ACTION */}
-            <div className="max-w-2xl px-4" id="collaboration-cta-block" data-reveal data-delay="0">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.1] font-jakarta mb-10 sm:mb-12">
-                {lang === 'it' ? 'Realizziamo insieme qualcosa di unico' : "Let's Create Something Unique"}
-              </h2>
-
-              <button
-                id="collab-contact-cta"
-                onClick={() => scrollToSection('direct-contact-section')}
-                className="px-8 py-4 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-xs uppercase rounded-full inline-flex items-center gap-3 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
-              >
-                <span>{lang === 'it' ? 'Contattami' : 'Contact me'}</span>
-                <ArrowDown className="w-4 h-4 text-white" />
-              </button>
-            </div>
-
-          </div>
-        </section>
-
-        {/* SECTION 4: INLINE CONTACT / GET IN TOUCH */}
-        <section className="relative w-full text-white py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-14 border-t border-white/5" id="direct-contact-section">
-          {/* Soft floating primary radial glow orbs scattered in the background with slow drifting animations */}
-          <motion.div
-            animate={{
-              x: [0, -40, 30, 0],
-              y: [0, 50, -30, 0],
-              scale: [1, 1.15, 0.9, 1],
-            }}
-            transition={{
-              duration: 23,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-[5%] right-[-25%] w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(232,48,42,0.14)_0%,rgba(232,48,42,0.02)_40%,transparent_80%)] pointer-events-none z-0"
-          />
-          <motion.div
-            animate={{
-              x: [0, 30, -40, 0],
-              y: [0, -30, 45, 0],
-              scale: [1, 0.95, 1.05, 1],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-[45%] left-[-20%] w-[750px] h-[750px] bg-[radial-gradient(circle,rgba(232,48,42,0.10)_0%,rgba(232,48,42,0.01)_40%,transparent_80%)] pointer-events-none z-0"
-          />
-          <motion.div
-            animate={{
-              x: [0, -25, 35, 0],
-              y: [0, 40, -25, 0],
-              scale: [1, 1.1, 0.95, 1],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute bottom-[-15%] left-[20%] w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(232,48,42,0.12)_0%,rgba(232,48,42,0.02)_40%,transparent_80%)] pointer-events-none z-0"
-          />
-
-          <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20">
-
-            <div className="relative grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16 items-stretch z-10 animate-fade-in">
-
-              {/* Left Column (Glassmorphic Contact Card Group with matching height) */}
-              <div className="lg:col-span-12 xl:col-span-5 h-full flex flex-col" id="sec4-info-container" data-reveal data-delay="0">
-                <div className="bg-[#121312]/70 border border-white/10 backdrop-blur-[16px] rounded-[2rem] p-6 sm:p-10 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between hover:border-[#E8302A]/40 hover:bg-[#151615]/80 custom-card-transition duration-500 ease-[0.16,1,0.3,1]">
-                  {/* Subtle soft gradient background glow inside the box */}
-                  <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-[#E8302A]/15 via-transparent to-transparent pointer-events-none rounded-full blur-3xl" />
-
-                  <div className="relative z-10 flex flex-col gap-6 lg:gap-8">
-                    {/* Custom capsule badge */}
-                    <div className="inline-flex items-center gap-2 self-start bg-[#151615] border border-[#E8302A]/30 px-4 py-2 rounded-full shadow-lg backdrop-blur-sm">
-                      <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8302A] font-bold">{lang === 'it' ? 'Contatti' : 'Contact'}</span>
-                    </div>
-
-                    {/* Title */}
-                    <div>
-                      <h2 className="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white font-jakarta">
-                        {lang === 'it' ? 'Contattami' : 'Get in touch'}
-                      </h2>
-                    </div>
+                {/* Card 1: Left Card (Slightly tilted on desktop) */}
+                <GlowCard
+                  id="collab-card-1"
+                  customSize={true}
+                  glowColor="red"
+                  radius={32}
+                  className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-neutral-950 ring-1 ring-[#05903C]/60 group shadow-2xl cursor-pointer md:-rotate-3 hover:rotate-0 hover:scale-105 custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:z-20 hover:ring-[#05903C]"
+                  onClick={() => {
+                    setActiveProjectPage(PROJECTS[0]);
+                  }}
+                  data-reveal
+                  data-delay="0"
+                >
+                  <img
+                    src="/project_cards_cover/orto_botanico.svg"
+                    alt="Orto Botanico"
+                    className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left">
+                    <span className="text-[9px] font-mono uppercase text-[#05903C] tracking-widest block mb-1">{lang === 'it' ? 'Progetto 01' : 'Project 01'}</span>
+                    <h4 className="text-sm font-bold tracking-[-0.02em] text-white uppercase font-jakarta">Orto Botanico</h4>
                   </div>
+                </GlowCard>
 
-                  {/* 3 Clickable capsule lines */}
-                  <div className="relative z-10 flex flex-col gap-4 mt-12">
-
-                    {/* Line 1: Email */}
-                    <a
-                      href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex justify-between items-center p-5 bg-[#151615]/90 border border-white/10 rounded-2xl group transition-all duration-300 cursor-pointer shadow-lg active:scale-[0.98] hover:border-[#E8302A]/50 hover:bg-[#1A1D1A]"
-                    >
-                      <div className="flex items-center gap-4 min-w-0 flex-1 pr-4">
-                        <div className="w-11 h-11 rounded-xl bg-[#E8302A]/10 border border-[#E8302A]/20 flex items-center justify-center text-[#E8302A] group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
-                          <Mail className="w-5 h-5" />
-                        </div>
-                        <div className="flex flex-col min-w-0">
-                          <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">Email</span>
-                          <span className="text-xs sm:text-sm font-semibold text-white tracking-tight break-all font-mono">
-                            diegocavallaro8@gmail.com
-                          </span>
-                        </div>
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
-                        <ArrowUpRight className="w-4 h-4" />
-                      </div>
-                    </a>
-
-                    {/* Line 2: Call */}
-                    <a
-                      href="tel:+393515485740"
-                      className="flex justify-between items-center p-5 bg-[#151615]/90 border border-white/10 rounded-2xl group transition-all duration-300 cursor-pointer shadow-lg active:scale-[0.98] hover:border-[#E8302A]/50 hover:bg-[#1A1D1A]"
-                    >
-                      <div className="flex items-center gap-4 min-w-0 flex-1 pr-4">
-                        <div className="w-11 h-11 rounded-xl bg-[#E8302A]/10 border border-[#E8302A]/20 flex items-center justify-center text-[#E8302A] group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
-                          <Phone className="w-5 h-5 animate-pulse" />
-                        </div>
-                        <div className="flex flex-col min-w-0">
-                          <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'Chiamami' : 'Call me'}</span>
-                          <span className="text-xs sm:text-sm font-semibold text-white tracking-tight font-mono">
-                            +39 3515485740
-                          </span>
-                        </div>
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
-                        <ArrowUpRight className="w-4 h-4" />
-                      </div>
-                    </a>
-
-                    {/* Line 3: Location */}
-                    <div
-                      className="flex justify-between items-center p-5 bg-[#151615]/90 border border-white/10 rounded-2xl shadow-lg"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-11 h-11 rounded-xl bg-[#E8302A]/10 border border-[#E8302A]/20 flex items-center justify-center text-[#E8302A]">
-                          <MapPin className="w-5 h-5" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'La mia posizione' : 'My location'}</span>
-                          <span className="text-xs sm:text-sm font-semibold text-white tracking-tight">
-                            {lang === 'it' ? 'Catania, Italia' : 'Catania, Italy'}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
+                {/* Card 2: Center Card (Flat & Raised slightly) */}
+                <GlowCard
+                  id="collab-card-2"
+                  customSize={true}
+                  glowColor="red"
+                  radius={32}
+                  className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-neutral-950 ring-1 ring-[#FCD306]/60 group shadow-2xl cursor-pointer md:-translate-y-4 hover:scale-105 custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:z-20 hover:ring-[#FCD306]"
+                  onClick={() => {
+                    setActiveProjectPage(PROJECTS[1]);
+                  }}
+                  data-reveal
+                  data-delay="120"
+                >
+                  <img
+                    src="/project_cards_cover/uss.svg"
+                    alt="Urban StreetArt Sicily"
+                    className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left">
+                    <span className="text-[9px] font-mono uppercase text-[#FCD306] tracking-widest block mb-1">{lang === 'it' ? 'Progetto 02' : 'Project 02'}</span>
+                    <h4 className="text-sm font-bold tracking-[-0.02em] text-white uppercase font-jakarta">Urban StreetArt Sicily</h4>
                   </div>
+                </GlowCard>
 
-                </div>
+                {/* Card 3: Right Card (Slightly tilted opposite on desktop) */}
+                <GlowCard
+                  id="collab-card-3"
+                  customSize={true}
+                  glowColor="red"
+                  radius={32}
+                  className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-neutral-950 ring-1 ring-[#AA1136]/60 group shadow-2xl cursor-pointer md:rotate-3 hover:rotate-0 hover:scale-105 custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:z-20 hover:ring-[#AA1136]"
+                  onClick={() => {
+                    setActiveProjectPage(PROJECTS[2]);
+                  }}
+                  data-reveal
+                  data-delay="240"
+                >
+                  <img
+                    src="/project_cards_cover/italo.svg"
+                    alt="Italo Treni"
+                    className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left">
+                    <span className="text-[9px] font-mono uppercase text-[#AA1136] tracking-widest block mb-1">{lang === 'it' ? 'Progetto 03' : 'Project 03'}</span>
+                    <h4 className="text-sm font-bold tracking-[-0.02em] text-white uppercase font-jakarta">Italo Treni</h4>
+                  </div>
+                </GlowCard>
+
               </div>
 
-              {/* Right Column (The Glassmorphic Contact Form) */}
-              <div className="lg:col-span-12 xl:col-span-7 h-full flex flex-col" id="sec4-form-container" data-reveal data-delay="120">
-                <div className="bg-[#121312]/70 border border-white/10 backdrop-blur-[16px] rounded-[2rem] p-6 sm:p-10 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between hover:border-[#E8302A]/40 hover:bg-[#151615]/80 custom-card-transition duration-500 ease-[0.16,1,0.3,1]">
+              {/* LOWER HEADER CALL TO ACTION */}
+              <div className="max-w-2xl px-4" id="collaboration-cta-block" data-reveal data-delay="0">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.1] font-jakarta mb-10 sm:mb-12">
+                  {lang === 'it' ? 'Realizziamo insieme qualcosa di unico' : "Let's Create Something Unique"}
+                </h2>
 
-                  {/* Subtle soft gradient background glow inside the box */}
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#E8302A]/15 via-transparent to-transparent pointer-events-none rounded-full blur-3xl" />
-
-                  {!sec4FormSubmitted ? (
-                    <form onSubmit={handleSec4FormSubmit} className="flex flex-col gap-6 relative z-10 w-full text-left">
-
-                      {/* Name Input */}
-                      <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
-                          <span>{lang === 'it' ? 'Nome' : 'Name'}</span>
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder={lang === 'it' ? 'Il tuo nome completo' : 'Your full name'}
-                          value={sec4Form.name}
-                          onChange={(e) => setSec4Form({ ...sec4Form, name: e.target.value })}
-                          className="w-full bg-[#161716] text-white border border-white/10 focus:border-[#E8302A] focus:ring-1 focus:ring-[#E8302A] text-sm py-4 px-5 rounded-2xl transition-all duration-300 focus:outline-none placeholder-neutral-500 font-jakarta shadow-inner"
-                        />
-                      </div>
-
-                      {/* Email Input */}
-                      <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
-                          <span>Email</span>
-                        </label>
-                        <input
-                          type="email"
-                          required
-                          placeholder={lang === 'it' ? 'latua.email@esempio.com' : 'your.email@example.com'}
-                          value={sec4Form.email}
-                          onChange={(e) => setSec4Form({ ...sec4Form, email: e.target.value })}
-                          className="w-full bg-[#161716] text-white border border-white/10 focus:border-[#E8302A] focus:ring-1 focus:ring-[#E8302A] text-sm py-4 px-5 rounded-2xl transition-all duration-300 focus:outline-none placeholder-neutral-500 font-jakarta shadow-inner"
-                        />
-                      </div>
-
-                      {/* Message Input */}
-                      <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
-                          <span>{lang === 'it' ? 'Messaggio' : 'Message'}</span>
-                        </label>
-                        <textarea
-                          required
-                          rows={4}
-                          placeholder={lang === 'it' ? 'Parlami del tuo progetto...' : 'Tell me about your project...'}
-                          value={sec4Form.message}
-                          onChange={(e) => setSec4Form({ ...sec4Form, message: e.target.value })}
-                          className="w-full bg-[#161716] text-white border border-white/10 focus:border-[#E8302A] focus:ring-1 focus:ring-[#E8302A] text-sm py-4 px-5 rounded-2xl transition-all duration-300 focus:outline-none placeholder-neutral-500 font-jakarta resize-none shadow-inner"
-                        />
-                      </div>
-
-                      {/* Submit Button - Copied premium gradient pill style */}
-                      <button
-                        type="submit"
-                        disabled={sec4Submitting}
-                        className="w-full mt-2 py-4 sm:py-5 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-xs uppercase rounded-full flex items-center justify-center gap-3 hover:scale-105 active:scale-95 disabled:scale-100 disabled:opacity-50 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
-                      >
-                        {sec4Submitting ? (
-                          <>
-                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            <span>{lang === 'it' ? 'Invio in corso...' : 'Sending request...'}</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>{lang === 'it' ? 'Invia' : 'Submit'}</span>
-                            <ArrowRight className="w-4 h-4 text-white" />
-                          </>
-                        )}
-                      </button>
-
-                    </form>
-                  ) : (
-                    <div className="text-center py-10 flex flex-col items-center gap-5 relative z-10 my-auto text-center w-full">
-                      <div className="w-16 h-16 rounded-full border border-[#E8302A] flex items-center justify-center text-white bg-[#E8302A] animate-bounce mb-2 mx-auto shadow-lg shadow-[#E8302A]/20">
-                        <Check className="w-8 h-8" />
-                      </div>
-                      <h3 className="text-xl font-bold tracking-tight text-[#E8302A] uppercase font-sans">
-                        {lang === 'it' ? 'Messaggio Inviato!' : 'Message Sent!'}
-                      </h3>
-                      <p className="text-sm text-neutral-300 max-w-sm mx-auto leading-relaxed">
-                        {lang === 'it'
-                          ? 'Grazie. Il tuo messaggio è stato trasmesso con successo. Diego ti risponderà entro 24 ore.'
-                          : 'Thank you. Your message has been transmitted successfully. Diego will get back to you within 24 hours.'}
-                      </p>
-                      <button
-                        onClick={() => setSec4FormSubmitted(false)}
-                        className="mt-4 px-8 py-3 bg-[#E8302A]/10 border border-[#E8302A]/20 hover:bg-[#E8302A] hover:text-white transition-all rounded-xl text-[10px] uppercase font-mono tracking-widest cursor-pointer mx-auto block text-white"
-                      >
-                        {lang === 'it' ? 'Invia un altro messaggio' : 'Send another message'}
-                      </button>
-                    </div>
-                  )}
-
-                </div>
+                <button
+                  id="collab-contact-cta"
+                  onClick={() => scrollToSection('direct-contact-section')}
+                  className="px-8 py-4 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-xs uppercase rounded-full inline-flex items-center gap-3 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
+                >
+                  <span>{lang === 'it' ? 'Contattami' : 'Contact me'}</span>
+                  <ArrowDown className="w-4 h-4 text-white" />
+                </button>
               </div>
 
             </div>
+          </section>
 
-          </div>
-        </section>
+          {/* SECTION 4: INLINE CONTACT / GET IN TOUCH */}
+          <section className="relative w-full text-white py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-14 border-t border-white/5" id="direct-contact-section">
+            {/* Soft floating primary radial glow orbs scattered in the background with slow drifting animations */}
+            <motion.div
+              animate={{
+                x: [0, -40, 30, 0],
+                y: [0, 50, -30, 0],
+                scale: [1, 1.15, 0.9, 1],
+              }}
+              transition={{
+                duration: 23,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute top-[5%] right-[-25%] w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(232,48,42,0.14)_0%,rgba(232,48,42,0.02)_40%,transparent_80%)] pointer-events-none z-0"
+            />
+            <motion.div
+              animate={{
+                x: [0, 30, -40, 0],
+                y: [0, -30, 45, 0],
+                scale: [1, 0.95, 1.05, 1],
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute top-[45%] left-[-20%] w-[750px] h-[750px] bg-[radial-gradient(circle,rgba(232,48,42,0.10)_0%,rgba(232,48,42,0.01)_40%,transparent_80%)] pointer-events-none z-0"
+            />
+            <motion.div
+              animate={{
+                x: [0, -25, 35, 0],
+                y: [0, 40, -25, 0],
+                scale: [1, 1.1, 0.95, 1],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute bottom-[-15%] left-[20%] w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(232,48,42,0.12)_0%,rgba(232,48,42,0.02)_40%,transparent_80%)] pointer-events-none z-0"
+            />
+
+            <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20">
+
+              <div className="relative grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16 items-stretch z-10 animate-fade-in">
+
+                {/* Left Column (Glassmorphic Contact Card Group with matching height) */}
+                <div className="lg:col-span-12 xl:col-span-5 h-full flex flex-col" id="sec4-info-container" data-reveal data-delay="0">
+                  <div className="bg-[#121312]/70 border border-white/10 backdrop-blur-[16px] rounded-[2rem] p-6 sm:p-10 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between hover:border-[#E8302A]/40 hover:bg-[#151615]/80 custom-card-transition duration-500 ease-[0.16,1,0.3,1]">
+                    {/* Subtle soft gradient background glow inside the box */}
+                    <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-[#E8302A]/15 via-transparent to-transparent pointer-events-none rounded-full blur-3xl" />
+
+                    <div className="relative z-10 flex flex-col gap-6 lg:gap-8">
+                      {/* Custom capsule badge */}
+                      <div className="inline-flex items-center gap-2 self-start bg-[#151615] border border-[#E8302A]/30 px-4 py-2 rounded-full shadow-lg backdrop-blur-sm">
+                        <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8302A] font-bold">{lang === 'it' ? 'Contatti' : 'Contact'}</span>
+                      </div>
+
+                      {/* Title */}
+                      <div>
+                        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white font-jakarta">
+                          {lang === 'it' ? 'Contattami' : 'Get in touch'}
+                        </h2>
+                      </div>
+                    </div>
+
+                    {/* 3 Clickable capsule lines */}
+                    <div className="relative z-10 flex flex-col gap-4 mt-12">
+
+                      {/* Line 1: Email */}
+                      <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex justify-between items-center p-5 bg-[#151615]/90 border border-white/10 rounded-2xl group transition-all duration-300 cursor-pointer shadow-lg active:scale-[0.98] hover:border-[#E8302A]/50 hover:bg-[#1A1D1A]"
+                      >
+                        <div className="flex items-center gap-4 min-w-0 flex-1 pr-4">
+                          <div className="w-11 h-11 rounded-xl bg-[#E8302A]/10 border border-[#E8302A]/20 flex items-center justify-center text-[#E8302A] group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
+                            <Mail className="w-5 h-5" />
+                          </div>
+                          <div className="flex flex-col min-w-0">
+                            <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">Email</span>
+                            <span className="text-xs sm:text-sm font-semibold text-white tracking-tight break-all font-mono">
+                              diegocavallaro8@gmail.com
+                            </span>
+                          </div>
+                        </div>
+                        <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
+                          <ArrowUpRight className="w-4 h-4" />
+                        </div>
+                      </a>
+
+                      {/* Line 2: Call */}
+                      <a
+                        href="tel:+393515485740"
+                        className="flex justify-between items-center p-5 bg-[#151615]/90 border border-white/10 rounded-2xl group transition-all duration-300 cursor-pointer shadow-lg active:scale-[0.98] hover:border-[#E8302A]/50 hover:bg-[#1A1D1A]"
+                      >
+                        <div className="flex items-center gap-4 min-w-0 flex-1 pr-4">
+                          <div className="w-11 h-11 rounded-xl bg-[#E8302A]/10 border border-[#E8302A]/20 flex items-center justify-center text-[#E8302A] group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
+                            <Phone className="w-5 h-5 animate-pulse" />
+                          </div>
+                          <div className="flex flex-col min-w-0">
+                            <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'Chiamami' : 'Call me'}</span>
+                            <span className="text-xs sm:text-sm font-semibold text-white tracking-tight font-mono">
+                              +39 3515485740
+                            </span>
+                          </div>
+                        </div>
+                        <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:bg-[#E8302A] group-hover:text-white group-hover:border-[#E8302A] transition-all duration-300 shrink-0">
+                          <ArrowUpRight className="w-4 h-4" />
+                        </div>
+                      </a>
+
+                      {/* Line 3: Location */}
+                      <div
+                        className="flex justify-between items-center p-5 bg-[#151615]/90 border border-white/10 rounded-2xl shadow-lg"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="w-11 h-11 rounded-xl bg-[#E8302A]/10 border border-[#E8302A]/20 flex items-center justify-center text-[#E8302A]">
+                            <MapPin className="w-5 h-5" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'La mia posizione' : 'My location'}</span>
+                            <span className="text-xs sm:text-sm font-semibold text-white tracking-tight">
+                              {lang === 'it' ? 'Catania, Italia' : 'Catania, Italy'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* Right Column (The Glassmorphic Contact Form) */}
+                <div className="lg:col-span-12 xl:col-span-7 h-full flex flex-col" id="sec4-form-container" data-reveal data-delay="120">
+                  <div className="bg-[#121312]/70 border border-white/10 backdrop-blur-[16px] rounded-[2rem] p-6 sm:p-10 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between hover:border-[#E8302A]/40 hover:bg-[#151615]/80 custom-card-transition duration-500 ease-[0.16,1,0.3,1]">
+
+                    {/* Subtle soft gradient background glow inside the box */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#E8302A]/15 via-transparent to-transparent pointer-events-none rounded-full blur-3xl" />
+
+                    {!sec4FormSubmitted ? (
+                      <form onSubmit={handleSec4FormSubmit} className="flex flex-col gap-6 relative z-10 w-full text-left">
+
+                        {/* Name Input */}
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
+                            <span>{lang === 'it' ? 'Nome' : 'Name'}</span>
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder={lang === 'it' ? 'Il tuo nome completo' : 'Your full name'}
+                            value={sec4Form.name}
+                            onChange={(e) => setSec4Form({ ...sec4Form, name: e.target.value })}
+                            className="w-full bg-[#161716] text-white border border-white/10 focus:border-[#E8302A] focus:ring-1 focus:ring-[#E8302A] text-sm py-4 px-5 rounded-2xl transition-all duration-300 focus:outline-none placeholder-neutral-500 font-jakarta shadow-inner"
+                          />
+                        </div>
+
+                        {/* Email Input */}
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
+                            <span>Email</span>
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            placeholder={lang === 'it' ? 'latua.email@esempio.com' : 'your.email@example.com'}
+                            value={sec4Form.email}
+                            onChange={(e) => setSec4Form({ ...sec4Form, email: e.target.value })}
+                            className="w-full bg-[#161716] text-white border border-white/10 focus:border-[#E8302A] focus:ring-1 focus:ring-[#E8302A] text-sm py-4 px-5 rounded-2xl transition-all duration-300 focus:outline-none placeholder-neutral-500 font-jakarta shadow-inner"
+                          />
+                        </div>
+
+                        {/* Message Input */}
+                        <div className="flex flex-col gap-2">
+                          <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
+                            <span>{lang === 'it' ? 'Messaggio' : 'Message'}</span>
+                          </label>
+                          <textarea
+                            required
+                            rows={4}
+                            placeholder={lang === 'it' ? 'Parlami del tuo progetto...' : 'Tell me about your project...'}
+                            value={sec4Form.message}
+                            onChange={(e) => setSec4Form({ ...sec4Form, message: e.target.value })}
+                            className="w-full bg-[#161716] text-white border border-white/10 focus:border-[#E8302A] focus:ring-1 focus:ring-[#E8302A] text-sm py-4 px-5 rounded-2xl transition-all duration-300 focus:outline-none placeholder-neutral-500 font-jakarta resize-none shadow-inner"
+                          />
+                        </div>
+
+                        {/* Submit Button - Copied premium gradient pill style */}
+                        <button
+                          type="submit"
+                          disabled={sec4Submitting}
+                          className="w-full mt-2 py-4 sm:py-5 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-xs uppercase rounded-full flex items-center justify-center gap-3 hover:scale-105 active:scale-95 disabled:scale-100 disabled:opacity-50 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
+                        >
+                          {sec4Submitting ? (
+                            <>
+                              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                              <span>{lang === 'it' ? 'Invio in corso...' : 'Sending request...'}</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>{lang === 'it' ? 'Invia' : 'Submit'}</span>
+                              <ArrowRight className="w-4 h-4 text-white" />
+                            </>
+                          )}
+                        </button>
+
+                      </form>
+                    ) : (
+                      <div className="text-center py-10 flex flex-col items-center gap-5 relative z-10 my-auto text-center w-full">
+                        <div className="w-16 h-16 rounded-full border border-[#E8302A] flex items-center justify-center text-white bg-[#E8302A] animate-bounce mb-2 mx-auto shadow-lg shadow-[#E8302A]/20">
+                          <Check className="w-8 h-8" />
+                        </div>
+                        <h3 className="text-xl font-bold tracking-tight text-[#E8302A] uppercase font-sans">
+                          {lang === 'it' ? 'Messaggio Inviato!' : 'Message Sent!'}
+                        </h3>
+                        <p className="text-sm text-neutral-300 max-w-sm mx-auto leading-relaxed">
+                          {lang === 'it'
+                            ? 'Grazie. Il tuo messaggio è stato trasmesso con successo. Diego ti risponderà entro 24 ore.'
+                            : 'Thank you. Your message has been transmitted successfully. Diego will get back to you within 24 hours.'}
+                        </p>
+                        <button
+                          onClick={() => setSec4FormSubmitted(false)}
+                          className="mt-4 px-8 py-3 bg-[#E8302A]/10 border border-[#E8302A]/20 hover:bg-[#E8302A] hover:text-white transition-all rounded-xl text-[10px] uppercase font-mono tracking-widest cursor-pointer mx-auto block text-white"
+                        >
+                          {lang === 'it' ? 'Invia un altro messaggio' : 'Send another message'}
+                        </button>
+                      </div>
+                    )}
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </section>
         </div>
 
         {/* ADDITIONAL GENERAL FOOTER AT THE VERY BOTTOM OF THE LONG SCROLL PAGE */}
