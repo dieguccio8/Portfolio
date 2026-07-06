@@ -18,6 +18,7 @@ export function CustomCursor({ color = '#E8302A' }: { color?: string }) {
     if (!window.matchMedia('(pointer: fine)').matches) return;
 
     const move = (e: MouseEvent) => {
+      setIsVisible(true);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
         dotX.set(e.clientX);
