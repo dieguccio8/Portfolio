@@ -337,9 +337,8 @@ export function AetherisLowerSections({
           <div className="flex flex-col gap-6 items-center lg:items-start w-full lg:w-1/3 z-10">
             <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#068B35]/30 shadow-lg shrink-0">
               <img 
-                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" 
+                src="/mirella.png" 
                 alt="Mirella - User Persona" 
-                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover grayscale contrast-110 brightness-95"
               />
             </div>
@@ -379,6 +378,14 @@ export function AetherisLowerSections({
             </div>
 
           </div>
+        </div>
+
+        <div className="w-full rounded-[2rem] sm:rounded-[3rem] overflow-hidden border border-[#068B35]/20 shadow-2xl relative mt-4">
+          <img 
+            src="/mockup_totem_3.jpg" 
+            alt="Totem Mockup" 
+            className="w-full h-auto object-cover"
+          />
         </div>
       </div>
 
