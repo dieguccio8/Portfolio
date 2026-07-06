@@ -28,7 +28,7 @@ import { PROJECTS, SKILL_GROUPS, BIOGRAPHY_TEXT } from './data.ts';
 import { Project } from './types.ts';
 import ProjectPage from './components/ProjectPage.tsx';
 import { GlowCard } from './components/GlowCard.tsx';
-import { DottedSurface } from './components/DottedSurface.tsx';
+import { FloatingPaths } from './components/ui/background-paths';
 import { GooeyProjectsBackground } from './components/GooeyProjectsBackground.tsx';
 import { CustomCursor } from './components/CustomCursor.tsx';
 import { SmoothScroll } from './components/SmoothScroll.tsx';
@@ -840,8 +840,11 @@ export default function App() {
 
       {/* SECTION 3: CREATIVE PARTNERSHIP / COLLABORATION SECTION (Premium dark, 3 hover-expanding cards, minimal layout) */}
       <section className="relative w-full bg-[#050505] text-white py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-14 border-t border-[#2A2A2A] overflow-hidden" id="collaboration-section">
-        {/* Three.js Dotted Surface background waves */}
-        <DottedSurface />
+        {/* Floating Paths background */}
+        <div className="absolute inset-0 pointer-events-none opacity-40">
+          <FloatingPaths position={1} />
+          <FloatingPaths position={-1} />
+        </div>
 
         
         <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col items-center text-center">

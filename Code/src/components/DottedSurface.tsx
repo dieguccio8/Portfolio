@@ -14,7 +14,7 @@ export const DottedSurface: React.FC = () => {
     // SCENE & BACKGROUND
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x050505);
-    
+
     // FOG
     // Add linear fog to fade the particles elegantly into the distance
     scene.fog = new THREE.Fog(0x050505, 15, 85);
@@ -36,7 +36,7 @@ export const DottedSurface: React.FC = () => {
         // Center the grid around (0, 0)
         const x = (ix - countX / 2) * spacingX;
         const z = (iz - countZ / 2) * spacingZ;
-        
+
         positions[i] = x;     // X
         positions[i + 1] = 0; // Y (will be animated)
         positions[i + 2] = z; // Z
@@ -49,14 +49,29 @@ export const DottedSurface: React.FC = () => {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
+    // CREATE CIRCLE TEXTURE
+    const circleCanvas = document.createElement('canvas');
+    circleCanvas.width = 32;
+    circleCanvas.height = 32;
+    const context = circleCanvas.getContext('2d');
+    if (context) {
+      context.beginPath();
+      context.arc(16, 16, 15, 0, Math.PI * 2);
+      context.fillStyle = '#ffffff';
+      context.fill();
+    }
+    const circleTexture = new THREE.CanvasTexture(circleCanvas);
+
     // POINTS MATERIAL
     // Crisp, small white particles with a bit of opacity for elegant look
     const material = new THREE.PointsMaterial({
       color: 0xffffff,
-      size: 0.12,
+      size: 0.15,
       transparent: true,
       opacity: 0.75,
-      sizeAttenuation: true
+      sizeAttenuation: true,
+      map: circleTexture,
+      depthWrite: false
     });
 
     const particles = new THREE.Points(geometry, material);
@@ -84,7 +99,7 @@ export const DottedSurface: React.FC = () => {
       animationFrameId = requestAnimationFrame(animate);
 
       const elapsed = clock.getElapsedTime();
-      const timeMultiplier = elapsed * 0.9;
+      const timeMultiplier = elapsed * 0.4;
       const positionAttr = geometry.attributes.position as THREE.BufferAttribute;
       const posArray = positionAttr.array as Float32Array;
 
@@ -92,7 +107,7 @@ export const DottedSurface: React.FC = () => {
       for (let ix = 0; ix < countX; ix++) {
         for (let iz = 0; iz < countZ; iz++) {
           const { x, z } = initialCoords[idx];
-          
+
           // Wave mathematics: y = sin(x) + cos(z) tied to time to simulate elegant floating sea
           // Applying spatial frequencies for natural wave patterns
           const y = (
@@ -111,7 +126,7 @@ export const DottedSurface: React.FC = () => {
       positionAttr.needsUpdate = true;
 
       // Slowly rotate the entire grid for a subtle extra dynamic feel
-      particles.rotation.y = elapsed * 0.015;
+      particles.rotation.y = elapsed * 0.007;
 
       renderer.render(scene, camera);
     };
@@ -120,7 +135,7 @@ export const DottedSurface: React.FC = () => {
     const handleResize = (entries: ResizeObserverEntry[]) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
-        
+
         // Update camera aspect
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
@@ -151,8 +166,8 @@ export const DottedSurface: React.FC = () => {
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0"
       id="dotted-surface-container"
       style={{
@@ -160,8 +175,8 @@ export const DottedSurface: React.FC = () => {
         WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, transparent 250px, black 450px, black 100%)'
       }}
     >
-      <canvas 
-        ref={canvasRef} 
+      <canvas
+        ref={canvasRef}
         className="block w-full h-full pointer-events-none"
         style={{ width: '100%', height: '100%' }}
       />
