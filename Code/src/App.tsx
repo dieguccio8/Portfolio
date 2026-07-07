@@ -34,6 +34,7 @@ import { CustomCursor } from './components/CustomCursor.tsx';
 import { SmoothScroll } from './components/SmoothScroll.tsx';
 import { ScrollProgress } from './components/ScrollProgress.tsx';
 import { ScrollReveal } from './components/ScrollReveal.tsx';
+import { CircularGalleryDemo } from './components/CircularGalleryDemo.tsx';
 
 const PenNibIcon = ({ className, strokeWidth = 2 }: { className?: string; strokeWidth?: number }) => (
   <svg 
@@ -573,6 +574,26 @@ export default function App() {
             </div>
           </motion.footer>
         </section>
+
+        {/* SECTION 1.5: CIRCULAR GALLERY */}
+        <section className="relative w-full bg-[#050505] text-white py-12 sm:py-16 md:py-20 border-t border-[#2A2A2A] overflow-hidden" id="circular-gallery-section">
+          <div className="relative z-10 w-full mx-auto">
+            <div className="flex flex-col items-center text-center mb-12 sm:mb-16 px-6 sm:px-10 md:px-14">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono" data-reveal data-delay="0">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
+                <span>{lang === 'it' ? 'Ispirazione' : 'Inspiration'}</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
+                {lang === 'it' ? 'Momenti Catturati' : 'Captured Moments'}
+              </h2>
+            </div>
+            
+            <div data-reveal data-delay="150" className="w-full">
+              <CircularGalleryDemo />
+            </div>
+          </div>
+        </section>
+
 
         {/* SECTION 2: ABOUT ME SECTION (High-contrast, premium dark background, mirroring photo layout) */}
         <section className="relative w-full bg-[#050505] text-white py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-14 border-t border-[#2A2A2A] overflow-hidden" id="about-me-section">
