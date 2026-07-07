@@ -605,7 +605,7 @@ export default function App() {
                 Skills
               </h2>
               <p className="mt-8 text-sm sm:text-base text-white/60 font-light max-w-lg mx-auto" data-reveal data-delay="120">
-                {lang === 'it' ? 'Trascina le card per scorrere tra le competenze' : 'Drag the cards to scroll through the skills'}
+                {lang === 'it' ? 'Trascina le cards per scorrere tra le skills' : 'Drag the cards to scroll through the skills'}
               </p>
             </div>
             
