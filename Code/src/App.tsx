@@ -361,15 +361,17 @@ export default function App() {
 
               {/* Desktop Only Logo - Diego Cavallaro Premium Monogram with red accent */}
               <div 
-                className={`flex items-center group/logo cursor-pointer transition-all duration-500 ease-in-out rounded-full ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20 justify-center hover:bg-white/[0.1]' : 'bg-transparent border border-transparent justify-start gap-2.5 md:flex'}`} 
+                className="flex items-center gap-2.5 group/logo cursor-pointer transition-all duration-500 ease-in-out" 
                 onClick={() => scrollToSection('hero-section')}
               >
-                <img
-                  src="/logo_diego_cavallaro.png"
-                  className={`object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-105 ${!isScrolled ? 'w-5 h-5' : 'w-5 h-5 hidden md:block'}`}
-                  alt="Diego Cavallaro Logo"
-                  id="header-logo-img"
-                />
+                <div className={`items-center justify-center transition-all duration-500 ease-in-out rounded-full ${!isScrolled ? 'flex w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20' : 'hidden md:flex w-5 h-5 bg-transparent border-transparent'}`}>
+                  <img
+                    src="/logo_diego_cavallaro.png"
+                    className="w-5 h-5 object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-105"
+                    alt="Diego Cavallaro Logo"
+                    id="header-logo-img"
+                  />
+                </div>
                 <span className={`text-white font-jakarta font-bold tracking-tight text-sm uppercase group-hover/logo:text-[#E8302A] transition-all duration-500 ease-in-out origin-left whitespace-nowrap overflow-hidden ${!isScrolled ? 'max-w-0 opacity-0' : 'max-w-[200px] opacity-100 hidden md:block'}`}>Diego Cavallaro</span>
               </div>
             </div>
@@ -593,8 +595,8 @@ export default function App() {
           </motion.footer>
         </section>
 
-        {/* SECTION 1.5: CIRCULAR GALLERY */}
-        <section className="relative w-full bg-[#050505] text-white py-12 sm:py-16 md:py-20 border-t border-[#2A2A2A] overflow-hidden" id="circular-gallery-section">
+        {/* SECTION 1.5: CIRCULAR GALLERY & TOOLS (Now acts as About Me) */}
+        <section className="relative w-full bg-[#050505] text-white py-12 sm:py-16 md:py-20 border-t border-[#2A2A2A] overflow-hidden" id="about-me-section">
           <div className="relative z-10 w-full mx-auto">
             <div className="flex flex-col items-center text-center mb-6 sm:mb-8 px-6 sm:px-10 md:px-14">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
@@ -608,127 +610,61 @@ export default function App() {
             <div data-reveal data-delay="150" className="w-full">
               <CircularGalleryDemo />
             </div>
-          </div>
-        </section>
 
+            {/* Software Skills Area */}
+            <div className="w-full max-w-[1600px] mx-auto px-6 sm:px-10 md:px-14 mt-16 sm:mt-24 mb-16 sm:mb-24 md:mb-32 flex flex-col items-center justify-center gap-12" data-reveal data-delay="200">
+              <h3 className="text-base sm:text-lg text-white/60 font-light max-w-lg mx-auto text-center">
+                Software Skills
+              </h3>
 
-        {/* SECTION 2: ABOUT ME SECTION (High-contrast, premium dark background, mirroring photo layout) */}
-        <section className="relative w-full bg-[#050505] text-white py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-14 border-t border-[#2A2A2A] overflow-hidden" id="about-me-section">
-          {/* Soft floating primary radial glow orbs scattered in the background with slow floating animations */}
-          <motion.div
-            animate={{
-              x: [0, -45, 30, 0],
-              y: [0, 40, -55, 0],
-              scale: [1, 1.15, 0.9, 1],
-            }}
-            transition={{
-              duration: 22,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-[10%] right-[-20%] w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(232,48,42,0.18)_0%,rgba(232,48,42,0.04)_40%,transparent_80%)] pointer-events-none z-0"
-          />
-          <motion.div
-            animate={{
-              x: [0, 40, -20, 0],
-              y: [0, -30, 45, 0],
-              scale: [1, 0.95, 1.08, 1],
-            }}
-            transition={{
-              duration: 19,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-[35%] left-[5%] w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(232,48,42,0.13)_0%,rgba(232,48,42,0.03)_40%,transparent_80%)] pointer-events-none z-0"
-          />
-          <motion.div
-            animate={{
-              x: [0, -25, 35, 0],
-              y: [0, 50, -25, 0],
-              scale: [1, 1.15, 0.9, 1],
-            }}
-            transition={{
-              duration: 24,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute bottom-[-5%] left-[-15%] w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(232,48,42,0.16)_0%,rgba(232,48,42,0.03)_40%,transparent_80%)] pointer-events-none z-0"
-          />
+              <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 md:gap-16 w-full">
+                {/* SVG for Photoshop */}
+                <svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 md:w-24 md:h-24 transition-all hover:scale-105 hover:opacity-100 opacity-70 duration-300 cursor-pointer drop-shadow-xl">
+                  <g clipPath="url(#clip0_379_3518)">
+                  <path d="M60 0.5H196C228.861 0.5 255.5 27.1391 255.5 60V196C255.5 228.861 228.861 255.5 196 255.5H60C27.1391 255.5 0.5 228.861 0.5 196V60C0.5 27.1391 27.1391 0.5 60 0.5Z" fill="#181818" stroke="#4D4D4D"/>
+                  <path d="M57.5996 178.04V68.2801C57.5996 67.5334 57.9196 67.1068 58.6663 67.1068C60.4796 67.1068 62.1863 67.1068 64.6396 67.0001C67.1996 66.8934 69.8663 66.8934 72.7463 66.7868C75.6263 66.6801 78.7196 66.6801 82.0263 66.5734C85.3329 66.4668 88.5329 66.4668 91.7329 66.4668C100.48 66.4668 107.733 67.5334 113.707 69.7734C119.04 71.5868 123.947 74.5734 128 78.5201C131.413 81.9334 134.08 86.0934 135.787 90.6801C137.387 95.1601 138.24 99.7468 138.24 104.547C138.24 113.72 136.107 121.293 131.84 127.267C127.573 133.24 121.6 137.72 114.667 140.28C107.413 142.947 99.4129 143.907 90.6663 143.907C88.1063 143.907 86.3996 143.907 85.3329 143.8C84.2663 143.693 82.7729 143.693 80.7463 143.693V177.933C80.8529 178.68 80.3196 179.32 79.5729 179.427C79.4663 179.427 79.3596 179.427 79.1463 179.427H58.8796C58.0263 179.427 57.5996 179 57.5996 178.04ZM80.8529 87.6934V123.533C82.3463 123.64 83.7329 123.747 85.0129 123.747H90.6663C94.8263 123.747 98.9863 123.107 102.933 121.827C106.347 120.867 109.333 118.84 111.68 116.173C113.92 113.507 114.987 109.88 114.987 105.187C115.093 101.88 114.24 98.5734 112.533 95.6934C110.72 92.9201 108.16 90.7868 105.067 89.6134C101.12 88.0134 96.8529 87.3734 92.4796 87.4801C89.7063 87.4801 87.2529 87.4801 85.2263 87.5868C83.0929 87.4801 81.5996 87.5868 80.8529 87.6934Z" fill="white"/>
+                  <path d="M204.799 117.027C201.599 115.32 198.186 114.147 194.559 113.4C190.612 112.547 186.666 112.013 182.612 112.013C180.479 111.907 178.239 112.227 176.212 112.76C174.826 113.08 173.652 113.827 172.906 114.893C172.372 115.747 172.052 116.813 172.052 117.773C172.052 118.733 172.479 119.693 173.119 120.547C174.079 121.72 175.359 122.68 176.746 123.427C179.199 124.707 181.759 125.88 184.319 126.947C190.079 128.867 195.626 131.533 200.746 134.733C204.266 136.973 207.146 139.96 209.172 143.587C210.879 147 211.732 150.733 211.626 154.573C211.732 159.587 210.239 164.6 207.466 168.76C204.479 173.027 200.319 176.333 195.519 178.253C190.292 180.493 183.892 181.667 176.212 181.667C171.306 181.667 166.506 181.24 161.706 180.28C157.972 179.64 154.239 178.467 150.826 176.867C150.079 176.44 149.546 175.693 149.652 174.84V156.28C149.652 155.96 149.759 155.533 150.079 155.32C150.399 155.107 150.719 155.213 151.039 155.427C155.199 157.88 159.572 159.587 164.266 160.653C168.319 161.72 172.586 162.253 176.852 162.253C180.906 162.253 183.786 161.72 185.706 160.76C187.412 160.013 188.586 158.2 188.586 156.28C188.586 154.787 187.732 153.4 186.026 152.013C184.319 150.627 180.799 149.027 175.572 147C170.132 145.08 165.119 142.52 160.426 139.32C157.119 136.973 154.346 133.88 152.319 130.253C150.612 126.84 149.759 123.107 149.866 119.373C149.866 114.787 151.146 110.413 153.492 106.467C156.159 102.2 160.106 98.7866 164.692 96.6532C169.706 94.0932 175.999 92.9199 183.572 92.9199C187.946 92.9199 192.426 93.2399 196.799 93.8799C199.999 94.3066 203.092 95.1599 205.972 96.3332C206.399 96.4399 206.826 96.8666 207.039 97.2932C207.146 97.7199 207.252 98.1466 207.252 98.5732V115.96C207.252 116.387 207.039 116.813 206.719 117.027C205.759 117.24 205.226 117.24 204.799 117.027Z" fill="white"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_379_3518">
+                  <rect width="256" height="256" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
 
-          <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col gap-12 sm:gap-20">
+                {/* SVG for Illustrator */}
+                <svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 md:w-24 md:h-24 transition-all hover:scale-105 hover:opacity-100 opacity-70 duration-300 cursor-pointer drop-shadow-xl">
+                  <g clipPath="url(#clip0_379_3535)">
+                  <path d="M60 0.5H196C228.861 0.5 255.5 27.1391 255.5 60V196C255.5 228.861 228.861 255.5 196 255.5H60C27.1391 255.5 0.5 228.861 0.5 196V60C0.5 27.1391 27.1391 0.5 60 0.5Z" fill="#181818" stroke="#4D4D4D"/>
+                  <path d="M128.157 160.973H88.4769L80.3703 186.04C80.1569 187 79.3036 187.64 78.3436 187.533H58.2903C57.1169 187.533 56.7969 186.893 57.1169 185.613L91.4636 86.7331C91.7836 85.6664 92.1036 84.4931 92.5303 83.2132C92.9569 80.9732 93.1703 78.6264 93.1703 76.2797C93.0636 75.7464 93.4903 75.2131 94.0236 75.1064H94.3436H121.65C122.504 75.1064 122.93 75.4264 123.037 75.9597L161.97 185.827C162.29 187 161.97 187.533 160.904 187.533H138.61C137.864 187.64 137.117 187.107 136.904 186.36L128.157 160.973ZM94.6636 139.32H121.757C121.117 137.08 120.264 134.413 119.304 131.64C118.344 128.76 117.384 125.667 116.424 122.467C115.357 119.16 114.397 115.96 113.33 112.653C112.264 109.347 111.304 106.253 110.45 103.16C109.597 100.173 108.85 97.3998 108.104 94.8398H107.89C106.93 99.4265 105.757 104.013 104.264 108.6C102.664 113.72 101.064 119.053 99.3569 124.387C97.8636 129.827 96.2636 134.84 94.6636 139.32Z" fill="white"/>
+                  <path d="M185.757 93.7733C182.237 93.88 178.824 92.4933 176.264 90.04C173.811 87.3733 172.531 83.8533 172.637 80.2267C172.531 76.6 173.917 73.1867 176.477 70.7333C179.037 68.28 182.451 67 185.971 67C190.131 67 193.331 68.28 195.677 70.7333C198.024 73.2933 199.304 76.7067 199.197 80.2267C199.304 83.8533 198.024 87.3733 195.464 90.04C193.011 92.6 189.384 93.9867 185.757 93.7733ZM173.811 186.36V104.227C173.811 103.16 174.237 102.733 175.197 102.733H196.317C197.277 102.733 197.704 103.267 197.704 104.227V186.36C197.704 187.533 197.277 188.067 196.317 188.067H175.411C174.344 188.067 173.811 187.427 173.811 186.36Z" fill="white"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_379_3535">
+                  <rect width="256" height="256" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
 
-
-
-            {/* Under Row: Strumenti & Competenze Cards placed full-width underneath */}
-            <div className="flex flex-col gap-8 w-full" id="about-subsections-container">
-
-              {/* Single Card: Strumenti & Competenze */}
-              <div
-                id="about-card-combined"
-                className="bg-white/[0.03] border border-white/10 backdrop-blur-md rounded-[2rem] p-6 sm:p-8 flex flex-col gap-8 shadow-2xl relative overflow-hidden custom-card-transition duration-500 ease-[0.16,1,0.3,1] hover:scale-[1.01] hover:border-white/20 group"
-                data-reveal data-delay="0"
-              >
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
-                    <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white">{lang === 'it' ? 'Strumenti' : 'Tools'}</h3>
-                  </div>
-                </div>
-
-                {/* Grid of the 4 beautifully engineered branding logos */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-
-                  {/* PhotoShop Brand Tile */}
-                  <div className="bg-white/[0.02] border border-white/5 hover:border-blue-500/30 p-5 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors duration-300 group/ps">
-                    <div className="w-12 h-12 rounded-xl bg-blue-950/20 border border-blue-500/10 flex items-center justify-center text-blue-400 group-hover/ps:bg-blue-500/10 group-hover/ps:border-blue-500/20 transition-all">
-                      <Image className="w-5 h-5" />
-                    </div>
-                    <div className="text-center">
-                      <span className="block text-xs font-bold text-white tracking-tight uppercase group-hover/ps:text-blue-400 transition-colors">Photoshop</span>
-                      <span className="font-mono text-[9px] text-white/30">Creative Suite</span>
-                    </div>
-                  </div>
-
-                  {/* Illustrator Brand Tile */}
-                  <div className="bg-white/[0.02] border border-white/5 hover:border-amber-500/30 p-5 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors duration-300 group/ai_ill">
-                    <div className="w-12 h-12 rounded-xl bg-amber-950/20 border border-amber-500/10 flex items-center justify-center text-amber-400 group-hover/ai_ill:bg-amber-500/10 group-hover/ai_ill:border-amber-500/20 transition-all">
-                      <PenTool className="w-5 h-5" />
-                    </div>
-                    <div className="text-center">
-                      <span className="block text-xs font-bold text-white tracking-tight uppercase group-hover/ai_ill:text-amber-400 transition-colors">Illustrator</span>
-                      <span className="font-mono text-[9px] text-white/30">Vector Design</span>
-                    </div>
-                  </div>
-
-                  {/* Figma Brand Tile */}
-                  <div className="bg-white/[0.02] border border-white/5 hover:border-purple-500/30 p-5 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors duration-300 group/fig">
-                    <div className="w-12 h-12 rounded-xl bg-purple-950/20 border border-purple-500/10 flex items-center justify-center text-purple-400 group-hover/fig:bg-purple-500/10 group-hover/fig:border-purple-500/20 transition-all">
-                      <Figma className="w-5 h-5" />
-                    </div>
-                    <div className="text-center">
-                      <span className="block text-xs font-bold text-white tracking-tight uppercase group-hover/fig:text-purple-400 transition-colors">Figma</span>
-                      <span className="font-mono text-[9px] text-white/30">Prototyping & UI</span>
-                    </div>
-                  </div>
-
-                  {/* AI Brand Tile */}
-                  <div className="bg-white/[0.02] border border-white/5 hover:border-[#E8302A]/30 p-5 rounded-2xl flex flex-col items-center justify-center gap-3 transition-colors duration-300 group/genai">
-                    <div className="w-12 h-12 rounded-xl bg-[#E8302A]/10 border border-[#E8302A]/10 flex items-center justify-center text-[#E8302A] group-hover/genai:bg-[#E8302A]/20 group-hover/genai:border-[#E8302A]/30 transition-all">
-                      <Sparkles className="w-5 h-5" />
-                    </div>
-                    <div className="text-center">
-                      <span className="block text-xs font-bold text-white tracking-tight uppercase group-hover/genai:text-[#E8302A] transition-colors">AI tools</span>
-                      <span className="font-mono text-[9px] text-white/30">Generative Design</span>
-                    </div>
-                  </div>
-
-                </div>
-
-
+                {/* SVG for Figma */}
+                <svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 md:w-24 md:h-24 transition-all hover:scale-105 hover:opacity-100 opacity-70 duration-300 cursor-pointer drop-shadow-xl">
+                  <g clipPath="url(#clip0_379_3528)">
+                  <path d="M60 0.5H196C228.861 0.5 255.5 27.1391 255.5 60V196C255.5 228.861 228.861 255.5 196 255.5H60C27.1391 255.5 0.5 228.861 0.5 196V60C0.5 27.1391 27.1391 0.5 60 0.5Z" fill="#181818" stroke="#4D4D4D"/>
+                  <g clipPath="url(#clip1_379_3528)">
+                  <path d="M105.805 61H127.522V104.751H105.805C77.1654 103.623 76.8762 62.1844 105.805 61ZM105.805 150.373H127.522V106.622H105.805C76.8762 107.807 77.1654 149.246 105.805 150.373ZM151.097 61H129.38V104.751H151.097C180.122 103.186 179.76 61.8931 151.097 61ZM127.522 174.12V152.245H105.805C88.0828 152.245 76.8762 173.174 89.2013 188.206C100.952 203.106 127.522 195.678 127.522 174.12ZM172.859 128.498C172.859 111.686 154.667 101.122 140.192 109.528C125.717 117.934 125.717 139.062 140.192 147.468C154.667 155.874 172.859 145.31 172.859 128.498Z" fill="white"/>
+                  </g>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_379_3528">
+                  <rect width="256" height="256" fill="white"/>
+                  </clipPath>
+                  <clipPath id="clip1_379_3528">
+                  <rect width="89" height="135" fill="white" transform="translate(84 61)"/>
+                  </clipPath>
+                  </defs>
+                </svg>
               </div>
-
             </div>
-
           </div>
         </section>
 
