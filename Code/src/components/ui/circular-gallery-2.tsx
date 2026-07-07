@@ -98,6 +98,32 @@ function createCardContentTexture(
 
   const centerX = canvas.width / 2;
 
+  function wrapTextAndGetNextY(
+    context: CanvasRenderingContext2D,
+    text: string,
+    x: number,
+    y: number,
+    maxWidth: number,
+    lineHeight: number
+  ) {
+    const words = text.split(' ');
+    let line = '';
+    let currentY = y;
+    for (let n = 0; n < words.length; n++) {
+      const testLine = line + words[n] + ' ';
+      const metrics = context.measureText(testLine);
+      if (metrics.width > maxWidth && n > 0) {
+        context.fillText(line.trim(), x, currentY);
+        line = words[n] + ' ';
+        currentY += lineHeight;
+      } else {
+        line = testLine;
+      }
+    }
+    context.fillText(line.trim(), x, currentY);
+    return currentY + lineHeight;
+  }
+
   // Title
   ctx.fillStyle = "#FFFFFF";
   ctx.font = "bold 70px Inter, sans-serif";
@@ -105,31 +131,16 @@ function createCardContentTexture(
   ctx.textBaseline = "top";
   
   const titleY = 600;
-  const maxTitleWidth = 750;
-  ctx.fillText(item.title, centerX, titleY, maxTitleWidth);
+  const maxTitleWidth = 850;
+  
+  const nextY = wrapTextAndGetNextY(ctx, item.title, centerX, titleY, maxTitleWidth, 85);
 
   // Description
   ctx.fillStyle = "#AAAAAA";
   ctx.font = "50px Inter, sans-serif";
-  const descY = 750;
-  const lineHeight = 75;
-  const maxWidth = 700;
+  const descY = nextY + 70; // increased spacing between title and description
   
-  const words = item.description.split(' ');
-  let line = '';
-  let currentY = descY;
-  for(let n = 0; n < words.length; n++) {
-    const testLine = line + words[n] + ' ';
-    const metrics = ctx.measureText(testLine);
-    if (metrics.width > maxWidth && n > 0) {
-      ctx.fillText(line, centerX, currentY);
-      line = words[n] + ' ';
-      currentY += lineHeight;
-    } else {
-      line = testLine;
-    }
-  }
-  ctx.fillText(line, centerX, currentY);
+  wrapTextAndGetNextY(ctx, item.description, centerX, descY, 800, 75);
 
   const texture = new Texture(gl, { generateMipmaps: true });
   texture.image = canvas;
@@ -138,9 +149,26 @@ function createCardContentTexture(
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
-      const iconSize = 200;
-      ctx.drawImage(img, centerX - iconSize / 2, 250, iconSize, iconSize);
-      texture.image = canvas;
+      const maxIconSize = 200;
+      let drawWidth = maxIconSize;
+      let drawHeight = maxIconSize;
+      
+      if (img.width && img.height) {
+        const aspect = img.width / img.height;
+        if (aspect > 1) {
+          drawWidth = maxIconSize;
+          drawHeight = maxIconSize / aspect;
+        } else {
+          drawHeight = maxIconSize;
+          drawWidth = maxIconSize * aspect;
+        }
+      }
+      
+      const x = centerX - drawWidth / 2;
+      const y = 250 + (maxIconSize - drawHeight) / 2;
+      
+      ctx.drawImage(img, x, y, drawWidth, drawHeight);
+      texture.needsUpdate = true;
     };
     img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(item.iconSvg);
   }
@@ -256,8 +284,8 @@ class Media {
         
         void main() {
           vec3 baseColor = vec3(0.0705, 0.0705, 0.0705); // #121212
-          vec3 strokeColor = vec3(0.898, 0.192, 0.172); // #E5312C
-          float strokeWidth = 0.005; 
+          vec3 strokeColor = vec3(0.169, 0.169, 0.169); // #2B2B2B
+          float strokeWidth = 0.003; 
           
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           
