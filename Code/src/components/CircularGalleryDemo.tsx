@@ -20,7 +20,7 @@ const galleryItems: GalleryItem[] = [
 
 export function CircularGalleryDemo() {
   return (
-    <div className="relative h-[600px] w-full bg-[#050505]">
+    <div className="relative h-[600px] w-full bg-transparent">
       <CircularGallery
         items={galleryItems}
         bend={3}

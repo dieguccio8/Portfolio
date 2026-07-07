@@ -263,14 +263,10 @@ class Media {
     this.font = font;
     this.createShader();
     this.createMesh();
-    this.createTitle();
     this.onResize();
   }
 
   createShader() {
-    const texture = new Texture(this.gl, {
-      generateMipmaps: true,
-    });
     this.program = new Program(this.gl, {
       depthTest: false,
       depthWrite: false,
@@ -291,9 +287,7 @@ class Media {
       `,
       fragment: `
         precision highp float;
-        uniform vec2 uImageSizes;
         uniform vec2 uPlaneSizes;
-        uniform sampler2D tMap;
         uniform float uBorderRadius;
         varying vec2 vUv;
         
@@ -303,15 +297,7 @@ class Media {
         }
         
         void main() {
-          vec2 ratio = vec2(
-            min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
-            min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
-          );
-          vec2 uv = vec2(
-            vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
-            vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
-          );
-          vec4 color = texture2D(tMap, uv);
+          vec4 color = vec4(0.0705, 0.0705, 0.0705, 1.0); // #121212
           
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           
@@ -323,26 +309,13 @@ class Media {
         }
       `,
       uniforms: {
-        tMap: { value: texture },
         uPlaneSizes: { value: [0, 0] },
-        uImageSizes: { value: [0, 0] },
         uSpeed: { value: 0 },
         uTime: { value: 100 * Math.random() },
         uBorderRadius: { value: this.borderRadius },
       },
       transparent: true,
     });
-
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = this.image;
-    img.onload = () => {
-      texture.image = img;
-      this.program.uniforms.uImageSizes.value = [
-        img.naturalWidth,
-        img.naturalHeight,
-      ];
-    };
   }
 
   createMesh() {
@@ -351,17 +324,6 @@ class Media {
       program: this.program,
     });
     this.plane.setParent(this.scene);
-  }
-
-  createTitle() {
-    this.title = new Title({
-      gl: this.gl,
-      plane: this.plane,
-      renderer: this.renderer,
-      text: this.text,
-      textColor: this.textColor,
-      font: this.font,
-    });
   }
 
   update(
