@@ -685,12 +685,12 @@ export default function App() {
             <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col items-center text-center">
 
               {/* Header Block: Centered master section title */}
-              <div className="flex flex-col items-center mb-16 sm:mb-24">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono" data-reveal data-delay="0">
+              <div className="flex flex-col items-center mb-16 sm:mb-24 relative z-50">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
                   <span>Portfolio</span>
                 </div>
-                <h2 className="text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
+                <h2 className="text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta">
                   {lang === 'it' ? 'I miei progetti' : 'My Projects'}
                 </h2>
               </div>
