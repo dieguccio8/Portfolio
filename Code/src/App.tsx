@@ -35,6 +35,7 @@ import { SmoothScroll } from './components/SmoothScroll.tsx';
 import { ScrollProgress } from './components/ScrollProgress.tsx';
 import { ScrollReveal } from './components/ScrollReveal.tsx';
 import { CircularGalleryDemo } from './components/CircularGalleryDemo.tsx';
+import { GridVignetteBackground } from './components/ui/vignette-grid-background.tsx';
 
 const PenNibIcon = ({ className, strokeWidth = 2 }: { className?: string; strokeWidth?: number }) => (
   <svg 
@@ -597,6 +598,7 @@ export default function App() {
 
         {/* SECTION 1.5: CIRCULAR GALLERY & TOOLS (Now acts as About Me) */}
         <section className="relative w-full bg-[#050505] text-white py-12 sm:py-16 md:py-20 border-t border-[#2A2A2A] overflow-hidden" id="about-me-section">
+          <GridVignetteBackground className="opacity-100" x={50} y={50} intensity={100} horizontalVignetteSize={50} verticalVignetteSize={30} />
           <div className="relative z-10 w-full mx-auto">
             <div className="flex flex-col items-center text-center mb-6 sm:mb-8 px-6 sm:px-10 md:px-14">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
