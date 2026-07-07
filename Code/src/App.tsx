@@ -396,7 +396,7 @@ export default function App() {
                   className="transition-all duration-300 ease-[0.16,1,0.3,1] hover:text-white cursor-pointer text-white/50 flex items-center gap-1.5 font-jakarta font-medium relative group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity absolute -left-3" />
-                  {lang === 'it' ? 'About' : 'About'}
+                  {lang === 'it' ? 'Skills' : 'Skills'}
                 </button>
 
                 <button
@@ -478,7 +478,7 @@ export default function App() {
                     }}
                     className="w-full text-left py-3 px-4 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 text-white font-medium transition-all text-sm uppercase tracking-wider font-sans"
                   >
-                    {lang === 'it' ? 'About' : 'About'}
+                    {lang === 'it' ? 'Skills' : 'Skills'}
                   </button>
                   <button
                     onClick={() => {
@@ -1044,7 +1044,7 @@ export default function App() {
           <span>{lang === 'it' ? '© 2026 Diego Cavallaro. Tutti i diritti riservati.' : '© 2026 Diego Cavallaro. All rights reserved.'}</span>
           <div className="flex gap-6 items-center">
             <button onClick={() => scrollToSection('hero-section')} className="hover:text-white transition-colors cursor-pointer font-mono">{lang === 'it' ? 'Torna su' : 'Back to top'}</button>
-            <button onClick={() => scrollToSection('about-me-section')} className="hover:text-white transition-colors cursor-pointer font-mono">{lang === 'it' ? 'About' : 'About'}</button>
+            <button onClick={() => scrollToSection('about-me-section')} className="hover:text-white transition-colors cursor-pointer font-mono">{lang === 'it' ? 'Skills' : 'Skills'}</button>
             <button onClick={() => scrollToSection('collaboration-section')} className="hover:text-white transition-colors cursor-pointer font-mono">{lang === 'it' ? 'Progetti' : 'Projects'}</button>
             <button onClick={() => scrollToSection('direct-contact-section')} className="hover:text-white transition-colors cursor-pointer font-mono uppercase tracking-widest text-[#E8302A]">{lang === 'it' ? 'Contatti' : 'Contact'}</button>
           </div>
