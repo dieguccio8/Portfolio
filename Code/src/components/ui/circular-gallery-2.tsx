@@ -297,15 +297,22 @@ class Media {
         }
         
         void main() {
-          vec4 color = vec4(0.0705, 0.0705, 0.0705, 1.0); // #121212
+          vec3 baseColor = vec3(0.0705, 0.0705, 0.0705); // #121212
+          vec3 strokeColor = vec3(0.898, 0.192, 0.172); // #E5312C
+          float strokeWidth = 0.005; 
           
           float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
           
           // Smooth antialiasing for edges
           float edgeSmooth = 0.002;
+          
+          // Calculate stroke: 1.0 near the edge, 0.0 inside
+          float strokeFactor = smoothstep(-strokeWidth - edgeSmooth, -strokeWidth + edgeSmooth, d);
+          vec3 finalColor = mix(baseColor, strokeColor, strokeFactor);
+          
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
           
-          gl_FragColor = vec4(color.rgb, alpha);
+          gl_FragColor = vec4(finalColor, alpha);
         }
       `,
       uniforms: {
