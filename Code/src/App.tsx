@@ -354,7 +354,7 @@ export default function App() {
                   setLang(lang === 'it' ? 'en' : 'it');
                   setMobileMenuOpen(false);
                 }}
-                className={`flex md:hidden items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md overflow-hidden ${!isScrolled ? 'max-w-0 opacity-0 border-transparent px-0 mx-0' : 'max-w-[32px] opacity-100'}`}
+                className={`items-center justify-center rounded-full border bg-white/[0.04] hover:bg-white/[0.1] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md overflow-hidden flex shrink-0 ${!isScrolled ? 'w-0 h-0 opacity-0 border-transparent' : 'w-8 h-8 opacity-100 border-white/10 md:w-0 md:h-0 md:opacity-0 md:border-transparent md:pointer-events-none'}`}
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
@@ -362,18 +362,18 @@ export default function App() {
 
               {/* Desktop Only Logo - Diego Cavallaro Premium Monogram with red accent */}
               <div 
-                className="flex items-center gap-2.5 group/logo cursor-pointer transition-all duration-500 ease-in-out" 
+                className="flex items-center gap-2.5 group/logo cursor-pointer transition-all duration-700 ease-[0.16,1,0.3,1]" 
                 onClick={() => scrollToSection('hero-section')}
               >
-                <div className={`items-center justify-center transition-all duration-500 ease-in-out rounded-full ${!isScrolled ? 'flex w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20' : 'hidden md:flex w-5 h-5 bg-transparent border-transparent'}`}>
+                <div className={`items-center justify-center transition-all duration-700 ease-[0.16,1,0.3,1] rounded-full flex overflow-hidden shrink-0 ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20 opacity-100' : 'w-0 h-0 opacity-0 border-transparent md:w-5 md:h-5 md:opacity-100'}`}>
                   <img
                     src="/logo_diego_cavallaro.png"
-                    className="w-5 h-5 object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-105"
+                    className="w-5 h-5 min-w-[20px] object-contain transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover/logo:scale-105"
                     alt="Diego Cavallaro Logo"
                     id="header-logo-img"
                   />
                 </div>
-                <span className={`text-white font-jakarta font-bold tracking-tight text-sm uppercase group-hover/logo:text-[#E8302A] transition-all duration-500 ease-in-out origin-left whitespace-nowrap overflow-hidden ${!isScrolled ? 'max-w-0 opacity-0' : 'max-w-[200px] opacity-100 hidden md:block'}`}>Diego Cavallaro</span>
+                <span className={`text-white font-jakarta font-bold tracking-tight text-sm uppercase group-hover/logo:text-[#E8302A] transition-all duration-700 ease-[0.16,1,0.3,1] origin-left whitespace-nowrap overflow-hidden block ${!isScrolled ? 'max-w-0 opacity-0' : 'max-w-0 opacity-0 md:max-w-[200px] md:opacity-100'}`}>Diego Cavallaro</span>
               </div>
             </div>
 
@@ -413,7 +413,7 @@ export default function App() {
             {/* Right Area: Action buttons (desktop) & Hamburger menu toggle (mobile) */}
             <div className="flex justify-end items-center gap-2 md:col-start-3">
               {/* Desktop Only Actions */}
-              <div className={`items-center gap-3 transition-all duration-500 ease-in-out overflow-hidden whitespace-nowrap hidden md:flex ${!isScrolled ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-[300px] opacity-100'}`} id="header-cta-container">
+              <div className={`items-center gap-3 transition-all duration-700 ease-[0.16,1,0.3,1] overflow-hidden whitespace-nowrap flex ${!isScrolled ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-0 opacity-0 md:max-w-[300px] md:opacity-100'}`} id="header-cta-container">
                 <button
                   id="nav-cv-btn"
                   onClick={() => {
@@ -443,7 +443,7 @@ export default function App() {
                   setLang(lang === 'it' ? 'en' : 'it');
                   setMobileMenuOpen(false);
                 }}
-                className={`items-center justify-center h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-500 ease-in-out text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0 overflow-hidden hidden md:flex ${!isScrolled ? 'max-w-0 opacity-0 border-transparent px-0 mx-0 pointer-events-none' : 'w-8 max-w-[32px] opacity-100'}`}
+                className={`items-center justify-center rounded-full border bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0 overflow-hidden flex ${!isScrolled ? 'w-0 h-0 opacity-0 border-transparent pointer-events-none' : 'w-0 h-0 opacity-0 md:w-8 md:h-8 md:opacity-100 md:border-white/10'}`}
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
@@ -452,10 +452,10 @@ export default function App() {
               {/* Hamburger Menu - Visible on Mobile ALWAYS, Visible on Desktop ONLY when !isScrolled */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`items-center justify-center rounded-full border border-white/10 transition-all duration-500 ease-in-out text-white cursor-pointer active:scale-95 flex ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] hover:bg-white/[0.1]' : 'w-8 h-8 bg-white/[0.04] hover:bg-white/[0.1] md:hidden'}`}
+                className={`items-center justify-center rounded-full border transition-all duration-700 ease-[0.16,1,0.3,1] text-white cursor-pointer active:scale-95 flex overflow-hidden shrink-0 ${!isScrolled ? 'w-10 h-10 border-white/10 backdrop-blur-md bg-white/[0.05] hover:bg-white/[0.1] opacity-100' : 'w-8 h-8 border-white/10 bg-white/[0.04] hover:bg-white/[0.1] md:w-0 md:h-0 md:opacity-0 md:border-transparent md:pointer-events-none'}`}
                 aria-label="Toggle Menu"
               >
-                {mobileMenuOpen ? <X className={`transition-transform duration-500 ease-in-out ${!isScrolled ? "w-5 h-5" : "w-4 h-4"}`} /> : <Menu className={`transition-transform duration-500 ease-in-out ${!isScrolled ? "w-5 h-5" : "w-4 h-4"}`} />}
+                {mobileMenuOpen ? <X className={`transition-transform duration-700 ease-[0.16,1,0.3,1] shrink-0 ${!isScrolled ? "w-5 h-5 min-w-[20px]" : "w-4 h-4 min-w-[16px] md:min-w-0"}`} /> : <Menu className={`transition-transform duration-700 ease-[0.16,1,0.3,1] shrink-0 ${!isScrolled ? "w-5 h-5 min-w-[20px]" : "w-4 h-4 min-w-[16px] md:min-w-0"}`} />}
               </button>
             </div>
           </motion.header>
