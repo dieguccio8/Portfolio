@@ -586,6 +586,9 @@ export default function App() {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
                 {lang === 'it' ? 'Momenti Catturati' : 'Captured Moments'}
               </h2>
+              <p className="mt-4 text-sm sm:text-base text-white/60 font-light max-w-lg mx-auto" data-reveal data-delay="120">
+                {lang === 'it' ? 'Trascina le card per scorrere tra le competenze' : 'Drag the cards to scroll through the skills'}
+              </p>
             </div>
             
             <div data-reveal data-delay="150" className="w-full">
@@ -640,72 +643,7 @@ export default function App() {
 
           <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 lg:px-20 flex flex-col gap-12 sm:gap-20">
 
-            {/* Header Block: Full width master section title */}
-            <div className="flex flex-col items-center text-center">
-              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono" data-reveal data-delay="0">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
-                <span>{lang === 'it' ? 'About' : 'About me'}</span>
-              </div>
-              <h2 className="text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold tracking-[-0.03em] text-white leading-[1.06] font-jakarta" data-reveal data-delay="80">
-                {lang === 'it' ? "Scopri chi c'è dietro ai progetti" : 'Meet The Mind Behind The Work'}
-              </h2>
-            </div>
 
-            {/* Top Row: Portrait image & text description beautifully balanced in a 50/50 side-by-side layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 sm:gap-20 lg:gap-32 items-center max-w-5xl mx-auto w-full">
-
-              {/* LEFT COLUMN: Silhouette Rounded Art Portrait only */}
-              <div className="flex justify-center w-full lg:block">
-                <div className="relative my-12 lg:my-10 w-[75vw] h-[75vw] max-w-[340px] max-h-[340px] sm:max-w-none sm:max-h-none sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] lg:w-[500px] lg:h-[500px] aspect-square mx-auto lg:ml-auto lg:mr-0 group select-none overflow-hidden rounded-full bg-[#141414] border border-[#2A2A2A] shadow-2xl custom-card-transition duration-500 hover:scale-[1.02] hover:border-white/20 shrink-0" id="about-left-column" data-reveal="scale" data-delay="100">
-                  <img
-                    src="/pic_about_me.jpg"
-                    alt="Diego Portrait"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover grayscale brightness-90 contrast-[1.02] group-hover:scale-105 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute inset-0 bg-[#E8302A]/5 mix-blend-color-dodge pointer-events-none" />
-                </div>
-              </div>
-
-              {/* RIGHT COLUMN: Narrative text only next to the image */}
-              <div className="flex flex-col gap-6 max-w-xl mx-auto lg:mx-0" id="about-right-column" data-reveal data-delay="150">
-                {/* Diego Custom Narrative */}
-                <div className="flex flex-col gap-6">
-                  <h3 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-bold tracking-[-0.025em] text-white font-jakarta leading-[1.1] text-balance">
-                    {lang === 'it' ? 'Junior UX/UI & Visual Designer' : 'Junior UX/UI & Visual Designer'}
-                  </h3>
-                  <div className="flex flex-col gap-5 text-sm sm:text-base lg:text-[1.05rem] font-light leading-[1.8] text-white/80 font-jakarta text-pretty">
-                    {lang === 'it' ? (
-                      <>
-                        <p>
-                          Ciao! Sono Diego, Junior UX/UI & Visual Designer con formazione in Digital Media Design. Progetto esperienze digitali semplici, funzionali e curate nei dettagli.
-                        </p>
-                        <p>
-                          Nel mio processo di lavoro do grande importanza alla ricerca, ai feedback e alla prototipazione per trasformare i bisogni degli utenti in soluzioni digitali chiare ed efficaci.
-                        </p>
-                        <p>
-                          Attualmente sto approfondendo UX e UI design con l’obiettivo di lavorare su progetti che abbiano un impatto reale.
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <p>
-                          Hi! I am Diego, a Junior UX/UI & Visual Designer with a background in Digital Media Design. I design simple, functional, and highly polished digital experiences.
-                        </p>
-                        <p>
-                          In my workflow, I place great importance on research, feedback, and prototyping to transform user needs into clear and effective digital solutions.
-                        </p>
-                        <p>
-                          I am currently deepening my knowledge of UX and UI design with the goal of working on projects that have a real impact.
-                        </p>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-            </div>
 
             {/* Under Row: Strumenti & Competenze Cards placed full-width underneath */}
             <div className="flex flex-col gap-8 w-full" id="about-subsections-container">
@@ -772,90 +710,7 @@ export default function App() {
 
                 </div>
 
-                <div className="flex items-center justify-between border-b border-white/10 pb-4 mt-6">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
-                    <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white">{lang === 'it' ? 'Competenze' : 'Skills'}</h3>
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full" id="competencies-grid">
-                  
-                  {/* Card 1: UX/UI */}
-                  <div className="bg-white/[0.02] border border-white/5 backdrop-blur-sm rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 group transition-all duration-500 hover:border-white/20 hover:bg-white/[0.04] shadow-lg">
-                    {/* Icon in bottom left, rotated towards center */}
-                    <PenNibIcon 
-                      className="absolute -bottom-10 -left-10 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] text-white opacity-[0.03] pointer-events-none group-hover:scale-105 group-hover:opacity-[0.06] transition-all duration-700 ease-out" 
-                      strokeWidth={0.5}
-                    />
-                    
-                    <div className="flex items-center gap-3 z-10">
-                      <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight uppercase">UX / UI</h4>
-                    </div>
-                    
-                    <ul className="flex flex-col gap-3.5 z-10 text-xs sm:text-sm text-white/70 font-light leading-relaxed">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>User Research, Analisi dei bisogni e del comportamento utente</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>Information Architecture, User Flow e Journey Mapping</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>Wireframing, UI Design e Prototipazione interattiva</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>Creazione e gestione di Design Systems (componenti, coerenza visiva, pattern)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>Visual Hierarchy e Data Visualization</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>UX Writing base</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>Fondamenti di Motion Design e 3D Graphics</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Card 2: Tecnologie & Digital */}
-                  <div className="bg-white/[0.02] border border-white/5 backdrop-blur-sm rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 group transition-all duration-500 hover:border-white/20 hover:bg-white/[0.04] shadow-lg">
-                    {/* Icon in bottom left, rotated towards center */}
-                    <Layers 
-                      className="absolute -bottom-16 -left-16 w-72 h-72 text-white opacity-[0.03] pointer-events-none group-hover:scale-105 group-hover:opacity-[0.06] transition-all duration-700 ease-out rotate-[15deg]" 
-                      strokeWidth={0.5}
-                    />
-                    
-                    <div className="flex items-center gap-3 z-10">
-                      <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight uppercase">
-                        {lang === 'it' ? 'Tecnologie & Digital' : 'Technologies & Digital'}
-                      </h4>
-                    </div>
-                    
-                    <ul className="flex flex-col gap-3.5 z-10 text-xs sm:text-sm text-white/70 font-light leading-relaxed">
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>{lang === 'it' ? 'Fondamenti di HTML e CSS' : 'Fundamentals of HTML & CSS'}</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>{lang === 'it' ? 'IA Generativa applicata al design' : 'Generative AI applied to design'}</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-[#E8302A] mt-0.5 font-bold">•</span>
-                        <span>{lang === 'it' ? 'Prototipazione assistita da AI' : 'AI-assisted prototyping'}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
               </div>
 
             </div>
