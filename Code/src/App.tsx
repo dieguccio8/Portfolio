@@ -365,7 +365,7 @@ export default function App() {
                 className="flex items-center gap-2.5 group/logo cursor-pointer transition-all duration-700 ease-[0.16,1,0.3,1]" 
                 onClick={() => scrollToSection('hero-section')}
               >
-                <div className={`items-center justify-center transition-all duration-700 ease-[0.16,1,0.3,1] rounded-full flex overflow-hidden shrink-0 ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20 opacity-100' : 'w-0 h-0 opacity-0 border-transparent md:w-5 md:h-5 md:opacity-100'}`}>
+                <div className={`items-center justify-center transition-all duration-700 ease-[0.16,1,0.3,1] rounded-full flex overflow-hidden shrink-0 ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20 opacity-100' : 'w-0 h-0 opacity-0 border-0 md:w-5 md:h-5 md:opacity-100'}`}>
                   <img
                     src="/logo_diego_cavallaro.png"
                     className="w-5 h-5 min-w-[20px] object-contain transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover/logo:scale-105"
@@ -610,7 +610,7 @@ export default function App() {
             </div>
             
             <div data-reveal data-delay="150" className="w-full">
-              <CircularGalleryDemo />
+              <CircularGalleryDemo lang={lang} />
             </div>
 
             {/* Software Skills Area */}
