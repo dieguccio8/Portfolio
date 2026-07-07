@@ -17,8 +17,10 @@ import { cn } from "@/lib/utils"; // Assuming shadcn 'cn' utility path
 * Types
 ----------------------------------- */
 export interface GalleryItem {
-  image: string;
-  text: string;
+  id?: string;
+  title: string;
+  description: string;
+  iconSvg?: string;
 }
 
 interface CircularGalleryProps
@@ -83,121 +85,78 @@ function autoBind(instance: object) {
   });
 }
 
-function createTextTexture(
+function createCardContentTexture(
   gl: OGLRenderingContext,
-  text: string,
-  font: string,
-  color: string,
+  item: GalleryItem
 ) {
   const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d")!;
-  context.font = font;
-  const metrics = context.measureText(text);
-  const textWidth = Math.ceil(metrics.width);
-  const textHeight = Math.ceil(parseInt(font, 10) * 1.2);
-  canvas.width = textWidth + 20;
-  canvas.height = textHeight + 20;
-  context.font = font;
-  context.fillStyle = color;
-  context.textBaseline = "middle";
-  context.textAlign = "center";
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.fillText(text, canvas.width / 2, canvas.height / 2);
-  const texture = new Texture(gl, { generateMipmaps: false });
+  canvas.width = 1000;
+  canvas.height = 1400;
+  const ctx = canvas.getContext("2d")!;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const centerX = canvas.width / 2;
+
+  // Title
+  ctx.fillStyle = "#FFFFFF";
+  ctx.font = "bold 70px Inter, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  
+  const titleY = 600;
+  const maxTitleWidth = 750;
+  ctx.fillText(item.title, centerX, titleY, maxTitleWidth);
+
+  // Description
+  ctx.fillStyle = "#AAAAAA";
+  ctx.font = "50px Inter, sans-serif";
+  const descY = 750;
+  const lineHeight = 75;
+  const maxWidth = 700;
+  
+  const words = item.description.split(' ');
+  let line = '';
+  let currentY = descY;
+  for(let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth && n > 0) {
+      ctx.fillText(line, centerX, currentY);
+      line = words[n] + ' ';
+      currentY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line, centerX, currentY);
+
+  const texture = new Texture(gl, { generateMipmaps: true });
   texture.image = canvas;
-  return { texture, width: canvas.width, height: canvas.height };
-}
 
-/* --------------------------------
-* OGL Classes
------------------------------------ */
-class Title {
-  gl: OGLRenderingContext;
-  plane: Mesh;
-  renderer: Renderer;
-  text: string;
-  textColor: string;
-  font: string;
-  mesh!: Mesh;
-
-  constructor({
-    gl,
-    plane,
-    renderer,
-    text,
-    textColor,
-    font,
-  }: {
-    gl: OGLRenderingContext;
-    plane: Mesh;
-    renderer: Renderer;
-    text: string;
-    textColor: string;
-    font: string;
-  }) {
-    autoBind(this);
-    this.gl = gl;
-    this.plane = plane;
-    this.renderer = renderer;
-    this.text = text;
-    this.textColor = textColor;
-    this.font = font;
-    this.createMesh();
+  if (item.iconSvg) {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const iconSize = 200;
+      ctx.drawImage(img, centerX - iconSize / 2, 250, iconSize, iconSize);
+      texture.image = canvas;
+    };
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(item.iconSvg);
   }
 
-  createMesh() {
-    const { texture, width, height } = createTextTexture(
-      this.gl,
-      this.text,
-      this.font,
-      this.textColor,
-    );
-    const geometry = new Plane(this.gl);
-    const program = new Program(this.gl, {
-      vertex: `
-        attribute vec3 position;
-        attribute vec2 uv;
-        uniform mat4 modelViewMatrix;
-        uniform mat4 projectionMatrix;
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragment: `
-        precision highp float;
-        uniform sampler2D tMap;
-        varying vec2 vUv;
-        void main() {
-          vec4 color = texture2D(tMap, vUv);
-          if (color.a < 0.1) discard;
-          gl_FragColor = color;
-        }
-      `,
-      uniforms: { tMap: { value: texture } },
-      transparent: true,
-    });
-    this.mesh = new Mesh(this.gl, { geometry, program });
-    const aspect = width / height;
-    const textHeight = this.plane.scale.y * 0.15;
-    const textWidth = textHeight * aspect;
-    this.mesh.scale.set(textWidth, textHeight, 1);
-    this.mesh.position.y = -this.plane.scale.y * 0.5 - textHeight * 0.5 - 0.05;
-    this.mesh.setParent(this.plane);
-  }
+  return texture;
 }
 
 class Media {
   gl: OGLRenderingContext;
   geometry: Plane;
-  image: string;
+  item: GalleryItem;
   index: number;
   length: number;
   renderer: Renderer;
   scene: Transform;
   screen: { width: number; height: number };
-  text: string;
   viewport: { width: number; height: number };
   bend: number;
   textColor: string;
@@ -205,7 +164,6 @@ class Media {
   font: string;
   program!: Program;
   plane!: Mesh;
-  title!: Title;
   extra: number = 0;
   widthTotal: number = 0;
   width: number = 0;
@@ -219,13 +177,12 @@ class Media {
   constructor({
     geometry,
     gl,
-    image,
+    item,
     index,
     length,
     renderer,
     scene,
     screen,
-    text,
     viewport,
     bend,
     textColor,
@@ -234,13 +191,12 @@ class Media {
   }: {
     geometry: Plane;
     gl: OGLRenderingContext;
-    image: string;
+    item: GalleryItem;
     index: number;
     length: number;
     renderer: Renderer;
     scene: Transform;
     screen: { width: number; height: number };
-    text: string;
     viewport: { width: number; height: number };
     bend: number;
     textColor: string;
@@ -249,13 +205,12 @@ class Media {
   }) {
     this.geometry = geometry;
     this.gl = gl;
-    this.image = image;
+    this.item = item;
     this.index = index;
     this.length = length;
     this.renderer = renderer;
     this.scene = scene;
     this.screen = screen;
-    this.text = text;
     this.viewport = viewport;
     this.bend = bend;
     this.textColor = textColor;
@@ -267,6 +222,8 @@ class Media {
   }
 
   createShader() {
+    const texture = createCardContentTexture(this.gl, this.item);
+    
     this.program = new Program(this.gl, {
       depthTest: false,
       depthWrite: false,
@@ -289,6 +246,7 @@ class Media {
         precision highp float;
         uniform vec2 uPlaneSizes;
         uniform float uBorderRadius;
+        uniform sampler2D tMap;
         varying vec2 vUv;
         
         float roundedBoxSDF(vec2 p, vec2 b, float r) {
@@ -310,12 +268,17 @@ class Media {
           float strokeFactor = smoothstep(-strokeWidth - edgeSmooth, -strokeWidth + edgeSmooth, d);
           vec3 finalColor = mix(baseColor, strokeColor, strokeFactor);
           
+          // Sample canvas texture and blend
+          vec4 contentColor = texture2D(tMap, vUv);
+          finalColor = mix(finalColor, contentColor.rgb, contentColor.a);
+          
           float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
           
           gl_FragColor = vec4(finalColor, alpha);
         }
       `,
       uniforms: {
+        tMap: { value: texture },
         uPlaneSizes: { value: [0, 0] },
         uSpeed: { value: 0 },
         uTime: { value: 100 * Math.random() },
@@ -513,15 +476,11 @@ class App {
     font: string,
   ) {
     const defaultItems: GalleryItem[] = [
-      { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: "Bridge" },
-      {
-        image: `https://picsum.photos/seed/2/800/600?grayscale`,
-        text: "Desk Setup",
-      },
-      {
-        image: `https://picsum.photos/seed/3/800/600?grayscale`,
-        text: "Waterfall",
-      },
+      { 
+        title: "User Research & Analisi", 
+        description: "Analisi dei dati e comportamenti per individuare le reali necessità degli utenti, guidando decisioni di design basate su metriche oggettive.",
+        iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8302A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="4"/><path d="M10.3 15H7a4 4 0 0 0-4 4v2"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.5-1.5"/></svg>`
+      }
     ];
 
     const galleryItems = items && items.length > 0 ? items : defaultItems;
@@ -530,13 +489,12 @@ class App {
       return new Media({
         geometry: this.planeGeometry,
         gl: this.gl,
-        image: data.image,
+        item: data,
         index,
         length: this.mediasImages.length,
         renderer: this.renderer,
         scene: this.scene,
         screen: this.screen,
-        text: data.text,
         viewport: this.viewport,
         bend,
         textColor,
