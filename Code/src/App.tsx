@@ -57,6 +57,17 @@ const PenNibIcon = ({ className, strokeWidth = 2 }: { className?: string; stroke
 export default function App() {
   const [lang, setLang] = useState<'it' | 'en'>('it');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Check initial scroll
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Navigation & Interactive States
   const [activeOverlay, setActiveOverlay] = useState<'none' | 'projects' | 'about' | 'contact'>('none');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -327,37 +338,44 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl grid grid-cols-3 items-center justify-between text-xs uppercase tracking-widest font-normal border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
+            className={`fixed top-4 left-0 right-0 mx-auto z-50 grid grid-cols-3 items-center justify-between text-xs uppercase tracking-widest font-normal transition-all duration-700 ease-[0.16,1,0.3,1] ${
+              isScrolled 
+                ? "w-[calc(100%-2rem)] max-w-5xl border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
+                : "w-full max-w-none border-transparent rounded-none px-6 sm:px-10 md:px-14 py-2 bg-transparent backdrop-blur-none shadow-none"
+            }`}
             id="app-header"
           >
             {/* Left Area: Logo/Brand */}
-            <div className="flex justify-start items-center gap-3 md:col-start-1">
+            <div className="flex items-center gap-3 md:col-start-1 justify-start">
               {/* Mobile Only Language Switcher (Left Side) */}
               <button
                 onClick={() => {
                   setLang(lang === 'it' ? 'en' : 'it');
                   setMobileMenuOpen(false);
                 }}
-                className="flex md:hidden items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+                className={`flex md:hidden items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md overflow-hidden ${!isScrolled ? 'max-w-0 opacity-0 border-transparent px-0 mx-0' : 'max-w-[32px] opacity-100'}`}
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
               </button>
 
               {/* Desktop Only Logo - Diego Cavallaro Premium Monogram with red accent */}
-              <div className="hidden md:flex justify-start items-center gap-2.5 group/logo cursor-pointer" onClick={() => scrollToSection('hero-section')}>
+              <div 
+                className={`flex items-center group/logo cursor-pointer transition-all duration-500 ease-in-out rounded-full ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20 justify-center hover:bg-white/[0.1]' : 'bg-transparent border border-transparent justify-start gap-2.5 md:flex'}`} 
+                onClick={() => scrollToSection('hero-section')}
+              >
                 <img
                   src="/logo_diego_cavallaro.png"
-                  className="w-5 h-5 object-contain transition-all duration-300 hover:scale-105"
+                  className={`object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-105 ${!isScrolled ? 'w-5 h-5' : 'w-5 h-5 hidden md:block'}`}
                   alt="Diego Cavallaro Logo"
                   id="header-logo-img"
                 />
-                <span className="text-white font-jakarta font-bold tracking-tight text-sm uppercase group-hover/logo:text-[#E8302A] transition-colors duration-300">Diego Cavallaro</span>
+                <span className={`text-white font-jakarta font-bold tracking-tight text-sm uppercase group-hover/logo:text-[#E8302A] transition-all duration-500 ease-in-out origin-left whitespace-nowrap overflow-hidden ${!isScrolled ? 'max-w-0 opacity-0' : 'max-w-[200px] opacity-100 hidden md:block'}`}>Diego Cavallaro</span>
               </div>
             </div>
 
             {/* Center Area: Mobile Only Logo & Desktop Center Navigation */}
-            <div className="flex justify-center items-center md:col-start-2">
+            <div className={`flex justify-center items-center md:col-start-2 transition-all duration-700 ease-[0.16,1,0.3,1] ${!isScrolled ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}`}>
               {/* Mobile Only Center Logo */}
               <div className="flex md:hidden justify-center items-center cursor-pointer" onClick={() => { scrollToSection('hero-section'); setMobileMenuOpen(false); }}>
                 <img
@@ -392,7 +410,7 @@ export default function App() {
             {/* Right Area: Action buttons (desktop) & Hamburger menu toggle (mobile) */}
             <div className="flex justify-end items-center gap-2 md:col-start-3">
               {/* Desktop Only Actions */}
-              <div className="hidden md:flex items-center gap-3" id="header-cta-container">
+              <div className={`items-center gap-3 transition-all duration-500 ease-in-out overflow-hidden whitespace-nowrap hidden md:flex ${!isScrolled ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-[300px] opacity-100'}`} id="header-cta-container">
                 <button
                   id="nav-cv-btn"
                   onClick={() => {
@@ -422,19 +440,19 @@ export default function App() {
                   setLang(lang === 'it' ? 'en' : 'it');
                   setMobileMenuOpen(false);
                 }}
-                className="hidden md:flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+                className={`items-center justify-center h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-500 ease-in-out text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0 overflow-hidden hidden md:flex ${!isScrolled ? 'max-w-0 opacity-0 border-transparent px-0 mx-0 pointer-events-none' : 'w-8 max-w-[32px] opacity-100'}`}
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
               </button>
 
-              {/* Mobile Only Hamburger Toggle */}
+              {/* Hamburger Menu - Visible on Mobile ALWAYS, Visible on Desktop ONLY when !isScrolled */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="flex md:hidden items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] text-white cursor-pointer active:scale-95 transition-all"
+                className={`items-center justify-center rounded-full border border-white/10 transition-all duration-500 ease-in-out text-white cursor-pointer active:scale-95 flex ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] hover:bg-white/[0.1]' : 'w-8 h-8 bg-white/[0.04] hover:bg-white/[0.1] md:hidden'}`}
                 aria-label="Toggle Menu"
               >
-                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+                {mobileMenuOpen ? <X className={`transition-transform duration-500 ease-in-out ${!isScrolled ? "w-5 h-5" : "w-4 h-4"}`} /> : <Menu className={`transition-transform duration-500 ease-in-out ${!isScrolled ? "w-5 h-5" : "w-4 h-4"}`} />}
               </button>
             </div>
           </motion.header>
@@ -447,7 +465,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="fixed top-20 left-4 right-4 z-40 md:hidden flex flex-col gap-4 border border-white/10 rounded-3xl p-6 bg-black/95 backdrop-blur-2xl shadow-2xl"
+                className={`fixed top-20 right-4 z-40 flex flex-col gap-4 border border-white/10 rounded-3xl p-6 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60 w-[calc(100%-2rem)] md:w-64 md:right-14 ${isScrolled ? 'md:hidden' : ''}`}
               >
                 <div className="flex flex-col gap-2">
                   <button
