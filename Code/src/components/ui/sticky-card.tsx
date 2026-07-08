@@ -26,7 +26,7 @@ const StickyCard002 = ({
   imageClassName,
 }: StickyCard002Props) => {
   const container = useRef(null);
-  const stickyRef = useRef(null);
+  const pinRef = useRef(null);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
 
   useGSAP(
@@ -48,16 +48,18 @@ const StickyCard002 = ({
       // Create timeline mapped to the scrolling of the container
       const scrollTimeline = gsap.timeline({
         scrollTrigger: {
-          trigger: container.current,
+          trigger: pinRef.current,
           start: "top top",
-          end: "bottom bottom", // Finishes when the wrapper reaches its end
-          scrub: 1,
-          pin: false, // NO PINNING! Handled by CSS sticky natively
+          end: () => `+=${window.innerHeight * totalCards}`, // Use exact pixel calculation to avoid vh mobile bugs
+          scrub: true, // true ensures 1:1 scrolling without interpolation lag
+          pin: true,
+          pinSpacing: true, // GSAP handles the padding automatically
+          anticipatePin: 1,
         },
       });
 
       // Add an initial dedicated pause for the first image so it stays still longer
-      scrollTimeline.to({}, { duration: 1.5 });
+      scrollTimeline.to({}, { duration: 1.0 });
 
       for (let i = 0; i < totalCards - 1; i++) {
         const currentImage = imageElements[i];
@@ -68,8 +70,9 @@ const StickyCard002 = ({
         scrollTimeline.to(
           currentImage,
           {
-            scale: 0.7,
+            scale: 0.75,
             rotation: 5,
+            opacity: 0,
             duration: 1.5,
             ease: "power2.inOut",
           },
@@ -88,7 +91,7 @@ const StickyCard002 = ({
         );
 
         // Pause to view the newly arrived image
-        scrollTimeline.to({}, { duration: 1.5 });
+        scrollTimeline.to({}, { duration: 1.0 });
       }
     },
     { scope: container }
@@ -96,14 +99,12 @@ const StickyCard002 = ({
 
   return (
     <div 
-      className={cn("w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]", className)} 
+      className={cn("w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#050505]", className)} 
       ref={container}
-      style={{ height: `${cards.length * 150}vh` }} // Set the height based on card count (increased for slower scroll)
     >
-      {/* NATIVE STICKY WRAPPER */}
       <div 
-        ref={stickyRef} 
-        className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden p-3 lg:p-8"
+        ref={pinRef} 
+        className="w-full h-[100svh] flex items-center justify-center overflow-hidden p-3 lg:p-8"
       >
         <div
           className={cn(
