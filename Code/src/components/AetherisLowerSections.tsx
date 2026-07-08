@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, AlertTriangle, Check, ArrowRight } from 'lucide-react';
+import { StickyCard002 } from './ui/sticky-card';
 
 interface Props {
   project: any;
@@ -9,12 +10,39 @@ interface Props {
   lang: string;
 }
 
+const problems = [
+  {
+    title: "Disorientamento",
+    description: "I visitatori si perdono facilmente senza mappe interattive.",
+    icon: AlertTriangle
+  },
+  {
+    title: "Mancanza di contesto",
+    description: "Le informazioni scientifiche risultano spesso ostiche o incomplete.",
+    icon: AlertTriangle
+  },
+  {
+    title: "Esperienza passiva",
+    description: "La visita si limita a un percorso osservativo senza interazione.",
+    icon: AlertTriangle
+  }
+];
+
 export function AetherisLowerSections({
   project,
   activeResearchTab,
   setActiveResearchTab,
   lang
 }: Props) {
+  const [mobileImageIndex, setMobileImageIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setMobileImageIndex(prev => (prev === 0 ? 1 : 0));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
       
@@ -314,8 +342,16 @@ export function AetherisLowerSections({
         <div className="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]">
           <img 
             src="/project-01-mockup-mobile.jpg" 
-            alt="Bussola Verde Mobile Mockup"
-            className="w-full h-auto object-cover"
+            alt="Bussola Verde Mobile Mockup 1"
+            className="w-full h-auto object-cover block"
+          />
+          <motion.img 
+            initial={false}
+            animate={{ opacity: mobileImageIndex === 1 ? 1 : 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            src="/project-01-mockup-mobile-2.jpg" 
+            alt="Bussola Verde Mobile Mockup 2"
+            className="w-full h-full object-cover absolute inset-0 z-10"
           />
         </div>
       </div>
@@ -379,14 +415,18 @@ export function AetherisLowerSections({
 
           </div>
         </div>
+      </div>
 
-        <div className="w-full rounded-[2rem] sm:rounded-[3rem] overflow-hidden border border-[#068B35]/20 shadow-2xl relative mt-4">
-          <img 
-            src="/mockup_totem_3.jpg" 
-            alt="Totem Mockup" 
-            className="w-full h-auto object-cover"
-          />
-        </div>
+      {/* NEW StickyCard002 Gallery Instead of Single Image */}
+      <div className="relative z-10 w-full">
+        <StickyCard002 
+          cards={[
+            { id: 1, image: "/mockup_totem_3.jpg", alt: "Totem Mockup 3" },
+            { id: 2, image: "/mockup_totem.jpg", alt: "Totem Mockup" },
+            { id: 3, image: "/mockup_cartello_zone_2.jpeg", alt: "Cartello Zone Mockup" },
+            { id: 4, image: "/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
+          ]} 
+        />
       </div>
 
     </div>
