@@ -38,6 +38,7 @@ import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from './ScrollProgress';
 import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
+import ThreeDMarquee from './ui/3d-marquee';
 
 function BeforeAfterSlider() {
   const [sliderPos, setSliderPos] = useState(50);
@@ -291,14 +292,6 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {/* Center Area: Global Navigation (Back to Home button and current project tag) */}
         <div className="flex justify-center items-center gap-4 sm:gap-6 col-start-2">
           <nav className="flex justify-center items-center gap-4 sm:gap-6 text-white/80">
-            <button 
-              onClick={onClose}
-              className="transition-colors duration-300 hover:text-white cursor-pointer text-white/80 flex items-center gap-1.5 font-medium relative group"
-            >
-              <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
-              <span>Home</span>
-            </button>
-            <span className="text-white/40 hidden sm:inline">|</span>
             <span className="text-white font-semibold font-mono tracking-wider hidden sm:inline truncate max-w-[150px]">
               {project.title}
             </span>
@@ -2552,6 +2545,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               </div>
             </div>
           )}
+
+          {/* 3D Marquee Section */}
+          <div className="py-16 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
+            <ThreeDMarquee />
+          </div>
 
           {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
           {isAetheris && (
