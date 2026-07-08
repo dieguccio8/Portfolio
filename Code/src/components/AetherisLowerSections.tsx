@@ -219,76 +219,78 @@ export function AetherisLowerSections({
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-stretch">
-          
-          {/* PROBLEMS BLOCK */}
-          <div className="bg-rose-950/10 border border-rose-900/20 rounded-[2.5rem] p-8 sm:p-12 flex flex-col gap-10">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-500 border border-rose-500/20 shrink-0">
-                <AlertTriangle className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl font-bold text-rose-400 font-raleway">Il Problema</h3>
-            </div>
+        <div className="flip-card mt-8">
+          <div className="flip-card-inner cursor-pointer">
             
-            <ul className="flex flex-col gap-6">
-              <li className="flex gap-4 items-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
-                <div>
-                  <h4 className="text-base font-bold text-white mb-1">Disorientamento</h4>
-                  <p className="text-sm text-neutral-400 font-light">I visitatori si perdono facilmente senza mappe interattive.</p>
+            {/* PROBLEMS BLOCK (FRONT) */}
+            <div className="flip-card-front bg-rose-950/10 border border-rose-900/20 rounded-[2.5rem] p-8 sm:p-12 flex flex-col gap-10 text-left">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-500 border border-rose-500/20 shrink-0">
+                  <AlertTriangle className="w-6 h-6" />
                 </div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
-                <div>
-                  <h4 className="text-base font-bold text-white mb-1">Informazione Statica</h4>
-                  <p className="text-sm text-neutral-400 font-light">La cartellonistica analogica fornisce solo nomi scientifici.</p>
-                </div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
-                <div>
-                  <h4 className="text-base font-bold text-white mb-1">Scarsa Interazione</h4>
-                  <p className="text-sm text-neutral-400 font-light">Visita frettolosa senza un effettivo coinvolgimento digitale.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          {/* SOLUTIONS BLOCK */}
-          <div className="bg-emerald-950/10 border border-emerald-900/20 rounded-[2.5rem] p-8 sm:p-12 flex flex-col gap-10">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] border border-[#068B35]/20 shrink-0">
-                <Check className="w-6 h-6" />
+                <h3 className="text-2xl font-bold text-rose-400 font-raleway">Il Problema</h3>
               </div>
-              <h3 className="text-2xl font-bold text-emerald-400 font-raleway">La Soluzione</h3>
+              
+              <ul className="flex flex-col gap-6">
+                <li className="flex gap-4 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
+                  <div>
+                    <h4 className="text-base font-bold text-white mb-1">Disorientamento</h4>
+                    <p className="text-sm text-neutral-400 font-light">I visitatori si perdono facilmente senza mappe interattive.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
+                  <div>
+                    <h4 className="text-base font-bold text-white mb-1">Informazione Statica</h4>
+                    <p className="text-sm text-neutral-400 font-light">La cartellonistica analogica fornisce solo nomi scientifici.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
+                  <div>
+                    <h4 className="text-base font-bold text-white mb-1">Scarsa Interazione</h4>
+                    <p className="text-sm text-neutral-400 font-light">Visita frettolosa senza un effettivo coinvolgimento digitale.</p>
+                  </div>
+                </li>
+              </ul>
             </div>
-            
-            <ul className="flex flex-col gap-6">
-              <li className="flex gap-4 items-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
-                <div>
-                  <h4 className="text-base font-bold text-white mb-1">Totem All'Ingresso</h4>
-                  <p className="text-sm text-neutral-400 font-light">Selezione immediata di percorsi tematici e mappa generale.</p>
-                </div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
-                <div>
-                  <h4 className="text-base font-bold text-white mb-1">QR Code Point</h4>
-                  <p className="text-sm text-neutral-400 font-light">Approfondimenti istantanei direttamente sul proprio smartphone.</p>
-                </div>
-              </li>
-              <li className="flex gap-4 items-start">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
-                <div>
-                  <h4 className="text-base font-bold text-white mb-1">Web-App Dedicata</h4>
-                  <p className="text-sm text-neutral-400 font-light">Esperienza guidata, accessibile e interattiva in tasca.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
 
+            {/* SOLUTIONS BLOCK (BACK) */}
+            <div className="flip-card-back bg-emerald-950/10 border border-emerald-900/20 rounded-[2.5rem] p-8 sm:p-12 flex flex-col gap-10 text-left">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] border border-[#068B35]/20 shrink-0">
+                  <Check className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold text-emerald-400 font-raleway">La Soluzione</h3>
+              </div>
+              
+              <ul className="flex flex-col gap-6">
+                <li className="flex gap-4 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
+                  <div>
+                    <h4 className="text-base font-bold text-white mb-1">Totem All'Ingresso</h4>
+                    <p className="text-sm text-neutral-400 font-light">Selezione immediata di percorsi tematici e mappa generale.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
+                  <div>
+                    <h4 className="text-base font-bold text-white mb-1">QR Code Point</h4>
+                    <p className="text-sm text-neutral-400 font-light">Approfondimenti istantanei direttamente sul proprio smartphone.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
+                  <div>
+                    <h4 className="text-base font-bold text-white mb-1">Web-App Dedicata</h4>
+                    <p className="text-sm text-neutral-400 font-light">Esperienza guidata, accessibile e interattiva in tasca.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -418,7 +420,7 @@ export function AetherisLowerSections({
       </div>
 
       {/* NEW StickyCard002 Gallery Instead of Single Image */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full shrink-0 block">
         <StickyCard002 
           cards={[
             { id: 1, image: "/mockup_totem_3.jpg", alt: "Totem Mockup 3" },

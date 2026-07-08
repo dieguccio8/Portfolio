@@ -26,34 +26,33 @@ const StickyCard002 = ({
   imageClassName,
 }: StickyCard002Props) => {
   const container = useRef(null);
-  const triggerRef = useRef(null);
+  const stickyRef = useRef(null);
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
 
   useGSAP(
     () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Ensure the ref array is exactly the length of the cards
       const imageElements = imageRefs.current.slice(0, cards.length);
       const totalCards = imageElements.length;
 
       if (!imageElements[0] || totalCards === 0) return;
 
+      // Initialize positions
       gsap.set(imageElements[0], { y: "0%", scale: 1, rotation: 0 });
-
       for (let i = 1; i < totalCards; i++) {
         if (!imageElements[i]) continue;
         gsap.set(imageElements[i], { y: "100%", scale: 1, rotation: 0 });
       }
 
+      // Create timeline mapped to the scrolling of the container
       const scrollTimeline = gsap.timeline({
         scrollTrigger: {
-          trigger: triggerRef.current,
+          trigger: container.current,
           start: "top top",
-          end: () => `+=${window.innerHeight * totalCards * 0.6}`, // Ancora più ridotto
-          pin: true,
+          end: "bottom bottom", // Finishes when the wrapper reaches its end
           scrub: 1,
-          pinSpacing: true,
+          pin: false, // NO PINNING! Handled by CSS sticky natively
         },
       });
 
@@ -62,10 +61,10 @@ const StickyCard002 = ({
         const nextImage = imageElements[i + 1];
         if (!currentImage || !nextImage) continue;
 
-        // Pause to view the current image
-        scrollTimeline.to({}, { duration: 0.8 });
+        // Pause to view current image
+        scrollTimeline.to({}, { duration: 0.5 });
 
-        // Transition
+        // Transition out current
         scrollTimeline.to(
           currentImage,
           {
@@ -77,6 +76,7 @@ const StickyCard002 = ({
           ">"
         );
 
+        // Transition in next
         scrollTimeline.to(
           nextImage,
           {
@@ -88,20 +88,23 @@ const StickyCard002 = ({
         );
       }
       
-      // Final pause to view the last image
-      scrollTimeline.to({}, { duration: 1 });
-
-      return () => {
-        scrollTimeline.kill();
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
+      // Final pause
+      scrollTimeline.to({}, { duration: 0.5 });
     },
-    { scope: container },
+    { scope: container }
   );
 
   return (
-    <div className={cn("w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]", className)} ref={container}>
-      <div className="sticky-cards relative flex h-screen w-full items-center justify-center overflow-hidden p-3 lg:p-8" ref={triggerRef}>
+    <div 
+      className={cn("w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]", className)} 
+      ref={container}
+      style={{ height: `${cards.length * 100}vh` }} // Set the height based on card count
+    >
+      {/* NATIVE STICKY WRAPPER */}
+      <div 
+        ref={stickyRef} 
+        className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden p-3 lg:p-8"
+      >
         <div
           className={cn(
             "relative h-[90%] w-full max-w-3xl overflow-hidden rounded-[2rem] sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-[85vw]",
@@ -114,7 +117,7 @@ const StickyCard002 = ({
               src={card.image}
               alt={card.alt || ""}
               className={cn(
-                "rounded-[2rem] absolute h-full w-full object-cover shadow-2xl",
+                "rounded-[2rem] absolute inset-0 h-full w-full object-cover shadow-2xl",
                 imageClassName,
               )}
               ref={(el) => {
