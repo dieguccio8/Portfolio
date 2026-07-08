@@ -219,18 +219,39 @@ export function AetherisLowerSections({
           </h2>
         </div>
 
-        <div className="flip-card mt-8">
-          <div className="flip-card-inner">
+        <div className="group relative mt-8 [perspective:2000px] cursor-pointer w-full">
+          {/* STATIC SPACER: Invisible copy of the tallest content. This locks the parent's height and width 100% solidly, so it never shrinks during 3D projection! */}
+          <div className="w-full flex flex-col gap-10 sm:gap-16 items-center invisible pointer-events-none">
+            <div className="flex items-center gap-4">
+              <div className="w-8 h-8" />
+              <h3 className="text-3xl sm:text-4xl font-bold font-raleway">I Problemi</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+              {/* Dummy cards just for height calculation */}
+              <div className="p-8 sm:p-10 flex flex-col gap-6">
+                <span className="text-3xl font-bold">?</span>
+                <div className="flex flex-col gap-4">
+                  <h4 className="text-xl font-bold">Disorientamento</h4>
+                  <p className="text-sm">I visitatori si perdono facilmente senza mappe interattive</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* BULLETPROOF HIT SHIELD: sits on top of everything and never rotates */}
+          <div className="absolute inset-0 z-[100]" />
+          
+          <div className="absolute inset-0 w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] grid">
             
             {/* PROBLEMS BLOCK (FRONT) */}
-            <div className="flip-card-front flex flex-col gap-10 sm:gap-16 items-center">
+            <div className="col-start-1 row-start-1 w-full h-full [backface-visibility:hidden] flex flex-col gap-10 sm:gap-16 items-center">
               <div className="flex items-center gap-4">
                 <AlertTriangle className="w-8 h-8 text-rose-500" />
                 <h3 className="text-3xl sm:text-4xl font-bold text-rose-500 font-raleway">I Problemi</h3>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6 h-full shadow-lg">
                   <span className="text-3xl font-bold text-white">?</span>
                   <div className="flex flex-col gap-4">
                     <h4 className="text-xl font-bold text-white">Disorientamento</h4>
@@ -238,7 +259,7 @@ export function AetherisLowerSections({
                   </div>
                 </div>
 
-                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6 h-full shadow-lg">
                   <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22v-4"/><path d="M12 6V2"/><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M19.071 19.071l-2.828-2.828"/><path d="M7.757 7.757L4.929 4.929"/><path d="M19.071 4.929l-2.828 2.828"/><path d="M7.757 16.243l-2.828 2.828"/><circle cx="12" cy="12" r="4"/></svg>
                   <div className="flex flex-col gap-4">
                     <h4 className="text-xl font-bold text-white">Informazione Statica</h4>
@@ -246,7 +267,7 @@ export function AetherisLowerSections({
                   </div>
                 </div>
 
-                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6 h-full shadow-lg">
                   <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l-4 4-2-2"/><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"/><path d="M13 13l4-4 2 2"/></svg>
                   <div className="flex flex-col gap-4">
                     <h4 className="text-xl font-bold text-white">Scarsa Interazione</h4>
@@ -257,14 +278,14 @@ export function AetherisLowerSections({
             </div>
 
             {/* SOLUTIONS BLOCK (BACK) */}
-            <div className="flip-card-back flex flex-col gap-10 sm:gap-16 items-center">
+            <div className="col-start-1 row-start-1 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col gap-10 sm:gap-16 items-center">
               <div className="flex items-center gap-4">
                 <Check className="w-8 h-8 text-[#068B35]" />
                 <h3 className="text-3xl sm:text-4xl font-bold text-[#068B35] font-raleway">Le Soluzioni</h3>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6 h-full shadow-lg">
                   <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
                   <div className="flex flex-col gap-4">
                     <h4 className="text-xl font-bold text-white">Totem All'Ingresso</h4>
@@ -272,7 +293,7 @@ export function AetherisLowerSections({
                   </div>
                 </div>
 
-                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6 h-full shadow-lg">
                   <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/><rect x="14" y="14" width="3" height="3"/></svg>
                   <div className="flex flex-col gap-4">
                     <h4 className="text-xl font-bold text-white">QR Code Point</h4>
@@ -280,7 +301,7 @@ export function AetherisLowerSections({
                   </div>
                 </div>
 
-                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6 h-full shadow-lg">
                   <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                   <div className="flex flex-col gap-4">
                     <h4 className="text-xl font-bold text-white">Web-App Dedicata</h4>
