@@ -135,6 +135,49 @@ body::after {
   z-index: 50;
 }
 
+/* ─── Animated Border Stroke ───────────────────────────────────────────── */
+.animated-border-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animated-border-card::before {
+  position: absolute;
+  content: ' ';
+  display: block;
+  /* Make it large enough to cover the diagonal of any responsive card */
+  width: 250%; 
+  height: 250%;
+  top: -75%;
+  left: -75%;
+  /* Use strict percentage stops to keep the "beam" narrow even though the element is huge */
+  background: linear-gradient(90deg, transparent 35%, #068B35 45%, #068B35 55%, transparent 65%);
+  animation: rotation_481 9000ms infinite linear;
+  z-index: 0;
+}
+
+.animated-border-content {
+  position: absolute;
+  /* Stroke width */
+  inset: 1.5px;
+  background: linear-gradient(to bottom right, #131514, #1a1d1b);
+  border-radius: calc(2rem - 1.5px);
+  z-index: 1;
+}
+
+@keyframes rotation_481 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
 .flip-card-inner {
   position: relative;
   width: 100%;

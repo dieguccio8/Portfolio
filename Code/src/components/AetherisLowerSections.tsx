@@ -223,71 +223,71 @@ export function AetherisLowerSections({
           <div className="flip-card-inner">
             
             {/* PROBLEMS BLOCK (FRONT) */}
-            <div className="flip-card-front bg-rose-950/10 border border-rose-900/20 rounded-[2.5rem] p-8 sm:p-12 flex flex-col gap-10 text-left">
+            <div className="flip-card-front flex flex-col gap-10 sm:gap-16 items-center">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-500 border border-rose-500/20 shrink-0">
-                  <AlertTriangle className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-rose-400 font-raleway">Il Problema</h3>
+                <AlertTriangle className="w-8 h-8 text-rose-500" />
+                <h3 className="text-3xl sm:text-4xl font-bold text-rose-500 font-raleway">I Problemi</h3>
               </div>
               
-              <ul className="flex flex-col gap-6">
-                <li className="flex gap-4 items-start">
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
-                  <div>
-                    <h4 className="text-base font-bold text-white mb-1">Disorientamento</h4>
-                    <p className="text-sm text-neutral-400 font-light">I visitatori si perdono facilmente senza mappe interattive.</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                  <span className="text-3xl font-bold text-white">?</span>
+                  <div className="flex flex-col gap-4">
+                    <h4 className="text-xl font-bold text-white">Disorientamento</h4>
+                    <p className="text-sm text-neutral-400 font-light leading-relaxed">I visitatori si perdono facilmente senza mappe interattive</p>
                   </div>
-                </li>
-                <li className="flex gap-4 items-start">
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
-                  <div>
-                    <h4 className="text-base font-bold text-white mb-1">Informazione Statica</h4>
-                    <p className="text-sm text-neutral-400 font-light">La cartellonistica analogica fornisce solo nomi scientifici.</p>
+                </div>
+
+                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                  <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22v-4"/><path d="M12 6V2"/><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M19.071 19.071l-2.828-2.828"/><path d="M7.757 7.757L4.929 4.929"/><path d="M19.071 4.929l-2.828 2.828"/><path d="M7.757 16.243l-2.828 2.828"/><circle cx="12" cy="12" r="4"/></svg>
+                  <div className="flex flex-col gap-4">
+                    <h4 className="text-xl font-bold text-white">Informazione Statica</h4>
+                    <p className="text-sm text-neutral-400 font-light leading-relaxed">La cartellonistica analogica fornisce solo nomi scientifici</p>
                   </div>
-                </li>
-                <li className="flex gap-4 items-start">
-                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
-                  <div>
-                    <h4 className="text-base font-bold text-white mb-1">Scarsa Interazione</h4>
-                    <p className="text-sm text-neutral-400 font-light">Visita frettolosa senza un effettivo coinvolgimento digitale.</p>
+                </div>
+
+                <div className="bg-[#1A1515] border border-rose-900/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                  <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l-4 4-2-2"/><path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"/><path d="M13 13l4-4 2 2"/></svg>
+                  <div className="flex flex-col gap-4">
+                    <h4 className="text-xl font-bold text-white">Scarsa Interazione</h4>
+                    <p className="text-sm text-neutral-400 font-light leading-relaxed">Visita frettolosa senza un effettivo coinvolgimento digitale</p>
                   </div>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
 
             {/* SOLUTIONS BLOCK (BACK) */}
-            <div className="flip-card-back bg-emerald-950/10 border border-emerald-900/20 rounded-[2.5rem] p-8 sm:p-12 flex flex-col gap-10 text-left">
+            <div className="flip-card-back flex flex-col gap-10 sm:gap-16 items-center">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] border border-[#068B35]/20 shrink-0">
-                  <Check className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-emerald-400 font-raleway">La Soluzione</h3>
+                <Check className="w-8 h-8 text-[#068B35]" />
+                <h3 className="text-3xl sm:text-4xl font-bold text-[#068B35] font-raleway">Le Soluzioni</h3>
               </div>
               
-              <ul className="flex flex-col gap-6">
-                <li className="flex gap-4 items-start">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
-                  <div>
-                    <h4 className="text-base font-bold text-white mb-1">Totem All'Ingresso</h4>
-                    <p className="text-sm text-neutral-400 font-light">Selezione immediata di percorsi tematici e mappa generale.</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                  <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+                  <div className="flex flex-col gap-4">
+                    <h4 className="text-xl font-bold text-white">Totem All'Ingresso</h4>
+                    <p className="text-sm text-neutral-400 font-light leading-relaxed">Selezione immediata di percorsi tematici e mappa generale</p>
                   </div>
-                </li>
-                <li className="flex gap-4 items-start">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
-                  <div>
-                    <h4 className="text-base font-bold text-white mb-1">QR Code Point</h4>
-                    <p className="text-sm text-neutral-400 font-light">Approfondimenti istantanei direttamente sul proprio smartphone.</p>
+                </div>
+
+                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                  <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/><rect x="14" y="14" width="3" height="3"/></svg>
+                  <div className="flex flex-col gap-4">
+                    <h4 className="text-xl font-bold text-white">QR Code Point</h4>
+                    <p className="text-sm text-neutral-400 font-light leading-relaxed">Approfondimenti istantanei direttamente sul proprio smartphone</p>
                   </div>
-                </li>
-                <li className="flex gap-4 items-start">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#068B35] mt-2 shrink-0" />
-                  <div>
-                    <h4 className="text-base font-bold text-white mb-1">Web-App Dedicata</h4>
-                    <p className="text-sm text-neutral-400 font-light">Esperienza guidata, accessibile e interattiva in tasca.</p>
+                </div>
+
+                <div className="bg-[#121A15] border border-[#068B35]/20 rounded-[2rem] p-8 sm:p-10 flex flex-col items-center text-center gap-6">
+                  <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  <div className="flex flex-col gap-4">
+                    <h4 className="text-xl font-bold text-white">Web-App Dedicata</h4>
+                    <p className="text-sm text-neutral-400 font-light leading-relaxed">Esperienza guidata, accessibile e interattiva in tasca</p>
                   </div>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -307,35 +307,69 @@ export function AetherisLowerSections({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="p-8 bg-gradient-to-br from-[#131514] to-[#1a1d1b] rounded-[2rem] border border-[#068B35]/20 flex flex-col gap-6 items-center text-center shadow-lg group">
-            <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
-              <Compass className="w-8 h-8 animate-pulse" />
+          
+          {/* CARD 1 */}
+          <div className="animated-border-card h-full shadow-lg group">
+            {/* Inner Content Block */}
+            <div className="animated-border-content p-8 flex flex-col gap-6 items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                <Compass className="w-8 h-8 animate-pulse" />
+              </div>
+              <div className="flex flex-col flex-1 z-10">
+                <h3 className="text-lg font-bold text-white font-raleway mb-2">Interattività</h3>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed">Pannelli digitali e QR accrescono istantaneamente la conoscenza.</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-white font-raleway mb-2">Interattività</h3>
-              <p className="text-sm text-neutral-400 font-light leading-relaxed">Pannelli digitali e QR accrescono istantaneamente la conoscenza.</p>
+            {/* Add a transparent structural div just to give the card height since animated-border-content is absolute */}
+            <div className="p-8 flex flex-col gap-6 items-center text-center invisible pointer-events-none">
+              <div className="w-16 h-16 shrink-0" />
+              <div>
+                <h3 className="text-lg mb-2">Interattività</h3>
+                <p className="text-sm">Pannelli digitali e QR accrescono istantaneamente la conoscenza.</p>
+              </div>
             </div>
           </div>
 
-          <div className="p-8 bg-gradient-to-br from-[#131514] to-[#1a1d1b] rounded-[2rem] border border-[#068B35]/20 flex flex-col gap-6 items-center text-center shadow-lg group">
-            <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
-              <ArrowRight className="w-8 h-8" />
+          {/* CARD 2 */}
+          <div className="animated-border-card h-full shadow-lg group">
+            <div className="animated-border-content p-8 flex flex-col gap-6 items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                <ArrowRight className="w-8 h-8" />
+              </div>
+              <div className="flex flex-col flex-1 z-10">
+                <h3 className="text-lg font-bold text-white font-raleway mb-2">Percorsi Agili</h3>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed">Itinerari personalizzati scelti tramite i Totem all'ingresso.</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-white font-raleway mb-2">Percorsi Agili</h3>
-              <p className="text-sm text-neutral-400 font-light leading-relaxed">Itinerari personalizzati scelti tramite i Totem all'ingresso.</p>
+            <div className="p-8 flex flex-col gap-6 items-center text-center invisible pointer-events-none">
+              <div className="w-16 h-16 shrink-0" />
+              <div>
+                <h3 className="text-lg mb-2">Percorsi Agili</h3>
+                <p className="text-sm">Itinerari personalizzati scelti tramite i Totem all'ingresso.</p>
+              </div>
             </div>
           </div>
 
-          <div className="p-8 bg-gradient-to-br from-[#131514] to-[#1a1d1b] rounded-[2rem] border border-[#068B35]/20 flex flex-col gap-6 items-center text-center shadow-lg group">
-            <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
-              <div className="w-4 h-4 bg-[#068B35] rounded-full shadow-[0_0_15px_rgba(6,139,53,0.8)]" />
+          {/* CARD 3 */}
+          <div className="animated-border-card h-full shadow-lg group">
+            <div className="animated-border-content p-8 flex flex-col gap-6 items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                <div className="w-4 h-4 bg-[#068B35] rounded-full shadow-[0_0_15px_rgba(6,139,53,0.8)]" />
+              </div>
+              <div className="flex flex-col flex-1 z-10">
+                <h3 className="text-lg font-bold text-white font-raleway mb-2">Protagonismo</h3>
+                <p className="text-sm text-neutral-400 font-light leading-relaxed">Il visitatore è l'attore principale della propria esplorazione.</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-white font-raleway mb-2">Protagonismo</h3>
-              <p className="text-sm text-neutral-400 font-light leading-relaxed">Il visitatore è l'attore principale della propria esplorazione.</p>
+            <div className="p-8 flex flex-col gap-6 items-center text-center invisible pointer-events-none">
+              <div className="w-16 h-16 shrink-0" />
+              <div>
+                <h3 className="text-lg mb-2">Protagonismo</h3>
+                <p className="text-sm">Il visitatore è l'attore principale della propria esplorazione.</p>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
