@@ -56,13 +56,13 @@ const StickyCard002 = ({
         },
       });
 
+      // Add an initial dedicated pause for the first image so it stays still longer
+      scrollTimeline.to({}, { duration: 1.5 });
+
       for (let i = 0; i < totalCards - 1; i++) {
         const currentImage = imageElements[i];
         const nextImage = imageElements[i + 1];
         if (!currentImage || !nextImage) continue;
-
-        // Pause to view current image
-        scrollTimeline.to({}, { duration: 0.5 });
 
         // Transition out current
         scrollTimeline.to(
@@ -70,7 +70,7 @@ const StickyCard002 = ({
           {
             scale: 0.7,
             rotation: 5,
-            duration: 1,
+            duration: 1.5,
             ease: "power2.inOut",
           },
           ">"
@@ -81,15 +81,15 @@ const StickyCard002 = ({
           nextImage,
           {
             y: "0%",
-            duration: 1,
+            duration: 1.5,
             ease: "power2.inOut",
           },
           "<"
         );
+
+        // Pause to view the newly arrived image
+        scrollTimeline.to({}, { duration: 1.5 });
       }
-      
-      // Final pause
-      scrollTimeline.to({}, { duration: 0.5 });
     },
     { scope: container }
   );
@@ -98,7 +98,7 @@ const StickyCard002 = ({
     <div 
       className={cn("w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]", className)} 
       ref={container}
-      style={{ height: `${cards.length * 100}vh` }} // Set the height based on card count
+      style={{ height: `${cards.length * 150}vh` }} // Set the height based on card count (increased for slower scroll)
     >
       {/* NATIVE STICKY WRAPPER */}
       <div 

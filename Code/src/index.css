@@ -123,6 +123,16 @@ body::after {
   background-color: transparent;
   width: 100%;
   perspective: 1500px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Invisible hit area to prevent hover flickering during 3D transform */
+.flip-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 50;
 }
 
 .flip-card-inner {

@@ -220,7 +220,7 @@ export function AetherisLowerSections({
         </div>
 
         <div className="flip-card mt-8">
-          <div className="flip-card-inner cursor-pointer">
+          <div className="flip-card-inner">
             
             {/* PROBLEMS BLOCK (FRONT) */}
             <div className="flip-card-front bg-rose-950/10 border border-rose-900/20 rounded-[2.5rem] p-8 sm:p-12 flex flex-col gap-10 text-left">
