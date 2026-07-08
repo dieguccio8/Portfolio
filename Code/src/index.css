@@ -41,11 +41,13 @@
   color: #FFFFFF;
 }
 
-body {
+html, body {
   background-color: #050505;
   color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 * {
