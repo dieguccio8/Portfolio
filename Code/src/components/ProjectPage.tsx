@@ -598,14 +598,25 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           </div>
         </section>
       ) : (
-        <section className={`relative w-full pt-20 h-[50vh] sm:h-[60vh] md:h-[70vh] flex flex-col justify-end p-6 sm:p-12 md:p-16 overflow-hidden ${isKinetics ? 'bg-[#0D0D0D]' : ''}`}>
+        <section className={`relative w-full pt-20 h-[70vh] sm:h-[80vh] md:h-[90vh] flex flex-col justify-end p-6 sm:p-12 md:p-16 overflow-hidden ${isKinetics ? 'bg-[#0D0D0D]' : ''}`}>
           <div className="absolute inset-0 z-0">
-            <img 
-              src={isAetheris ? '/project-01-hero.jpg' : (wireframeImages[`hero_${project.id}`] || project.heroImage)} 
-              alt={project.title}
-              referrerPolicy="no-referrer"
-              className={`w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] ${isKinetics ? 'grayscale brightness-[0.3] contrast-[1.15] hover:grayscale-0' : isAetheris ? '' : 'grayscale brightness-[0.4] hover:grayscale-0'}`}
-            />
+            {isAetheris ? (
+              <video 
+                src="/hero_video.mov"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
+              />
+            ) : (
+              <img 
+                src={wireframeImages[`hero_${project.id}`] || project.heroImage} 
+                alt={project.title}
+                referrerPolicy="no-referrer"
+                className={`w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] ${isKinetics ? 'grayscale brightness-[0.3] contrast-[1.15] hover:grayscale-0' : 'grayscale brightness-[0.4] hover:grayscale-0'}`}
+              />
+            )}
             <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
           </div>
 
@@ -629,19 +640,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             </h1>
             {isAetheris && (
               <div className="flex flex-col gap-1 w-full items-center justify-center mb-4">
-                <div className="bg-black/30 backdrop-blur-xl rounded-3xl p-6 sm:p-8 md:p-10 mb-8 border border-white/15 shadow-[0_15px_40px_rgba(0,0,0,0.6)] flex items-center justify-center">
-                  <img 
-                    src="/logo_orto_botanico_testo_bianco.png" 
-                    alt="Orto Botanico" 
-                    className="w-[250px] sm:w-[320px] md:w-[400px] object-contain"
-                  />
-                </div>
                 {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}
                 <div className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 w-full">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                    <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Client:</span>
-                    <span className="text-xs sm:text-sm font-semibold text-white">{project.client}</span>
-                  </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
                     <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Year:</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">{project.year}</span>
@@ -2245,88 +2245,43 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </h3>
                 </div>
                 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-8 mt-6">
                   {/* Colori Principali */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="flex flex-wrap gap-8">
                     {/* Verde Primario */}
-                    <div className="flex flex-col justify-between p-5 rounded-2xl bg-transparent border border-white/5 hover:border-white/10 transition-colors gap-5" id="orto-primary-color-container">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl shadow-sm border border-white/10 shrink-0" style={{ backgroundColor: '#068B35' }} />
-                        <div>
-                          <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 block font-bold">
-                            {lang === 'it' ? "Colore Identitario" : "Brand Identity Color"}
-                          </span>
-                          <span className="text-sm font-bold text-white block">
-                            {lang === 'it' ? "Verde Primario" : "Primary Green"}
-                          </span>
-                        </div>
+                    <button onClick={() => handleCopyHex('#068B35')} className="group flex flex-col items-center gap-3 cursor-pointer">
+                      <div className="w-16 h-16 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover:-translate-y-1" style={{ backgroundColor: '#068B35' }} />
+                      <div className="text-center">
+                        <span className="text-[10px] font-bold text-white block">{lang === 'it' ? "Verde Primario" : "Primary Green"}</span>
+                        <span className="text-[9px] font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#068B35' ? 'Copied' : '#068B35'}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <code className="text-neutral-300 text-xs font-mono font-bold">#068B35</code>
-                        <button 
-                          onClick={() => handleCopyHex('#068B35')}
-                          className="text-neutral-500 hover:text-white transition-colors cursor-pointer text-xs font-mono font-semibold"
-                        >
-                          {copiedColor === '#068B35' ? 'Copied!' : 'Copy'}
-                        </button>
-                      </div>
-                    </div>
+                    </button>
 
                     {/* Bianco */}
-                    <div className="flex flex-col justify-between p-5 rounded-2xl bg-transparent border border-white/5 hover:border-white/10 transition-colors gap-5">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl shadow-sm border border-white/10 shrink-0 bg-white" />
-                        <div>
-                          <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 block font-bold">
-                            {lang === 'it' ? "Luce / Interfacce" : "Light / Interfaces"}
-                          </span>
-                          <span className="text-sm font-bold text-white block">
-                            {lang === 'it' ? "Bianco" : "White"}
-                          </span>
-                        </div>
+                    <button onClick={() => handleCopyHex('#FFFFFF')} className="group flex flex-col items-center gap-3 cursor-pointer">
+                      <div className="w-16 h-16 rounded-full shadow-lg border border-white/10 shrink-0 bg-white transition-transform group-hover:-translate-y-1" />
+                      <div className="text-center">
+                        <span className="text-[10px] font-bold text-white block">{lang === 'it' ? "Bianco" : "White"}</span>
+                        <span className="text-[9px] font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#FFFFFF' ? 'Copied' : '#FFFFFF'}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <code className="text-neutral-300 text-xs font-mono font-bold">#FFFFFF</code>
-                        <button 
-                          onClick={() => handleCopyHex('#FFFFFF')}
-                          className="text-neutral-500 hover:text-white transition-colors cursor-pointer text-xs font-mono font-semibold"
-                        >
-                          {copiedColor === '#FFFFFF' ? 'Copied!' : 'Copy'}
-                        </button>
-                      </div>
-                    </div>
+                    </button>
 
                     {/* Grigio Chiaro */}
-                    <div className="flex flex-col justify-between p-5 rounded-2xl bg-transparent border border-white/5 hover:border-white/10 transition-colors gap-5">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl shadow-sm border border-white/10 shrink-0" style={{ backgroundColor: '#EBEBEB' }} />
-                        <div>
-                          <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 block font-bold">
-                            {lang === 'it' ? "Testi secondari" : "Secondary Text"}
-                          </span>
-                          <span className="text-sm font-bold text-white block">
-                            {lang === 'it' ? "Grigio Chiaro" : "Light Gray"}
-                          </span>
-                        </div>
+                    <button onClick={() => handleCopyHex('#EBEBEB')} className="group flex flex-col items-center gap-3 cursor-pointer">
+                      <div className="w-16 h-16 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover:-translate-y-1" style={{ backgroundColor: '#EBEBEB' }} />
+                      <div className="text-center">
+                        <span className="text-[10px] font-bold text-white block">{lang === 'it' ? "Grigio Chiaro" : "Light Gray"}</span>
+                        <span className="text-[9px] font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#EBEBEB' ? 'Copied' : '#EBEBEB'}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <code className="text-neutral-300 text-xs font-mono font-bold">#EBEBEB</code>
-                        <button 
-                          onClick={() => handleCopyHex('#EBEBEB')}
-                          className="text-neutral-500 hover:text-white transition-colors cursor-pointer text-xs font-mono font-semibold"
-                        >
-                          {copiedColor === '#EBEBEB' ? 'Copied!' : 'Copy'}
-                        </button>
-                      </div>
-                    </div>
+                    </button>
                   </div>
 
                   {/* Le pillole categoria con colori specifici */}
-                  <div className="flex flex-col gap-3 p-5 rounded-2xl border border-white/5 bg-transparent">
-                    <span className="text-[9px] font-bold uppercase tracking-widest font-mono text-neutral-400 block">
+                  <div className="flex flex-col gap-5 mt-4">
+                    <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest block border-b border-white/5 pb-2">
                       {lang === 'it' ? "Colori Pillole Categoria" : "Category Pill Colors"}
                     </span>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2.5" id="orto-categories-row">
+                    <div className="flex flex-wrap gap-x-6 gap-y-4" id="orto-categories-row">
                       {[
                         { labelIt: 'Orto Generale', labelEn: 'General Garden', bg: '#0054F0', text: '#FFFFFF' },
                         { labelIt: 'Tropicale', labelEn: 'Tropical', bg: '#EEBE00', text: '#0A0A0A' },
@@ -2339,16 +2294,18 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         <button 
                           key={index}
                           onClick={() => handleCopyHex(item.bg)}
-                          className="p-2.5 rounded-xl flex flex-col justify-between items-start gap-2 transition-all hover:scale-[1.03] text-left border border-white/5 cursor-pointer relative overflow-hidden group"
-                          style={{ backgroundColor: item.bg }}
+                          className="flex items-center gap-3 group cursor-pointer"
                           id={`category-pill-${index}`}
                         >
-                          <span className="font-semibold text-[11px] tracking-wide" style={{ color: item.text }}>
-                            {lang === 'it' ? item.labelIt : item.labelEn}
-                          </span>
-                          <span className="font-mono text-[8px] opacity-75 group-hover:opacity-100 transition-opacity" style={{ color: item.text }}>
-                            {copiedColor === item.bg ? 'Copied!' : item.bg}
-                          </span>
+                          <div className="w-6 h-6 rounded-full shadow-md border border-white/10 shrink-0 transition-transform group-hover:scale-110" style={{ backgroundColor: item.bg }} />
+                          <div className="text-left">
+                            <span className="font-semibold text-[10px] text-white block">
+                              {lang === 'it' ? item.labelIt : item.labelEn}
+                            </span>
+                            <span className="font-mono text-[9px] text-neutral-500 group-hover:text-white transition-colors">
+                              {copiedColor === item.bg ? 'Copied!' : item.bg}
+                            </span>
+                          </div>
                         </button>
                       ))}
                     </div>
@@ -2365,127 +2322,113 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-10 mt-4">
                   {/* H1 Demo */}
-                  <div className="p-5 rounded-2xl bg-transparent border border-white/5 flex flex-col gap-2">
-                    <div className="flex justify-between items-center border-b border-white/5 pb-1.5">
-                      <span className="font-mono text-[9px] text-neutral-400 font-bold uppercase">H1 SPECIFICATION</span>
-                      <span className="font-mono text-[9px] text-emerald-400 font-bold bg-[#068B35]/15 px-2 py-0.5 rounded">Raleway, Semibold, 62px</span>
-                    </div>
-                    <div className="py-2">
-                      <h1 
-                        style={{ fontFamily: "'Raleway', sans-serif" }} 
-                        className="text-white text-2xl sm:text-3xl md:text-[62px] font-semibold leading-tight tracking-tight"
-                      >
-                        {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
-                      </h1>
-                    </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="font-mono text-[10px] text-[#068B35] font-bold uppercase tracking-wider">H1 / Raleway, Semibold, 62px</span>
+                    <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-3xl md:text-[62px] font-semibold leading-tight tracking-tight">
+                      {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
+                    </h1>
                   </div>
 
                   {/* Body Text Demo */}
-                  <div className="p-5 rounded-2xl bg-transparent border border-white/5 flex flex-col gap-2">
-                    <div className="flex justify-between items-center border-b border-white/5 pb-1.5">
-                      <span className="font-mono text-[9px] text-neutral-400 font-bold uppercase">BODY SPECIFICATION</span>
-                      <span className="font-mono text-[9px] text-emerald-400 font-bold bg-[#068B35]/15 px-2 py-0.5 rounded">Raleway, Regular, 28px</span>
-                    </div>
-                    <div className="py-2">
-                      <p 
-                        style={{ fontFamily: "'Raleway', sans-serif" }} 
-                        className="text-[#EBEBEB] text-base md:text-[28px] leading-relaxed font-light"
-                      >
-                        {lang === 'it' ? (
-                          "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
-                        ) : (
-                          "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
-                        )}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="font-mono text-[10px] text-[#068B35] font-bold uppercase tracking-wider">Body / Raleway, Regular, 28px</span>
+                    <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-lg md:text-[28px] leading-relaxed font-light">
+                      {lang === 'it' ? (
+                        "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
+                      ) : (
+                        "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
+                      )}
+                    </p>
                   </div>
                 </div>
               </div>
 
-              {/* Block 3: Componenti Core (Figma Prototype Embeds) */}
+              {/* Block 3: Componenti Core */}
               <div id="orto-block-components" className="flex flex-col gap-6 pt-8 border-t border-white/5">
                 <div>
                   <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">Libreria Componenti</span>
                   <h3 className="text-xl font-bold text-white mt-1">Componenti Visivi del Design System</h3>
                   <p className="text-sm leading-relaxed text-neutral-300 font-light mt-1 max-w-4xl">
-                    Sfoglia ed esplora la libreria di componenti del progetto. Puoi caricare le immagini reali dei singoli componenti esportati da Figma cliccando su ciascun placeholder per popolare la galleria.
+                    Sfoglia ed esplora la libreria di componenti del progetto.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6" id="orto-components-grid">
-                  {[
-                    { id: 'comp_01', title: '01. Scelta Percorso', layoutDesc: 'Bottone di navigazione con selezione traccia' },
-                    { id: 'comp_02', title: '02. Scopri le Piante', layoutDesc: 'Lista esplorativa con icone e dettagli' },
-                    { id: 'comp_03', title: '03. Tag Categorie', layoutDesc: 'Filtro a pillole orizzontali' },
-                    { id: 'comp_04', title: '04. Searchbar', layoutDesc: 'Barra di ricerca con input integrato' },
-                    { id: 'comp_05', title: '05. Selettore Lingua', layoutDesc: 'Menu a tendina multilingua' },
-                    { id: 'comp_06', title: '06. Card Pianta', layoutDesc: 'Card informativa botanica completa' },
-                    { id: 'comp_07', title: '07. Button Percorso', layoutDesc: 'Pulsante d\'azione con icona freccia' },
-                    { id: 'comp_08', title: '08. Pin Pianta', layoutDesc: 'Indicatore mappa botanico' }
-                  ].map((comp) => {
-                    const hasImg = !!wireframeImages[comp.id];
-                    return (
-                      <div 
-                        key={comp.id} 
-                        className="relative rounded-xl bg-transparent border border-white/5 hover:border-[#068B35]/25 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col p-4 gap-2.5 group"
-                      >
-                        <div className="flex items-center justify-between border-b border-white/5 pb-2 shrink-0">
-                          <div>
-                            <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">{comp.title}</span>
-                          </div>
-                          {hasImg && (
-                            <button 
-                              onClick={() => handleRemoveImage(comp.id)}
-                              className="text-neutral-500 hover:text-red-400 p-1 rounded transition-colors cursor-pointer"
-                              title="Rimuovi immagine"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          )}
-                        </div>
+                <div className="relative w-full rounded-[2.5rem] bg-[#0A0A0B] border border-white/5 p-8 md:p-12 lg:p-16 overflow-hidden mt-8 shadow-2xl">
+                  {/* Faint Dot Grid Background */}
+                  <div className="absolute inset-0 opacity-[0.1]" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+                  <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#068B35]/10 rounded-full blur-[120px] pointer-events-none" />
+                  
+                <div className="relative w-full rounded-[2.5rem] bg-[#0A0A0B] border border-white/5 p-8 md:p-16 overflow-hidden mt-8 shadow-2xl">
+                  {/* Faint Dot Grid Background */}
+                  <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+                  <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#068B35]/5 rounded-full blur-[120px] pointer-events-none" />
+                  
+                  {/* Ordered Grid Container */}
+                  <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col gap-12 lg:gap-16 items-start">
+                    
+                    {/* Top Row: Searchbars (larger) */}
+                    <div className="w-full flex flex-col gap-6">
+                      <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">01. Stati Searchbar</span>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
+                        <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                        <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                        <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      </div>
+                    </div>
 
-                        <div className={`w-full ${hasImg ? 'h-auto' : 'h-[160px] sm:h-[180px]'} overflow-hidden rounded-lg bg-neutral-900/40 relative flex items-center justify-center border border-dashed border-white/5 group-hover:border-emerald-500/20 transition-all duration-300`}>
-                          {hasImg ? (
-                            <div className="relative w-full h-full flex items-center justify-center">
-                              <img 
-                                src={wireframeImages[comp.id]} 
-                                alt={comp.title} 
-                                referrerPolicy="no-referrer"
-                                className="w-full h-auto object-contain block max-h-[500px]"
-                              />
-                              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                                <label className="cursor-pointer bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 text-white rounded-lg p-2 transition-all">
-                                  <Upload className="w-4 h-4" />
-                                  <input 
-                                    type="file" 
-                                    accept="image/*" 
-                                    className="hidden" 
-                                    onChange={(e) => handleImageUpload(comp.id, e)} 
-                                  />
-                                </label>
-                              </div>
-                            </div>
-                          ) : (
-                            <label className="cursor-pointer absolute inset-0 flex flex-col items-center justify-center p-4 text-center hover:bg-emerald-500/[0.02] transition-colors">
-                              <input 
-                                type="file" 
-                                accept="image/*" 
-                                className="hidden" 
-                                onChange={(e) => handleImageUpload(comp.id, e)} 
-                              />
-                              <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-2 group-hover:scale-110 transition-transform">
-                                <Upload className="w-4 h-4" />
-                              </div>
-                              <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">Carica Componente</span>
-                              <span className="text-[9px] text-neutral-500 font-mono mt-0.5 block">{comp.layoutDesc}</span>
-                            </label>
-                          )}
+                    {/* Middle Row: Card Pianta + Buttons + UI Controls */}
+                    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12">
+                      
+                      {/* Left: Card Pianta */}
+                      <div className="lg:col-span-4 flex flex-col gap-6">
+                        <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">02. Componente Principale</span>
+                        <div className="flex justify-center lg:justify-start">
+                          <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
                         </div>
                       </div>
-                    );
-                  })}
+
+                      {/* Right: Buttons and Selectors */}
+                      <div className="lg:col-span-8 flex flex-col gap-12">
+                        {/* Bottoni */}
+                        <div className="flex flex-col gap-6">
+                          <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">03. Bottoni Navigazione</span>
+                          <div className="flex flex-wrap gap-5 items-start">
+                            <img src="/design_system/button_primary.svg" alt="Button Primary" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
+                            <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
+                            <img src="/design_system/button_scopri_pianta.png" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
+                          </div>
+                        </div>
+
+                        {/* Controlli UI */}
+                        <div className="flex flex-col gap-6">
+                          <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">04. Controlli Interfaccia</span>
+                          <div className="flex flex-row items-end gap-8">
+                            <img src="/design_system/language.svg" alt="Language" className="h-32 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
+                            <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform mb-2" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Row: Map Categories Grid */}
+                    <div className="w-full flex flex-col gap-6">
+                      <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">05. Pillole Categorie Mappa</span>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-x-4 gap-y-4">
+                        {[ "Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
+                          <img 
+                            key={variant}
+                            src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`} 
+                            alt={`Categoria ${variant}`} 
+                            className="w-full h-auto max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform" 
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
