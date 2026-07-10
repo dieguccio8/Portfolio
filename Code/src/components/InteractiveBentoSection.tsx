@@ -30,14 +30,14 @@ export default function InteractiveBentoSection() {
   }, []);
 
   return (
-    // L'altezza totale di 200vh garantisce 100vh di scroll "bloccato" 
+    // L'altezza totale di 150vh garantisce 50vh di scroll "bloccato" 
     // mentre l'interfaccia sticky rimane fissa.
-    <div className="relative w-full h-auto lg:h-[200vh]">
+    <div className="relative w-full h-auto lg:h-[150vh]">
       
       {/* VISUAL CONTAINER (Sticky) */}
       {/* Su desktop resta incollato in alto. Su mobile è relativo e ha la sua altezza naturale. */}
       <div className="w-full lg:sticky lg:top-0 lg:left-0 lg:h-screen flex items-center justify-center relative z-10 bg-transparent">
-        <div className="w-full flex flex-col xl:flex-row gap-8 lg:gap-16 xl:gap-24 justify-center items-center py-16 px-4 md:px-0">
+        <div className="w-full flex flex-col xl:flex-row gap-8 lg:gap-16 xl:gap-24 justify-center items-center py-4 md:py-8 px-4 md:px-0">
           
           {/* Left Side: Timeline */}
           <div className="flex-1 w-full max-w-lg">

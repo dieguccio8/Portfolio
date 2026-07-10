@@ -2628,10 +2628,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             </div>
           )}
 
-          {/* User Requested Modules (Timeline Accordion & Bento Grid) */}
-          {isAetheris && (
-            <InteractiveBentoSection />
-          )}
+
 
         </div>
 
