@@ -314,7 +314,7 @@ export default function App() {
       <CustomCursor />
       <ScrollProgress />
       <ScrollReveal />
-      <div className="relative min-h-screen bg-[#050505] text-white font-sans select-none flex flex-col scroll-smooth overflow-x-hidden">
+      <div className="relative min-h-screen bg-[#050505] text-white font-sans select-none flex flex-col scroll-smooth overflow-x-clip">
 
         {/* SECTION 1: HERO VIEW CONTAINER */}
         <section className="relative w-full min-h-screen flex flex-col justify-between p-6 sm:p-10 md:p-14 bg-[#050505] overflow-hidden" id="hero-section">

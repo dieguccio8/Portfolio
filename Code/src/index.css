@@ -46,7 +46,7 @@ html, body {
   color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
