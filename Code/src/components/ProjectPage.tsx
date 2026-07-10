@@ -30,8 +30,7 @@ import {
 import { Project } from '../types';
 import UserJourney from './UserJourney';
 import ProjectRightColumn from './ProjectRightColumn';
-import TimelineAccordion from './TimelineAccordion';
-import BentoGrid from './BentoGrid';
+import InteractiveBentoSection from './InteractiveBentoSection';
 import KineticsLowerSections from './KineticsLowerSections';
 import ChronosLowerSections from './ChronosLowerSections';
 import { AetherisLowerSections } from './AetherisLowerSections';
@@ -2631,17 +2630,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
           {/* User Requested Modules (Timeline Accordion & Bento Grid) */}
           {isAetheris && (
-            <div className="w-full flex flex-col md:flex-row gap-16 lg:gap-24 justify-center items-center py-12 relative z-10 px-4 md:px-0">
-              {/* Left Side: Timeline */}
-              <div className="flex-1 w-full max-w-lg">
-                <TimelineAccordion />
-              </div>
-              
-              {/* Right Side: Bento Grid */}
-              <div className="flex-1 w-full max-w-xl">
-                <BentoGrid />
-              </div>
-            </div>
+            <InteractiveBentoSection />
           )}
 
         </div>
