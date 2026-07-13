@@ -347,7 +347,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 py-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Left Column: Brand Info */}
               <div className="lg:col-span-7 flex flex-col gap-6 text-left">
-                <div className="flex flex-col gap-2">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col gap-2"
+                >
                   <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#FCD306] font-bold font-urbanist block">
                     01 / REBRANDING & EDITORIAL SYSTEM
                   </span>
@@ -355,68 +360,96 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     <span className="w-2 h-2 rounded-full bg-[#FCD306] animate-pulse" />
                     <span>PHASE 02 / GEOMETRIC EVOLUTION</span>
                   </div>
-                </div>
+                </motion.div>
 
-                <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tighter uppercase font-urbanist text-[#F5F5F0] leading-[0.9] max-w-2xl">
+                <motion.h1 
+                  initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.1, type: "spring", bounce: 0.3, visualDuration: 0.8 }}
+                  className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tighter uppercase font-urbanist text-[#F5F5F0] leading-[0.9] max-w-2xl"
+                >
                   {lang === 'it' ? 'Da Community' : 'From Community'} <br />
-                  <span className="text-[#FCD306] relative inline-block">
+                  <span className="text-[#FCD306] relative inline-block group cursor-default">
                     {lang === 'it' ? 'a Brand.' : 'to Brand.'}
                     {/* 3.6 Drip accent under keyword */}
-                    <svg className="absolute left-2 -bottom-6 sm:-bottom-7 w-16 h-8 text-[#FCD306] pointer-events-none" viewBox="0 0 60 30" fill="currentColor">
+                    <svg className="absolute left-2 -bottom-6 sm:-bottom-7 w-16 h-8 text-[#FCD306] pointer-events-none group-hover:scale-110 transition-transform duration-500" viewBox="0 0 60 30" fill="currentColor">
                       <path d="M0,0 L60,0 L60,5 C55,5 53,8 53,12 C53,18 47,18 47,12 L47,5 C40,5 38,10 38,15 C38,22 32,22 32,15 L32,5 C25,5 23,12 23,18 C23,26 15,26 15,18 L15,5 C10,5 8,8 8,10 C8,12 5,12 5,10 L5,0 Z" />
                     </svg>
                   </span>
-                </h1>
+                </motion.h1>
 
-                <p className="text-base sm:text-lg text-[#A8A8A2] leading-relaxed font-normal font-urbanist max-w-xl mt-4">
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-base sm:text-lg text-[#A8A8A2] leading-relaxed font-normal font-urbanist max-w-xl mt-4"
+                >
                   {lang === 'it'
                     ? "Diego Cavallaro ha guidato il rebranding completo di Urban StreetArt Sicily, evolvendo la community locale in un sistema editoriale phygital strutturato, pronto a lanciare edizioni limitate e collezioni streetwear."
                     : "Diego Cavallaro led the complete rebranding of Urban StreetArt Sicily, evolving the local community into a structured phygital editorial system, ready to launch limited editions and streetwear collections."
                   }
-                </p>
+                </motion.p>
 
-                {/* Sleek Horizontal Project Ledger */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 mt-4 border-t border-[#2B2B2B] max-w-xl font-urbanist">
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1">Client</span>
+                {/* Sleek Horizontal Project Ledger - Magnetic Interaction */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 mt-4 border-t border-[#2B2B2B] max-w-xl font-urbanist"
+                >
+                  <div className="group cursor-default">
+                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Client</span>
                     <span className="text-xs sm:text-sm font-bold text-[#F5F5F0]">{project.client}</span>
                   </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1">Year</span>
+                  <div className="group cursor-default">
+                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Year</span>
                     <span className="text-xs sm:text-sm font-bold text-[#F5F5F0]">{project.year}</span>
                   </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1">My Role</span>
+                  <div className="group cursor-default">
+                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">My Role</span>
                     <span className="text-xs sm:text-sm font-bold text-[#F5F5F0]">{project.role}</span>
                   </div>
                   <div>
                     <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1">Applied Stack</span>
-                    <div className="flex flex-wrap gap-2 mt-1.5">
+                    <div className="flex flex-wrap gap-2 mt-1.5 perspective-[1000px]">
                       {project.tags.map((tag, i) => {
                         const rots = ['rotate-[-4deg]', 'rotate-[3deg]', 'rotate-[-2deg]', 'rotate-[5deg]'];
                         const rot = rots[i % rots.length];
                         return (
-                          <span
+                          <motion.span
+                            whileHover={{ scale: 1.15, rotate: 0, z: 20 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 20 }}
                             key={tag}
-                            className={`text-[9px] font-mono px-2.5 py-1 bg-[#FCD306] text-[#0D0D0D] rounded-none border-2 border-[#0D0D0D] uppercase font-black shadow-[3px_3px_0px_#1A1A1A] inline-block transition-transform hover:rotate-0 hover:scale-110 ${rot}`}
+                            className={`text-[9px] font-mono px-2.5 py-1 bg-[#FCD306] text-[#0D0D0D] rounded-none border-2 border-[#0D0D0D] uppercase font-black shadow-[3px_3px_0px_#1A1A1A] inline-block ${rot}`}
                           >
                             {tag}
-                          </span>
+                          </motion.span>
                         );
                       })}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* Right Column: Stunning StreetArt Editorial Collage */}
-              <div className="lg:col-span-5 relative w-full aspect-[4/5] max-w-[450px] mx-auto lg:max-w-none flex items-center justify-center p-6 select-none z-10 mt-8 lg:mt-0">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
+                className="lg:col-span-5 relative w-full aspect-[4/5] max-w-[450px] mx-auto lg:max-w-none flex items-center justify-center p-6 select-none z-10 mt-8 lg:mt-0 perspective-[1200px]"
+              >
                 {/* 3.5 Alone/cornice geometrica di sfondo */}
-                <div className="absolute inset-4 bg-[#FCD306] rotate-[5deg] -z-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-2 border-[#0D0D0D]" />
+                <motion.div 
+                  animate={{ rotate: [5, 6, 5] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-4 bg-[#FCD306] rotate-[5deg] -z-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-2 border-[#0D0D0D]" 
+                />
 
                 {/* Main Image with geometric torn corner (3.3) and rotation */}
-                <div
-                  className="w-full h-full relative z-10 rotate-[-2deg] overflow-hidden bg-[#1A1A1A] border-2 border-[#2B2B2B] shadow-2xl transition-all duration-500 hover:rotate-0 hover:scale-[1.02] cursor-pointer"
+                <motion.div
+                  whileHover={{ rotate: 0, scale: 1.02, z: 20 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="w-full h-full relative z-10 rotate-[-2deg] overflow-hidden bg-[#1A1A1A] border-2 border-[#2B2B2B] shadow-2xl cursor-pointer"
                   style={{
                     clipPath: "polygon(0 0, 100% 0, 100% 86%, 86% 100%, 0 100%)"
                   }}
@@ -434,23 +467,27 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   <div className="absolute top-4 left-4 z-20 w-8 h-8 rounded-none border border-[#FCD306]/40 flex items-center justify-center bg-[#0D0D0D]/70 backdrop-blur-sm">
                     <span className="text-[10px] font-mono text-[#FCD306] font-bold">✦</span>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* 3.4 Collage a due livelli: secondary inset image ruotata in senso opposto */}
-                <div className="absolute -bottom-6 -left-4 sm:-left-8 z-20 w-36 h-48 sm:w-44 sm:h-56 bg-[#1A1A1A] p-2 border-2 border-[#2B2B2B] shadow-[10px_10px_0px_#0D0D0D] rotate-[8deg] hover:rotate-0 hover:scale-105 transition-all duration-300">
-                  <div className="w-full h-full overflow-hidden bg-[#0D0D0D] relative">
+                <motion.div 
+                  whileHover={{ rotate: 0, scale: 1.1, z: 50, x: -10, y: -10 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="absolute -bottom-6 -left-4 sm:-left-8 z-20 w-36 h-48 sm:w-44 sm:h-56 bg-[#1A1A1A] p-2 border-2 border-[#2B2B2B] shadow-[10px_10px_0px_#0D0D0D] rotate-[8deg]"
+                >
+                  <div className="w-full h-full overflow-hidden bg-[#0D0D0D] relative group">
                     <img
                       src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=300&auto=format&fit=crop"
                       alt="Sicily street art closeup detail"
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover grayscale brightness-[0.85] hover:grayscale-0 transition-all duration-500"
+                      className="w-full h-full object-cover grayscale brightness-[0.85] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                     />
                     <div className="absolute bottom-1 right-2 text-[7px] font-mono text-[#A8A8A2] uppercase tracking-wider font-urbanist">
                       REF. GEOM-92
                     </div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </section>
         ) : isChronos ? (

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { 
   Trash2,
   Upload
@@ -38,11 +38,22 @@ export default function KineticsLowerSections({
     return () => clearInterval(interval);
   }, []);
 
+  // Sticky Scroll Refs
+  const processRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: processRef,
+    offset: ["start end", "end start"]
+  });
+
+  const blueprintY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const blueprintRotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
+  const smoothY = useSpring(blueprintY, { stiffness: 100, damping: 30 });
+
   return (
     <div className="flex flex-col gap-24 w-full">
       
       {/* SECTION 3: THE PROCESS - BRAND ARCHITECTURE */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-12 border-t border-[#2B2B2B]">
+      <section ref={processRef} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-12 border-t border-[#2B2B2B] relative">
         {/* Left Column: Branding Concept */}
         <div className="lg:col-span-6 flex flex-col gap-8">
           <div className="flex flex-col gap-4">
@@ -94,8 +105,8 @@ export default function KineticsLowerSections({
           </div>
         </div>
 
-        {/* Right Column: Logo Exploded Blueprint */}
-        <div className="lg:col-span-6 flex flex-col gap-6">
+        {/* Right Column: Logo Exploded Blueprint (Sticky & Scroll-linked) */}
+        <div className="lg:col-span-6 flex flex-col gap-6 lg:sticky lg:top-32">
           <div className="flex justify-between items-center">
             <span className="text-[10px] font-mono text-[#A8A8A2] uppercase tracking-widest font-urbanist">
               Logo Anatomy & Geometric System
@@ -106,7 +117,10 @@ export default function KineticsLowerSections({
           </div>
 
           {/* Exploded Blueprint Interactive Card */}
-          <div className="bg-[#1A1A1A] border border-[#2B2B2B] rounded-none p-8 md:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between aspect-square lg:aspect-auto lg:h-[480px] group">
+          <motion.div 
+            style={{ y: smoothY, rotate: blueprintRotate }}
+            className="bg-[#1A1A1A] border border-[#2B2B2B] rounded-none p-8 md:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between aspect-square lg:aspect-auto lg:h-[480px] group cursor-crosshair"
+          >
             {/* Technical grid overlays */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:1.5rem_1.5rem]" />
             
@@ -173,7 +187,7 @@ export default function KineticsLowerSections({
                   : "Each letter is designed on a fixed 8x8 grid with 45-degree geometric connections. The balance between solid and empty spaces guarantees excellent readability, whether printed at extremely small sizes on t-shirt labels or scaled on mega urban billboards."}
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -317,9 +331,11 @@ export default function KineticsLowerSections({
           ].map((prod) => {
             const hasImg = !!wireframeImages[prod.id];
             return (
-              <div 
+              <motion.div 
+                whileHover={{ scale: 1.02, rotateX: 5, rotateY: -5, z: 20 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 key={prod.id} 
-                className="relative rounded-none bg-[#1A1A1A] border border-[#2B2B2B] hover:border-[#FCD306]/50 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col p-6 gap-4 group"
+                className="relative rounded-none bg-[#1A1A1A] border border-[#2B2B2B] hover:border-[#FCD306] hover:shadow-[0_20px_50px_rgba(252,211,6,0.15)] transition-all duration-300 overflow-hidden flex flex-col p-6 gap-4 group perspective-[1000px]"
               >
                 <div className="flex items-center justify-between border-b border-[#2B2B2B] pb-2 shrink-0">
                   <div>
@@ -338,16 +354,21 @@ export default function KineticsLowerSections({
 
                 <div className={`w-full ${prod.height} overflow-hidden rounded-none bg-[#0D0D0D] relative flex items-center justify-center border border-dashed border-[#2B2B2B] group-hover:border-[#FCD306]/20 transition-all duration-300`}>
                   {hasImg ? (
-                    <div className={`relative w-full h-full flex items-center justify-center p-2 transition-transform duration-300 ${prod.rot} group-hover:rotate-0`}>
+                    <motion.div 
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      className={`relative w-full h-full flex items-center justify-center p-2 ${prod.rot}`}
+                    >
                       <img 
                         src={wireframeImages[prod.id]} 
                         alt={prod.title} 
                         referrerPolicy="no-referrer"
-                        className="w-full h-full object-contain rounded-none block shadow-md"
+                        className="w-full h-full object-contain rounded-none block shadow-2xl"
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                        <label className="cursor-pointer bg-[#1A1A1A]/80 hover:bg-[#1A1A1A] border border-[#2B2B2B] text-white rounded-none p-2.5 transition-all">
-                          <Upload className="w-4 h-4" />
+                        <label className="cursor-pointer bg-[#FCD306] hover:bg-white text-black border-2 border-black font-bold uppercase text-[10px] rounded-none p-3 shadow-[4px_4px_0px_#000] transition-all">
+                          <Upload className="w-4 h-4 inline-block mr-2" />
+                          REPLACE
                           <input 
                             type="file" 
                             accept="image/*" 
@@ -356,7 +377,7 @@ export default function KineticsLowerSections({
                           />
                         </label>
                       </div>
-                    </div>
+                    </motion.div>
                   ) : (
                     <label className="cursor-pointer absolute inset-0 flex flex-col items-center justify-center p-4 text-center hover:bg-[#FCD306]/[0.02] transition-colors">
                       <input 
@@ -375,7 +396,7 @@ export default function KineticsLowerSections({
                     </label>
                   )}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
