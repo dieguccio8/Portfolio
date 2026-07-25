@@ -163,7 +163,33 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
   const [wireframeImages, setWireframeImages] = useState<{ [key: string]: string }>(() => {
     try {
       const saved = localStorage.getItem('aetheris_wireframes');
-      return saved ? JSON.parse(saved) : {};
+      const parsed = saved ? JSON.parse(saved) : {};
+      
+      const defaultImages: { [key: string]: string } = {
+        hero_aetheris: '/Images/Project 01/hero.jpg',
+        hero_kinetics: '/Images/Project 02/Mockup/mockup_desktop_2.jpg',
+        hero_chronos: '/Images/Project 03/hero.jpg',
+        totem_1: '/Images/Project 01/mockup_totem.jpg',
+        totem_2: '/Images/Project 01/mockup_totem_2.jpeg',
+        totem_3: '/Images/Project 01/mockup_totem_3.jpg',
+        totem_4: '/Images/Project 01/mockup_cartello_pianta_2.jpg',
+        mobile_1: '/Images/Project 01/mockup_mobile.jpg',
+        mobile_2: '/Images/Project 01/mockup_mobile_2.jpg',
+        mobile_3: '/Images/Project 01/mockup_cartello_zone_2.jpeg',
+        mobile_4: '/Images/Project 01/mockup_cartello_pianta.jpg',
+        prod_01: '/Images/Project 02/Mockup/mockup_magazine.jpg',
+        prod_02: '/Images/Project 02/Mockup/mockup_desktop.jpg',
+        prod_03: '/Images/Project 02/Mockup/mockup_tshirt.jpg',
+        prod_04: '/Images/Project 02/Mockup/mockup_cappello.jpg',
+      };
+
+      const finalImages = { ...defaultImages };
+      for (const key in parsed) {
+        if (parsed[key] && parsed[key].length > 0) {
+          finalImages[key] = parsed[key];
+        }
+      }
+      return finalImages;
     } catch {
       return {};
     }
