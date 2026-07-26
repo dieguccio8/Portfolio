@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, AlertTriangle, Check, ArrowRight } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
 import InteractiveBentoSection from './InteractiveBentoSection';
+import HighlightCard from './ui/highlight-card';
+import { HalftoneBackground } from './ui/halftone-background';
 
 interface Props {
   project: any;
@@ -48,7 +50,11 @@ export function AetherisLowerSections({
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
       
       {/* 01 / RESEARCH & ANALYSIS */}
-      <div className="pt-16 border-t border-white/5 flex flex-col gap-12">
+      <div className="pt-32 pb-32 flex flex-col gap-12 relative">
+        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[100vw]">
+          <HalftoneBackground />
+        </div>
+        <div className="relative z-10 flex flex-col gap-12">
         <div className="flex flex-col gap-4">
           <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">01 / Ricerca ed Analisi</span>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">
@@ -91,32 +97,27 @@ export function AetherisLowerSections({
             >
               {/* Visual Cards for Desk Research */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-8 bg-[#131514] rounded-[2rem] border border-white/5 flex flex-col gap-6 items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] font-bold font-mono text-xl shrink-0">1</div>
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Pain Point</span>
-                    <h3 className="text-xl font-bold text-white font-raleway">Orientamento</h3>
-                    <p className="text-sm leading-relaxed text-neutral-400 font-light">Nessuna guida per non esperti.</p>
-                  </div>
-                </div>
-
-                <div className="p-8 bg-[#131514] rounded-[2rem] border border-white/5 flex flex-col gap-6 items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] font-bold font-mono text-xl shrink-0">2</div>
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Pain Point</span>
-                    <h3 className="text-xl font-bold text-white font-raleway">Coinvolgimento</h3>
-                    <p className="text-sm leading-relaxed text-neutral-400 font-light">Esperienza passiva e veloce (5 min).</p>
-                  </div>
-                </div>
-
-                <div className="p-8 bg-[#131514] rounded-[2rem] border border-white/5 flex flex-col gap-6 items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] font-bold font-mono text-xl shrink-0">3</div>
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Pain Point</span>
-                    <h3 className="text-xl font-bold text-white font-raleway">Informazioni</h3>
-                    <p className="text-sm leading-relaxed text-neutral-400 font-light">Mancano spiegazioni oltre al nome scientifico.</p>
-                  </div>
-                </div>
+                <HighlightCard
+                  title="Orientamento"
+                  description={[
+                    "Nessuna guida per non esperti."
+                  ]}
+                  icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                />
+                <HighlightCard
+                  title="Coinvolgimento"
+                  description={[
+                    "Esperienza passiva e veloce (5 min)."
+                  ]}
+                  icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                />
+                <HighlightCard
+                  title="Informazioni"
+                  description={[
+                    "Mancano spiegazioni oltre al nome scientifico."
+                  ]}
+                  icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                />
               </div>
             </motion.div>
           )}
@@ -131,8 +132,7 @@ export function AetherisLowerSections({
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Chart 1 */}
-                <div className="p-8 bg-[#131514] rounded-[2rem] border border-white/5 flex flex-col gap-8 justify-center">
-                  <h3 className="text-lg font-bold text-white font-raleway">Come ti orienti?</h3>
+                <HighlightCard title="Come ti orienti?">
                   <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-2">
                       <div className="flex justify-between items-end">
@@ -153,11 +153,10 @@ export function AetherisLowerSections({
                       </div>
                     </div>
                   </div>
-                </div>
+                </HighlightCard>
 
                 {/* Chart 2 */}
-                <div className="p-8 bg-[#131514] rounded-[2rem] border border-white/5 flex flex-col gap-8 justify-center">
-                  <h3 className="text-lg font-bold text-white font-raleway">Useresti QR code interattivi?</h3>
+                <HighlightCard title="Useresti QR code interattivi?">
                   <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-2">
                       <div className="flex justify-between items-end">
@@ -178,7 +177,7 @@ export function AetherisLowerSections({
                       </div>
                     </div>
                   </div>
-                </div>
+                </HighlightCard>
               </div>
             </motion.div>
           )}
@@ -191,35 +190,32 @@ export function AetherisLowerSections({
               exit={{ opacity: 0, y: -10 }}
               className="grid grid-cols-1 md:grid-cols-2 gap-8"
             >
-              <div className="p-8 bg-[#131514] rounded-[2rem] border border-white/5 flex flex-col gap-6 justify-center">
-                <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q1</span>
-                <h3 className="text-xl font-bold text-white font-raleway">Utilità di un Totem Digitale?</h3>
-                <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
-                  "Migliorerebbe l'esperienza, permettendo di orientarsi e prepararsi prima della visita."
-                </p>
-              </div>
+              <HighlightCard title="Utilità di un Totem Digitale?">
+                <div className="flex flex-col items-center gap-4 text-center">
+                  <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q1</span>
+                  <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
+                    "Migliorerebbe l'esperienza, permettendo di orientarsi e prepararsi prima della visita."
+                  </p>
+                </div>
+              </HighlightCard>
 
-              <div className="p-8 bg-[#131514] rounded-[2rem] border border-white/5 flex flex-col gap-6 justify-center">
-                <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q2</span>
-                <h3 className="text-xl font-bold text-white font-raleway">Mancanze Informative?</h3>
-                <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
-                  "Le info online sono incomplete per chi viene da fuori città. Serve contesto rapido."
-                </p>
-              </div>
+              <HighlightCard title="Mancanze Informative?">
+                <div className="flex flex-col items-center gap-4 text-center">
+                  <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q2</span>
+                  <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
+                    "Sì, mancano dettagli scientifici chiari oltre al nome della pianta."
+                  </p>
+                </div>
+              </HighlightCard>
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </div>
 
       {/* 02 / ANALYSIS & STRATEGY: PROBLEMS VS SOLUTIONS */}
-      <div className="pt-8 border-t border-white/5 flex flex-col gap-4">
-        <div className="flex flex-col gap-4">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">02 / Analisi e Strategia</span>
-        </div>
-
-        <div className="-mt-8 w-full">
-          <InteractiveBentoSection />
-        </div>
+      <div className="-mt-24 sm:-mt-32 w-full">
+        <InteractiveBentoSection />
       </div>
 
       {/* 03 / L'ECOSISTEMA */}

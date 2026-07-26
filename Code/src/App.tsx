@@ -38,14 +38,14 @@ import { CircularGalleryDemo } from './components/CircularGalleryDemo.tsx';
 import { GridVignetteBackground } from './components/ui/vignette-grid-background.tsx';
 
 const PenNibIcon = ({ className, strokeWidth = 2 }: { className?: string; strokeWidth?: number }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth={strokeWidth} 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={className}
   >
     <path d="M6 13l1.5-7.5L22 2l-3.5 14.5L11 18l-5-5z" />
@@ -339,11 +339,10 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className={`fixed top-4 left-0 right-0 mx-auto z-50 grid grid-cols-3 items-center justify-between text-xs uppercase tracking-widest font-normal transition-all duration-700 ease-[0.16,1,0.3,1] ${
-              isScrolled 
-                ? "w-[calc(100%-2rem)] max-w-5xl border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
-                : "w-full max-w-none border-transparent rounded-none px-6 sm:px-10 md:px-14 py-2 bg-transparent backdrop-blur-none shadow-none"
-            }`}
+            className={`fixed top-4 left-0 right-0 mx-auto z-50 grid grid-cols-3 items-center justify-between text-xs uppercase tracking-widest font-normal transition-all duration-700 ease-[0.16,1,0.3,1] ${isScrolled
+              ? "w-[calc(100%-2rem)] max-w-5xl border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
+              : "w-full max-w-none border-transparent rounded-none px-6 sm:px-10 md:px-14 py-2 bg-transparent backdrop-blur-none shadow-none"
+              }`}
             id="app-header"
           >
             {/* Left Area: Logo/Brand */}
@@ -361,8 +360,8 @@ export default function App() {
               </button>
 
               {/* Desktop Only Logo - Diego Cavallaro Premium Monogram with red accent */}
-              <div 
-                className="flex items-center gap-2.5 group/logo cursor-pointer transition-all duration-700 ease-[0.16,1,0.3,1]" 
+              <div
+                className="flex items-center gap-2.5 group/logo cursor-pointer transition-all duration-700 ease-[0.16,1,0.3,1]"
                 onClick={() => scrollToSection('hero-section')}
               >
                 <div className={`items-center justify-center transition-all duration-700 ease-[0.16,1,0.3,1] rounded-full flex overflow-hidden shrink-0 ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20 opacity-100' : 'w-0 h-0 opacity-0 border-0 md:w-8 md:h-8 md:opacity-100'}`}>
@@ -599,7 +598,7 @@ export default function App() {
                 {lang === 'it' ? 'Trascina le cards per scorrere tra le skills' : 'Drag the cards to scroll through the skills'}
               </p>
             </div>
-            
+
             <div data-reveal data-delay="150" className="w-full pb-8">
               <CircularGalleryDemo lang={lang} />
             </div>
@@ -1532,7 +1531,6 @@ export default function App() {
           )}
 
         </AnimatePresence>
-
       </div>
     </SmoothScroll>
   );

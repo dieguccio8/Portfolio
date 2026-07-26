@@ -134,12 +134,7 @@ export default function TimelineAccordion({ activePhase, onPhaseChange }: { acti
                         ))}
                       </ul>
                       
-                      {/* Explore Link */}
-                      <a className="inline-block relative overflow-visible group/link mt-2" href={phase.linkHref}>
-                        <span className={`relative z-10 text-sm font-semibold border-b transition-colors pb-[2px] uppercase tracking-wider ${colors.link} ${colors.linkBorder} ${colors.linkBorderHover}`}>
-                          {phase.linkText}
-                        </span>
-                      </a>
+                      {/* Explore Link removed as requested */}
 
                     </div>
                   </div>

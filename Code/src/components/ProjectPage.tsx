@@ -25,7 +25,8 @@ import {
   BookOpen,
   Trash2,
   Upload,
-  Image
+  Image,
+  MessageSquare
 } from 'lucide-react';
 import { Project } from '../types';
 import UserJourney from './UserJourney';
@@ -40,6 +41,8 @@ import { ScrollProgress } from './ScrollProgress';
 import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
 import ThreeDMarquee from './ui/3d-marquee';
+import HighlightCard from './ui/highlight-card';
+import { HalftoneBackground } from './ui/halftone-background';
 
 function BeforeAfterSlider() {
   const [sliderPos, setSliderPos] = useState(50);
@@ -115,7 +118,7 @@ interface ProjectPageProps {
 export default function ProjectPage({ project, onClose, onNavigateToProject, allProjects, lang = 'it', setLang }: ProjectPageProps) {
   // Back to top on mount or project change
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }, [project.id]);
 
   // Localization dictionary for project data
@@ -903,7 +906,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         )}
 
         {/* 4. FULL-WIDTH LOWER CASE STUDY SECTIONS */}
-        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 mt-16 flex flex-col gap-16 w-full pb-12">
+        <div className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 flex flex-col gap-16 w-full pb-12 ${isAetheris ? '' : 'mt-16'}`}>
           {isKinetics ? (
             <KineticsLowerSections
               project={project}
@@ -931,7 +934,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             isDetailed && (
               <div className="flex flex-col gap-16">
                 {/* Sezione Tipologie di Ricerca */}
-                <div className="pt-10 border-t border-white/10 flex flex-col gap-6">
+                <div className="pt-32 pb-32 flex flex-col gap-6 relative">
+                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[100vw]">
+                    <HalftoneBackground />
+                  </div>
+                  <div className="relative z-10 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
                     <span className={`text-[10px] font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
                       {lang === 'it'
@@ -1026,11 +1033,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                         {/* 3 card con opinioni utenti */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                          <div className={`p-5 bg-[#131514] rounded-2xl border border-white/10 flex flex-col gap-4 justify-between transition-all shadow-sm ${isAetheris ? 'hover:border-[#068B35]/30' : 'hover:border-[#E8302A]/30'
-                            }`}>
-                            <span className="text-[10px] font-mono text-neutral-400 uppercase">{lang === 'it' ? 'Recensione 1' : 'Review 1'}</span>
-                            <p className="text-xs sm:text-sm italic leading-relaxed text-white/90 font-light">
-                              {lang === 'it' ? (
+                          <HighlightCard
+                            title={lang === 'it' ? 'Recensione 1' : 'Review 1'}
+                            description={[
+                              lang === 'it' ? (
                                 isAetheris
                                   ? "“Difficile per chi non conosce il mondo della botanica destreggiarsi fra le piante. Nessuna guida né spiegazione”"
                                   : "“Ci sono murales incredibili a Catania e Palermo, ma non si trova mezza riga su chi li abbia dipinti o cosa vogliano dire.”"
@@ -1038,20 +1044,15 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 isAetheris
                                   ? "“Hard for those who do not know the world of botany to navigate among the plants. No guide or explanation”"
                                   : "“There are incredible murals in Catania and Palermo, but you can't find a single line about who painted them or what they mean.”"
-                              )}
-                            </p>
-                            <div className="h-[1px] bg-white/5 my-1" />
-                            <span className={`text-[9px] font-mono uppercase tracking-widest font-bold px-2 py-0.5 rounded w-fit ${isAetheris ? 'text-[#068B35] bg-[#068B35]/10' : 'text-[#E8302A] bg-[#E8302A]/10'
-                              }`}>
-                              {lang === 'it' ? 'Criticità: Informazioni' : 'Issue: Information'}
-                            </span>
-                          </div>
-
-                          <div className={`p-5 bg-[#131514] rounded-2xl border border-white/10 flex flex-col gap-4 justify-between transition-all shadow-sm ${isAetheris ? 'hover:border-[#068B35]/30' : 'hover:border-[#E8302A]/30'
-                            }`}>
-                            <span className="text-[10px] font-mono text-neutral-400 uppercase">{lang === 'it' ? 'Recensione 2' : 'Review 2'}</span>
-                            <p className="text-xs sm:text-sm italic leading-relaxed text-white/90 font-light">
-                              {lang === 'it' ? (
+                              ),
+                              lang === 'it' ? 'Criticità: Informazioni' : 'Issue: Information'
+                            ]}
+                            icon={<MessageSquare className="w-8 h-8 text-white" />}
+                          />
+                          <HighlightCard
+                            title={lang === 'it' ? 'Recensione 2' : 'Review 2'}
+                            description={[
+                              lang === 'it' ? (
                                 isAetheris
                                   ? "“L’ho visitato da solo. E’ bello da vedere, si visita in 5 minuti ma non presenta nulla di particolare, forse necessitavo di una guida.”"
                                   : "“Ho provato a fare un giro per vedere la street art a San Berillo, ma molte opere sono nei vicoli ciechi e senza una mappa è facilissimo perdersi.”"
@@ -1059,23 +1060,17 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 isAetheris
                                   ? "“I visited it alone. It's nice to look at, takes 5 minutes, but doesn't offer anything special, maybe I needed a guide.”"
                                   : "“I tried walking around to see street art in San Berillo, but many works are in dead ends and without a map it's very easy to get lost.”"
-                              )}
-                            </p>
-                            <div className="h-[1px] bg-white/5 my-1" />
-                            <span className={`text-[9px] font-mono uppercase tracking-widest font-bold px-2 py-0.5 rounded w-fit ${isAetheris ? 'text-[#068B35] bg-[#068B35]/10' : 'text-[#E8302A] bg-[#E8302A]/10'
-                              }`}>
-                              {lang === 'it'
+                              ),
+                              lang === 'it'
                                 ? (isAetheris ? "Criticità: Coinvolgimento" : "Criticità: Navigazione")
                                 : (isAetheris ? "Issue: Engagement" : "Issue: Navigation")
-                              }
-                            </span>
-                          </div>
-
-                          <div className={`p-5 bg-[#131514] rounded-2xl border border-white/10 flex flex-col gap-4 justify-between transition-all shadow-sm ${isAetheris ? 'hover:border-[#068B35]/30' : 'hover:border-[#E8302A]/30'
-                            }`}>
-                            <span className="text-[10px] font-mono text-neutral-400 uppercase">{lang === 'it' ? 'Recensione 3' : 'Review 3'}</span>
-                            <p className="text-xs sm:text-sm italic leading-relaxed text-white/90 font-light">
-                              {lang === 'it' ? (
+                            ]}
+                            icon={<MessageSquare className="w-8 h-8 text-white" />}
+                          />
+                          <HighlightCard
+                            title={lang === 'it' ? 'Recensione 3' : 'Review 3'}
+                            description={[
+                              lang === 'it' ? (
                                 isAetheris
                                   ? "“Bello, ma manca di spiegazioni riguardo le piante... oltre al nome scientifico nient’altro!”"
                                   : "“Molti murales storici vengono coperti o vandalizzati senza che nessuno li documenti. Manca un archivio storico digitale.”"
@@ -1083,17 +1078,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 isAetheris
                                   ? "“Beautiful, but lacks explanations about the plants... other than the scientific name there's nothing else!”"
                                   : "“Many historical murals are covered up or vandalized without anyone documenting them. A digital historical archive is missing.”"
-                              )}
-                            </p>
-                            <div className="h-[1px] bg-white/5 my-1" />
-                            <span className={`text-[9px] font-mono uppercase tracking-widest font-bold px-2 py-0.5 rounded w-fit ${isAetheris ? 'text-[#068B35] bg-[#068B35]/10' : 'text-[#E8302A] bg-[#E8302A]/10'
-                              }`}>
-                              {lang === 'it'
+                              ),
+                              lang === 'it'
                                 ? (isAetheris ? "Criticità: Informazioni" : "Criticità: Conservazione")
                                 : (isAetheris ? "Issue: Information" : "Issue: Preservation")
-                              }
-                            </span>
-                          </div>
+                            ]}
+                            icon={<MessageSquare className="w-8 h-8 text-white" />}
+                          />
                         </div>
                       </motion.div>
                     )}
@@ -1119,16 +1110,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </p>
 
                         {/* Grafici risposte dei sondaggi */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 h-full">
                           {/* Domanda 1 */}
-                          <div className="p-6 bg-[#131514] rounded-2xl border border-white/10 flex flex-col gap-4 justify-between shadow-sm">
-                            <div className="flex items-start gap-2.5">
-                              <span className={`text-xs font-mono px-2 py-0.5 border rounded uppercase font-semibold ${isAetheris
-                                ? 'bg-[#068B35]/10 text-[#068B35] border-[#068B35]/20'
-                                : 'bg-[#E8302A]/10 text-[#E8302A] border-[#E8302A]/20'
-                                }`}>{lang === 'it' ? 'Domanda 1' : 'Question 1'}</span>
-                              <span className="text-xs sm:text-sm font-bold text-white leading-snug">
-                                {lang === 'it' ? (
+                          <HighlightCard
+                            title={lang === 'it' ? (
                                   isAetheris
                                     ? "“Come ti stai orientando nell’orto?”"
                                     : "“Come scopri le opere di street art in una nuova città?”"
@@ -1137,9 +1122,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                     ? "“How do you orient yourself in the garden?”"
                                     : "“How do you discover street art in a new city?”"
                                 )}
-                              </span>
-                            </div>
-
+                          >
                             <div className="flex flex-col gap-3 pt-2">
                               {/* Prima Opzione */}
                               <div className="flex flex-col gap-1">
@@ -1193,17 +1176,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </HighlightCard>
 
                           {/* Domanda 2 */}
-                          <div className="p-6 bg-[#131514] rounded-2xl border border-white/10 flex flex-col gap-4 justify-between shadow-sm">
-                            <div className="flex items-start gap-2.5">
-                              <span className={`text-xs font-mono px-2 py-0.5 border rounded uppercase font-semibold ${isAetheris
-                                ? 'bg-[#068B35]/10 text-[#068B35] border-[#068B35]/20'
-                                : 'bg-[#E8302A]/10 text-[#E8302A] border-[#E8302A]/20'
-                                }`}>{lang === 'it' ? 'Domanda 2' : 'Question 2'}</span>
-                              <span className="text-xs sm:text-sm font-bold text-white leading-snug">
-                                {lang === 'it' ? (
+                          <HighlightCard
+                            title={lang === 'it' ? (
                                   isAetheris
                                     ? "“Useresti il tuo smartphone per approfondire tramite QR code?”"
                                     : "“Useresti un’app dedicata per fare tour autoguidati di street art?”"
@@ -1212,9 +1189,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                     ? "“Would you use your smartphone to learn more via QR codes?”"
                                     : "“Would you use a dedicated app to take self-guided street art tours?”"
                                 )}
-                              </span>
-                            </div>
-
+                          >
                             <div className="flex flex-col gap-3 pt-2">
                               {/* Opzione Sì */}
                               <div className="flex flex-col gap-1">
@@ -1247,7 +1222,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </HighlightCard>
                         </div>
                       </motion.div>
                     )}
@@ -1272,19 +1247,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           )}
                         </p>
 
-                        <div className="flex flex-col gap-4 mt-2">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2 h-full">
                           {/* Domanda 1 Interviste */}
-                          <div className={`p-5 bg-[#131514] rounded-2xl border border-white/10 flex flex-col gap-3 transition-all shadow-sm ${isAetheris ? 'hover:border-[#068B35]/30' : 'hover:border-[#E8302A]/30'
-                            }`}>
-                            <div className="flex gap-3 items-start">
-                              <span className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 font-mono text-xs font-bold ${isAetheris
-                                ? 'bg-[#068B35]/10 text-[#068B35] border-[#068B35]/20'
-                                : 'bg-[#E8302A]/10 text-[#E8302A] border-[#E8302A]/20'
-                                }`}>{lang === 'it' ? 'D1' : 'Q1'}</span>
-                              <div className="flex flex-col gap-1">
-                                <span className="text-[10px] font-mono text-neutral-400 uppercase">{lang === 'it' ? 'Domanda' : 'Question'}</span>
-                                <p className="text-xs sm:text-sm font-bold text-white">
-                                  {lang === 'it' ? (
+                          <HighlightCard
+                            title={lang === 'it' ? (
                                     isAetheris
                                       ? "Pensi che creare un totem digitale per aiutarti in un percorso all'interno di qui possa migliorare la tua esperienza?"
                                       : "Qual è la sfida maggiore nel fare conoscere le tue opere al pubblico di passaggio?"
@@ -1293,15 +1259,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                       ? "Do you think creating a digital kiosk to guide you through a path inside could improve your experience?"
                                       : "What is the biggest challenge in making your artworks known to the passing public?"
                                   )}
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="h-[1px] bg-white/5 my-1" />
-
-                            <div className="flex gap-3 items-start">
+                          >
+                            <div className="flex gap-3 items-start mt-4">
                               <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-mono text-xs font-bold">{lang === 'it' ? 'R1' : 'A1'}</span>
-                              <div className="flex flex-col gap-1">
+                              <div className="flex flex-col gap-1 text-left">
                                 <span className="text-[10px] font-mono text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
                                 <p className="text-xs sm:text-sm italic text-neutral-300 leading-relaxed font-light">
                                   {lang === 'it' ? (
@@ -1316,20 +1277,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 </p>
                               </div>
                             </div>
-                          </div>
+                          </HighlightCard>
 
                           {/* Domanda 2 Interviste */}
-                          <div className={`p-5 bg-[#131514] rounded-2xl border border-white/10 flex flex-col gap-3 transition-all shadow-sm ${isAetheris ? 'hover:border-[#068B35]/30' : 'hover:border-[#E8302A]/30'
-                            }`}>
-                            <div className="flex gap-3 items-start">
-                              <span className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 font-mono text-xs font-bold ${isAetheris
-                                ? 'bg-[#068B35]/10 text-[#068B35] border-[#068B35]/20'
-                                : 'bg-[#E8302A]/10 text-[#E8302A] border-[#E8302A]/20'
-                                }`}>{lang === 'it' ? 'D2' : 'Q2'}</span>
-                              <div className="flex flex-col gap-1">
-                                <span className="text-[10px] font-mono text-neutral-400 uppercase">{lang === 'it' ? 'Domanda' : 'Question'}</span>
-                                <p className="text-xs sm:text-sm font-bold text-white">
-                                  {lang === 'it' ? (
+                          <HighlightCard
+                            title={lang === 'it' ? (
                                     isAetheris
                                       ? "C'è qualcosa che volevi sapere ma non hai trovato l'informazione adatta qui?"
                                       : "Quali difficoltà incontrano i turisti che vogliono esplorare l'arte urbana?"
@@ -1338,15 +1290,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                       ? "Is there anything you wanted to know but couldn't find the right information for here?"
                                       : "What challenges do tourists face when they want to explore urban art?"
                                   )}
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="h-[1px] bg-white/5 my-1" />
-
-                            <div className="flex gap-3 items-start">
+                          >
+                            <div className="flex gap-3 items-start mt-4">
                               <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-mono text-xs font-bold">{lang === 'it' ? 'R2' : 'A2'}</span>
-                              <div className="flex flex-col gap-1">
+                              <div className="flex flex-col gap-1 text-left">
                                 <span className="text-[10px] font-mono text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
                                 <p className="text-xs sm:text-sm italic text-neutral-300 leading-relaxed font-light">
                                   {lang === 'it' ? (
@@ -1361,22 +1308,22 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 </p>
                               </div>
                             </div>
-                          </div>
+                          </HighlightCard>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
+                  </div>
                 </div>
 
                 {/* Sezione Problemi Riscontrati e Soluzioni Adottate */}
-                <div className="pt-10 border-t border-white/5 flex flex-col gap-6">
+                <div className="-mt-16 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
-                    <span className={`text-[10px] font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
-                      {lang === 'it'
-                        ? (isAetheris ? '02 / Analisi e Strategia' : '03 / Analisi e Strategia')
-                        : (isAetheris ? '02 / Analysis & Strategy' : '03 / Analysis & Strategy')
-                      }
-                    </span>
+                    {!isAetheris && (
+                      <span className={`text-[10px] font-mono uppercase tracking-widest text-[#E8302A] font-bold`}>
+                        {lang === 'it' ? '03 / Analisi e Strategia' : '03 / Analysis & Strategy'}
+                      </span>
+                    )}
                     <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight text-white ${isAetheris ? 'font-raleway' : 'font-sans'}`}>
                       {lang === 'it' ? 'Problemi Riscontrati & Soluzioni Adottate' : 'Problems Identified & Solutions Adopted'}
                     </h2>
