@@ -398,7 +398,7 @@ void main() {
         (gl as WebGLRenderingContext).uniform4f(uSceneLocation, canvas.width, canvas.height, time * -1.52, 5.0);
         (gl as WebGLRenderingContext).uniform4f(uShapeLocation, 1.78, 0.19, 1.00, 0.00);
         (gl as WebGLRenderingContext).uniform4f(uSurfaceLocation, 4.00, 0.60, -0.40, 0.70);
-        (gl as WebGLRenderingContext).uniform4f(uFinishLocation, 0.00, 1.00, 0.040, 0.16);
+        (gl as WebGLRenderingContext).uniform4f(uFinishLocation, 0.00, 1.00, 0.040, 0.00);
         (gl as WebGLRenderingContext).uniform4f(uTransformLocation, 4990.0, 2.98, 0.14, 1.0);
         (gl as WebGLRenderingContext).uniform4f(uSpaceLocation, -0.25, -0.02, mouseX, mouseY);
         (gl as WebGLRenderingContext).uniform4f(uCursorLocation, presence, 2.0, 0.15, 0.57);

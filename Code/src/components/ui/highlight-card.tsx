@@ -13,7 +13,7 @@ interface ComponentProps {
 const HighlightCard: FC<ComponentProps> = ({ title, description, icon, children }) => {
   return (
     <div className="group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-rotate-1 h-full">
-      <Card className="text-white rounded-2xl border border-white/10 bg-gradient-to-br from-[#010101] via-[#090909] to-[#010101] shadow-2xl relative backdrop-blur-xl overflow-hidden hover:border-[#068B35]/40 hover:shadow-[#068B35]/10 hover:shadow-3xl w-full h-full">
+      <Card className="text-white rounded-2xl border border-white/10 bg-black shadow-2xl relative backdrop-blur-xl overflow-hidden hover:border-[#068B35]/40 hover:shadow-[#068B35]/10 hover:shadow-3xl w-full h-full">
         
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-tr from-[#068B35]/5 to-[#068B35]/10 opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>

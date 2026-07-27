@@ -25,6 +25,7 @@ rl.question('\nInserisci il link del componente 21st.dev: ', async (url) => {
   
   const browser = await puppeteer.launch({
     headless: "new",
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   
@@ -64,7 +65,57 @@ rl.question('\nInserisci il link del componente 21st.dev: ', async (url) => {
       demoCodeUrl = demoMatch[1];
     }
     
-    let outputText = `Componente: ${componentName}\nURL: ${url}\n\n`;
+    // Extract Preview URL
+    let previewUrl = null;
+    const previewMatch = html.match(/(?:\\*")preview_url(?:\\*")\s*:\s*(?:\\*")(https:\/\/cdn\.21st\.dev\/[^"\\]+\.png)(?:\\*")/);
+    if (previewMatch) {
+      previewUrl = previewMatch[1];
+    }
+    
+    // Extract Compiled CSS URL
+    let compiledCssUrl = null;
+    const cssMatch = html.match(/(?:\\*")compiled_css(?:\\*")\s*:\s*(?:\\*")(https:\/\/cdn\.21st\.dev\/[^"\\]+\.css)(?:\\*")/);
+    if (cssMatch) {
+      compiledCssUrl = cssMatch[1];
+    }
+    
+    // Extract Dependencies
+    let depsStr = "";
+    const regexDeps = /(?:\\*")dependencies(?:\\*")\s*:\s*(?:\\*")?(\{.*?\}|\[.*?\])(?:\\*")?/;
+    const depsMatch = html.match(regexDeps);
+    if (depsMatch) {
+      try {
+        let cleanStr = depsMatch[1].replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+        const depsObj = JSON.parse(cleanStr);
+        if (Array.isArray(depsObj)) depsStr = depsObj.join(' ');
+        else depsStr = Object.keys(depsObj).join(' ');
+      } catch(e) {}
+    }
+
+    // Extract Registry Dependencies (e.g. button, utils)
+    let regDepsStr = "";
+    const regexReg = /(?:\\*")registryDependencies(?:\\*")\s*:\s*(?:\\*")?(\{.*?\}|\[.*?\])(?:\\*")?/;
+    const regMatch = html.match(regexReg);
+    if (regMatch) {
+      try {
+        let cleanStr = regMatch[1].replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+        const obj = JSON.parse(cleanStr);
+        if (Array.isArray(obj)) regDepsStr = obj.join(' ');
+        else regDepsStr = Object.keys(obj).join(' ');
+      } catch(e) {}
+    }
+
+    // AI Prompt Generation
+    let outputText = `Prompt AI per l'IDE:\n"Crea un componente React chiamato '${componentName}'. Usa il codice sottostante come implementazione esatta e assicurati che il risultato visivo corrisponda perfettamente all'immagine 'preview.png' allegata. Non omettere parti funzionali."\n\n`;
+    outputText += `Componente: ${componentName}\nURL: ${url}\n\n`;
+    
+    if (depsStr || regDepsStr) {
+      outputText += `=========== DIPENDENZE ===========\n`;
+      if (depsStr) outputText += `Installa questi pacchetti:\nnpm install ${depsStr}\n\n`;
+      if (regDepsStr) outputText += `Componenti shadcn richiesti:\nnpx shadcn-ui@latest add ${regDepsStr}\n\n`;
+      outputText += `====================================\n\n`;
+    }
+
     let foundCode = false;
 
     if (codeUrl) {
@@ -81,6 +132,15 @@ rl.question('\nInserisci il link del componente 21st.dev: ', async (url) => {
       const demoCode = await response.text();
       outputText += `=========== CODICE DEMO (demo.tsx) ===========\n\n${demoCode}\n\n`;
       foundCode = true;
+    }
+
+    if (compiledCssUrl) {
+      const cssRes = await fetch(compiledCssUrl);
+      if (cssRes.ok) {
+        const cssText = await cssRes.text();
+        const cssFileName = compiledCssUrl.split('/').pop() || 'styles.css';
+        outputText += `=========== STILE CSS (${cssFileName}) ===========\n\n${cssText}\n\n`;
+      }
     }
     
     // Fallback if demo code is embedded directly as a string in the payload
@@ -109,11 +169,27 @@ rl.question('\nInserisci il link del componente 21st.dev: ', async (url) => {
     if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir);
     if (!fs.existsSync(compDir)) fs.mkdirSync(compDir);
     
-    const outputPath = path.join(compDir, `${componentName}.txt`);
-    fs.writeFileSync(outputPath, outputText, 'utf-8');
+    const txtPath = path.join(compDir, `${componentName}.txt`);
+    fs.writeFileSync(txtPath, outputText, 'utf-8');
+
+    // Download preview image if available
+    if (previewUrl) {
+      try {
+        const previewRes = await fetch(previewUrl);
+        if (previewRes.ok) {
+          const buffer = await previewRes.arrayBuffer();
+          const previewPath = path.join(compDir, 'preview.png');
+          fs.writeFileSync(previewPath, Buffer.from(buffer));
+          console.log(`[Scraper] Immagine di anteprima salvata in:`);
+          console.log(previewPath);
+        }
+      } catch (e) {
+        console.log(`[Scraper] Impossibile scaricare l'immagine di anteprima: ${e.message}`);
+      }
+    }
     
     console.log(`\n[Scraper] Successo! Il file TXT è stato salvato in:`);
-    console.log(outputPath);
+    console.log(txtPath);
     
   } catch (err) {
     console.error("\n[Scraper] Errore durante lo scraping:", err);
