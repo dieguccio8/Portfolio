@@ -339,7 +339,7 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className={`fixed top-4 left-0 right-0 mx-auto z-50 grid grid-cols-3 items-center justify-between text-xs uppercase tracking-widest font-normal transition-all duration-700 ease-[0.16,1,0.3,1] ${isScrolled
+            className={`fixed top-4 left-0 right-0 mx-auto z-50 grid grid-cols-3 items-center justify-between text-sm uppercase tracking-widest font-normal transition-all duration-700 ease-[0.16,1,0.3,1] ${isScrolled
               ? "w-[calc(100%-2rem)] max-w-5xl border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
               : "w-full max-w-none border-transparent rounded-none px-6 sm:px-10 md:px-14 py-2 bg-transparent backdrop-blur-none shadow-none"
               }`}
@@ -353,7 +353,7 @@ export default function App() {
                   setLang(lang === 'it' ? 'en' : 'it');
                   setMobileMenuOpen(false);
                 }}
-                className={`items-center justify-center rounded-full border bg-white/[0.04] hover:bg-white/[0.1] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md overflow-hidden flex shrink-0 ${!isScrolled ? 'w-0 h-0 opacity-0 border-transparent' : 'w-8 h-8 opacity-100 border-white/10 md:w-0 md:h-0 md:opacity-0 md:border-transparent md:pointer-events-none'}`}
+                className={`items-center justify-center rounded-full border bg-white/[0.04] hover:bg-white/[0.1] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-sm font-mono font-bold text-white select-none cursor-pointer shadow-md overflow-hidden flex shrink-0 ${!isScrolled ? 'w-0 h-0 opacity-0 border-transparent' : 'w-8 h-8 opacity-100 border-white/10 md:w-0 md:h-0 md:opacity-0 md:border-transparent md:pointer-events-none'}`}
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
@@ -423,14 +423,14 @@ export default function App() {
                     link.click();
                     document.body.removeChild(link);
                   }}
-                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2 rounded-full font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-[10px]"
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-2 rounded-full font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-sm"
                 >
                   {lang === 'it' ? 'Download CV' : 'Download CV'}
                 </button>
                 <button
                   id="nav-contact-btn"
                   onClick={() => scrollToSection('direct-contact-section')}
-                  className="bg-[#E8302A] hover:bg-[#c9221d] text-white px-5 py-2 rounded-full font-bold transition-all duration-300 shadow-[0_0_15px_rgba(232,48,42,0.3)] hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-[10px]"
+                  className="bg-[#E8302A] hover:bg-[#c9221d] text-white px-5 py-2 rounded-full font-bold transition-all duration-300 shadow-[0_0_15px_rgba(232,48,42,0.3)] hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-sm"
                 >
                   {lang === 'it' ? 'Contattami' : 'Contact Me'}
                 </button>
@@ -442,7 +442,7 @@ export default function App() {
                   setLang(lang === 'it' ? 'en' : 'it');
                   setMobileMenuOpen(false);
                 }}
-                className={`items-center justify-center rounded-full border bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0 overflow-hidden flex ${!isScrolled ? 'w-0 h-0 opacity-0 border-transparent pointer-events-none' : 'w-0 h-0 opacity-0 md:w-8 md:h-8 md:opacity-100 md:border-white/10'}`}
+                className={`items-center justify-center rounded-full border bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-700 ease-[0.16,1,0.3,1] text-sm font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0 overflow-hidden flex ${!isScrolled ? 'w-0 h-0 opacity-0 border-transparent pointer-events-none' : 'w-0 h-0 opacity-0 md:w-8 md:h-8 md:opacity-100 md:border-white/10'}`}
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
@@ -503,7 +503,7 @@ export default function App() {
                       document.body.removeChild(link);
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-white font-bold text-center transition-all text-[11px] uppercase tracking-wider"
+                    className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-white font-bold text-center transition-all text-sm uppercase tracking-wider"
                   >
                     {lang === 'it' ? 'Download CV' : 'Download CV'}
                   </button>
@@ -512,7 +512,7 @@ export default function App() {
                       scrollToSection('direct-contact-section');
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full py-3 bg-[#E8302A] hover:bg-[#c9221d] rounded-xl text-white font-bold text-center transition-all text-[11px] uppercase tracking-wider shadow-lg"
+                    className="w-full py-3 bg-[#E8302A] hover:bg-[#c9221d] rounded-xl text-white font-bold text-center transition-all text-sm uppercase tracking-wider shadow-lg"
                   >
                     {lang === 'it' ? 'Contattami' : 'Contact Me'}
                   </button>
@@ -536,7 +536,7 @@ export default function App() {
                 transition={{ delay: 0.8, duration: 0.8 }}
                 className="inline-flex items-center gap-2.5 bg-white/[0.04] border border-white/10 px-5 py-2.5 rounded-full shadow-lg backdrop-blur-md select-none mt-2 hover:border-white/25 hover:bg-white/[0.06] transition-all cursor-pointer"
               >
-                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/90 font-medium">{lang === 'it' ? 'Made in Catania' : 'Based in Catania'}</span>
+                <span className="text-sm sm:text-sm font-mono uppercase tracking-[0.2em] text-white/90 font-medium">{lang === 'it' ? 'Made in Catania' : 'Based in Catania'}</span>
               </motion.div>
             </div>
           </main>
@@ -546,13 +546,13 @@ export default function App() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-end text-xs tracking-wider"
+            className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-end text-sm tracking-wider"
             id="app-footer"
           >
             {/* Left Side: Social Icons */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-start gap-6 sm:gap-10 text-white/40">
               <div className="flex flex-col gap-1">
-                <span className="uppercase text-[10px] tracking-widest text-white/30">{lang === 'it' ? 'Link Social' : 'Social links'}</span>
+                <span className="uppercase text-sm tracking-widest text-white/30">{lang === 'it' ? 'Link Social' : 'Social links'}</span>
                 <div className="flex items-center gap-4 text-white/60">
                   <a
                     href="https://linkedin.com"
@@ -562,7 +562,7 @@ export default function App() {
                     title="LinkedIn"
                   >
                     <Linkedin className="w-3.5 h-3.5" />
-                    <span className="text-[10px] uppercase font-mono">LN</span>
+                    <span className="text-sm uppercase font-mono">LN</span>
                   </a>
                   <a
                     href="https://instagram.com"
@@ -572,7 +572,7 @@ export default function App() {
                     title="Instagram"
                   >
                     <Instagram className="w-3.5 h-3.5" />
-                    <span className="text-[10px] uppercase font-mono">IG</span>
+                    <span className="text-sm uppercase font-mono">IG</span>
                   </a>
                 </div>
               </div>
@@ -581,7 +581,7 @@ export default function App() {
             {/* Right Side: Role & Domain Description */}
             <div className="text-right flex flex-col md:items-end justify-end gap-1 font-mono text-white/40">
               <span className="text-white">{"// Junior"}</span>
-              <span className="uppercase text-[10px] tracking-[0.2em] text-white/60">{lang === 'it' ? "UX/UI e Visual Designer" : "UX/UI & Visual Designer"}</span>
+              <span className="uppercase text-sm tracking-[0.2em] text-white/60">{lang === 'it' ? "UX/UI e Visual Designer" : "UX/UI & Visual Designer"}</span>
             </div>
           </motion.footer>
         </section>
@@ -621,7 +621,7 @@ export default function App() {
 
               {/* Header Block: Centered master section title */}
               <div className="flex flex-col items-center mb-16 sm:mb-24 relative z-50">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/40 mb-3 font-mono">
+                <div className="flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-white/40 mb-3 font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A]" />
                   <span>Portfolio</span>
                 </div>
@@ -719,7 +719,7 @@ export default function App() {
                 <button
                   id="collab-contact-cta"
                   onClick={() => scrollToSection('direct-contact-section')}
-                  className="px-8 py-4 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-xs uppercase rounded-full inline-flex items-center gap-3 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
+                  className="px-8 py-4 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-sm uppercase rounded-full inline-flex items-center gap-3 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
                 >
                   <span>{lang === 'it' ? 'Contattami' : 'Contact me'}</span>
                   <ArrowDown className="w-4 h-4 text-white" />
@@ -785,7 +785,7 @@ export default function App() {
                     <div className="relative z-10 flex flex-col gap-6 lg:gap-8">
                       {/* Custom capsule badge */}
                       <div className="inline-flex items-center gap-2 self-start bg-[#151615] border border-[#E8302A]/30 px-4 py-2 rounded-full shadow-lg backdrop-blur-sm">
-                        <span className="text-[11px] font-mono uppercase tracking-widest text-[#E8302A] font-bold">{lang === 'it' ? 'Contatti' : 'Contact'}</span>
+                        <span className="text-sm font-mono uppercase tracking-widest text-[#E8302A] font-bold">{lang === 'it' ? 'Contatti' : 'Contact'}</span>
                       </div>
 
                       {/* Title */}
@@ -811,8 +811,8 @@ export default function App() {
                             <Mail className="w-5 h-5" />
                           </div>
                           <div className="flex flex-col min-w-0">
-                            <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">Email</span>
-                            <span className="text-xs sm:text-sm font-semibold text-white tracking-tight break-all font-mono">
+                            <span className="text-sm font-mono text-white/80 uppercase tracking-widest font-semibold">Email</span>
+                            <span className="text-sm sm:text-sm font-semibold text-white tracking-tight break-all font-mono">
                               diegocavallaro8@gmail.com
                             </span>
                           </div>
@@ -832,8 +832,8 @@ export default function App() {
                             <Phone className="w-5 h-5 animate-pulse" />
                           </div>
                           <div className="flex flex-col min-w-0">
-                            <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'Chiamami' : 'Call me'}</span>
-                            <span className="text-xs sm:text-sm font-semibold text-white tracking-tight font-mono">
+                            <span className="text-sm font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'Chiamami' : 'Call me'}</span>
+                            <span className="text-sm sm:text-sm font-semibold text-white tracking-tight font-mono">
                               +39 3515485740
                             </span>
                           </div>
@@ -852,8 +852,8 @@ export default function App() {
                             <MapPin className="w-5 h-5" />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-[11px] font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'La mia posizione' : 'My location'}</span>
-                            <span className="text-xs sm:text-sm font-semibold text-white tracking-tight">
+                            <span className="text-sm font-mono text-white/80 uppercase tracking-widest font-semibold">{lang === 'it' ? 'La mia posizione' : 'My location'}</span>
+                            <span className="text-sm sm:text-sm font-semibold text-white tracking-tight">
                               {lang === 'it' ? 'Catania, Italia' : 'Catania, Italy'}
                             </span>
                           </div>
@@ -877,7 +877,7 @@ export default function App() {
 
                         {/* Name Input */}
                         <div className="flex flex-col gap-2">
-                          <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
+                          <label className="text-sm font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
                             <span>{lang === 'it' ? 'Nome' : 'Name'}</span>
                           </label>
@@ -893,7 +893,7 @@ export default function App() {
 
                         {/* Email Input */}
                         <div className="flex flex-col gap-2">
-                          <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
+                          <label className="text-sm font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
                             <span>Email</span>
                           </label>
@@ -909,7 +909,7 @@ export default function App() {
 
                         {/* Message Input */}
                         <div className="flex flex-col gap-2">
-                          <label className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
+                          <label className="text-sm font-mono uppercase tracking-widest text-neutral-300 pl-1 font-bold flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#E8302A] shrink-0 animate-pulse" />
                             <span>{lang === 'it' ? 'Messaggio' : 'Message'}</span>
                           </label>
@@ -927,7 +927,7 @@ export default function App() {
                         <button
                           type="submit"
                           disabled={sec4Submitting}
-                          className="w-full mt-2 py-4 sm:py-5 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-xs uppercase rounded-full flex items-center justify-center gap-3 hover:scale-105 active:scale-95 disabled:scale-100 disabled:opacity-50 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
+                          className="w-full mt-2 py-4 sm:py-5 bg-gradient-to-r from-[#E8302A] to-red-700 text-white font-bold tracking-widest text-sm uppercase rounded-full flex items-center justify-center gap-3 hover:scale-105 active:scale-95 disabled:scale-100 disabled:opacity-50 transition-all cursor-pointer shadow-lg shadow-red-950/20 hover:shadow-red-600/10"
                         >
                           {sec4Submitting ? (
                             <>
@@ -958,7 +958,7 @@ export default function App() {
                         </p>
                         <button
                           onClick={() => setSec4FormSubmitted(false)}
-                          className="mt-4 px-8 py-3 bg-[#E8302A]/10 border border-[#E8302A]/20 hover:bg-[#E8302A] hover:text-white transition-all rounded-xl text-[10px] uppercase font-mono tracking-widest cursor-pointer mx-auto block text-white"
+                          className="mt-4 px-8 py-3 bg-[#E8302A]/10 border border-[#E8302A]/20 hover:bg-[#E8302A] hover:text-white transition-all rounded-xl text-sm uppercase font-mono tracking-widest cursor-pointer mx-auto block text-white"
                         >
                           {lang === 'it' ? 'Invia un altro messaggio' : 'Send another message'}
                         </button>
@@ -975,7 +975,7 @@ export default function App() {
         </div>
 
         {/* ADDITIONAL GENERAL FOOTER AT THE VERY BOTTOM OF THE LONG SCROLL PAGE */}
-        <footer className="w-full bg-black border-t border-white/5 py-8 px-6 sm:px-10 md:px-14 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-mono text-white/30" id="main-footer">
+        <footer className="w-full bg-black border-t border-white/5 py-8 px-6 sm:px-10 md:px-14 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm font-mono text-white/30" id="main-footer">
           <span>{lang === 'it' ? '© 2026 Diego Cavallaro. Tutti i diritti riservati.' : '© 2026 Diego Cavallaro. All rights reserved.'}</span>
           <div className="flex gap-6 items-center">
             <button onClick={() => scrollToSection('hero-section')} className="hover:text-white transition-colors cursor-pointer font-mono">{lang === 'it' ? 'Torna su' : 'Back to top'}</button>
@@ -1014,10 +1014,10 @@ export default function App() {
                   <form onSubmit={handleBookingSubmit} className="flex flex-col gap-4">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="w-2 h-2 rounded-full bg-[#E8302A]" />
-                      <h3 className="text-xs font-mono uppercase tracking-widest text-white">Secure Consult Scheduler</h3>
+                      <h3 className="text-sm font-mono uppercase tracking-widest text-white">Secure Consult Scheduler</h3>
                     </div>
 
-                    <p className="text-xs text-white/60 leading-relaxed mb-2 font-mono">
+                    <p className="text-sm text-white/60 leading-relaxed mb-2 font-mono">
                       Schedule a synchronized workshop / brief call with Alex.
                     </p>
 
@@ -1029,7 +1029,7 @@ export default function App() {
                         value={bookingForm.name}
                         onChange={(e) => setBookingForm({ ...bookingForm, name: e.target.value })}
                         placeholder="Jennifer Lane"
-                        className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-xs p-2.5 rounded-lg text-white font-mono focus:outline-none"
+                        className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-sm p-2.5 rounded-lg text-white font-mono focus:outline-none"
                       />
                     </div>
 
@@ -1041,7 +1041,7 @@ export default function App() {
                         value={bookingForm.email}
                         onChange={(e) => setBookingForm({ ...bookingForm, email: e.target.value })}
                         placeholder="jJennifer@aetheris.com"
-                        className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-xs p-2.5 rounded-lg text-white font-mono focus:outline-none"
+                        className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-sm p-2.5 rounded-lg text-white font-mono focus:outline-none"
                       />
                     </div>
 
@@ -1051,7 +1051,7 @@ export default function App() {
                         <select
                           value={bookingForm.projectType}
                           onChange={(e) => setBookingForm({ ...bookingForm, projectType: e.target.value })}
-                          className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-[11px] p-2.5 rounded-lg text-white font-mono focus:outline-none"
+                          className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-sm p-2.5 rounded-lg text-white font-mono focus:outline-none"
                         >
                           <option value="Interactive Strategy">Interactive Strategy</option>
                           <option value="Typography Direction">Typography Direction</option>
@@ -1067,7 +1067,7 @@ export default function App() {
                           required
                           value={bookingForm.date}
                           onChange={(e) => setBookingForm({ ...bookingForm, date: e.target.value })}
-                          className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-[11px] p-2 rounded-lg text-white font-mono focus:outline-none"
+                          className="w-full bg-black border border-[#2A2A2A] focus:border-[#E8302A] text-sm p-2 rounded-lg text-white font-mono focus:outline-none"
                         />
                       </div>
                     </div>
@@ -1075,7 +1075,7 @@ export default function App() {
                     <button
                       type="submit"
                       disabled={isBookingSubmitting}
-                      className="w-full mt-3 py-3 bg-[#E8302A] hover:bg-red-700 disabled:opacity-50 text-white font-bold tracking-widest text-xs uppercase rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                      className="w-full mt-3 py-3 bg-[#E8302A] hover:bg-red-700 disabled:opacity-50 text-white font-bold tracking-widest text-sm uppercase rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors"
                     >
                       {isBookingSubmitting ? (
                         <>
@@ -1096,12 +1096,12 @@ export default function App() {
                       <Check className="w-6 h-6" />
                     </div>
                     <h4 className="text-sm font-bold tracking-tight text-white uppercase font-mono">Consulate Appointed</h4>
-                    <p className="text-xs text-white/60 max-w-xs mx-auto leading-relaxed">
+                    <p className="text-sm text-white/60 max-w-xs mx-auto leading-relaxed">
                       Consult successfully reserved inside the sandbox. Alex will receive the SSL transmission packet shortly.
                     </p>
                     <button
                       onClick={() => setIsBookingOpen(false)}
-                      className="mt-2 px-6 py-2.5 bg-white/5 border border-white/10 hover:bg-white hover:text-black transition-colors rounded-xl text-[10px] uppercase font-mono tracking-widest cursor-pointer"
+                      className="mt-2 px-6 py-2.5 bg-white/5 border border-white/10 hover:bg-white hover:text-black transition-colors rounded-xl text-sm uppercase font-mono tracking-widest cursor-pointer"
                     >
                       Dismiss Workspace
                     </button>
@@ -1130,7 +1130,7 @@ export default function App() {
               <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-5">
                 <div className="flex items-center gap-2">
                   <Layers className="w-4 h-4 text-white" />
-                  <span className="text-xs uppercase tracking-widest font-mono text-white">{lang === 'it' ? 'Lavori Selezionati' : 'Selected Works'}</span>
+                  <span className="text-sm uppercase tracking-widest font-mono text-white">{lang === 'it' ? 'Lavori Selezionati' : 'Selected Works'}</span>
                 </div>
                 <button
                   id="close-projects-btn"
@@ -1138,7 +1138,7 @@ export default function App() {
                     setActiveOverlay('none');
                     setSelectedProject(null);
                   }}
-                  className="group flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 hover:text-white cursor-pointer active:scale-95 transition-all"
+                  className="group flex items-center gap-2 text-sm uppercase tracking-widest text-white/60 hover:text-white cursor-pointer active:scale-95 transition-all"
                 >
                   <span>{lang === 'it' ? 'Torna alla Home' : 'Back to Hero'}</span>
                   <X className="w-4 h-4 group-hover:rotate-90 transition-transform" />
@@ -1159,7 +1159,7 @@ export default function App() {
                       className={`group cursor-pointer border-b border-white/10 py-5 flex items-center justify-between transition-colors duration-300 ${selectedProject?.id === project.id ? 'text-white' : 'text-white/40 hover:text-white/80'}`}
                     >
                       <div className="flex items-center gap-4 sm:gap-6">
-                        <span className="font-mono text-[10px] text-white/30 group-hover:text-white/60 transition-colors">
+                        <span className="font-mono text-sm text-white/30 group-hover:text-white/60 transition-colors">
                           0{index + 1}
                         </span>
                         <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
@@ -1167,7 +1167,7 @@ export default function App() {
                         </h3>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="hidden sm:inline font-mono text-xs text-white/40 group-hover:text-white/60">
+                        <span className="hidden sm:inline font-mono text-sm text-white/40 group-hover:text-white/60">
                           {project.year}
                         </span>
                         <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${selectedProject?.id === project.id ? 'translate-x-1 opacity-100' : 'opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5'}`} />
@@ -1190,11 +1190,11 @@ export default function App() {
                       >
                         <div className="flex justify-between items-start">
                           <div>
-                            <span className="text-[10px] font-mono tracking-wider uppercase text-white/40 block mb-1">{lang === 'it' ? 'Categoria' : 'Category'}</span>
+                            <span className="text-sm font-mono tracking-wider uppercase text-white/40 block mb-1">{lang === 'it' ? 'Categoria' : 'Category'}</span>
                             <span className="text-white font-medium text-sm">{getLocalizedProjectField(selectedProject, 'category')}</span>
                           </div>
                           <div className="text-right">
-                            <span className="text-[10px] font-mono tracking-wider uppercase text-white/40 block mb-1">{lang === 'it' ? 'Anno' : 'Year'}</span>
+                            <span className="text-sm font-mono tracking-wider uppercase text-white/40 block mb-1">{lang === 'it' ? 'Anno' : 'Year'}</span>
                             <span className="text-white font-mono text-sm">{selectedProject.year}</span>
                           </div>
                         </div>
@@ -1202,14 +1202,14 @@ export default function App() {
                         <div className="h-[1px] bg-white/10 my-1" />
 
                         <div>
-                          <span className="text-[10px] font-mono tracking-wider uppercase text-white/40 block mb-2">{lang === 'it' ? 'Descrizione' : 'Description'}</span>
-                          <p className="text-xs sm:text-sm leading-relaxed text-white/70 font-light">
+                          <span className="text-sm font-mono tracking-wider uppercase text-white/40 block mb-2">{lang === 'it' ? 'Descrizione' : 'Description'}</span>
+                          <p className="text-sm sm:text-sm leading-relaxed text-white/70 font-light">
                             {getLocalizedProjectField(selectedProject, 'description')}
                           </p>
                         </div>
 
                         <div>
-                          <span className="text-[10px] font-mono tracking-wider uppercase text-white/40 block mb-2">{lang === 'it' ? 'Tecnologie' : 'Applied Stack'}</span>
+                          <span className="text-sm font-mono tracking-wider uppercase text-white/40 block mb-2">{lang === 'it' ? 'Tecnologie' : 'Applied Stack'}</span>
                           <div className="flex flex-wrap gap-1.5">
                             {selectedProject.tags.map(tag => (
                               <span
@@ -1225,7 +1225,7 @@ export default function App() {
                         <div className="mt-4 pt-4 border-t border-white/5 flex gap-4">
                           <button
                             onClick={() => alert(`Redirecting to a simulation of ${selectedProject.title} project workspace...`)}
-                            className="flex-1 py-2.5 bg-white text-black hover:bg-neutral-200 transition-colors rounded text-center text-xs uppercase font-bold tracking-wider cursor-pointer flex items-center justify-center gap-1"
+                            className="flex-1 py-2.5 bg-white text-black hover:bg-neutral-200 transition-colors rounded text-center text-sm uppercase font-bold tracking-wider cursor-pointer flex items-center justify-center gap-1"
                           >
                             <span>{lang === 'it' ? 'Apri Progetto' : 'Launch Project'}</span>
                             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -1233,7 +1233,7 @@ export default function App() {
                         </div>
                       </motion.div>
                     ) : (
-                      <div className="border border-dashed border-white/10 p-10 text-center rounded-lg text-white/30 text-xs uppercase tracking-widest font-mono">
+                      <div className="border border-dashed border-white/10 p-10 text-center rounded-lg text-white/30 text-sm uppercase tracking-widest font-mono">
                         {lang === 'it' ? 'Passa con il mouse su un progetto per vedere i dettagli' : 'Hover on a project to inspect details'}
                       </div>
                     )}
@@ -1243,7 +1243,7 @@ export default function App() {
               </div>
 
               {/* Aesthetic lower footnote */}
-              <div className="mt-8 border-t border-white/5 pt-4 text-[10px] font-mono text-white/20 flex flex-col sm:flex-row justify-between gap-2">
+              <div className="mt-8 border-t border-white/5 pt-4 text-sm font-mono text-white/20 flex flex-col sm:flex-row justify-between gap-2">
                 <span>{lang === 'it' ? 'Tutti i diritti riservati © 2026' : 'All rights reserved © 2026'}</span>
                 <span>{lang === 'it' ? 'Disponibile per contratti freelance e art direction full-time' : 'Available for freelance contracts & fulltime art direction'}</span>
               </div>
@@ -1264,12 +1264,12 @@ export default function App() {
               <div className="flex justify-between items-center mb-10 border-b border-white/10 pb-5">
                 <div className="flex items-center gap-2">
                   <Info className="w-4 h-4 text-white" />
-                  <span className="text-xs uppercase tracking-widest font-mono text-white">{lang === 'it' ? 'Chi sono' : 'About the Artist'}</span>
+                  <span className="text-sm uppercase tracking-widest font-mono text-white">{lang === 'it' ? 'Chi sono' : 'About the Artist'}</span>
                 </div>
                 <button
                   id="close-about-btn"
                   onClick={() => setActiveOverlay('none')}
-                  className="group flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 hover:text-white cursor-pointer active:scale-95 transition-all"
+                  className="group flex items-center gap-2 text-sm uppercase tracking-widest text-white/60 hover:text-white cursor-pointer active:scale-95 transition-all"
                 >
                   <span>{lang === 'it' ? 'Torna alla Home' : 'Back to Hero'}</span>
                   <X className="w-4 h-4 group-hover:rotate-90 transition-transform" />
@@ -1282,7 +1282,7 @@ export default function App() {
                 {/* Left Bio Section (width: 7/12) */}
                 <div className="lg:col-span-7 flex flex-col gap-6">
                   <div>
-                    <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/40 block mb-3">{lang === 'it' ? 'Manifesto & Missione' : 'Manifesto & Mission'}</span>
+                    <span className="text-sm font-mono tracking-[0.2em] uppercase text-white/40 block mb-3">{lang === 'it' ? 'Manifesto & Missione' : 'Manifesto & Mission'}</span>
                     <p className="text-xl sm:text-2xl font-light leading-relaxed text-white">
                       {lang === 'it'
                         ? "Diego Cavallaro è un Junior UX/UI & Visual Designer con formazione in Digital Media Design. Operando nella meticolosa intersezione tra layout strutturati, tipografia pulita e interfacce interattive intuitive, Diego progetta esperienze digitali semplici, funzionali e altamente curate."
@@ -1291,7 +1291,7 @@ export default function App() {
                   </div>
 
                   <div className="border-t border-white/10 pt-6 mt-4">
-                    <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/40 block mb-4">{lang === 'it' ? 'Filosofia Principale' : 'Core Philosophy'}</span>
+                    <span className="text-sm font-mono tracking-[0.2em] uppercase text-white/40 block mb-4">{lang === 'it' ? 'Filosofia Principale' : 'Core Philosophy'}</span>
                     <p className="text-sm leading-relaxed text-white/70 font-light mb-4">
                       {lang === 'it'
                         ? "Il design non riguarda la decorazione o l'aggiunta di funzioni superficiali. Il massimo dell'artigianalità si manifesta in confini eleganti, allineamenti iper-precisi, gerarchia dei contenuti e micro-transizioni fluide. Eliminare l'eccesso consente al messaggio principale e all'utilità interattiva di caricarsi istantaneamente e comunicare chiaramente."
@@ -1302,7 +1302,7 @@ export default function App() {
 
                 {/* Right Skills Grid Section (width: 5/12) */}
                 <div className="lg:col-span-5 flex flex-col gap-6 w-full">
-                  <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/40 block mb-1">{lang === 'it' ? 'Competenze / Servizi' : 'Capabilities / Offerings'}</span>
+                  <span className="text-sm font-mono tracking-[0.2em] uppercase text-white/40 block mb-1">{lang === 'it' ? 'Competenze / Servizi' : 'Capabilities / Offerings'}</span>
 
                   <div className="flex flex-col gap-4">
                     {SKILL_GROUPS.map((group) => (
@@ -1310,14 +1310,14 @@ export default function App() {
                         key={group.category}
                         className="border border-white/10 p-5 rounded-md bg-neutral-950/40"
                       >
-                        <h4 className="text-xs font-mono uppercase text-white tracking-widest mb-3 border-b border-white/5 pb-2">
+                        <h4 className="text-sm font-mono uppercase text-white tracking-widest mb-3 border-b border-white/5 pb-2">
                           {group.category}
                         </h4>
                         <ul className="flex flex-wrap gap-2">
                           {group.items.map((item) => (
                             <li
                               key={item}
-                              className="text-xs text-white/60 hover:text-white transition-colors flex items-center gap-1.5"
+                              className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-1.5"
                             >
                               <span className="w-1 h-1 rounded-full bg-white/30" />
                               {item}
@@ -1334,7 +1334,7 @@ export default function App() {
               </div>
 
               {/* Aesthetic lower footnote */}
-              <div className="mt-8 border-t border-white/5 pt-4 text-[10px] font-mono text-white/20 flex flex-col sm:flex-row justify-between gap-2">
+              <div className="mt-8 border-t border-white/5 pt-4 text-sm font-mono text-white/20 flex flex-col sm:flex-row justify-between gap-2">
                 <span>{lang === 'it' ? 'Basato a Catania / Collaborazione Remota e Ibrida' : 'Based in Catania / Remote & Hybrid Cooperation'}</span>
                 <span>{lang === 'it' ? 'Disponibile a partire dal Q3 2026' : 'Available starting Q3 2026'}</span>
               </div>
@@ -1355,7 +1355,7 @@ export default function App() {
               <div className="flex justify-between items-center mb-10 border-b border-white/10 pb-5">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-white" />
-                  <span className="text-xs uppercase tracking-widest font-mono text-white">{lang === 'it' ? 'Connettiamoci' : "Let's Connect"}</span>
+                  <span className="text-sm uppercase tracking-widest font-mono text-white">{lang === 'it' ? 'Connettiamoci' : "Let's Connect"}</span>
                 </div>
                 <button
                   id="close-contact-btn"
@@ -1363,7 +1363,7 @@ export default function App() {
                     setActiveOverlay('none');
                     setFormSubmitted(false);
                   }}
-                  className="group flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 hover:text-white cursor-pointer active:scale-95 transition-all"
+                  className="group flex items-center gap-2 text-sm uppercase tracking-widest text-white/60 hover:text-white cursor-pointer active:scale-95 transition-all"
                 >
                   <span>{lang === 'it' ? 'Torna alla Home' : 'Back to Hero'}</span>
                   <X className="w-4 h-4 group-hover:rotate-90 transition-transform" />
@@ -1376,7 +1376,7 @@ export default function App() {
                 {/* Left Column: Direct Inquiries & Quick Email Copy */}
                 <div className="lg:col-span-5 flex flex-col gap-6">
                   <div>
-                    <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/40 block mb-2">{lang === 'it' ? 'Richieste Dirette' : 'Direct Inquiries'}</span>
+                    <span className="text-sm font-mono tracking-[0.2em] uppercase text-white/40 block mb-2">{lang === 'it' ? 'Richieste Dirette' : 'Direct Inquiries'}</span>
                     <p className="text-lg font-light leading-relaxed text-white/80">
                       {lang === 'it'
                         ? "Interessato a iniziare un nuovo progetto, commissionare un layout o fare due chiacchiere? Premi qui sotto per aprire l'indirizzo diretto."
@@ -1397,12 +1397,12 @@ export default function App() {
                         <Mail className="w-4 h-4 text-white" />
                       </div>
                       <div className="min-w-0">
-                        <span className="text-[10px] font-mono text-white/30 block">{lang === 'it' ? 'INVIA EMAIL' : 'SEND EMAIL'}</span>
+                        <span className="text-sm font-mono text-white/30 block">{lang === 'it' ? 'INVIA EMAIL' : 'SEND EMAIL'}</span>
                         <span className="text-sm font-medium text-white font-mono break-all">diegocavallaro8@gmail.com</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 text-xs text-white/40 font-mono shrink-0">
+                    <div className="flex items-center gap-1 text-sm text-white/40 font-mono shrink-0">
                       <span className="flex items-center gap-1 hover:text-white transition-colors">
                         <ArrowUpRight className="w-3.5 h-3.5" />
                         {lang === 'it' ? 'Scrivi' : 'Compose'}
@@ -1411,8 +1411,8 @@ export default function App() {
                   </a>
 
                   <div className="border-t border-white/5 pt-6 mt-2">
-                    <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/40 block mb-2">{lang === 'it' ? 'Orari di Servizio' : 'Service Hours'}</span>
-                    <p className="text-xs font-light text-white/60 leading-relaxed font-mono">
+                    <span className="text-sm font-mono tracking-[0.2em] uppercase text-white/40 block mb-2">{lang === 'it' ? 'Orari di Servizio' : 'Service Hours'}</span>
+                    <p className="text-sm font-light text-white/60 leading-relaxed font-mono">
                       {lang === 'it'
                         ? "Disponibile Lun—Ven (09:00—18:00 BST). Le risposte arrivano solitamente entro 24 ore lavorative standard."
                         : "Available Mon—Fri (09:00—18:00 BST). Responses typically land within 24 standard business hours."}
@@ -1433,12 +1433,12 @@ export default function App() {
                         exit={{ opacity: 0 }}
                         id="simulated-contact-form"
                       >
-                        <h4 className="text-xs font-mono uppercase tracking-widest text-white border-b border-white/10 pb-3">
+                        <h4 className="text-sm font-mono uppercase tracking-widest text-white border-b border-white/10 pb-3">
                           {lang === 'it' ? 'Invia Trasmissione Sicura' : 'Transmit Secured Transmission'}
                         </h4>
 
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[10px] font-mono uppercase text-white/40">{lang === 'it' ? 'Il Tuo Nome' : 'Your Name'}</label>
+                          <label className="text-sm font-mono uppercase text-white/40">{lang === 'it' ? 'Il Tuo Nome' : 'Your Name'}</label>
                           <input
                             type="text"
                             required
@@ -1450,7 +1450,7 @@ export default function App() {
                         </div>
 
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[10px] font-mono uppercase text-white/40">{lang === 'it' ? 'Il Tuo Indirizzo Email' : 'Your Email Address'}</label>
+                          <label className="text-sm font-mono uppercase text-white/40">{lang === 'it' ? 'Il Tuo Indirizzo Email' : 'Your Email Address'}</label>
                           <input
                             type="email"
                             required
@@ -1462,7 +1462,7 @@ export default function App() {
                         </div>
 
                         <div className="flex flex-col gap-1.5">
-                          <label className="text-[10px] font-mono uppercase text-white/40">{lang === 'it' ? 'Contenuto del Messaggio' : 'Secure Message Payload'}</label>
+                          <label className="text-sm font-mono uppercase text-white/40">{lang === 'it' ? 'Contenuto del Messaggio' : 'Secure Message Payload'}</label>
                           <textarea
                             rows={4}
                             required
@@ -1476,7 +1476,7 @@ export default function App() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full py-3 bg-white text-black hover:bg-neutral-200 disabled:opacity-50 transition-all font-bold tracking-widest text-xs uppercase rounded flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                          className="w-full py-3 bg-white text-black hover:bg-neutral-200 disabled:opacity-50 transition-all font-bold tracking-widest text-sm uppercase rounded flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                         >
                           {isSubmitting ? (
                             <>
@@ -1503,7 +1503,7 @@ export default function App() {
                           <Check className="w-6 h-6" />
                         </div>
                         <h4 className="text-base font-bold tracking-tight text-white uppercase font-mono">{lang === 'it' ? 'Trasmissione Inviata' : 'Transmission Dispatched'}</h4>
-                        <p className="text-xs text-white/60 max-w-sm mx-auto leading-relaxed">
+                        <p className="text-sm text-white/60 max-w-sm mx-auto leading-relaxed">
                           {lang === 'it'
                             ? "Il tuo messaggio è stato salvato. Lo abbiamo memorizzato nel nostro ambiente locale. Ci sentiamo presto!"
                             : "Your message proposal has been saved. We've stored it inside the sandbox local environment. Talk to you soon!"}
@@ -1511,7 +1511,7 @@ export default function App() {
 
                         <button
                           onClick={() => setFormSubmitted(false)}
-                          className="mt-4 px-5 py-2.5 bg-white/10 border border-white/10 hover:bg-white hover:text-black transition-colors rounded text-xs uppercase font-mono tracking-widest cursor-pointer"
+                          className="mt-4 px-5 py-2.5 bg-white/10 border border-white/10 hover:bg-white hover:text-black transition-colors rounded text-sm uppercase font-mono tracking-widest cursor-pointer"
                         >
                           {lang === 'it' ? 'Invia un altro messaggio' : 'Send Another Note'}
                         </button>
@@ -1523,7 +1523,7 @@ export default function App() {
               </div>
 
               {/* Aesthetic lower footnote */}
-              <div className="mt-8 border-t border-white/5 pt-4 text-[10px] font-mono text-white/20 flex flex-col sm:flex-row justify-between gap-2">
+              <div className="mt-8 border-t border-white/5 pt-4 text-sm font-mono text-white/20 flex flex-col sm:flex-row justify-between gap-2">
                 <span>{lang === 'it' ? 'Sistema di trasmissione contatti sandbox end-to-end' : 'End-to-end sandbox contact transmission state system'}</span>
                 <span>{lang === 'it' ? 'Protocollo di Copia Sicura SSL' : 'Secure Copy Protocol SSL'}</span>
               </div>

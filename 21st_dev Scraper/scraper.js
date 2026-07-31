@@ -2,21 +2,39 @@ const readline = require('readline');
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-rl.question('\nInserisci il link del componente 21st.dev: ', async (url) => {
-  if (!url || !url.includes('21st.dev')) {
-    console.log("Link non valido. Assicurati che sia un URL di 21st.dev.");
-    rl.close();
-    return;
+const askQuestion = (query) => new Promise(resolve => rl.question(query, resolve));
+
+async function main() {
+  while (true) {
+    const url = await askQuestion('\nInserisci il link del componente 21st.dev: ');
+    
+    if (!url || !url.includes('21st.dev')) {
+      console.log("Link non valido. Assicurati che sia un URL di 21st.dev.");
+    } else {
+      await scrape(url);
+    }
+    
+    const answer = await askQuestion('\nVuoi estrarre un altro componente? (y/n): ');
+    if (answer.toLowerCase() !== 'y') {
+      break;
+    }
   }
   
   rl.close();
+  console.log("Chiusura del terminale...");
+  // Use osascript to close the Terminal window on macOS
+  exec('osascript -e \'tell application "Terminal" to close first window\'');
+  process.exit(0);
+}
 
+async function scrape(url) {
   // Extract component name from URL (e.g. "glass-card")
   const componentName = url.split('/').pop().split('?')[0] || 'component';
   
@@ -196,4 +214,6 @@ rl.question('\nInserisci il link del componente 21st.dev: ', async (url) => {
   } finally {
     await browser.close();
   }
-});
+}
+
+main();

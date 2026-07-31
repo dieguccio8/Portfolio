@@ -170,11 +170,11 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
       {!isKinetics && (
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/5 pb-6 relative z-10">
           <div className="flex flex-col gap-1.5">
-            <span className={`text-[10px] font-mono uppercase tracking-widest ${textAccentClass} font-bold`}>
+            <span className={`text-sm font-mono uppercase tracking-widest ${textAccentClass} font-bold`}>
               {lang === 'it' ? '06 / Esperienza' : '06 / Experience'}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">User Journey Map</h2>
-            <p className="text-xs sm:text-sm leading-relaxed text-neutral-400 font-light max-w-2xl">
+            <p className="text-sm sm:text-sm leading-relaxed text-neutral-400 font-light max-w-2xl">
               {lang === 'it' 
                 ? `L'evoluzione del viaggio dell'utente ${isAetheris ? 'Mirella' : 'Matteo'}, mettendo a confronto l'esperienza d'uso tradizionale priva di supporti con la nuova esperienza abilitata da ${isAetheris ? '"Bussola Verde"' : '"Urban StreetArt Sicily"'}.` 
                 : `The evolution of the user journey of ${isAetheris ? 'Mirella' : 'Matteo'}, comparing the traditional unsupported user experience with the new experience enabled by ${isAetheris ? '"Bussola Verde"' : '"Urban StreetArt Sicily"'}.`}
@@ -185,7 +185,7 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
           <div className="flex bg-[#0C0D0C] border border-white/5 p-1 rounded-2xl shrink-0 self-start md:self-auto shadow-inner relative">
             <button
               onClick={() => setActiveTab('prima')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium tracking-wide transition-all duration-300 relative z-10 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium tracking-wide transition-all duration-300 relative z-10 ${
                 activeTab === 'prima' ? 'text-rose-200' : 'text-neutral-400 hover:text-white'
               }`}
             >
@@ -200,7 +200,7 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
             </button>
             <button
               onClick={() => setActiveTab('dopo')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium tracking-wide transition-all duration-300 relative z-10 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium tracking-wide transition-all duration-300 relative z-10 ${
                 activeTab === 'dopo' ? (isAetheris ? 'text-emerald-200' : 'text-rose-200') : 'text-neutral-400 hover:text-white'
               }`}
             >
@@ -223,13 +223,13 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
 
       {isKinetics && (
         <div className="flex justify-between items-center border-b border-white/5 pb-6 relative z-10">
-          <span className="text-xs uppercase tracking-widest font-mono text-[#E8302A] font-bold">
+          <span className="text-sm uppercase tracking-widest font-mono text-[#E8302A] font-bold">
             {lang === 'it' ? 'Fasi di Esperienza di Matteo' : "Matteo's Experience Phases"}
           </span>
           <div className="flex bg-[#0C0D0C] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative">
             <button
               onClick={() => setActiveTab('prima')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 relative z-10 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 ${
                 activeTab === 'prima' ? 'text-rose-200 font-bold' : 'text-neutral-400 hover:text-white'
               }`}
             >
@@ -244,7 +244,7 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
             </button>
             <button
               onClick={() => setActiveTab('dopo')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all duration-300 relative z-10 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 ${
                 activeTab === 'dopo' ? 'text-[#E8302A] font-bold' : 'text-neutral-400 hover:text-white'
               }`}
             >
@@ -323,7 +323,7 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
               <h3 className="text-xl font-bold text-white tracking-tight font-sans">
                 User Journey <span className={activeTab === 'prima' ? 'text-rose-400 font-semibold' : (isAetheris ? 'text-emerald-400' : 'text-rose-400') + ' font-semibold'}>{activeTab === 'prima' ? (lang === 'it' ? 'Prima' : 'Before') : (lang === 'it' ? 'Dopo' : 'After')}</span>
               </h3>
-              <p className="text-xs sm:text-sm leading-relaxed text-neutral-300 font-light">
+              <p className="text-sm sm:text-sm leading-relaxed text-neutral-300 font-light">
                 {activeTab === 'prima' 
                   ? (isAetheris 
                       ? (lang === 'it' ? "Senza strumenti dedicati, la visita è penalizzata da un senso di disorientamento, barriere di reperimento informazioni e carenza di approfondimenti durante la permanenza all'Orto." : "Without dedicated tools, the visit is penalized by disorientation, information retrieval barriers, and a lack of deep insights during the stay at the Garden.")
@@ -357,7 +357,7 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
                 {/* Horizontal flow line or badge representation */}
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-b border-white/5 pb-4">
                   <div className="flex items-center gap-3">
-                    <span className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs font-bold shrink-0 ${
+                    <span className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-sm font-bold shrink-0 ${
                       activeTab === 'prima' 
                         ? 'bg-rose-950/20 text-rose-300 border border-rose-900/40' 
                         : isAetheris ? 'bg-[#2E8B3A]/20 text-emerald-300 border border-[#2E8B3A]/40' : 'bg-[#E8302A]/20 text-rose-300 border border-[#E8302A]/40'
@@ -371,8 +371,8 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
                   
                   {/* Channel tag */}
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Canale d'uso:</span>
-                    <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono tracking-wide font-medium ${
+                    <span className="text-sm font-mono uppercase tracking-widest text-neutral-400">Canale d'uso:</span>
+                    <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-mono tracking-wide font-medium ${
                       activeTab === 'prima' 
                         ? 'bg-rose-950/20 text-rose-300 border border-rose-900/40' 
                         : isAetheris ? 'bg-[#2E8B3A]/20 text-emerald-300 border border-[#2E8B3A]/40' : 'bg-[#E8302A]/20 text-rose-300 border border-[#E8302A]/40'
@@ -394,11 +394,11 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
                   <div className="p-4 rounded-2xl bg-[#0C0D0C]/40 border border-white/5 flex flex-col gap-3 shadow-sm hover:bg-[#0C0D0C]/60 transition-all">
                     <div className={`flex items-center gap-2 ${isAetheris ? 'text-emerald-400' : 'text-rose-400'}`}>
                       <Target className="w-4 h-4" />
-                      <span className="text-[10px] font-mono uppercase tracking-wider font-bold">
+                      <span className="text-sm font-mono uppercase tracking-wider font-bold">
                         {lang === 'it' ? 'Azione & Obiettivo' : 'Action & Goal'}
                       </span>
                     </div>
-                    <p className="text-xs sm:text-[13px] leading-relaxed text-neutral-300 font-light">
+                    <p className="text-sm sm:text-[13px] leading-relaxed text-neutral-300 font-light">
                       {step.action}
                     </p>
                   </div>
@@ -408,11 +408,11 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
                     <div className="absolute top-0 right-0 w-24 h-24 bg-neutral-900/[0.02] rounded-full blur-2xl pointer-events-none" />
                     <div className="flex items-center gap-2 text-neutral-400">
                       <MessageSquare className="w-4 h-4" />
-                      <span className="text-[10px] font-mono uppercase tracking-wider font-bold">
+                      <span className="text-sm font-mono uppercase tracking-wider font-bold">
                         {lang === 'it' ? "Pensiero dell'Utente" : "User's Thought"}
                       </span>
                     </div>
-                    <p className="text-xs sm:text-[13px] italic leading-relaxed text-neutral-300 font-light pl-2 border-l border-white/10">
+                    <p className="text-sm sm:text-[13px] italic leading-relaxed text-neutral-300 font-light pl-2 border-l border-white/10">
                       “{step.thought}”
                     </p>
                   </div>
@@ -425,21 +425,21 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
                   }`}>
                     <div className={`flex items-center gap-2 ${activeTab === 'prima' ? 'text-rose-400' : 'text-amber-400'}`}>
                       <AlertTriangle className="w-4 h-4" />
-                      <span className="text-[10px] font-mono uppercase tracking-wider font-bold">
+                      <span className="text-sm font-mono uppercase tracking-wider font-bold">
                         {lang === 'it' ? 'Fattore di Attrito' : 'Friction Factor'}
                       </span>
                     </div>
                     {Array.isArray(step.painPoint) ? (
                       <ul className="flex flex-col gap-2">
                         {step.painPoint.map((p, i) => (
-                          <li key={i} className="text-xs sm:text-[13px] leading-relaxed text-neutral-300 font-light flex items-start gap-1.5">
+                          <li key={i} className="text-sm sm:text-[13px] leading-relaxed text-neutral-300 font-light flex items-start gap-1.5">
                             <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${activeTab === 'prima' ? 'bg-rose-500' : 'bg-amber-500'}`} />
                             <span>{p}</span>
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-xs sm:text-[13px] leading-relaxed text-neutral-300 font-light">
+                      <p className="text-sm sm:text-[13px] leading-relaxed text-neutral-300 font-light">
                         {step.painPoint}
                       </p>
                     )}
@@ -453,13 +453,13 @@ export default function UserJourney({ projectId = 'aetheris', lang = 'it' }: Use
                   }`}>
                     <div className={`flex items-center gap-2 ${activeTab === 'prima' ? 'text-amber-400' : isAetheris ? 'text-emerald-400' : 'text-rose-400'}`}>
                       {activeTab === 'prima' ? <Lightbulb className="w-4 h-4" /> : <Sparkles className="w-4 h-4" />}
-                      <span className="text-[10px] font-mono uppercase tracking-wider font-bold">
+                      <span className="text-sm font-mono uppercase tracking-wider font-bold">
                         {activeTab === 'prima' 
                           ? (lang === 'it' ? 'Opportunità Correlata' : 'Related Opportunity') 
                           : (lang === 'it' ? 'Soluzione Digitale' : 'Digital Solution')}
                       </span>
                     </div>
-                    <p className="text-xs sm:text-[13px] leading-relaxed text-neutral-300 font-light">
+                    <p className="text-sm sm:text-[13px] leading-relaxed text-neutral-300 font-light">
                       {step.opportunity}
                     </p>
                   </div>

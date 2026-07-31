@@ -88,7 +88,7 @@ function BeforeAfterSlider() {
           className="w-full h-full object-cover brightness-100 contrast-[1.1]"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute top-6 right-6 z-20 px-4 py-1.5 bg-[#FCD306] border border-[#0D0D0D]/10 text-[10px] font-mono text-[#0D0D0D] font-bold uppercase tracking-wider rounded-none">
+        <div className="absolute top-6 right-6 z-20 px-4 py-1.5 bg-[#FCD306] border border-[#0D0D0D]/10 text-sm font-mono text-[#0D0D0D] font-bold uppercase tracking-wider rounded-none">
           AFTER: Ecosistema Editoriale Culturale
         </div>
       </div>
@@ -240,7 +240,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
       <CustomCursor color={primaryColor} />
       <ScrollProgress color={primaryColor} />
       <ScrollReveal />
-      <div id="project-page-root" className={`min-h-screen pb-24 relative ${isKinetics ? 'font-urbanist bg-[#0D0D0D] text-[#F5F5F0] selection:bg-[#FCD306] selection:text-[#0D0D0D]' : isAetheris ? 'font-raleway bg-[#121312] text-white selection:bg-[#068B35]/30 selection:text-white' : isChronos ? 'font-sans bg-black text-white selection:bg-[#9E1C1F] selection:text-white' : 'font-sans bg-black text-white selection:bg-[#E8302A] selection:text-white'}`}>
+      <div id="project-page-root" className={`min-h-screen pb-24 relative ${isKinetics ? 'font-urbanist bg-[#0D0D0D] text-[#F5F5F0] selection:bg-[#FCD306] selection:text-[#0D0D0D]' : isAetheris ? 'font-raleway bg-[#050505] text-white selection:bg-[#068B35]/30 selection:text-white' : isChronos ? 'font-sans bg-black text-white selection:bg-[#9E1C1F] selection:text-white' : 'font-sans bg-black text-white selection:bg-[#E8302A] selection:text-white'}`}>
 
         {/* Ambient soft primary glows */}
         {!isAetheris && (
@@ -290,7 +290,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
         {/* 1. FIXED TOP HEADER (Pill shape, matches home navbar) */}
         <header
-          className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl grid grid-cols-3 items-center text-xs uppercase tracking-widest font-normal border border-white/15 rounded-full px-6 py-2.5 bg-black/50 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
+          className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl grid grid-cols-3 items-center text-sm uppercase tracking-widest font-normal border border-white/15 rounded-full px-6 py-2.5 bg-black/50 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
           id="project-header"
         >
           {/* Left Area: Language Selector & Logo/Brand (returns to Home on click) */}
@@ -298,7 +298,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             {!isAetheris && setLang && (
               <button
                 onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
-                className="flex items-center justify-center w-8 h-8 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/40 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+                className="flex items-center justify-center w-8 h-8 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/40 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-sm font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
@@ -334,14 +334,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
               target="_blank"
               rel="noreferrer"
-              className={`text-white px-3 sm:px-5 py-2 rounded-full font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-[10px] uppercase text-center shrink-0 ${isAetheris ? 'bg-[#068B35] hover:bg-[#057A2E] shadow-[0_0_15px_rgba(6,139,53,0.3)]' : 'bg-[#E8302A] hover:bg-[#c9221d] shadow-[0_0_15px_rgba(232,48,42,0.3)]'}`}
+              className={`text-white px-3 sm:px-5 py-2 rounded-full font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-sm uppercase text-center shrink-0 ${isAetheris ? 'bg-[#068B35] hover:bg-[#057A2E] shadow-[0_0_15px_rgba(6,139,53,0.3)]' : 'bg-[#E8302A] hover:bg-[#c9221d] shadow-[0_0_15px_rgba(232,48,42,0.3)]'}`}
             >
               {isAetheris ? (lang === 'it' ? 'Contattami' : 'Contact me') : (lang === 'it' ? 'Lavoriamo' : "Let's work")}
             </a>
             {isAetheris && setLang && (
               <button
                 onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
-                className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-[10px] font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
+                className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-sm font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
                 title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
               >
                 {lang.toUpperCase()}
@@ -382,10 +382,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   className="flex flex-col gap-2"
                 >
-                  <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#FCD306] font-bold font-urbanist block">
+                  <span className="text-sm sm:text-sm font-mono uppercase tracking-[0.25em] text-[#FCD306] font-bold font-urbanist block">
                     01 / REBRANDING & EDITORIAL SYSTEM
                   </span>
-                  <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-[#A8A8A2] uppercase font-medium">
+                  <div className="flex items-center gap-2 text-sm font-mono tracking-widest text-[#A8A8A2] uppercase font-medium">
                     <span className="w-2 h-2 rounded-full bg-[#FCD306] animate-pulse" />
                     <span>PHASE 02 / GEOMETRIC EVOLUTION</span>
                   </div>
@@ -427,19 +427,19 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 mt-4 border-t border-[#2B2B2B] max-w-xl font-urbanist"
                 >
                   <div className="group cursor-default">
-                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Client</span>
-                    <span className="text-xs sm:text-sm font-bold text-[#F5F5F0]">{project.client}</span>
+                    <span className="text-xs font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Client</span>
+                    <span className="text-sm sm:text-sm font-bold text-[#F5F5F0]">{project.client}</span>
                   </div>
                   <div className="group cursor-default">
-                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Year</span>
-                    <span className="text-xs sm:text-sm font-bold text-[#F5F5F0]">{project.year}</span>
+                    <span className="text-xs font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Year</span>
+                    <span className="text-sm sm:text-sm font-bold text-[#F5F5F0]">{project.year}</span>
                   </div>
                   <div className="group cursor-default">
-                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">My Role</span>
-                    <span className="text-xs sm:text-sm font-bold text-[#F5F5F0]">{project.role}</span>
+                    <span className="text-xs font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">My Role</span>
+                    <span className="text-sm sm:text-sm font-bold text-[#F5F5F0]">{project.role}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1">Applied Stack</span>
+                    <span className="text-xs font-mono uppercase text-[#A8A8A2] tracking-wider block mb-1">Applied Stack</span>
                     <div className="flex flex-wrap gap-2 mt-1.5 perspective-[1000px]">
                       {project.tags.map((tag, i) => {
                         const rots = ['rotate-[-4deg]', 'rotate-[3deg]', 'rotate-[-2deg]', 'rotate-[5deg]'];
@@ -449,7 +449,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             whileHover={{ scale: 1.15, rotate: 0, z: 20 }}
                             transition={{ type: "spring", stiffness: 400, damping: 20 }}
                             key={tag}
-                            className={`text-[9px] font-mono px-2.5 py-1 bg-[#FCD306] text-[#0D0D0D] rounded-none border-2 border-[#0D0D0D] uppercase font-black shadow-[3px_3px_0px_#1A1A1A] inline-block ${rot}`}
+                            className={`text-xs font-mono px-2.5 py-1 bg-[#FCD306] text-[#0D0D0D] rounded-none border-2 border-[#0D0D0D] uppercase font-black shadow-[3px_3px_0px_#1A1A1A] inline-block ${rot}`}
                           >
                             {tag}
                           </motion.span>
@@ -494,7 +494,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                   {/* 3.8 Micro-icona geometrica in un angolo */}
                   <div className="absolute top-4 left-4 z-20 w-8 h-8 rounded-none border border-[#FCD306]/40 flex items-center justify-center bg-[#0D0D0D]/70 backdrop-blur-sm">
-                    <span className="text-[10px] font-mono text-[#FCD306] font-bold">✦</span>
+                    <span className="text-sm font-mono text-[#FCD306] font-bold">✦</span>
                   </div>
                 </motion.div>
 
@@ -529,11 +529,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               {/* Left Column: Brand Info */}
               <div className="lg:col-span-6 flex flex-col gap-6 text-left">
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-[#9E1C1F] uppercase font-bold">
+                  <div className="flex items-center gap-2 text-sm font-mono tracking-widest text-[#9E1C1F] uppercase font-bold">
                     <span className="w-2 h-2 rounded-full bg-[#9E1C1F] animate-pulse" />
                     <span>2025 / Concept Redesign, UX/UI & System Architecture</span>
                   </div>
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold">
+                  <span className="text-sm font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold">
                     Italo Treni
                   </span>
                 </div>
@@ -549,19 +549,19 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 {/* Sleek Horizontal Project Ledger */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 mt-2 border-t border-white/5 max-w-xl">
                   <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-500 tracking-wider block mb-1">Client</span>
-                    <span className="text-xs sm:text-sm font-semibold text-neutral-300">{project.client}</span>
+                    <span className="text-xs font-mono uppercase text-neutral-500 tracking-wider block mb-1">Client</span>
+                    <span className="text-sm sm:text-sm font-semibold text-neutral-300">{project.client}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-500 tracking-wider block mb-1">Year</span>
-                    <span className="text-xs sm:text-sm font-semibold text-neutral-300">{project.year}</span>
+                    <span className="text-xs font-mono uppercase text-neutral-500 tracking-wider block mb-1">Year</span>
+                    <span className="text-sm sm:text-sm font-semibold text-neutral-300">{project.year}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-500 tracking-wider block mb-1">My Role</span>
-                    <span className="text-xs sm:text-sm font-semibold text-neutral-300">{project.role}</span>
+                    <span className="text-xs font-mono uppercase text-neutral-500 tracking-wider block mb-1">My Role</span>
+                    <span className="text-sm sm:text-sm font-semibold text-neutral-300">{project.role}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] font-mono uppercase text-neutral-500 tracking-wider block mb-1">Applied Stack</span>
+                    <span className="text-xs font-mono uppercase text-neutral-500 tracking-wider block mb-1">Applied Stack</span>
                     <div className="flex flex-wrap gap-1 mt-0.5">
                       {project.tags.slice(0, 3).map((tag) => (
                         <span key={tag} className="text-[8px] font-mono px-1.5 py-0.5 bg-white/5 text-neutral-300 rounded border border-white/10 uppercase font-medium">
@@ -574,7 +574,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                 <div className="flex items-center gap-4 mt-2">
                   <div className="h-[1px] w-12 bg-[#9E1C1F]" />
-                  <span className="text-[11px] font-mono text-neutral-500 uppercase tracking-wider">
+                  <span className="text-sm font-mono text-neutral-500 uppercase tracking-wider">
                     Case Study UX/UI Restyling
                   </span>
                 </div>
@@ -606,14 +606,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     {/* App Header */}
                     <div className="px-4 py-3 border-b border-white/5 flex justify-between items-center z-10 shrink-0">
-                      <span className="font-sans font-black tracking-tight text-xs text-[#9E1C1F]">italo.</span>
-                      <span className="text-[9px] font-mono text-neutral-400">BIGLIETTERIA RAPIDA</span>
+                      <span className="font-sans font-black tracking-tight text-sm text-[#9E1C1F]">italo.</span>
+                      <span className="text-xs font-mono text-neutral-400">BIGLIETTERIA RAPIDA</span>
                     </div>
 
                     {/* App Home View */}
                     <div className="p-4 flex-1 flex flex-col gap-4 text-left justify-between z-10">
                       <div className="flex flex-col gap-1 mt-2">
-                        <span className="text-[10px] font-mono text-[#9E1C1F] uppercase font-bold tracking-wider">Benvenuto a bordo</span>
+                        <span className="text-sm font-mono text-[#9E1C1F] uppercase font-bold tracking-wider">Benvenuto a bordo</span>
                         <h4 className="text-sm font-sans font-bold leading-tight">Dove desideri viaggiare oggi?</h4>
                       </div>
 
@@ -621,19 +621,19 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       <div className="bg-neutral-900/90 border border-white/10 rounded-2xl p-3 flex flex-col gap-2.5 shadow-lg">
                         {/* From/To Stations */}
                         <div className="flex flex-col gap-1 bg-black/40 p-2 rounded-xl border border-white/5">
-                          <div className="flex justify-between items-center text-[11px] font-sans font-medium text-neutral-400">
+                          <div className="flex justify-between items-center text-sm font-sans font-medium text-neutral-400">
                             <span>DA</span>
                             <span>A</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <span className="text-xs font-bold text-white font-sans">Catania C.le</span>
-                            <span className="text-[#9E1C1F] font-bold text-xs font-mono">➔</span>
-                            <span className="text-xs font-bold text-white font-sans">Milano Centrale</span>
+                            <span className="text-sm font-bold text-white font-sans">Catania C.le</span>
+                            <span className="text-[#9E1C1F] font-bold text-sm font-mono">➔</span>
+                            <span className="text-sm font-bold text-white font-sans">Milano Centrale</span>
                           </div>
                         </div>
 
                         {/* Date & Passenger Selection */}
-                        <div className="grid grid-cols-2 gap-2 text-[10px]">
+                        <div className="grid grid-cols-2 gap-2 text-sm">
                           <div className="bg-black/40 p-2 rounded-xl border border-white/5">
                             <span className="text-neutral-500 block uppercase font-mono mb-0.5">Andata</span>
                             <span className="font-sans font-bold text-white">08 Luglio, 2026</span>
@@ -645,7 +645,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </div>
 
                         {/* Search Button */}
-                        <div className="w-full py-2.5 bg-[#9E1C1F] hover:bg-red-700 transition-colors rounded-xl text-[10px] font-mono text-white uppercase tracking-widest font-bold text-center">
+                        <div className="w-full py-2.5 bg-[#9E1C1F] hover:bg-red-700 transition-colors rounded-xl text-sm font-mono text-white uppercase tracking-widest font-bold text-center">
                           Cerca Soluzioni
                         </div>
                       </div>
@@ -654,8 +654,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       <div className="flex flex-col gap-1.5 mt-auto mb-2">
                         <span className="text-[8px] font-mono text-neutral-500 uppercase tracking-wider">Tratte Recenti</span>
                         <div className="flex gap-2">
-                          <span className="px-2 py-1 bg-neutral-900 border border-white/5 rounded text-[9px] font-sans font-medium text-neutral-300">Catania ➔ Palermo</span>
-                          <span className="px-2 py-1 bg-neutral-900 border border-white/5 rounded text-[9px] font-sans font-medium text-neutral-300">Roma ➔ Milano</span>
+                          <span className="px-2 py-1 bg-neutral-900 border border-white/5 rounded text-xs font-sans font-medium text-neutral-300">Catania ➔ Palermo</span>
+                          <span className="px-2 py-1 bg-neutral-900 border border-white/5 rounded text-xs font-sans font-medium text-neutral-300">Roma ➔ Milano</span>
                         </div>
                       </div>
                     </div>
@@ -684,12 +684,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   className={`w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] ${isKinetics ? 'grayscale brightness-[0.3] contrast-[1.15] hover:grayscale-0' : 'grayscale brightness-[0.4] hover:grayscale-0'}`}
                 />
               )}
-              <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
+              <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/50 to-transparent' : isAetheris ? 'bg-gradient-to-t from-[#050505] from-10% via-[#050505]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
             </div>
 
             <div className="relative z-10 max-w-[1600px] mx-auto w-full flex flex-col gap-3">
               {!isAetheris && (
-                <span className={`text-xs font-mono uppercase tracking-[0.25em] ${isKinetics ? 'text-[#FCD306] font-bold font-urbanist' : 'text-[#E8302A]'}`}>
+                <span className={`text-sm font-mono uppercase tracking-[0.25em] ${isKinetics ? 'text-[#FCD306] font-bold font-urbanist' : 'text-[#E8302A]'}`}>
                   {getLocalizedField('category')}
                 </span>
               )}
@@ -710,16 +710,16 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}
                   <div className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 w-full">
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Year:</span>
-                      <span className="text-xs sm:text-sm font-semibold text-white">{project.year}</span>
+                      <span className="text-sm font-mono uppercase text-[#068B35] tracking-wider">Year:</span>
+                      <span className="text-sm sm:text-sm font-semibold text-white">{project.year}</span>
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Role:</span>
-                      <span className="text-xs sm:text-sm font-semibold text-white">{project.role}</span>
+                      <span className="text-sm font-mono uppercase text-[#068B35] tracking-wider">Role:</span>
+                      <span className="text-sm sm:text-sm font-semibold text-white">{project.role}</span>
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className="text-[10px] font-mono uppercase text-[#068B35] tracking-wider">Type:</span>
-                      <span className="text-xs sm:text-sm font-semibold text-white">Team Project</span>
+                      <span className="text-sm font-mono uppercase text-[#068B35] tracking-wider">Type:</span>
+                      <span className="text-sm sm:text-sm font-semibold text-white">Team Project</span>
                     </div>
                   </div>
                 </div>
@@ -752,7 +752,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     {/* Left part inside the yellow block: texts */}
                     <div className="flex-1 flex flex-col gap-4 relative z-10 text-left">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#0D0D0D] font-bold block">02 / Context & Challenge</span>
+                        <span className="text-sm font-mono uppercase tracking-[0.18em] text-[#0D0D0D] font-bold block">02 / Context & Challenge</span>
                         <div className="h-[2px] flex-1 bg-[#0D0D0D]/30" />
                       </div>
                       <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#0D0D0D] uppercase leading-none">
@@ -765,7 +765,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     {/* Right part: Before/After Interactive Slider (Pop of dark high contrast) */}
                     <div className="w-full md:w-[450px] shrink-0 flex flex-col gap-3 relative z-10">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#0D0D0D] font-bold">
+                      <span className="text-sm font-mono uppercase tracking-widest text-[#0D0D0D] font-bold">
                         Trascina o clicca per confrontare l'identità visiva
                       </span>
 
@@ -779,7 +779,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             className="w-full h-full object-cover grayscale brightness-50 contrast-75 blur-[1px]"
                             referrerPolicy="no-referrer"
                           />
-                          <div className="absolute top-6 left-6 z-20 px-4 py-1.5 bg-[#0D0D0D] border border-[#2B2B2B] rounded-none text-[10px] font-mono text-[#A8A8A2] uppercase tracking-wider">
+                          <div className="absolute top-6 left-6 z-20 px-4 py-1.5 bg-[#0D0D0D] border border-[#2B2B2B] rounded-none text-sm font-mono text-[#A8A8A2] uppercase tracking-wider">
                             BEFORE: Aggregatore Instagram
                           </div>
                         </div>
@@ -794,7 +794,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     {/* Intro with high speed train image */}
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                       <div className="md:col-span-7 flex flex-col gap-4">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#9E1C1F] font-bold">01 / Introduzione</span>
+                        <span className="text-sm font-mono uppercase tracking-widest text-[#9E1C1F] font-bold">01 / Introduzione</span>
                         <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
                           Un'esperienza di acquisto biglietti che viaggia alla velocità del brand.
                         </h3>
@@ -815,7 +815,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     {/* Context & Challenge */}
                     <div className="flex flex-col gap-4 pt-10 border-t border-white/5">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#9E1C1F] font-bold">02 / Context & Challenge</span>
+                      <span className="text-sm font-mono uppercase tracking-widest text-[#9E1C1F] font-bold">02 / Context & Challenge</span>
                       <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase font-sans">
                         L'Attrito Invisibile.
                       </h2>
@@ -827,9 +827,9 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 ) : (
                   <div className="flex flex-col gap-16 w-full">
                     {/* Visual Intro Grid for Orto Botanico */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center">
+                    <div className={`grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center ${isAetheris ? 'pb-0' : 'pb-16'}`}>
                       <div className="md:col-span-5 flex flex-col gap-8">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">01 / Introduzione</span>
+                        <span className="text-sm font-mono uppercase tracking-widest text-[#068B35] font-bold">01 / Introduzione</span>
 
                         <div className="flex flex-col gap-6">
                           <div className="flex flex-col gap-1 border-l-2 border-[#068B35]/30 pl-4 transition-colors hover:border-[#068B35]">
@@ -865,7 +865,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 <div className="flex flex-col gap-10">
                   {/* Section: Descrizione */}
                   <div className="flex flex-col gap-3">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#E8302A]">{lang === 'it' ? '01 / Il Progetto' : '01 / The Project'}</span>
+                    <span className="text-sm font-mono uppercase tracking-widest text-[#E8302A]">{lang === 'it' ? '01 / Il Progetto' : '01 / The Project'}</span>
                     <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">{lang === 'it' ? 'Esplorazione Concettuale' : 'Conceptual Exploration'}</h2>
                     <p className="text-base leading-relaxed text-white/80 font-light mt-1">
                       {getLocalizedField('longDescription')}
@@ -875,7 +875,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   {/* Section: Sfida & Soluzione side-by-side/stacked */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-white/5">
                     <div className="flex flex-col gap-3">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">{lang === 'it' ? '02 / La Sfida' : '02 / The Challenge'}</span>
+                      <span className="text-sm font-mono uppercase tracking-widest text-white/40">{lang === 'it' ? '02 / La Sfida' : '02 / The Challenge'}</span>
                       <h3 className="text-lg font-bold text-white uppercase">{lang === 'it' ? 'Il Problema' : 'The Problem'}</h3>
                       <p className="text-sm leading-relaxed text-white/70 font-light">
                         {getLocalizedField('challenge')}
@@ -883,7 +883,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     </div>
 
                     <div className="flex flex-col gap-3">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">{lang === 'it' ? '03 / La Soluzione' : '03 / The Solution'}</span>
+                      <span className="text-sm font-mono uppercase tracking-widest text-white/40">{lang === 'it' ? '03 / La Soluzione' : '03 / The Solution'}</span>
                       <h3 className="text-lg font-bold text-white uppercase">{lang === 'it' ? 'La Risoluzione' : 'The Resolution'}</h3>
                       <p className="text-sm leading-relaxed text-white/70 font-light">
                         {getLocalizedField('solution')}
@@ -936,11 +936,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 {/* Sezione Tipologie di Ricerca */}
                 <div className="pt-32 pb-32 flex flex-col gap-6 relative">
                   <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[100vw]">
-                    <HalftoneBackground />
+                    <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24" style={{ background: `radial-gradient(125% 125% at 50% 10%, #000 40%, ${isAetheris ? '#068b35' : primaryColor} 100%)` }}></div>
                   </div>
                   <div className="relative z-10 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
-                    <span className={`text-[10px] font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
+                    <span className={`text-sm font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
                       {lang === 'it'
                         ? (isAetheris ? '01 / Ricerca ed Analisi' : '02 / Ricerca ed Analisi')
                         : (isAetheris ? '01 / Research & Analysis' : '02 / Research & Analysis')
@@ -969,7 +969,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   <div className={`flex bg-[#131514] border border-white/5 p-1 ${isAetheris ? 'rounded-full' : 'rounded-2xl'} shrink-0 self-start shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none`}>
                     <button
                       onClick={() => setActiveResearchTab('desk')}
-                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono ${activeResearchTab === 'desk' ? 'text-white' : 'text-neutral-400 hover:text-white'
+                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono ${activeResearchTab === 'desk' ? 'text-white' : 'text-neutral-400 hover:text-white'
                         }`}
                     >
                       {activeResearchTab === 'desk' && (
@@ -983,7 +983,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     </button>
                     <button
                       onClick={() => setActiveResearchTab('sondaggi')}
-                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono ${activeResearchTab === 'sondaggi' ? 'text-white' : 'text-neutral-400 hover:text-white'
+                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono ${activeResearchTab === 'sondaggi' ? 'text-white' : 'text-neutral-400 hover:text-white'
                         }`}
                     >
                       {activeResearchTab === 'sondaggi' && (
@@ -997,7 +997,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     </button>
                     <button
                       onClick={() => setActiveResearchTab('interviste')}
-                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono ${activeResearchTab === 'interviste' ? 'text-white' : 'text-neutral-400 hover:text-white'
+                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono ${activeResearchTab === 'interviste' ? 'text-white' : 'text-neutral-400 hover:text-white'
                         }`}
                     >
                       {activeResearchTab === 'interviste' && (
@@ -1033,7 +1033,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                         {/* 3 card con opinioni utenti */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                          <HighlightCard
+                          <HighlightCard animatedBorder={isAetheris}
                             title={lang === 'it' ? 'Recensione 1' : 'Review 1'}
                             description={[
                               lang === 'it' ? (
@@ -1049,7 +1049,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             ]}
                             icon={<MessageSquare className="w-8 h-8 text-white" />}
                           />
-                          <HighlightCard
+                          <HighlightCard animatedBorder={isAetheris}
                             title={lang === 'it' ? 'Recensione 2' : 'Review 2'}
                             description={[
                               lang === 'it' ? (
@@ -1067,7 +1067,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             ]}
                             icon={<MessageSquare className="w-8 h-8 text-white" />}
                           />
-                          <HighlightCard
+                          <HighlightCard animatedBorder={isAetheris}
                             title={lang === 'it' ? 'Recensione 3' : 'Review 3'}
                             description={[
                               lang === 'it' ? (
@@ -1112,7 +1112,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         {/* Grafici risposte dei sondaggi */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 h-full">
                           {/* Domanda 1 */}
-                          <HighlightCard
+                          <HighlightCard animatedBorder={isAetheris}
                             title={lang === 'it' ? (
                                   isAetheris
                                     ? "“Come ti stai orientando nell’orto?”"
@@ -1126,7 +1126,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             <div className="flex flex-col gap-3 pt-2">
                               {/* Prima Opzione */}
                               <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                                <div className="flex justify-between text-sm font-mono text-neutral-400">
                                   <span>
                                     {lang === 'it'
                                       ? (isAetheris ? "In modo casuale" : "Camminando in modo casuale")
@@ -1144,7 +1144,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                               {/* Seconda Opzione */}
                               <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                                <div className="flex justify-between text-sm font-mono text-neutral-400">
                                   <span>
                                     {lang === 'it'
                                       ? (isAetheris ? "Segnaletica fisica" : "Social media & Blog d'arte")
@@ -1162,7 +1162,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                               {/* Terza Opzione */}
                               <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                                <div className="flex justify-between text-sm font-mono text-neutral-400">
                                   <span>
                                     {lang === 'it'
                                       ? (isAetheris ? "Mappa cartacea" : "Guide turistiche ufficiali")
@@ -1179,7 +1179,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           </HighlightCard>
 
                           {/* Domanda 2 */}
-                          <HighlightCard
+                          <HighlightCard animatedBorder={isAetheris}
                             title={lang === 'it' ? (
                                   isAetheris
                                     ? "“Useresti il tuo smartphone per approfondire tramite QR code?”"
@@ -1193,7 +1193,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             <div className="flex flex-col gap-3 pt-2">
                               {/* Opzione Sì */}
                               <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                                <div className="flex justify-between text-sm font-mono text-neutral-400">
                                   <span>{lang === 'it' ? 'Sì' : 'Yes'}</span>
                                   <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                                     {isAetheris ? "75%" : "80%"}
@@ -1206,7 +1206,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                               {/* Opzione Forse */}
                               <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                                <div className="flex justify-between text-sm font-mono text-neutral-400">
                                   <span>
                                     {lang === 'it'
                                       ? (isAetheris ? "Forse" : "Forse / Dipende")
@@ -1249,7 +1249,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2 h-full">
                           {/* Domanda 1 Interviste */}
-                          <HighlightCard
+                          <HighlightCard animatedBorder={isAetheris}
                             title={lang === 'it' ? (
                                     isAetheris
                                       ? "Pensi che creare un totem digitale per aiutarti in un percorso all'interno di qui possa migliorare la tua esperienza?"
@@ -1261,10 +1261,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                   )}
                           >
                             <div className="flex gap-3 items-start mt-4">
-                              <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-mono text-xs font-bold">{lang === 'it' ? 'R1' : 'A1'}</span>
+                              <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-mono text-sm font-bold">{lang === 'it' ? 'R1' : 'A1'}</span>
                               <div className="flex flex-col gap-1 text-left">
-                                <span className="text-[10px] font-mono text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
-                                <p className="text-xs sm:text-sm italic text-neutral-300 leading-relaxed font-light">
+                                <span className="text-sm font-mono text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
+                                <p className="text-sm sm:text-sm italic text-neutral-300 leading-relaxed font-light">
                                   {lang === 'it' ? (
                                     isAetheris
                                       ? "“Un totem digitale potrebbe migliorare l’esperienza di visita, permettendo di informarsi e orientarsi meglio prima e durante la visita.”"
@@ -1280,7 +1280,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           </HighlightCard>
 
                           {/* Domanda 2 Interviste */}
-                          <HighlightCard
+                          <HighlightCard animatedBorder={isAetheris}
                             title={lang === 'it' ? (
                                     isAetheris
                                       ? "C'è qualcosa che volevi sapere ma non hai trovato l'informazione adatta qui?"
@@ -1292,10 +1292,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                   )}
                           >
                             <div className="flex gap-3 items-start mt-4">
-                              <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-mono text-xs font-bold">{lang === 'it' ? 'R2' : 'A2'}</span>
+                              <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-mono text-sm font-bold">{lang === 'it' ? 'R2' : 'A2'}</span>
                               <div className="flex flex-col gap-1 text-left">
-                                <span className="text-[10px] font-mono text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
-                                <p className="text-xs sm:text-sm italic text-neutral-300 leading-relaxed font-light">
+                                <span className="text-sm font-mono text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
+                                <p className="text-sm sm:text-sm italic text-neutral-300 leading-relaxed font-light">
                                   {lang === 'it' ? (
                                     isAetheris
                                       ? "“Le informazioni disponibili online sull’orto botanico non sono complete, soprattutto per chi non conosce il luogo o viene da fuori città.”"
@@ -1320,7 +1320,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 <div className="-mt-16 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
                     {!isAetheris && (
-                      <span className={`text-[10px] font-mono uppercase tracking-widest text-[#E8302A] font-bold`}>
+                      <span className={`text-sm font-mono uppercase tracking-widest text-[#E8302A] font-bold`}>
                         {lang === 'it' ? '03 / Analisi e Strategia' : '03 / Analysis & Strategy'}
                       </span>
                     )}
@@ -1379,8 +1379,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       <div className="flex flex-col gap-4">
                         {/* Soluzione 1 */}
                         <div className="p-4 bg-[#131514] rounded-xl border border-[#068B35]/20 hover:border-[#068B35]/40 transition-all flex gap-4 shadow-sm">
-                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-[10px] font-mono mt-0.5">1</div>
-                          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-sm font-mono mt-0.5">1</div>
+                          <p className="text-sm sm:text-sm text-neutral-300 leading-relaxed">
                             {lang === 'it' ? (
                               isAetheris
                                 ? "Per facilitare l’orientamento, sono stati introdotti totem interattivi che permettono ai visitatori di consultare una mappa dell’orto e scegliere diversi percorsi di esplorazione."
@@ -1395,8 +1395,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                         {/* Soluzione 2 */}
                         <div className="p-4 bg-[#131514] rounded-xl border border-[#068B35]/20 hover:border-[#068B35]/40 transition-all flex gap-4 shadow-sm">
-                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-[10px] font-mono mt-0.5">2</div>
-                          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-sm font-mono mt-0.5">2</div>
+                          <p className="text-sm sm:text-sm text-neutral-300 leading-relaxed">
                             {lang === 'it' ? (
                               isAetheris
                                 ? "Per arricchire le informazioni disponibili sulle piante, il progetto integra QR code posizionati accanto alla segnaletica, che consentono di accedere tramite smartphone a contenuti aggiuntivi e approfondimenti."
@@ -1411,8 +1411,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                         {/* Soluzione 3 */}
                         <div className="p-4 bg-[#131514] rounded-xl border border-[#068B35]/20 hover:border-[#068B35]/40 transition-all flex gap-4 shadow-sm">
-                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-[10px] font-mono mt-0.5">3</div>
-                          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-sm font-mono mt-0.5">3</div>
+                          <p className="text-sm sm:text-sm text-neutral-300 leading-relaxed">
                             {lang === 'it' ? (
                               isAetheris
                                 ? "Infine, una web-app mobile accompagna l’utente durante la visita, offrendo mappe, schede informative e strumenti di ricerca che rendono l’esperienza più accessibile, interattiva e informativa."
@@ -1432,7 +1432,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 {/* Sezione Cos'è Bussola Verde */}
                 <div className="pt-10 border-t border-white/5 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
-                    <span className={`text-[10px] font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
+                    <span className={`text-sm font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
                       {lang === 'it'
                         ? (isAetheris ? '03 / Il Progetto' : '04 / Il Progetto')
                         : (isAetheris ? '03 / The Project' : '04 / The Project')
@@ -1487,7 +1487,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-3 p-4 bg-[#131514] rounded-2xl border border-white/5 shadow-sm">
-                        <div className={`flex items-center gap-2 text-xs font-mono font-semibold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                        <div className={`flex items-center gap-2 text-sm font-mono font-semibold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                           <span className={`w-1.5 h-1.5 rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
                           <span>
                             {lang === 'it'
@@ -1496,7 +1496,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             }
                           </span>
                         </div>
-                        <p className="text-xs sm:text-sm leading-relaxed text-neutral-300 font-light">
+                        <p className="text-sm sm:text-sm leading-relaxed text-neutral-300 font-light">
                           {lang === 'it' ? (
                             isAetheris
                               ? "L’ esperienza continua attraverso la segnaletica interattiva delle piante, che andrà ad accrescere la conoscenza del visitatore."
@@ -1510,7 +1510,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       </div>
 
                       <div className="flex flex-col gap-3 p-4 bg-[#131514] rounded-2xl border border-white/5 shadow-sm">
-                        <div className={`flex items-center gap-2 text-xs font-mono font-semibold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                        <div className={`flex items-center gap-2 text-sm font-mono font-semibold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                           <span className={`w-1.5 h-1.5 rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
                           <span>
                             {lang === 'it'
@@ -1519,7 +1519,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             }
                           </span>
                         </div>
-                        <p className="text-xs sm:text-sm leading-relaxed text-neutral-300 font-light">
+                        <p className="text-sm sm:text-sm leading-relaxed text-neutral-300 font-light">
                           {lang === 'it' ? (
                             isAetheris
                               ? "Nasce dall’obiettivo di voler trasformare la visita tradicional in un'esperienza su misura, rendendo il visitatore protagonista attivo della propria esplorazione."
@@ -1535,7 +1535,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     <div className={`p-4 sm:p-5 border rounded-2xl mt-2 ${isAetheris ? 'bg-[#068B35]/10 border-[#068B35]/20 text-emerald-300' : 'bg-[#E8302A]/10 border-[#E8302A]/20 text-rose-300'
                       }`}>
-                      <p className="text-xs sm:text-sm leading-relaxed text-center font-medium">
+                      <p className="text-sm sm:text-sm leading-relaxed text-center font-medium">
                         {lang === 'it' ? (
                           isAetheris
                             ? "Il progetto mira a integrare l'innovazione digitale nei sentieri del giardino, dando vita a un percorso di scoperta che valorizza l’intero patrimonio botanico."
@@ -1553,7 +1553,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 {/* Sezione User Persona */}
                 <div className="pt-10 border-t border-white/5 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
-                    <span className={`text-[10px] font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
+                    <span className={`text-sm font-mono uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
                       {lang === 'it'
                         ? (isAetheris ? '04 / Target User' : '05 / Target User')
                         : (isAetheris ? '04 / Target User' : '05 / Target User')
@@ -1597,7 +1597,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </div>
                       </div>
                       <div className="flex shrink-0 justify-center">
-                        <span className={`border text-[10px] uppercase font-mono tracking-widest font-bold rounded-full py-1.5 px-4 ${isAetheris
+                        <span className={`border text-sm uppercase font-mono tracking-widest font-bold rounded-full py-1.5 px-4 ${isAetheris
                           ? 'bg-[#068B35]/15 text-emerald-300 border-[#068B35]/30'
                           : 'bg-[#E8302A]/15 text-rose-300 border-[#E8302A]/30'
                           }`}>
@@ -1615,7 +1615,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       {/* Left Quote */}
                       <div className="bg-[#1A1D1B]/40 border border-white/5 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-center relative">
                         <div className={`text-3xl font-serif leading-none mb-1 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>“</div>
-                        <p className="text-xs sm:text-sm italic text-neutral-200 leading-relaxed font-light">
+                        <p className="text-sm sm:text-sm italic text-neutral-200 leading-relaxed font-light">
                           {lang === 'it' ? (
                             isAetheris
                               ? "Voglio connettermi attivamente alla natura e approfondire la mia conoscenza scientifica senza barriere, in modo dinamico e intuitivo."
@@ -1631,10 +1631,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                       {/* Right Bio & Contesto */}
                       <div className="bg-[#1A1D1B]/40 border border-white/5 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col gap-2.5 justify-center">
-                        <span className={`text-[10px] font-mono uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                        <span className={`text-sm font-mono uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                           {lang === 'it' ? "Bio & Contesto" : "Bio & Context"}
                         </span>
-                        <p className="text-xs sm:text-sm leading-relaxed text-neutral-300 font-light">
+                        <p className="text-sm sm:text-sm leading-relaxed text-neutral-300 font-light">
                           {lang === 'it' ? (
                             isAetheris
                               ? "Mirella si è trasferita a Catania da poco. Originaria della Colombia, terra di immensa biodiversità, ha sviluppato un occhio critico e ben allenato verso il mondo vegetale. Non frequenta l'Orto Botanico come una semplice turista, bensì come studentessa: per lei è un'oasi di pace lontana dal caos cittadino, dove può al contempo approfondire le sue competenze scientifiche."
@@ -1651,7 +1651,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     {/* Demographics Row (under Quote and Bio, spacious and not truncated) */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
                       <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                        <span className="block text-[9px] font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
+                        <span className="block text-xs font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
                           {lang === 'it' ? "Età" : "Age"}
                         </span>
                         <span className="text-sm sm:text-base font-bold text-white">
@@ -1663,7 +1663,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </span>
                       </div>
                       <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                        <span className="block text-[9px] font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
+                        <span className="block text-xs font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
                           {lang === 'it' ? "Nazionalità" : "Nationality"}
                         </span>
                         <span className="text-sm sm:text-base font-bold text-white">
@@ -1675,7 +1675,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </span>
                       </div>
                       <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                        <span className="block text-[9px] font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
+                        <span className="block text-xs font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
                           {lang === 'it' ? "Occupazione" : "Occupation"}
                         </span>
                         <span className="text-sm sm:text-base font-bold text-white">
@@ -1687,7 +1687,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </span>
                       </div>
                       <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                        <span className="block text-[9px] font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
+                        <span className="block text-xs font-mono text-neutral-400 uppercase tracking-wider mb-0.5">
                           {lang === 'it' ? "Carattere" : "Personality"}
                         </span>
                         <span className="text-sm sm:text-base font-bold text-white">
@@ -1702,15 +1702,15 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     {/* Comportamento e Abitudini */}
                     <div className="flex flex-col gap-3 border-t border-white/5 pt-6">
-                      <span className={`text-[10px] font-mono uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                      <span className={`text-sm font-mono uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                         {lang === 'it' ? "Comportamento & Abitudini" : "Behaviors & Habits"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                          <span className={`text-[9px] font-mono uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                          <span className={`text-xs font-mono uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                             {lang === 'it' ? "Pianificazione" : "Planning"}
                           </span>
-                          <p className="text-xs leading-relaxed text-neutral-300 font-light">
+                          <p className="text-sm leading-relaxed text-neutral-300 font-light">
                             {lang === 'it' ? (
                               isAetheris
                                 ? "È una persona che si informa molto prima di muoversi. Usa internet per decidere cosa fare e dove andare."
@@ -1723,10 +1723,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           </p>
                         </div>
                         <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                          <span className={`text-[9px] font-mono uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                          <span className={`text-xs font-mono uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                             {lang === 'it' ? "Orientamento" : "Navigation"}
                           </span>
-                          <p className="text-xs leading-relaxed text-neutral-300 font-light">
+                          <p className="text-sm leading-relaxed text-neutral-300 font-light">
                             {lang === 'it' ? (
                               isAetheris
                                 ? "Si affida alla tecnologia per muoversi in città, ma nell'orto adotta un'esplorazione libera e intuitiva, supportata da ricerche preliminari online."
@@ -1739,10 +1739,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           </p>
                         </div>
                         <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                          <span className={`text-[9px] font-mono uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                          <span className={`text-xs font-mono uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                             {lang === 'it' ? "Socialità" : "Social Habits"}
                           </span>
-                          <p className="text-xs leading-relaxed text-neutral-300 font-light">
+                          <p className="text-sm leading-relaxed text-neutral-300 font-light">
                             {lang === 'it' ? (
                               isAetheris
                                 ? "È solita frequentare il luogo sia in solitudine, che in compagnia."
@@ -1760,7 +1760,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     {/* Obiettivi & Frustrazioni */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-white/5 pt-6">
                       <div className="flex flex-col gap-2">
-                        <span className={`text-[10px] font-mono uppercase tracking-widest font-bold flex items-center gap-1.5 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'
+                        <span className={`text-sm font-mono uppercase tracking-widest font-bold flex items-center gap-1.5 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'
                           }`}>
                           <Target className="w-3.5 h-3.5" />
                           {lang === 'it' ? "Obiettivi e Motivazioni" : "Goals & Motivations"}
@@ -1770,14 +1770,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             }`}>
                             <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
                             <div className="flex flex-col">
-                              <span className="text-xs font-bold text-white">
+                              <span className="text-sm font-bold text-white">
                                 {lang === 'it' ? (
                                   isAetheris ? "Ricerca di Benessere" : "Esplorazione Dinamica"
                                 ) : (
                                   isAetheris ? "Wellness & Peace" : "Dynamic Exploration"
                                 )}
                               </span>
-                              <span className="text-[11px] leading-relaxed text-neutral-300 font-light">
+                              <span className="text-sm leading-relaxed text-neutral-300 font-light">
                                 {lang === 'it' ? (
                                   isAetheris
                                     ? "Trovare un rifugio silenzioso lontano dal caos urbano per rigenerarsi e favorire la concentrazione."
@@ -1794,14 +1794,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             }`}>
                             <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
                             <div className="flex flex-col">
-                              <span className="text-xs font-bold text-white">
+                              <span className="text-sm font-bold text-white">
                                 {lang === 'it' ? (
                                   isAetheris ? "Apprendimento" : "Approfondimento Culturale"
                                 ) : (
                                   isAetheris ? "Scientific Learning" : "Cultural Insight"
                                 )}
                               </span>
-                              <span className="text-[11px] leading-relaxed text-neutral-300 font-light">
+                              <span className="text-sm leading-relaxed text-neutral-300 font-light">
                                 {lang === 'it' ? (
                                   isAetheris
                                     ? "Soddisfare la curiosità scientifica esplorando specie vegetali che ancora non ha avuto modo di studiare."
@@ -1819,7 +1819,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                       {/* Frustrazioni */}
                       <div className="flex flex-col gap-2">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-rose-400 font-bold flex items-center gap-1.5">
+                        <span className="text-sm font-mono uppercase tracking-widest text-rose-400 font-bold flex items-center gap-1.5">
                           <AlertTriangle className="w-3.5 h-3.5" />
                           {lang === 'it' ? "Frustrazioni e Ostacoli" : "Frustrations & Obstacles"}
                         </span>
@@ -1827,14 +1827,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           <li className="p-3 bg-rose-950/10 rounded-xl border border-rose-900/20 flex gap-2.5 items-start shadow-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
                             <div className="flex flex-col">
-                              <span className="text-xs font-bold text-rose-200">
+                              <span className="text-sm font-bold text-rose-200">
                                 {lang === 'it' ? (
                                   isAetheris ? "Assenza di Supporti Digitali" : "Mancanza di Informazioni"
                                 ) : (
                                   isAetheris ? "Lack of Digital Tools" : "Lack of Information"
                                 )}
                               </span>
-                              <span className="text-[11px] leading-relaxed text-rose-300/80 font-light">
+                              <span className="text-sm leading-relaxed text-rose-300/80 font-light">
                                 {lang === 'it' ? (
                                   isAetheris
                                     ? "L'impossibilità di usare il telefono per accedere a mappe interattive o localizzare specie specifiche rende l'esperienza 'vecchia' e poco fruibile."
@@ -1850,14 +1850,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           <li className="p-3 bg-rose-950/10 rounded-xl border border-rose-900/20 flex gap-2.5 items-start shadow-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
                             <div className="flex flex-col">
-                              <span className="text-xs font-bold text-rose-200">
+                              <span className="text-sm font-bold text-rose-200">
                                 {lang === 'it' ? (
                                   isAetheris ? "Carenza di Dati Scientifici" : "Localizzazione Approssimativa"
                                 ) : (
                                   isAetheris ? "Insufficient Scientific Data" : "Vague Locations"
                                 )}
                               </span>
-                              <span className="text-[11px] leading-relaxed text-rose-300/80 font-light">
+                              <span className="text-sm leading-relaxed text-rose-300/80 font-light">
                                 {lang === 'it' ? (
                                   isAetheris
                                     ? "La mancanza di cartellini chiari, aggiornati o dettagliati per approfondire lo studio attivo."
@@ -1873,14 +1873,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           <li className="p-3 bg-rose-950/10 rounded-xl border border-rose-900/20 flex gap-2.5 items-start shadow-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5" />
                             <div className="flex flex-col">
-                              <span className="text-xs font-bold text-rose-200">
+                              <span className="text-sm font-bold text-rose-200">
                                 {lang === 'it' ? (
                                   isAetheris ? "Barriere Linguistiche" : "Esperienza Frammentata"
                                 ) : (
                                   isAetheris ? "Language Barriers" : "Fragmented Experience"
                                 )}
                               </span>
-                              <span className="text-[11px] leading-relaxed text-rose-300/80 font-light">
+                              <span className="text-sm leading-relaxed text-rose-300/80 font-light">
                                 {lang === 'it' ? (
                                   isAetheris
                                     ? "Le informazioni non sono pensate o accessibili per chi non è del luogo, le informazioni sono presenti solo in inglese e italiano."
@@ -1907,7 +1907,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 {/* Sezione Wireframe */}
                 <div className={`pt-10 border-t flex flex-col gap-6 ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
                   <div className="flex flex-col gap-3">
-                    <span className={`text-[10px] font-mono uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                    <span className={`text-sm font-mono uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                       {lang === 'it'
                         ? (isAetheris ? '05 / Architettura ed Ergonomia' : '06 / Architettura ed Ergonomia')
                         : (isAetheris ? '05 / Architecture & Ergonomics' : '06 / Architecture & Ergonomics')
@@ -1934,7 +1934,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       <div className={`flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-6 ${isAetheris ? 'border-white/5' : 'border-neutral-100'
                         }`}>
                         <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold ${isAetheris
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-sm font-bold ${isAetheris
                             ? 'bg-[#068B35]/20 border border-[#068B35]/30 text-emerald-400'
                             : 'bg-[#FEECEB] border border-[#E8302A]/20 text-[#E8302A]'
                             }`}>
@@ -1948,7 +1948,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             )}
                           </h3>
                         </div>
-                        <span className={`text-[10px] font-mono uppercase tracking-widest rounded-full px-3 py-1 font-bold self-start md:self-auto ${isAetheris
+                        <span className={`text-sm font-mono uppercase tracking-widest rounded-full px-3 py-1 font-bold self-start md:self-auto ${isAetheris
                           ? 'bg-[#068B35]/15 border border-[#068B35]/35 text-emerald-300'
                           : 'bg-[#FEECEB] border border-[#E8302A]/20 text-[#E8302A]'
                           }`}>
@@ -1956,7 +1956,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </span>
                       </div>
 
-                      <p className={`text-xs sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
+                      <p className={`text-sm sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
                         {lang === 'it' ? (
                           isAetheris
                             ? "Il wireframe del totem definisce la struttura e l’organizzazione delle principali funzionalità disponibili per il visitatore all’ingresso dell’Orto Botanico. L’interfaccia è pensata per essere semplice e intuitiva, permettendo all’utente di orientarsi rapidamente e scegliere il percorso più adatto ai propri interessi."
@@ -1967,7 +1967,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             : "The kiosk wireframe defines the interactive interface of the urban installation for consulting the map of the city's artistic neighborhoods."
                         )}
                       </p>
-                      <p className={`text-xs sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
+                      <p className={`text-sm sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
                         {lang === 'it' ? (
                           isAetheris
                             ? "Attraverso il totem è possibile consultare la mappa dell’orto, esplorare le diverse specie vegetali e selezionare uno dei percorsi disponibili. Una volta scelto il percorso, il visitatore può avviare l’esperienza e continuare l’esplorazione tramite QR code sul proprio smartphone."
@@ -2029,7 +2029,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                   </div>
 
                                   <div className="z-10 flex justify-between items-start">
-                                    <span className="text-[10px] font-mono text-neutral-400 font-bold uppercase">Totem {index + 1}</span>
+                                    <span className="text-sm font-mono text-neutral-400 font-bold uppercase">Totem {index + 1}</span>
                                     <label className={`cursor-pointer p-1.5 rounded-lg border transition-all ${isAetheris
                                       ? 'bg-[#1A1D1B] border-white/5 hover:border-[#068B35]/40 hover:bg-[#068B35]/10 text-neutral-300 hover:text-emerald-400'
                                       : 'bg-white border-[#D0D0D0] hover:border-[#068B35]/30 hover:bg-[#EAF4EC] text-neutral-400 hover:text-[#068B35]'
@@ -2052,8 +2052,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                       <Image className="w-4 h-4" />
                                     </div>
                                     <div>
-                                      <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">Carica Wireframe</span>
-                                      <span className={`text-[9px] font-mono uppercase mt-0.5 block ${isAetheris ? 'text-emerald-400/80' : 'text-[#068B35]/60'}`}>Clicca per selezionare</span>
+                                      <span className="text-sm font-mono text-neutral-400 uppercase tracking-wider block">Carica Wireframe</span>
+                                      <span className={`text-xs font-mono uppercase mt-0.5 block ${isAetheris ? 'text-emerald-400/80' : 'text-[#068B35]/60'}`}>Clicca per selezionare</span>
                                     </div>
                                   </div>
                                 </>
@@ -2072,7 +2072,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       <div className={`flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-6 ${isAetheris ? 'border-white/5' : 'border-neutral-100'
                         }`}>
                         <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold ${isAetheris
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-sm font-bold ${isAetheris
                             ? 'bg-[#068B35]/20 border border-[#068B35]/30 text-emerald-400'
                             : 'bg-[#EAF4EC] border border-[#068B35]/20 text-[#068B35]'
                             }`}>
@@ -2080,7 +2080,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           </div>
                           <h3 className={`text-lg sm:text-xl font-bold ${isAetheris ? 'text-white font-raleway' : 'font-sans text-[#1A1A1A]'}`}>Web-App Mobile</h3>
                         </div>
-                        <span className={`text-[10px] font-mono uppercase tracking-widest rounded-full px-3 py-1 font-bold self-start md:self-auto ${isAetheris
+                        <span className={`text-sm font-mono uppercase tracking-widest rounded-full px-3 py-1 font-bold self-start md:self-auto ${isAetheris
                           ? 'bg-[#068B35]/15 border border-[#068B35]/35 text-emerald-300'
                           : 'bg-[#EAF4EC] border border-[#068B35]/10 text-[#068B35]'
                           }`}>
@@ -2088,10 +2088,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </span>
                       </div>
 
-                      <p className={`text-xs sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
+                      <p className={`text-sm sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
                         Il wireframe della web-app mobile definisce la struttura delle principali funzionalità che accompagnano il visitatore durante la visita. L’interfaccia permette di consultare la mappa dell’orto, cercare le piante tramite filtri e accedere alle schede informative attraverso la scansione dei QR code presenti nel percorso.
                       </p>
-                      <p className={`text-xs sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
+                      <p className={`text-sm sm:text-sm leading-relaxed font-light ${isAetheris ? 'text-neutral-300' : 'text-neutral-600'}`}>
                         Questo sistema consente all’utente di esplorare il giardino in modo autonomo, accedendo facilmente a informazioni aggiuntive sulle specie vegetali.
                       </p>
 
@@ -2145,7 +2145,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                   </div>
 
                                   <div className="z-10 flex justify-between items-start">
-                                    <span className="text-[10px] font-mono text-neutral-400 font-bold uppercase">Mobile {index + 1}</span>
+                                    <span className="text-sm font-mono text-neutral-400 font-bold uppercase">Mobile {index + 1}</span>
                                     <label className={`cursor-pointer p-1.5 rounded-lg border transition-all ${isAetheris
                                       ? 'bg-[#1A1D1B] border-white/5 hover:border-[#068B35]/40 hover:bg-[#068B35]/10 text-neutral-300 hover:text-emerald-400'
                                       : 'bg-white border-[#D0D0D0] hover:border-[#068B35]/30 hover:bg-[#EAF4EC] text-neutral-400 hover:text-[#068B35]'
@@ -2168,10 +2168,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                       <Smartphone className="w-4 h-4" />
                                     </div>
                                     <div>
-                                      <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">
+                                      <span className="text-sm font-mono text-neutral-400 uppercase tracking-wider block">
                                         {lang === 'it' ? "Carica Wireframe" : "Upload Wireframe"}
                                       </span>
-                                      <span className={`text-[9px] font-mono uppercase mt-0.5 block ${isAetheris ? 'text-emerald-400/80' : 'text-[#068B35]/60'}`}>
+                                      <span className={`text-xs font-mono uppercase mt-0.5 block ${isAetheris ? 'text-emerald-400/80' : 'text-[#068B35]/60'}`}>
                                         {lang === 'it' ? "Clicca per selezionare" : "Click to select"}
                                       </span>
                                     </div>
@@ -2194,7 +2194,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             <div className="pt-12 border-t border-white/5 flex flex-col gap-12 mt-12 text-left" id="orto-design-system-section">
               {/* Header section matching other sections */}
               <div className="flex flex-col gap-3">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">
+                <span className="text-sm font-mono uppercase tracking-widest text-[#068B35] font-bold">
                   {lang === 'it' ? "06 / Design System Spec" : "06 / Design System Spec"}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">Design System</h2>
@@ -2210,7 +2210,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               {/* Block 1: Palette colori */}
               <div id="orto-block-palette" className="flex flex-col gap-6 pt-8 border-t border-white/5">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Color Palette</span>
+                  <span className="text-sm font-mono uppercase tracking-widest text-neutral-400 font-bold">Color Palette</span>
                   <h3 className="text-lg font-bold text-white mt-1">
                     {lang === 'it' ? "Tavolozza Colori" : "Color Palette"}
                   </h3>
@@ -2223,8 +2223,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     <button onClick={() => handleCopyHex('#068B35')} className="group flex flex-col items-center gap-3 cursor-pointer">
                       <div className="w-16 h-16 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover:-translate-y-1" style={{ backgroundColor: '#068B35' }} />
                       <div className="text-center">
-                        <span className="text-[10px] font-bold text-white block">{lang === 'it' ? "Verde Primario" : "Primary Green"}</span>
-                        <span className="text-[9px] font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#068B35' ? 'Copied' : '#068B35'}</span>
+                        <span className="text-sm font-bold text-white block">{lang === 'it' ? "Verde Primario" : "Primary Green"}</span>
+                        <span className="text-xs font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#068B35' ? 'Copied' : '#068B35'}</span>
                       </div>
                     </button>
 
@@ -2232,8 +2232,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     <button onClick={() => handleCopyHex('#FFFFFF')} className="group flex flex-col items-center gap-3 cursor-pointer">
                       <div className="w-16 h-16 rounded-full shadow-lg border border-white/10 shrink-0 bg-white transition-transform group-hover:-translate-y-1" />
                       <div className="text-center">
-                        <span className="text-[10px] font-bold text-white block">{lang === 'it' ? "Bianco" : "White"}</span>
-                        <span className="text-[9px] font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#FFFFFF' ? 'Copied' : '#FFFFFF'}</span>
+                        <span className="text-sm font-bold text-white block">{lang === 'it' ? "Bianco" : "White"}</span>
+                        <span className="text-xs font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#FFFFFF' ? 'Copied' : '#FFFFFF'}</span>
                       </div>
                     </button>
 
@@ -2241,15 +2241,15 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     <button onClick={() => handleCopyHex('#EBEBEB')} className="group flex flex-col items-center gap-3 cursor-pointer">
                       <div className="w-16 h-16 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover:-translate-y-1" style={{ backgroundColor: '#EBEBEB' }} />
                       <div className="text-center">
-                        <span className="text-[10px] font-bold text-white block">{lang === 'it' ? "Grigio Chiaro" : "Light Gray"}</span>
-                        <span className="text-[9px] font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#EBEBEB' ? 'Copied' : '#EBEBEB'}</span>
+                        <span className="text-sm font-bold text-white block">{lang === 'it' ? "Grigio Chiaro" : "Light Gray"}</span>
+                        <span className="text-xs font-mono text-neutral-400 group-hover:text-white transition-colors">{copiedColor === '#EBEBEB' ? 'Copied' : '#EBEBEB'}</span>
                       </div>
                     </button>
                   </div>
 
                   {/* Le pillole categoria con colori specifici */}
                   <div className="flex flex-col gap-5 mt-4">
-                    <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest block border-b border-white/5 pb-2">
+                    <span className="text-sm font-mono text-[#068B35] uppercase tracking-widest block border-b border-white/5 pb-2">
                       {lang === 'it' ? "Colori Pillole Categoria" : "Category Pill Colors"}
                     </span>
                     <div className="flex flex-wrap gap-x-6 gap-y-4" id="orto-categories-row">
@@ -2270,10 +2270,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         >
                           <div className="w-6 h-6 rounded-full shadow-md border border-white/10 shrink-0 transition-transform group-hover:scale-110" style={{ backgroundColor: item.bg }} />
                           <div className="text-left">
-                            <span className="font-semibold text-[10px] text-white block">
+                            <span className="font-semibold text-sm text-white block">
                               {lang === 'it' ? item.labelIt : item.labelEn}
                             </span>
-                            <span className="font-mono text-[9px] text-neutral-500 group-hover:text-white transition-colors">
+                            <span className="font-mono text-xs text-neutral-500 group-hover:text-white transition-colors">
                               {copiedColor === item.bg ? 'Copied!' : item.bg}
                             </span>
                           </div>
@@ -2287,7 +2287,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               {/* Block 2: Tipografia */}
               <div id="orto-block-typography" className="flex flex-col gap-6 pt-8 border-t border-white/5">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold">Typography Guide</span>
+                  <span className="text-sm font-mono uppercase tracking-widest text-neutral-400 font-bold">Typography Guide</span>
                   <h3 className="text-lg font-bold text-white mt-1">
                     {lang === 'it' ? "Caratteri & Gerarchia" : "Typefaces & Hierarchy"}
                   </h3>
@@ -2296,7 +2296,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 <div className="flex flex-col gap-10 mt-4">
                   {/* H1 Demo */}
                   <div className="flex flex-col gap-2">
-                    <span className="font-mono text-[10px] text-[#068B35] font-bold uppercase tracking-wider">H1 / Raleway, Semibold, 62px</span>
+                    <span className="font-mono text-sm text-[#068B35] font-bold uppercase tracking-wider">H1 / Raleway, Semibold, 62px</span>
                     <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-3xl md:text-[62px] font-semibold leading-tight tracking-tight">
                       {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
                     </h1>
@@ -2304,7 +2304,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                   {/* Body Text Demo */}
                   <div className="flex flex-col gap-2">
-                    <span className="font-mono text-[10px] text-[#068B35] font-bold uppercase tracking-wider">Body / Raleway, Regular, 28px</span>
+                    <span className="font-mono text-sm text-[#068B35] font-bold uppercase tracking-wider">Body / Raleway, Regular, 28px</span>
                     <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-lg md:text-[28px] leading-relaxed font-light">
                       {lang === 'it' ? (
                         "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
@@ -2319,7 +2319,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               {/* Block 3: Componenti Core */}
               <div id="orto-block-components" className="flex flex-col gap-6 pt-8 border-t border-white/5">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">Libreria Componenti</span>
+                  <span className="text-sm font-mono uppercase tracking-widest text-[#068B35] font-bold">Libreria Componenti</span>
                   <h3 className="text-xl font-bold text-white mt-1">Componenti Visivi del Design System</h3>
                   <p className="text-sm leading-relaxed text-neutral-300 font-light mt-1 max-w-4xl">
                     Sfoglia ed esplora la libreria di componenti del progetto.
@@ -2341,7 +2341,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                       {/* Top Row: Searchbars (larger) */}
                       <div className="w-full flex flex-col gap-6">
-                        <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">01. Stati Searchbar</span>
+                        <span className="text-sm font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">01. Stati Searchbar</span>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
                           <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
                           <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
@@ -2354,7 +2354,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                         {/* Left: Card Pianta */}
                         <div className="lg:col-span-4 flex flex-col gap-6">
-                          <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">02. Componente Principale</span>
+                          <span className="text-sm font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">02. Componente Principale</span>
                           <div className="flex justify-center lg:justify-start">
                             <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
                           </div>
@@ -2364,7 +2364,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         <div className="lg:col-span-8 flex flex-col gap-12">
                           {/* Bottoni */}
                           <div className="flex flex-col gap-6">
-                            <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">03. Bottoni Navigazione</span>
+                            <span className="text-sm font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">03. Bottoni Navigazione</span>
                             <div className="flex flex-wrap gap-5 items-start">
                               <img src="/design_system/button_primary.svg" alt="Button Primary" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
                               <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
@@ -2374,7 +2374,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                           {/* Controlli UI */}
                           <div className="flex flex-col gap-6">
-                            <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">04. Controlli Interfaccia</span>
+                            <span className="text-sm font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">04. Controlli Interfaccia</span>
                             <div className="flex flex-row items-end gap-8">
                               <img src="/design_system/language.svg" alt="Language" className="h-32 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
                               <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform mb-2" />
@@ -2385,7 +2385,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                       {/* Bottom Row: Map Categories Grid */}
                       <div className="w-full flex flex-col gap-6">
-                        <span className="text-[10px] font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">05. Pillole Categorie Mappa</span>
+                        <span className="text-sm font-mono text-[#068B35] uppercase tracking-widest border-b border-white/5 pb-3">05. Pillole Categorie Mappa</span>
                         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-x-4 gap-y-4">
                           {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
                             <img
@@ -2405,12 +2405,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             </div>
           ) : (
             <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
-              <span className={`text-[10px] font-mono uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
+              <span className={`text-sm font-mono uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {/* Palette */}
                 <div className="flex flex-col gap-3">
-                  <h4 className={`text-xs uppercase tracking-widest font-mono ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Color Palette</h4>
+                  <h4 className={`text-sm uppercase tracking-widest font-mono ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Color Palette</h4>
                   <div className="flex flex-col gap-2">
                     {project.colorPalette?.map((color, idx) => (
                       <button
@@ -2427,11 +2427,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             style={{ backgroundColor: color.hex }}
                           />
                           <div>
-                            <span className={`text-xs font-bold block ${isAetheris ? 'text-white' : 'text-white'}`}>{color.name}</span>
-                            <span className={`text-[10px] font-mono block ${isAetheris ? 'text-neutral-400' : 'text-white/40'}`}>{color.hex}</span>
+                            <span className={`text-sm font-bold block ${isAetheris ? 'text-white' : 'text-white'}`}>{color.name}</span>
+                            <span className={`text-sm font-mono block ${isAetheris ? 'text-neutral-400' : 'text-white/40'}`}>{color.hex}</span>
                           </div>
                         </div>
-                        <div className={`text-[10px] font-mono transition-colors shrink-0 ${isAetheris
+                        <div className={`text-sm font-mono transition-colors shrink-0 ${isAetheris
                           ? 'text-neutral-400 group-hover:text-emerald-400'
                           : 'text-white/30 group-hover:text-[#E8302A]'
                           }`}>
@@ -2444,11 +2444,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                 {/* Typography */}
                 <div className="flex flex-col gap-3">
-                  <h4 className={`text-xs uppercase tracking-widest font-mono ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Typography Spec</h4>
+                  <h4 className={`text-sm uppercase tracking-widest font-mono ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Typography Spec</h4>
                   <div className={`p-4 rounded-xl border ${isAetheris ? 'bg-[#131514] border-white/5' : 'bg-neutral-950/60 border-white/5'
                     }`}>
-                    <span className={`text-[10px] font-mono block mb-1 ${isAetheris ? 'text-neutral-500' : 'text-white/30'}`}>Font Pairings</span>
-                    <span className={`text-xs leading-relaxed font-mono block ${isAetheris ? 'text-white' : 'text-white'}`}>
+                    <span className={`text-sm font-mono block mb-1 ${isAetheris ? 'text-neutral-500' : 'text-white/30'}`}>Font Pairings</span>
+                    <span className={`text-sm leading-relaxed font-mono block ${isAetheris ? 'text-white' : 'text-white'}`}>
                       {getLocalizedField('typography')}
                     </span>
                   </div>
@@ -2466,7 +2466,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           {isAetheris && (
             <div className="flex flex-col gap-6 pt-10 border-t border-white/5" id="orto-interactive-prototypes-section">
               <div className="flex flex-col gap-3">
-                <span className="text-[10px] font-mono uppercase tracking-widest font-bold text-[#068B35]">
+                <span className="text-sm font-mono uppercase tracking-widest font-bold text-[#068B35]">
                   {lang === 'it' ? '07 / Sperimenta l’Esperienza' : '07 / Experience the Design'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">{lang === 'it' ? 'Provalo' : 'Try It'}</h2>
@@ -2483,7 +2483,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 <div className="flex bg-[#131514] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none">
                   <button
                     onClick={() => setActiveProtoTab('mobile')}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
                       }`}
                   >
                     {activeProtoTab === 'mobile' && (
@@ -2501,7 +2501,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                   <button
                     onClick={() => setActiveProtoTab('totem')}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-mono cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
                       }`}
                   >
                     {activeProtoTab === 'totem' && (
@@ -2584,7 +2584,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                 {/* Right Side: Description and Direct Actions */}
                 <div className="flex-1 text-center md:text-left">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#068B35]/10 border border-[#068B35]/20 rounded-full text-[10px] text-emerald-400 font-semibold uppercase tracking-wider mb-4 font-mono">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#068B35]/10 border border-[#068B35]/20 rounded-full text-sm text-emerald-400 font-semibold uppercase tracking-wider mb-4 font-mono">
                     <QrCode className="w-3.5 h-3.5" />
                     <span>{lang === 'it' ? 'Inquadra e Prova' : 'Scan & Try'}</span>
                   </div>
@@ -2612,7 +2612,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       }
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#068B35] text-white hover:bg-emerald-700 font-bold uppercase tracking-wider text-xs rounded-xl hover:scale-105 active:scale-95 transition-all w-full sm:w-auto justify-center cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#068B35] text-white hover:bg-emerald-700 font-bold uppercase tracking-wider text-sm rounded-xl hover:scale-105 active:scale-95 transition-all w-full sm:w-auto justify-center cursor-pointer"
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>{lang === 'it' ? 'Apri Prototipo' : 'Open Prototype'}</span>
@@ -2627,7 +2627,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         setCopiedLink(true);
                         setTimeout(() => setCopiedLink(false), 2000);
                       }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1a1c1a] hover:bg-[#252825] border border-white/5 text-neutral-300 font-semibold uppercase tracking-wider text-xs rounded-xl transition-all w-full sm:w-auto justify-center cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1a1c1a] hover:bg-[#252825] border border-white/5 text-neutral-300 font-semibold uppercase tracking-wider text-sm rounded-xl transition-all w-full sm:w-auto justify-center cursor-pointer"
                     >
                       {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                       <span>{copiedLink ? (lang === 'it' ? 'Copiato!' : 'Copied!') : (lang === 'it' ? 'Copia Link' : 'Copy Link')}</span>
@@ -2644,7 +2644,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
         {/* 4. OTHER PROJECTS NAVIGATOR (Bottom hopper) */}
         <section className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 mt-20 border-t pt-16 ${isAetheris ? 'border-white/5' : 'border-white/5'}`}>
-          <span className={`text-[10px] font-mono uppercase tracking-[0.25em] block mb-4 text-center ${isAetheris ? 'text-[#068B35] font-bold' : 'text-[#E8302A]'}`}>
+          <span className={`text-sm font-mono uppercase tracking-[0.25em] block mb-4 text-center ${isAetheris ? 'text-[#068B35] font-bold' : 'text-[#E8302A]'}`}>
             {lang === 'it' ? 'Prossima Esplorazione' : 'Next Project Exploration'}
           </span>
           <h3 className={`text-2xl sm:text-3xl font-bold tracking-tight text-center mb-10 ${isAetheris ? 'text-white font-raleway' : 'text-white'}`}>
@@ -2671,7 +2671,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                 <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
                   <div>
-                    <span className={`text-[9px] font-mono uppercase tracking-widest block mb-1 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                    <span className={`text-xs font-mono uppercase tracking-widest block mb-1 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
                       {p.year} / {p.category}
                     </span>
                     <h4 className="text-lg font-bold text-white uppercase">{p.title}</h4>
@@ -2692,7 +2692,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         <section className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 mt-16 text-center">
           <button
             onClick={onClose}
-            className={`px-8 py-3 font-bold uppercase tracking-widest text-xs rounded-full inline-flex items-center gap-2 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-lg ${isAetheris
+            className={`px-8 py-3 font-bold uppercase tracking-widest text-sm rounded-full inline-flex items-center gap-2 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-lg ${isAetheris
               ? 'bg-[#131514] text-[#068B35] border border-[#068B35]/30 hover:bg-[#068B35]/10 hover:border-[#068B35]/55 hover:text-emerald-400 shadow-xl'
               : 'bg-white text-black hover:bg-neutral-100'
               }`}

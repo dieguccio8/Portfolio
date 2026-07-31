@@ -247,6 +247,36 @@ body::after {
   will-change: transform, scale, rotate;
 }
 
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 
+@keyframes rotation {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
 
+.gradient-border-component {
+  position: relative;
+}
 
+.gradient-border-auto {
+  animation: rotation var(--animation-duration, 5s) linear infinite;
+}
+
+.gradient-border-hover:hover {
+  animation: rotation var(--animation-duration, 5s) linear infinite;
+}
+
+.gradient-border-stop-hover {
+  animation: rotation var(--animation-duration, 5s) linear infinite;
+}
+.gradient-border-stop-hover:hover {
+  animation-play-state: paused;
+}

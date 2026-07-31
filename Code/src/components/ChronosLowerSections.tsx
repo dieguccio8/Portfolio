@@ -62,29 +62,29 @@ function ItaloBeforeAfterSlider({ lang = 'it' }: { lang?: string }) {
         
         {/* Mockup Screen After */}
         <div className="w-full h-full bg-[#111] p-6 flex flex-col justify-between text-left relative">
-          <div className="absolute top-4 right-4 z-20 px-3 py-1 bg-[#9E1C1F] rounded-full text-[9px] font-mono text-white font-bold uppercase tracking-wider">
+          <div className="absolute top-4 right-4 z-20 px-3 py-1 bg-[#9E1C1F] rounded-full text-xs font-mono text-white font-bold uppercase tracking-wider">
             {lang === 'it' ? "AFTER: Flusso Rapido 3-Tap" : "AFTER: Fast 3-Tap Flow"}
           </div>
           
           <div className="flex flex-col gap-4 mt-6">
-            <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest font-bold">
+            <span className="text-sm font-mono text-neutral-400 uppercase tracking-widest font-bold">
               {lang === 'it' ? "Riepilogo Viaggio" : "Journey Summary"}
             </span>
             <div className="bg-neutral-900/90 border border-white/10 rounded-2xl p-4 flex flex-col gap-3">
               <div className="flex justify-between items-center border-b border-white/5 pb-2">
                 <div className="flex flex-col">
                   <span className="text-sm font-black text-white uppercase tracking-tight">Catania C.le</span>
-                  <span className="text-[10px] font-mono text-[#9E1C1F] font-bold">MILANO CENTRALE</span>
+                  <span className="text-sm font-mono text-[#9E1C1F] font-bold">MILANO CENTRALE</span>
                 </div>
                 <div className="flex flex-col items-end">
-                  <span className="text-xs font-mono text-neutral-400">08:15 ➔ 17:40</span>
-                  <span className="text-[9px] font-mono text-neutral-500">
+                  <span className="text-sm font-mono text-neutral-400">08:15 ➔ 17:40</span>
+                  <span className="text-xs font-mono text-neutral-500">
                     {lang === 'it' ? "Durata: 9h 25m" : "Duration: 9h 25m"}
                   </span>
                 </div>
               </div>
               <div className="flex justify-between items-center pt-1">
-                <span className="text-[11px] text-neutral-400">
+                <span className="text-sm text-neutral-400">
                   {lang === 'it' ? "Tariffa Smart • Flex" : "Smart • Flex Fare"}
                 </span>
                 <span className="text-sm font-black text-white">€89,90</span>
@@ -92,13 +92,13 @@ function ItaloBeforeAfterSlider({ lang = 'it' }: { lang?: string }) {
             </div>
             
             {/* Quick checkout CTA button */}
-            <div className="w-full py-3 bg-[#9E1C1F] text-white text-xs font-mono font-bold uppercase tracking-widest rounded-xl text-center shadow-lg shadow-[#9E1C1F]/20 flex items-center justify-center gap-2">
+            <div className="w-full py-3 bg-[#9E1C1F] text-white text-sm font-mono font-bold uppercase tracking-widest rounded-xl text-center shadow-lg shadow-[#9E1C1F]/20 flex items-center justify-center gap-2">
               <span>{lang === 'it' ? "Paga in 1-Click con Apple Pay" : "Pay in 1-Click with Apple Pay"}</span>
               <span className="text-white/60">➔</span>
             </div>
           </div>
           
-          <div className="border-t border-white/5 pt-4 text-[9px] font-mono text-neutral-500 flex justify-between uppercase">
+          <div className="border-t border-white/5 pt-4 text-xs font-mono text-neutral-500 flex justify-between uppercase">
             <span>{lang === 'it' ? "Selezionato: Carrozza 4 - Posto 42" : "Selected: Carriage 4 - Seat 42"}</span>
             <span>{lang === 'it' ? "No Frizioni" : "No Friction"}</span>
           </div>
@@ -197,7 +197,7 @@ export default function ChronosLowerSections({
         <div className="lg:col-span-7 flex flex-col gap-6 text-left">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">02 / Context & Challenge</span>
+              <span className="text-sm font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">02 / Context & Challenge</span>
               <div className="h-[1px] flex-1 bg-white/5" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase font-sans">
@@ -215,7 +215,7 @@ export default function ChronosLowerSections({
           {/* Interactive Heatmap Simulator */}
           <div className="p-6 bg-neutral-950/60 border border-white/5 rounded-3xl flex flex-col gap-4 relative overflow-hidden group">
             <div className="flex justify-between items-center border-b border-white/5 pb-2">
-              <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">
+              <span className="text-sm font-mono text-neutral-400 uppercase tracking-widest">
                 {lang === 'it' ? "Heatmap Attuale / Frizioni Rilevate" : "Current Heatmap / Detected Frictions"}
               </span>
               <span className="text-[8px] font-mono text-red-500 font-bold uppercase tracking-widest bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">
@@ -223,7 +223,7 @@ export default function ChronosLowerSections({
               </span>
             </div>
             
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               {lang === 'it' 
                 ? "L'analisi euristica ha evidenziato un eccesso di elementi promozionali e banner di fidelizzazione inseriti proprio nella schermata di checkout, generando rumore cognitivo e rallentando il caricamento dell'itinerario." 
                 : "Heuristic analysis highlighted an excess of promotional elements and loyalty banners placed right in the checkout screen, generating cognitive noise and slowing down itinerary loading."}
@@ -236,28 +236,28 @@ export default function ChronosLowerSections({
               {/* Dynamic Simulated Interactive Hotspots */}
               <div className="relative z-10 w-full h-full flex items-center justify-around">
                 <div className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-red-600/70 blur-md animate-pulse flex items-center justify-center text-white text-[10px] font-mono font-bold">
+                  <div className="w-12 h-12 rounded-full bg-red-600/70 blur-md animate-pulse flex items-center justify-center text-white text-sm font-mono font-bold">
                     84%
                   </div>
-                  <span className="text-[9px] font-mono text-red-400 uppercase">
+                  <span className="text-xs font-mono text-red-400 uppercase">
                     {lang === 'it' ? "Banner Promozionali" : "Promotional Banners"}
                   </span>
                 </div>
                 
                 <div className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-orange-500/70 blur-md animate-pulse flex items-center justify-center text-white text-[10px] font-mono font-bold">
+                  <div className="w-12 h-12 rounded-full bg-orange-500/70 blur-md animate-pulse flex items-center justify-center text-white text-sm font-mono font-bold">
                     65%
                   </div>
-                  <span className="text-[9px] font-mono text-orange-400 uppercase">
+                  <span className="text-xs font-mono text-orange-400 uppercase">
                     {lang === 'it' ? "Input Confusi" : "Confused Inputs"}
                   </span>
                 </div>
                 
                 <div className="flex flex-col items-center gap-1.5">
-                  <div className="w-12 h-12 rounded-full bg-yellow-500/60 blur-md animate-pulse flex items-center justify-center text-white text-[10px] font-mono font-bold">
+                  <div className="w-12 h-12 rounded-full bg-yellow-500/60 blur-md animate-pulse flex items-center justify-center text-white text-sm font-mono font-bold">
                     42%
                   </div>
-                  <span className="text-[9px] font-mono text-yellow-400 uppercase">
+                  <span className="text-xs font-mono text-yellow-400 uppercase">
                     {lang === 'it' ? "Passaggi Lunghi" : "Long Steps"}
                   </span>
                 </div>
@@ -270,10 +270,10 @@ export default function ChronosLowerSections({
         <div className="lg:col-span-5 bg-gradient-to-br from-[#9E1C1F]/10 via-[#9E1C1F]/5 to-transparent border border-white/10 rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between aspect-square lg:aspect-auto lg:h-[450px]">
           {/* Subtle glowing badge */}
           <div className="flex justify-between items-center border-b border-white/5 pb-4">
-            <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest">
+            <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest">
               UX ASSESSMENT SUMMARY
             </span>
-            <span className="text-[9px] font-mono text-[#9E1C1F] font-bold">
+            <span className="text-xs font-mono text-[#9E1C1F] font-bold">
               STATUS: AUDIT COMPLETE
             </span>
           </div>
@@ -282,7 +282,7 @@ export default function ChronosLowerSections({
             <h3 className="text-xl sm:text-2xl font-black text-white uppercase font-sans tracking-tight">
               {lang === 'it' ? "PERDITA DI VELOCITÀ SUL CANALE MOBILE." : "LOSS OF SPEED ON MOBILE CHANNEL."}
             </h3>
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               {lang === 'it' 
                 ? "Il checkout mobile registrava un tasso di abbandono anomalo in coincidenza con la selezione delle tariffe accessorie. Riordinare la priorità visiva ha permesso di recuperare conversioni vitali salvaguardando l'esperienza utente premium tipica dei treni Italo." 
                 : "The mobile checkout registered an abnormal drop-off rate coinciding with the selection of accessory fares. Reordering visual priority recovered vital conversions while safeguarding the premium user experience typical of Italo trains."}
@@ -291,7 +291,7 @@ export default function ChronosLowerSections({
 
           <div className="border-t border-white/5 pt-4 flex gap-3 items-center">
             <div className="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping" />
-            <span className="text-[10px] font-mono text-neutral-500 uppercase">
+            <span className="text-sm font-mono text-neutral-500 uppercase">
               {lang === 'it' ? "Risoluzione mirata delle barriere cognitive" : "Targeted resolution of cognitive barriers"}
             </span>
           </div>
@@ -303,7 +303,7 @@ export default function ChronosLowerSections({
         <div className="lg:col-span-6 flex flex-col gap-8 text-left">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">03 / The Process</span>
+              <span className="text-sm font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">03 / The Process</span>
               <div className="h-[1px] flex-1 bg-white/5" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase font-sans">
@@ -320,7 +320,7 @@ export default function ChronosLowerSections({
 
           {/* Interactive User Flow Selector */}
           <div className="flex flex-col gap-4">
-            <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+            <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">
               {lang === 'it' ? "Lo \"Svuotatasche\" del Designer / Architettura di Flusso" : "The Designer's Pocket-Dump / Flow Architecture"}
             </span>
             <div className="bg-neutral-950 rounded-2xl border border-white/5 p-4 flex flex-col gap-2">
@@ -335,11 +335,11 @@ export default function ChronosLowerSections({
                   }`}
                 >
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-[#9E1C1F]">{st.title}</span>
-                    <span className="text-xs font-bold font-sans uppercase">{st.subtitle}</span>
-                    <p className="text-[11px] font-light text-neutral-400 mt-1 leading-relaxed max-w-md">{st.desc}</p>
+                    <span className="text-sm font-mono font-bold tracking-wider uppercase text-[#9E1C1F]">{st.title}</span>
+                    <span className="text-sm font-bold font-sans uppercase">{st.subtitle}</span>
+                    <p className="text-sm font-light text-neutral-400 mt-1 leading-relaxed max-w-md">{st.desc}</p>
                   </div>
-                  <span className="text-xs font-mono text-neutral-600">{st.coords}</span>
+                  <span className="text-sm font-mono text-neutral-600">{st.coords}</span>
                 </button>
               ))}
             </div>
@@ -349,10 +349,10 @@ export default function ChronosLowerSections({
         {/* Right Column: Wireframe Asymmetric Grid */}
         <div className="lg:col-span-6 flex flex-col gap-6">
           <div className="flex justify-between items-center">
-            <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
+            <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">
               {lang === 'it' ? "Sviluppo Schemi a Bassa Fedeltà (Wireframe)" : "Low-Fidelity Schematics Development (Wireframes)"}
             </span>
-            <span className="text-[9px] font-mono text-[#9E1C1F] border border-[#9E1C1F]/20 bg-[#9E1C1F]/5 px-2 py-0.5 rounded font-bold uppercase">
+            <span className="text-xs font-mono text-[#9E1C1F] border border-[#9E1C1F]/20 bg-[#9E1C1F]/5 px-2 py-0.5 rounded font-bold uppercase">
               Low-Fi Stage
             </span>
           </div>
@@ -364,8 +364,8 @@ export default function ChronosLowerSections({
             <div className="bg-[#1C1717] border border-[#9E1C1F]/20 p-6 rounded-2xl flex flex-col justify-between aspect-square text-left relative overflow-hidden group hover:border-[#9E1C1F] transition-all">
               <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-white/10 to-transparent pointer-events-none" />
               <div className="flex flex-col gap-2">
-                <span className="text-[9px] font-mono text-[#9E1C1F] tracking-wider uppercase font-bold">INSIGHT #12</span>
-                <p className="text-xs font-serif text-neutral-300 italic leading-relaxed">
+                <span className="text-xs font-mono text-[#9E1C1F] tracking-wider uppercase font-bold">INSIGHT #12</span>
+                <p className="text-sm font-serif text-neutral-300 italic leading-relaxed">
                   {lang === 'it' 
                     ? '"Troppi passaggi prima del riepilogo. Gli utenti vogliono vedere subito il prezzo finale incluse tasse e supplementi."' 
                     : '"Too many steps before the summary. Users want to see the final price immediately, including taxes and surcharges."'}
@@ -379,8 +379,8 @@ export default function ChronosLowerSections({
               {/* Technical grids */}
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:1rem_1rem]" />
               <div className="flex flex-col gap-2 relative z-10">
-                <span className="text-[9px] font-mono text-neutral-400 tracking-wider uppercase font-bold">USER FLOW BLUEPRINT</span>
-                <div className="flex flex-col gap-1 text-[11px] text-neutral-300 font-mono">
+                <span className="text-xs font-mono text-neutral-400 tracking-wider uppercase font-bold">USER FLOW BLUEPRINT</span>
+                <div className="flex flex-col gap-1 text-sm text-neutral-300 font-mono">
                   <div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-red-500" /><span>{lang === 'it' ? "Ricerca Tratta" : "Route Search"}</span></div>
                   <div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-orange-400" /><span>{lang === 'it' ? "Selezione Orario" : "Time Selection"}</span></div>
                   <div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /><span>{lang === 'it' ? "Checkout Istantaneo" : "Instant Checkout"}</span></div>
@@ -390,7 +390,7 @@ export default function ChronosLowerSections({
             </div>
           </div>
           
-          <p className="text-xs text-neutral-400 leading-relaxed font-light text-left">
+          <p className="text-sm text-neutral-400 leading-relaxed font-light text-left">
             {lang === 'it' 
               ? "Questo approccio metodologico ha garantito la validazione logica dell'esperienza d'uso prima di addentrarsi nella fase di visual design, scongiurando ripensamenti architetturali tardivi e focalizzando gli sforzi sulla purezza dell'interazione finale." 
               : "This methodological approach guaranteed logical validation of the user experience before diving into the visual design phase, preventing late architectural second-guessing and focusing efforts on the purity of the final interaction."}
@@ -402,7 +402,6 @@ export default function ChronosLowerSections({
       <section className="flex flex-col gap-10 pt-12 border-t border-white/5">
         <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
           <div className="flex-1 flex flex-col gap-2 text-left">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">04 / The Solution</span>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase font-sans">
               {lang === 'it' ? "Navigazione Impeccabile, Scalabilità Assoluta." : "Impeccable Navigation, Absolute Scalability."}
             </h2>
@@ -414,7 +413,7 @@ export default function ChronosLowerSections({
               )}
             </p>
           </div>
-          <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest hidden md:block">
+          <span className="text-xs font-mono text-neutral-500 uppercase tracking-widest hidden md:block">
             {lang === 'it' ? "Prima / Dopo & UI Kit System" : "Before / After & UI Kit System"}
           </span>
         </div>
@@ -424,22 +423,22 @@ export default function ChronosLowerSections({
           
           {/* Interactive comparative slider card (Col span 7) */}
           <div className="lg:col-span-7 flex flex-col gap-4">
-            <span className="text-xs font-mono text-neutral-400 text-left">
+            <span className="text-sm font-mono text-neutral-400 text-left">
               {lang === 'it' ? "Trascina la barra centrale per confrontare il vecchio e il nuovo flusso" : "Drag the center bar to compare the old and new flow"}
             </span>
             
             <div className="relative w-full h-[400px] rounded-[2rem] overflow-hidden border border-white/10 select-none cursor-ew-resize bg-neutral-950 shadow-2xl">
               {/* Before Image */}
               <div className="absolute inset-0 bg-neutral-900 p-6 flex flex-col justify-between text-left">
-                <div className="absolute top-4 left-4 z-20 px-3 py-1 bg-black/80 border border-white/10 rounded-full text-[9px] font-mono text-neutral-400 uppercase tracking-wider">
+                <div className="absolute top-4 left-4 z-20 px-3 py-1 bg-black/80 border border-white/10 rounded-full text-xs font-mono text-neutral-400 uppercase tracking-wider">
                   {lang === 'it' ? "BEFORE: Interfaccia Frammentata e Lenta" : "BEFORE: Fragmented and Slow Interface"}
                 </div>
                 
                 <div className="flex flex-col gap-3 mt-12 opacity-60">
                   <div className="bg-black/50 border border-white/5 p-4 rounded-xl flex flex-col gap-2">
-                    <span className="text-[9px] font-mono text-red-500 uppercase">{lang === 'it' ? "Avviso" : "Alert"}</span>
-                    <span className="text-xs font-bold">{lang === 'it' ? "Inserisci Codice Italo Più per proseguire" : "Enter Italo Più Code to continue"}</span>
-                    <div className="w-full h-8 bg-neutral-800 rounded-lg flex items-center px-3 text-[10px] text-neutral-500">
+                    <span className="text-xs font-mono text-red-500 uppercase">{lang === 'it' ? "Avviso" : "Alert"}</span>
+                    <span className="text-sm font-bold">{lang === 'it' ? "Inserisci Codice Italo Più per proseguire" : "Enter Italo Più Code to continue"}</span>
+                    <div className="w-full h-8 bg-neutral-800 rounded-lg flex items-center px-3 text-sm text-neutral-500">
                       {lang === 'it' ? "Form d'inserimento opzionale" : "Optional input form"}
                     </div>
                   </div>
@@ -462,7 +461,7 @@ export default function ChronosLowerSections({
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#9E1C1F]/5 blur-3xl rounded-full" />
             
             <div className="flex flex-col gap-4 z-10">
-              <span className="text-[9px] font-mono text-[#9E1C1F] tracking-widest uppercase font-bold">
+              <span className="text-xs font-mono text-[#9E1C1F] tracking-widest uppercase font-bold">
                 DIGITAL IDENTITY SYSTEM
               </span>
               <h3 className="text-lg font-black tracking-tight text-white uppercase font-sans">
@@ -473,16 +472,16 @@ export default function ChronosLowerSections({
               
               {/* Typography showcase */}
               <div className="flex flex-col gap-1.5">
-                <span className="text-[9px] font-mono text-neutral-500 uppercase">Typography</span>
+                <span className="text-xs font-mono text-neutral-500 uppercase">Typography</span>
                 <span className="text-xl font-bold font-sans tracking-tight text-white">Instrument Sans</span>
-                <span className="text-[11px] font-mono text-[#9E1C1F] tracking-widest uppercase">Aa Bb Cc Dd Ee Ff 123</span>
+                <span className="text-sm font-mono text-[#9E1C1F] tracking-widest uppercase">Aa Bb Cc Dd Ee Ff 123</span>
               </div>
 
               <div className="h-[1px] bg-white/5 my-1" />
 
               {/* Material Symbols icon showcase */}
               <div className="flex flex-col gap-2">
-                <span className="text-[9px] font-mono text-neutral-500 uppercase">Icons (Material Symbols by Google)</span>
+                <span className="text-xs font-mono text-neutral-500 uppercase">Icons (Material Symbols by Google)</span>
                 <div className="flex gap-3 text-neutral-300">
                   <div className="w-9 h-9 rounded-lg bg-neutral-900 border border-white/5 flex items-center justify-center shadow-md">
                     <Compass className="w-5 h-5 text-[#9E1C1F]" />
@@ -503,7 +502,7 @@ export default function ChronosLowerSections({
 
               {/* Color Swatch Selector */}
               <div className="flex flex-col gap-2">
-                <span className="text-[9px] font-mono text-neutral-500 uppercase">Iconic Palette (Click to Copy)</span>
+                <span className="text-xs font-mono text-neutral-500 uppercase">Iconic Palette (Click to Copy)</span>
                 <div className="flex gap-2">
                   {[
                     { hex: '#9E1C1F', name: 'Italo Red' },
@@ -513,7 +512,7 @@ export default function ChronosLowerSections({
                     <button
                       key={col.hex}
                       onClick={() => handleCopyHex(col.hex)}
-                      className="flex items-center gap-1.5 px-2 py-1 rounded bg-neutral-900 border border-white/5 text-[9px] font-mono text-neutral-300 hover:text-white hover:border-[#9E1C1F] transition-all cursor-pointer"
+                      className="flex items-center gap-1.5 px-2 py-1 rounded bg-neutral-900 border border-white/5 text-xs font-mono text-neutral-300 hover:text-white hover:border-[#9E1C1F] transition-all cursor-pointer"
                     >
                       <span className="w-2.5 h-2.5 rounded-sm shrink-0 border border-white/10" style={{ backgroundColor: col.hex }} />
                       <span>{copiedColor === col.hex ? 'COPIED' : col.hex}</span>
@@ -523,7 +522,7 @@ export default function ChronosLowerSections({
               </div>
             </div>
 
-            <div className="border-t border-white/5 pt-4 text-[10px] text-neutral-500 mt-6 z-10">
+            <div className="border-t border-white/5 pt-4 text-sm text-neutral-500 mt-6 z-10">
               {lang === 'it' 
                 ? "Coerenza e accessibilità visiva secondo lo standard WCAG AAA." 
                 : "Consistency and visual accessibility according to WCAG AAA standards."}
@@ -535,7 +534,6 @@ export default function ChronosLowerSections({
       {/* SECTION 5: IMPACT & METRICS */}
       <section className="flex flex-col gap-10 pt-12 pb-8 border-t border-white/5 text-left">
         <div className="flex flex-col gap-2">
-          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">05 / Impact & Metrics</span>
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase font-sans">
             {lang === 'it' ? "I Numeri della Velocità." : "The Numbers of Speed."}
           </h2>
@@ -556,11 +554,11 @@ export default function ChronosLowerSections({
             <span className="font-sans font-black tracking-tighter text-5xl sm:text-6xl text-[#9E1C1F] leading-none">
               +<CountUpNumber target={34} suffix="%" />
             </span>
-            <span className="text-[11px] font-mono uppercase text-white font-bold tracking-wider mt-1">
+            <span className="text-sm font-mono uppercase text-white font-bold tracking-wider mt-1">
               {lang === 'it' ? "Tasso di Conversione Mobile" : "Mobile Conversion Rate"}
             </span>
             <div className="h-[1px] w-8 bg-neutral-700 my-1.5" />
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               {lang === 'it' 
                 ? "Incremento stimato derivato dalla rimozione delle distrazioni promozionali e dei passaggi non essenziali all'interno dell'imbuto transazionale." 
                 : "Estimated increase derived from the removal of promotional distractions and non-essential steps within the transactional funnel."}
@@ -572,11 +570,11 @@ export default function ChronosLowerSections({
             <span className="font-sans font-black tracking-tighter text-5xl sm:text-6xl text-white leading-none">
               -<CountUpNumber target={40} suffix="%" />
             </span>
-            <span className="text-[11px] font-mono uppercase text-[#9E1C1F] font-bold tracking-wider mt-1">
+            <span className="text-sm font-mono uppercase text-[#9E1C1F] font-bold tracking-wider mt-1">
               {lang === 'it' ? "Tempo Medio d'Acquisto" : "Average Purchase Time"}
             </span>
             <div className="h-[1px] w-8 bg-neutral-700 my-1.5" />
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               {lang === 'it' 
                 ? "Forte contrazione delle tempistiche medie di completamento prenotazione grazie all'innovativa architettura lineare integrata One-Tap." 
                 : "Significant reduction in average booking completion times thanks to the innovative integrated One-Tap linear architecture."}
@@ -588,11 +586,11 @@ export default function ChronosLowerSections({
             <span className="font-sans font-black tracking-tighter text-5xl sm:text-6xl text-white leading-none">
               -<CountUpNumber target={25} suffix="%" />
             </span>
-            <span className="text-[11px] font-mono uppercase text-white font-bold tracking-wider mt-1">
+            <span className="text-sm font-mono uppercase text-white font-bold tracking-wider mt-1">
               {lang === 'it' ? "Drop-off nel Checkout" : "Checkout Drop-off"}
             </span>
             <div className="h-[1px] w-8 bg-neutral-700 my-1.5" />
-            <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light">
               {lang === 'it' 
                 ? "Riduzione dei rimbalzi e dei carrelli abbandonati nella fase più delicata di inserimento dati passeggero e verifica dei posti a sedere." 
                 : "Reduction in bounces and abandoned carts during the most delicate phase of entering passenger data and verifying seat availability."}
@@ -604,7 +602,7 @@ export default function ChronosLowerSections({
       {/* SECTION 6: FIGMA PROTOTYPE */}
       <section className="flex flex-col items-center justify-center text-center pt-12 pb-12 border-t border-white/5 gap-6 w-full max-w-6xl mx-auto">
         <div className="flex flex-col gap-3 max-w-2xl px-4">
-          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">
+          <span className="text-sm font-mono uppercase tracking-[0.2em] text-[#9E1C1F] font-bold">
             {lang === 'it' ? "06 / Prototipo Interattivo" : "06 / Interactive Prototype"}
           </span>
           <h2 id="figma-prototype-title" className="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase font-sans">

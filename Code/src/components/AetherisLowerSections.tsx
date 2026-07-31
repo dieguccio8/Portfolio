@@ -4,7 +4,52 @@ import { Compass, AlertTriangle, Check, ArrowRight } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
 import InteractiveBentoSection from './InteractiveBentoSection';
 import HighlightCard from './ui/highlight-card';
-import { HalftoneBackground } from './ui/halftone-background';
+import AuroraBackground from './ui/aurora-background';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const IsometricBar = ({ percentage, color, label, level }: { percentage: string, color: string, label: string, level: number }) => {
+  const y1 = 260 - (130 * level);
+  const p1 = { x: 30, y: y1 };
+  const p2 = { x: 90, y: y1 };
+  const p3 = { x: 120, y: y1 + 25 };
+  const dotY = p1.y - 30;
+
+  return (
+    <div className="relative w-full h-[280px] flex flex-col items-center">
+      <div 
+        className="absolute w-[160px]" 
+        style={{ left: '-10px', top: (p1.y - 125) + 'px' }}
+      >
+        <div className="text-4xl sm:text-5xl font-light font-urbanist tracking-tight" style={{ color }}>
+          {percentage}
+        </div>
+        <div className="text-xs font-mono text-neutral-400 uppercase leading-snug mt-1 w-[140px]">
+          {label}
+        </div>
+      </div>
+
+      <svg viewBox="0 0 160 280" className="w-full h-full overflow-visible">
+        <defs>
+          <linearGradient id={`grad-${percentage.replace('%','')}-${color.replace('#','')}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={color} stopOpacity="0.4" />
+            <stop offset="100%" stopColor={color} stopOpacity="0.0" />
+          </linearGradient>
+        </defs>
+
+        <polygon points={`${p1.x},${p1.y} ${p2.x},${p1.y} ${p2.x},280 ${p1.x},280`} fill={`url(#grad-${percentage.replace('%','')}-${color.replace('#','')})`} />
+        <polygon points={`${p2.x},${p1.y} ${p3.x},${p3.y} ${p3.x},280 ${p2.x},280`} fill={`url(#grad-${percentage.replace('%','')}-${color.replace('#','')})`} />
+        <polyline points={`${p1.x},${p1.y} ${p2.x},${p1.y} ${p3.x},${p3.y}`} fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1={p1.x} y1={p1.y} x2={p1.x} y2="280" stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
+        <line x1={p2.x} y1={p1.y} x2={p2.x} y2="280" stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
+        <line x1={p3.x} y1={p3.y} x2={p3.x} y2="280" stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
+      </svg>
+    </div>
+  );
+};
 
 interface Props {
   project: any;
@@ -38,6 +83,39 @@ export function AetherisLowerSections({
   lang
 }: Props) {
   const [mobileImageIndex, setMobileImageIndex] = React.useState(0);
+  const pinRef = React.useRef<HTMLDivElement>(null);
+  
+  // Using a ref to hold the current tab for the GSAP callback
+  // This prevents the GSAP hook from recreating every time state changes
+  const activeTabRef = React.useRef(activeResearchTab);
+  React.useEffect(() => {
+    activeTabRef.current = activeResearchTab;
+  }, [activeResearchTab]);
+
+  useGSAP(() => {
+    if (!pinRef.current) return;
+    
+    ScrollTrigger.create({
+      trigger: pinRef.current,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        
+        let targetTab = 'desk';
+        if (progress > 0.33 && progress <= 0.66) {
+          targetTab = 'sondaggi';
+        } else if (progress > 0.66) {
+          targetTab = 'interviste';
+        }
+
+        if (activeTabRef.current !== targetTab) {
+          setActiveResearchTab(targetTab);
+        }
+      }
+    });
+  }, { scope: pinRef });
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -46,182 +124,173 @@ export function AetherisLowerSections({
     return () => clearInterval(interval);
   }, []);
 
+  // Update tab click to use GSAP ScrollTo plugin if available, or just window.scrollTo
+  const handleTabClick = (tab: string, index: number) => {
+    if (!pinRef.current) return;
+    const trigger = ScrollTrigger.getById(pinRef.current.id) || ScrollTrigger.getAll().find(st => st.trigger === pinRef.current);
+    if (trigger) {
+      const start = trigger.start;
+      const end = trigger.end;
+      // We offset slightly to land squarely in the middle of each section's trigger zone
+      const progress = index === 0 ? 0.15 : index === 1 ? 0.5 : 0.85;
+      const scrollPos = start + (end - start) * progress;
+      window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
       
       {/* 01 / RESEARCH & ANALYSIS */}
-      <div className="pt-32 pb-32 flex flex-col gap-12 relative">
-        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[100vw]">
-          <HalftoneBackground />
-        </div>
-        <div className="relative z-10 flex flex-col gap-12">
-        <div className="flex flex-col gap-4">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">01 / Ricerca ed Analisi</span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">
-            Metodologia a Scansione
-          </h2>
-        </div>
-
-        {/* Tab Selector */}
-        <div className="flex bg-[#131514] border border-white/5 p-1.5 rounded-full shrink-0 self-start shadow-inner relative overflow-x-auto scrollbar-none w-full sm:w-auto">
-          {['desk', 'sondaggi', 'interviste'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveResearchTab(tab)}
-              className={`flex items-center justify-center min-w-[120px] gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 uppercase font-mono ${
-                activeResearchTab === tab ? 'text-white' : 'text-neutral-500 hover:text-white'
-              }`}
-            >
-              {activeResearchTab === tab && (
-                <motion.div
-                  layoutId="active-research-bg-aetheris"
-                  className="absolute inset-0 bg-[#068B35] rounded-full"
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-20">
-                {tab === 'desk' ? 'Desk' : tab === 'sondaggi' ? 'Sondaggi' : 'Interviste'}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        <AnimatePresence mode="wait">
-          {activeResearchTab === 'desk' && (
-            <motion.div
-              key="desk-tab"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="flex flex-col gap-10"
-            >
-              {/* Visual Cards for Desk Research */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <HighlightCard
-                  title="Orientamento"
-                  description={[
-                    "Nessuna guida per non esperti."
-                  ]}
-                  icon={<AlertTriangle className="w-8 h-8 text-white" />}
-                />
-                <HighlightCard
-                  title="Coinvolgimento"
-                  description={[
-                    "Esperienza passiva e veloce (5 min)."
-                  ]}
-                  icon={<AlertTriangle className="w-8 h-8 text-white" />}
-                />
-                <HighlightCard
-                  title="Informazioni"
-                  description={[
-                    "Mancano spiegazioni oltre al nome scientifico."
-                  ]}
-                  icon={<AlertTriangle className="w-8 h-8 text-white" />}
-                />
+      <div ref={pinRef} className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
+        <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col">
+          <AuroraBackground className="!bg-transparent h-full w-full pt-32 sm:pt-40 pb-20">
+            <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">
+              <div className="flex flex-col gap-4">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">
+                  Metodologia a Scansione
+                </h2>
               </div>
-            </motion.div>
-          )}
 
-          {activeResearchTab === 'sondaggi' && (
-            <motion.div
-              key="sondaggi-tab"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="flex flex-col gap-10"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Chart 1 */}
-                <HighlightCard title="Come ti orienti?">
-                  <div className="flex flex-col gap-6">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex justify-between items-end">
-                        <span className="text-sm font-mono text-neutral-400 uppercase tracking-wider">Casuale</span>
-                        <span className="text-3xl font-black text-[#068B35]">70%</span>
-                      </div>
-                      <div className="w-full bg-white/5 h-4 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#068B35] rounded-full" style={{ width: '70%' }} />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="flex justify-between items-end">
-                        <span className="text-sm font-mono text-neutral-400 uppercase tracking-wider">Segnaletica</span>
-                        <span className="text-3xl font-black text-white">20%</span>
-                      </div>
-                      <div className="w-full bg-white/5 h-4 rounded-full overflow-hidden">
-                        <div className="h-full bg-white/20 rounded-full" style={{ width: '20%' }} />
-                      </div>
-                    </div>
-                  </div>
-                </HighlightCard>
-
-                {/* Chart 2 */}
-                <HighlightCard title="Useresti QR code interattivi?">
-                  <div className="flex flex-col gap-6">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex justify-between items-end">
-                        <span className="text-sm font-mono text-neutral-400 uppercase tracking-wider">Sì, assolutamente</span>
-                        <span className="text-3xl font-black text-[#068B35]">75%</span>
-                      </div>
-                      <div className="w-full bg-white/5 h-4 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#068B35] rounded-full" style={{ width: '75%' }} />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="flex justify-between items-end">
-                        <span className="text-sm font-mono text-neutral-400 uppercase tracking-wider">Forse</span>
-                        <span className="text-3xl font-black text-white">25%</span>
-                      </div>
-                      <div className="w-full bg-white/5 h-4 rounded-full overflow-hidden">
-                        <div className="h-full bg-white/20 rounded-full" style={{ width: '25%' }} />
-                      </div>
-                    </div>
-                  </div>
-                </HighlightCard>
+              {/* Tab Selector */}
+              <div className="flex gap-8 sm:gap-12 shrink-0 self-start relative overflow-x-auto scrollbar-none w-full sm:w-auto border-b border-white/10 pb-3 px-2 mt-16">
+                {['desk', 'sondaggi', 'interviste'].map((tab, index) => (
+                  <button
+                    key={tab}
+                    onClick={() => handleTabClick(tab, index)}
+                    className={`flex items-center justify-center pb-2 text-xs sm:text-sm tracking-widest transition-all duration-300 relative z-10 uppercase font-mono ${
+                      activeResearchTab === tab ? 'text-white/90 font-bold' : 'text-white/40 hover:text-white/70'
+                    }`}
+                  >
+                    {activeResearchTab === tab && (
+                      <motion.div
+                        layoutId="active-research-bg-aetheris"
+                        className="absolute -bottom-[13px] left-0 right-0 h-[2px] bg-white/80"
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-20">
+                      {tab === 'desk' ? 'Desk' : tab === 'sondaggi' ? 'Sondaggi' : 'Interviste'}
+                    </span>
+                  </button>
+                ))}
               </div>
-            </motion.div>
-          )}
 
-          {activeResearchTab === 'interviste' && (
-            <motion.div
-              key="interviste-tab"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            >
-              <HighlightCard title="Utilità di un Totem Digitale?">
-                <div className="flex flex-col items-center gap-4 text-center">
-                  <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q1</span>
-                  <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
-                    "Migliorerebbe l'esperienza, permettendo di orientarsi e prepararsi prima della visita."
-                  </p>
-                </div>
-              </HighlightCard>
+              {/* Dynamic Content Area */}
+              <div className="flex-1 relative w-full mt-24">
+                <AnimatePresence mode="wait">
+                  {activeResearchTab === 'desk' && (
+                    <motion.div
+                      key="desk-tab"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+                    >
+                      <HighlightCard animatedBorder={true}
+                        title="Orientamento"
+                        description={["Nessuna guida per non esperti."]}
+                        icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                      />
+                      <HighlightCard animatedBorder={true}
+                        title="Coinvolgimento"
+                        description={["Esperienza passiva e veloce (5 min)."]}
+                        icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                      />
+                      <HighlightCard animatedBorder={true}
+                        title="Informazioni"
+                        description={["Mancano spiegazioni oltre al nome scientifico."]}
+                        icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                      />
+                    </motion.div>
+                  )}
 
-              <HighlightCard title="Mancanze Informative?">
-                <div className="flex flex-col items-center gap-4 text-center">
-                  <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q2</span>
-                  <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
-                    "Sì, mancano dettagli scientifici chiari oltre al nome della pianta."
-                  </p>
-                </div>
-              </HighlightCard>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  {activeResearchTab === 'sondaggi' && (
+                    <motion.div
+                      key="sondaggi-tab"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                    >
+                      {/* Chart 1 */}
+                      <HighlightCard animatedBorder={true} title="Come ti orienti?">
+                        <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
+                          <div className="w-1/2">
+                            <IsometricBar percentage="20%" color="#FFFFFF" label="Segnaletica" level={0.2} />
+                          </div>
+                          <div className="w-1/2">
+                            <IsometricBar percentage="70%" color="#068B35" label="Casuale" level={0.7} />
+                          </div>
+                        </div>
+                      </HighlightCard>
+
+                      {/* Chart 2 */}
+                      <HighlightCard animatedBorder={true} title="Useresti QR code interattivi?">
+                        <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
+                          <div className="w-1/2">
+                            <IsometricBar percentage="25%" color="#FFFFFF" label="Forse" level={0.25} />
+                          </div>
+                          <div className="w-1/2">
+                            <IsometricBar percentage="75%" color="#068B35" label="Sì, assolutamente" level={0.75} />
+                          </div>
+                        </div>
+                      </HighlightCard>
+                    </motion.div>
+                  )}
+
+                  {activeResearchTab === 'interviste' && (
+                    <motion.div
+                      key="interviste-tab"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                    >
+                      <HighlightCard animatedBorder={true} title="Utilità di un Totem Digitale?">
+                        <div className="flex flex-col items-center gap-4 text-center">
+                          <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q1</span>
+                          <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
+                            "Migliorerebbe l'esperienza, permettendo di orientarsi e prepararsi prima della visita."
+                          </p>
+                        </div>
+                      </HighlightCard>
+
+                      <HighlightCard animatedBorder={true} title="Mancanze Informative?">
+                        <div className="flex flex-col items-center gap-4 text-center">
+                          <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q2</span>
+                          <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
+                            "Sì, mancano dettagli scientifici chiari oltre al nome della pianta."
+                          </p>
+                        </div>
+                      </HighlightCard>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+            </div>
+          </AuroraBackground>
+          
+          {/* Fade-in mask for smooth transition from the hero */}
+          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] from-10% via-[#050505]/80 to-transparent pointer-events-none z-0" />
+          
+          {/* Fade-out mask for smooth transition to the next section */}
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pointer-events-none z-0" />
         </div>
       </div>
 
       {/* 02 / ANALYSIS & STRATEGY: PROBLEMS VS SOLUTIONS */}
-      <div className="-mt-24 sm:-mt-32 w-full">
+      <div className="relative z-20 w-full -mt-[30vh] sm:-mt-[40vh]">
         <InteractiveBentoSection />
       </div>
 
       {/* 03 / L'ECOSISTEMA */}
       <div className="pt-16 border-t border-white/5 flex flex-col gap-12">
         <div className="flex flex-col gap-4 text-center items-center">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">03 / Il Progetto</span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-raleway">
             Cos'è Bussola Verde?
           </h2>
@@ -319,7 +388,6 @@ export function AetherisLowerSections({
       {/* 04 / USER PERSONA */}
       <div className="pt-16 border-t border-white/5 flex flex-col gap-12 pb-16">
         <div className="flex flex-col gap-4 text-center items-center">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#068B35] font-bold">04 / Target User</span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-raleway">
             L'Utente Ideale
           </h2>
@@ -340,7 +408,7 @@ export function AetherisLowerSections({
             </div>
             <div className="text-center lg:text-left flex flex-col gap-2">
               <h3 className="text-4xl font-black text-white font-raleway">Mirella</h3>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#068B35] font-bold bg-[#068B35]/10 px-4 py-1.5 rounded-full inline-block">Profilo Accademico</span>
+              <span className="text-sm font-mono uppercase tracking-widest text-[#068B35] font-bold bg-[#068B35]/10 px-4 py-1.5 rounded-full inline-block">Profilo Accademico</span>
             </div>
           </div>
 
@@ -356,19 +424,19 @@ export function AetherisLowerSections({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Origine</span>
+                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Origine</span>
                 <span className="text-base font-bold text-white">Colombia, ricca di biodiversità.</span>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Status</span>
+                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Status</span>
                 <span className="text-base font-bold text-white">Nuova residente a Catania (Studentessa).</span>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Obiettivo</span>
+                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Obiettivo</span>
                 <span className="text-base font-bold text-white">Esplorazione scientifica intuitiva.</span>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Necessità</span>
+                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Necessità</span>
                 <span className="text-base font-bold text-white">Informazioni repentine tramite smartphone.</span>
               </div>
             </div>

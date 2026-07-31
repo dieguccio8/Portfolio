@@ -57,10 +57,6 @@ export default function KineticsLowerSections({
         {/* Left Column: Branding Concept */}
         <div className="lg:col-span-6 flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#FCD306] font-bold font-urbanist">03 / The Process</span>
-              <div className="h-[1px] flex-1 bg-[#2B2B2B]" />
-            </div>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#F5F5F0] uppercase font-urbanist relative">
               {lang === 'it' ? (
                 <>Un sistema, <span className="text-[#FCD306]">infinite geografie.</span></>
@@ -80,13 +76,13 @@ export default function KineticsLowerSections({
           {/* Interactive Region Badge Showcase */}
           <div className="bg-[#1A1A1A]/60 border border-[#2B2B2B] p-6 relative overflow-hidden flex flex-col gap-4 shadow-lg">
             <div className="absolute top-2 right-3 text-[8px] font-mono text-[#A8A8A2] uppercase">Active Matrix</div>
-            <span className="text-[10px] font-mono text-[#A8A8A2] uppercase tracking-wider block">Dynamic Area Expansion</span>
+            <span className="text-sm font-mono text-[#A8A8A2] uppercase tracking-wider block">Dynamic Area Expansion</span>
             <div className="flex gap-3">
               {regions.map((region, i) => (
                 <button
                   key={region}
                   onClick={() => setCurrentRegionIndex(i)}
-                  className={`px-3 py-1 text-xs font-mono font-bold transition-all border ${
+                  className={`px-3 py-1 text-sm font-mono font-bold transition-all border ${
                     i === currentRegionIndex 
                       ? 'bg-[#FCD306] text-[#0D0D0D] border-[#FCD306] scale-105' 
                       : 'bg-[#0D0D0D] text-[#A8A8A2] border-[#2B2B2B] hover:border-[#FCD306]'
@@ -108,10 +104,10 @@ export default function KineticsLowerSections({
         {/* Right Column: Logo Exploded Blueprint (Sticky & Scroll-linked) */}
         <div className="lg:col-span-6 flex flex-col gap-6 lg:sticky lg:top-32">
           <div className="flex justify-between items-center">
-            <span className="text-[10px] font-mono text-[#A8A8A2] uppercase tracking-widest font-urbanist">
+            <span className="text-sm font-mono text-[#A8A8A2] uppercase tracking-widest font-urbanist">
               Logo Anatomy & Geometric System
             </span>
-            <span className="text-[9px] font-mono text-[#0D0D0D] bg-[#FCD306] border border-[#FCD306]/20 px-2 py-0.5 rounded-none font-bold font-urbanist">
+            <span className="text-xs font-mono text-[#0D0D0D] bg-[#FCD306] border border-[#FCD306]/20 px-2 py-0.5 rounded-none font-bold font-urbanist">
               GRID: 8X8 SYSTEM
             </span>
           </div>
@@ -155,7 +151,7 @@ export default function KineticsLowerSections({
                       <span className="absolute -left-8 top-3 text-[7px] font-mono text-[#A8A8A2] font-urbanist">h: 48px</span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono text-[#A8A8A2] font-urbanist">BLOCK_U (STEM)</span>
+                  <span className="text-sm font-mono text-[#A8A8A2] font-urbanist">BLOCK_U (STEM)</span>
                 </div>
 
                 {/* Block 'S' */}
@@ -171,17 +167,17 @@ export default function KineticsLowerSections({
                     {/* Bottom part of S */}
                     <div className="w-full h-8 bg-[#FCD306]/30 border border-[#2B2B2B] rounded-none relative group-hover:border-[#FCD306] transition-colors duration-700" />
                   </div>
-                  <span className="text-[10px] font-mono text-[#A8A8A2] font-urbanist">BLOCK_S (CURVE)</span>
+                  <span className="text-sm font-mono text-[#A8A8A2] font-urbanist">BLOCK_S (CURVE)</span>
                 </div>
               </div>
             </div>
 
             {/* Bottom explanatory technical legend */}
             <div className="border-t border-[#2B2B2B] pt-4 text-left z-10">
-              <span className="text-[10px] font-mono uppercase text-[#FCD306] block mb-1 font-bold font-urbanist">
+              <span className="text-sm font-mono uppercase text-[#FCD306] block mb-1 font-bold font-urbanist">
                 GEOMETRIC INTEGRITY
               </span>
-              <p className="text-xs text-[#A8A8A2] leading-relaxed font-normal font-urbanist">
+              <p className="text-sm text-[#A8A8A2] leading-relaxed font-normal font-urbanist">
                 {lang === 'it' 
                   ? "Ogni lettera è progettata su una griglia fissa 8x8 con raccordi geometrici a 45 gradi. L'equilibrio tra pieni e vuoti garantisce una leggibilità eccellente, sia stampata a piccolissime dimensioni sulle etichette delle t-shirt, sia scalata su mega-cartelloni urbani." 
                   : "Each letter is designed on a fixed 8x8 grid with 45-degree geometric connections. The balance between solid and empty spaces guarantees excellent readability, whether printed at extremely small sizes on t-shirt labels or scaled on mega urban billboards."}
@@ -195,7 +191,6 @@ export default function KineticsLowerSections({
       <section className="flex flex-col gap-10 pt-12 border-t border-[#2B2B2B]">
         <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
           <div className="flex-1 flex flex-col gap-2 text-left">
-            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#FCD306] font-bold font-urbanist">04 / Digital Identity</span>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#F5F5F0] uppercase font-urbanist">
               {lang === 'it' ? "Il palcoscenico per l'arte." : "The stage for art."}
             </h2>
@@ -205,7 +200,7 @@ export default function KineticsLowerSections({
                 : "The social templates and digital touchpoints have been redesigned to let the images breathe, reducing visual noise and placing the artist at the center of the editorial narrative."}
             </p>
           </div>
-          <span className="text-[9px] font-mono text-[#A8A8A2] uppercase tracking-widest hidden md:block font-urbanist">
+          <span className="text-xs font-mono text-[#A8A8A2] uppercase tracking-widest hidden md:block font-urbanist">
             Instagram Feed Templates
           </span>
         </div>
@@ -215,7 +210,7 @@ export default function KineticsLowerSections({
           
           {/* Mockup 1: Dark Mode Instagram Feed */}
           <div className="flex flex-col gap-4 items-center font-urbanist">
-            <span className="text-xs font-mono text-[#A8A8A2]">
+            <span className="text-sm font-mono text-[#A8A8A2]">
               {lang === 'it' ? "Mockup A: Grid Instagram Editoriale" : "Mockup A: Editorial Instagram Grid"}
             </span>
             
@@ -228,13 +223,13 @@ export default function KineticsLowerSections({
               </div>
               
               {/* Phone Content (Instagram Profile Page) */}
-              <div className="flex-1 bg-[#0D0D0D] rounded-[2.5rem] overflow-hidden flex flex-col pt-6 text-[#F5F5F0] text-xs select-none">
+              <div className="flex-1 bg-[#0D0D0D] rounded-[2.5rem] overflow-hidden flex flex-col pt-6 text-[#F5F5F0] text-sm select-none">
                 {/* Instagram Header */}
                 <div className="px-4 py-3 border-b border-[#2B2B2B] flex justify-between items-center shrink-0">
-                  <span className="font-bold text-[11px] font-urbanist">urbanstreetart.sicily</span>
+                  <span className="font-bold text-sm font-urbanist">urbanstreetart.sicily</span>
                   <div className="flex gap-2.5 text-[#A8A8A2]">
                     <span className="w-2.5 h-2.5 border border-white rounded-sm" />
-                    <span className="font-bold text-[10px]">•••</span>
+                    <span className="font-bold text-sm">•••</span>
                   </div>
                 </div>
 
@@ -253,7 +248,7 @@ export default function KineticsLowerSections({
                       </div>
                     </div>
                     {/* Stats */}
-                    <div className="flex-1 flex justify-around text-center text-[10px]">
+                    <div className="flex-1 flex justify-around text-center text-sm">
                       <div className="flex flex-col"><span className="font-bold text-white">142</span><span className="text-[8px] text-[#A8A8A2] uppercase font-mono">Posts</span></div>
                       <div className="flex flex-col"><span className="font-bold text-white">48.2K</span><span className="text-[8px] text-[#A8A8A2] uppercase font-mono">Followers</span></div>
                       <div className="flex flex-col"><span className="font-bold text-white">405</span><span className="text-[8px] text-[#A8A8A2] uppercase font-mono">Following</span></div>
@@ -262,13 +257,13 @@ export default function KineticsLowerSections({
 
                   {/* Bio Description */}
                   <div className="flex flex-col gap-1">
-                    <span className="font-bold text-[#F5F5F0] text-[11px] font-urbanist">Urban StreetArt Sicily</span>
-                    <span className="text-[#A8A8A2] text-[10px] leading-relaxed font-urbanist">
+                    <span className="font-bold text-[#F5F5F0] text-sm font-urbanist">Urban StreetArt Sicily</span>
+                    <span className="text-[#A8A8A2] text-sm leading-relaxed font-urbanist">
                       {lang === 'it' 
                         ? "Ecosistema editoriale indipendente dedicato alla street art in Sicilia. Rebranding ed identità modulare." 
                         : "Independent editorial ecosystem dedicated to street art in Sicily. Rebranding and modular identity."}
                     </span>
-                    <span className="text-[#FCD306] text-[9px] font-mono uppercase tracking-wider font-semibold font-urbanist">
+                    <span className="text-[#FCD306] text-xs font-mono uppercase tracking-wider font-semibold font-urbanist">
                       linkin.bio/urbanstreetart
                     </span>
                   </div>
@@ -308,7 +303,6 @@ export default function KineticsLowerSections({
       {/* SECTION 5: THE SOLUTION - PHYGITAL REAL-WORLD PRODUCTS */}
       <section className="flex flex-col gap-10 pt-12 border-t border-[#2B2B2B]">
         <div className="flex flex-col gap-3 text-left">
-          <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#FCD306] font-bold font-urbanist">05 / Phygital Monetization</span>
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#F5F5F0] uppercase font-urbanist">
             {lang === 'it' ? "Dalla strada, per la strada." : "From the street, for the street."}
           </h2>
@@ -339,7 +333,7 @@ export default function KineticsLowerSections({
               >
                 <div className="flex items-center justify-between border-b border-[#2B2B2B] pb-2 shrink-0">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#FCD306] font-bold font-urbanist">{prod.title}</span>
+                    <span className="text-sm font-mono uppercase tracking-wider text-[#FCD306] font-bold font-urbanist">{prod.title}</span>
                   </div>
                   {hasImg && (
                     <button 
@@ -366,7 +360,7 @@ export default function KineticsLowerSections({
                         className="w-full h-full object-contain rounded-none block shadow-2xl"
                       />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                        <label className="cursor-pointer bg-[#FCD306] hover:bg-white text-black border-2 border-black font-bold uppercase text-[10px] rounded-none p-3 shadow-[4px_4px_0px_#000] transition-all">
+                        <label className="cursor-pointer bg-[#FCD306] hover:bg-white text-black border-2 border-black font-bold uppercase text-sm rounded-none p-3 shadow-[4px_4px_0px_#000] transition-all">
                           <Upload className="w-4 h-4 inline-block mr-2" />
                           REPLACE
                           <input 
@@ -389,10 +383,10 @@ export default function KineticsLowerSections({
                       <div className="w-10 h-10 rounded-none bg-[#FCD306]/10 flex items-center justify-center text-[#FCD306] mb-3 group-hover:scale-110 transition-transform">
                         <Upload className="w-5 h-5" />
                       </div>
-                      <span className="text-xs font-mono text-[#F5F5F0] uppercase tracking-wider block font-urbanist group-hover:text-[#FCD306]">
+                      <span className="text-sm font-mono text-[#F5F5F0] uppercase tracking-wider block font-urbanist group-hover:text-[#FCD306]">
                         {lang === 'it' ? "Carica Immagine" : "Upload Image"}
                       </span>
-                      <span className="text-[10px] text-[#A8A8A2] font-mono mt-1 block leading-relaxed font-urbanist">{prod.layoutDesc}</span>
+                      <span className="text-sm text-[#A8A8A2] font-mono mt-1 block leading-relaxed font-urbanist">{prod.layoutDesc}</span>
                     </label>
                   )}
                 </div>
