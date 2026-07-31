@@ -927,7 +927,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             <AetherisLowerSections
               project={project}
               activeResearchTab={activeResearchTab}
-              setActiveResearchTab={setActiveResearchTab}
+              setActiveResearchTab={(val) => setActiveResearchTab(val as any)}
               lang={lang}
             />
           ) : (

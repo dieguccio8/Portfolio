@@ -120,11 +120,11 @@ type GLTFResult = GLTF & {
   materials: {
     ['iphone-16-pro-001.001']: THREE.MeshStandardMaterial
   }
-  animations: GLTFAction[]
+  animations: any[]
 }
 
-export function Model(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/models/iphone16_mockup/iphone-16-pro.glb') as GLTFResult
+export function Model(props: any) {
+  const { nodes, materials } = (useGLTF('/models/iphone16_mockup/iphone-16-pro.glb') as unknown) as GLTFResult
   const screenTexture = useTexture('/models/iphone16_mockup/screen.jpg')
 
   // Fix texture orientation if necessary

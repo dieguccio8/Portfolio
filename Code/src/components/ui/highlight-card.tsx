@@ -68,7 +68,7 @@ const HighlightCard: FC<ComponentProps> = ({ title, description, icon, children,
               <div className="relative mb-8">
                 <div className="p-5 rounded-full border border-white/5 bg-white/5 shadow-xl backdrop-blur-md transform group-hover:scale-110 transition-transform duration-700">
                   <div className="text-[#068b35] opacity-80 group-hover:opacity-100 transition-opacity duration-700">
-                    {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement, { className: (icon as any).props.className?.replace('text-white', '') }) : icon}
+                    {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement, { className: (icon as any).props.className?.replace('text-white', '') } as any) : icon}
                   </div>
                 </div>
               </div>
