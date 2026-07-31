@@ -332,7 +332,7 @@ export function AetherisLowerSections({
       </div>
 
       {/* 03.5 / LOOPING MOCKUPS (Restored) */}
-      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[50vh] md:h-[80vh] mt-10 md:mt-20">
+      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[50vh] md:h-[80vh] -mt-8 md:-mt-[12vh]">
         <div className="relative w-full h-full">
           <img
             src="/project-01-mockup-mobile.jpg"
