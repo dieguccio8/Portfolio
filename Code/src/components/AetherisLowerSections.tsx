@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Compass, AlertTriangle, Check, ArrowRight } from 'lucide-react';
+import { Compass, AlertTriangle, Check, ArrowRight, Star } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
 import InteractiveBentoSection from './InteractiveBentoSection';
 import HighlightCard from './ui/highlight-card';
@@ -347,6 +347,7 @@ export function AetherisLowerSections({
         </div>
       </div>
 
+      {/* 04 / USER PERSONA */}
       {/* 04 / USER PERSONA */}
       <div className="pt-8 md:pt-16 flex flex-col gap-12 pb-16 relative z-10 mt-[-2rem]">
         <div className="flex flex-col gap-4 text-center items-center">
