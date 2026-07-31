@@ -11,42 +11,71 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const IsometricBar = ({ percentage, color, label, level }: { percentage: string, color: string, label: string, level: number }) => {
-  const y1 = 260 - (130 * level);
-  const p1 = { x: 30, y: y1 };
-  const p2 = { x: 90, y: y1 };
-  const p3 = { x: 120, y: y1 + 25 };
-  const dotY = p1.y - 30;
-
+const NeonGauge = ({ percentage, color, label, level }: { percentage: string, color: string, label: string, level: number }) => {
   return (
-    <div className="relative w-full h-[280px] flex flex-col items-center">
-      <div 
-        className="absolute w-[160px]" 
-        style={{ left: '-10px', top: (p1.y - 125) + 'px' }}
-      >
-        <div className="text-4xl sm:text-5xl font-light font-urbanist tracking-tight" style={{ color }}>
-          {percentage}
-        </div>
-        <div className="text-xs font-mono text-neutral-400 uppercase leading-snug mt-1 w-[140px]">
-          {label}
+    <div className="relative w-full flex flex-col items-center justify-end group mt-4">
+      <div className="relative w-full flex items-end justify-center">
+        <svg viewBox="0 -10 200 130" className="w-full h-auto overflow-visible">
+          <defs>
+            <linearGradient id={`grad-${color.replace('#', '')}`} x1="0%" y1="100%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor={color} stopOpacity="0.2" />
+              <stop offset="100%" stopColor={color} stopOpacity="1" />
+            </linearGradient>
+            <filter id={`glow-${color.replace('#', '')}`} x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+          
+          {/* Background Track */}
+          <path 
+            d="M 20 100 A 80 80 0 0 1 180 100" 
+            fill="none" 
+            stroke="#ffffff" 
+            strokeWidth="6" 
+            strokeOpacity="0.05"
+            strokeLinecap="round" 
+          />
+          
+          {/* Active Track */}
+          <path 
+            d="M 20 100 A 80 80 0 0 1 180 100" 
+            fill="none" 
+            stroke={`url(#grad-${color.replace('#', '')})`} 
+            strokeWidth="6" 
+            strokeLinecap="round" 
+            pathLength="1"
+            strokeDasharray="1"
+            strokeDashoffset={1 - level}
+            filter={`url(#glow-${color.replace('#', '')})`}
+            className="transition-all duration-1000 ease-out"
+          />
+          
+          {/* Knob */}
+          <circle 
+            cx={100 - 80 * Math.cos(level * Math.PI)} 
+            cy={100 - 80 * Math.sin(level * Math.PI)} 
+            r="8" 
+            fill="#030604" 
+            stroke={color} 
+            strokeWidth="2" 
+            filter={`url(#glow-${color.replace('#', '')})`}
+            className="transition-all duration-1000 ease-out"
+          />
+        </svg>
+        
+        {/* Percentage Text inside the arc */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center">
+          <span className="text-4xl font-urbanist font-medium tracking-tight text-white drop-shadow-lg">
+            {percentage}
+          </span>
         </div>
       </div>
-
-      <svg viewBox="0 0 160 280" className="w-full h-full overflow-visible">
-        <defs>
-          <linearGradient id={`grad-${percentage.replace('%','')}-${color.replace('#','')}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color} stopOpacity="0.4" />
-            <stop offset="100%" stopColor={color} stopOpacity="0.0" />
-          </linearGradient>
-        </defs>
-
-        <polygon points={`${p1.x},${p1.y} ${p2.x},${p1.y} ${p2.x},280 ${p1.x},280`} fill={`url(#grad-${percentage.replace('%','')}-${color.replace('#','')})`} />
-        <polygon points={`${p2.x},${p1.y} ${p3.x},${p3.y} ${p3.x},280 ${p2.x},280`} fill={`url(#grad-${percentage.replace('%','')}-${color.replace('#','')})`} />
-        <polyline points={`${p1.x},${p1.y} ${p2.x},${p1.y} ${p3.x},${p3.y}`} fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        <line x1={p1.x} y1={p1.y} x2={p1.x} y2="280" stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
-        <line x1={p2.x} y1={p1.y} x2={p2.x} y2="280" stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
-        <line x1={p3.x} y1={p3.y} x2={p3.x} y2="280" stroke={color} strokeWidth="1.5" strokeOpacity="0.4" />
-      </svg>
+      
+      {/* Label under the gauge */}
+      <div className="mt-4 text-xs font-mono text-neutral-400 uppercase tracking-widest font-semibold group-hover:text-neutral-200 transition-colors text-center">
+        {label}
+      </div>
     </div>
   );
 };
@@ -84,7 +113,7 @@ export function AetherisLowerSections({
 }: Props) {
   const [mobileImageIndex, setMobileImageIndex] = React.useState(0);
   const pinRef = React.useRef<HTMLDivElement>(null);
-  
+
   // Using a ref to hold the current tab for the GSAP callback
   // This prevents the GSAP hook from recreating every time state changes
   const activeTabRef = React.useRef(activeResearchTab);
@@ -94,7 +123,7 @@ export function AetherisLowerSections({
 
   useGSAP(() => {
     if (!pinRef.current) return;
-    
+
     ScrollTrigger.create({
       trigger: pinRef.current,
       start: 'top top',
@@ -102,7 +131,7 @@ export function AetherisLowerSections({
       scrub: true,
       onUpdate: (self) => {
         const progress = self.progress;
-        
+
         let targetTab = 'desk';
         if (progress > 0.33 && progress <= 0.66) {
           targetTab = 'sondaggi';
@@ -140,7 +169,7 @@ export function AetherisLowerSections({
 
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
-      
+
       {/* 01 / RESEARCH & ANALYSIS */}
       <div ref={pinRef} className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
         <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col">
@@ -158,9 +187,8 @@ export function AetherisLowerSections({
                   <button
                     key={tab}
                     onClick={() => handleTabClick(tab, index)}
-                    className={`flex items-center justify-center pb-2 text-xs sm:text-sm tracking-widest transition-all duration-300 relative z-10 uppercase font-mono ${
-                      activeResearchTab === tab ? 'text-white/90 font-bold' : 'text-white/40 hover:text-white/70'
-                    }`}
+                    className={`flex items-center justify-center pb-2 text-xs sm:text-sm tracking-widest transition-all duration-300 relative z-10 uppercase font-mono ${activeResearchTab === tab ? 'text-white/90 font-bold' : 'text-white/40 hover:text-white/70'
+                      }`}
                   >
                     {activeResearchTab === tab && (
                       <motion.div
@@ -186,7 +214,7 @@ export function AetherisLowerSections({
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -50 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+                      className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
                     >
                       <HighlightCard animatedBorder={true}
                         title="Orientamento"
@@ -213,16 +241,16 @@ export function AetherisLowerSections({
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -50 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
                     >
                       {/* Chart 1 */}
                       <HighlightCard animatedBorder={true} title="Come ti orienti?">
                         <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
                           <div className="w-1/2">
-                            <IsometricBar percentage="20%" color="#FFFFFF" label="Segnaletica" level={0.2} />
+                            <NeonGauge percentage="20%" color="#FFFFFF" label="Segnaletica" level={0.2} />
                           </div>
                           <div className="w-1/2">
-                            <IsometricBar percentage="70%" color="#068B35" label="Casuale" level={0.7} />
+                            <NeonGauge percentage="70%" color="#068B35" label="Casuale" level={0.7} />
                           </div>
                         </div>
                       </HighlightCard>
@@ -231,10 +259,10 @@ export function AetherisLowerSections({
                       <HighlightCard animatedBorder={true} title="Useresti QR code interattivi?">
                         <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
                           <div className="w-1/2">
-                            <IsometricBar percentage="25%" color="#FFFFFF" label="Forse" level={0.25} />
+                            <NeonGauge percentage="25%" color="#FFFFFF" label="Forse" level={0.25} />
                           </div>
                           <div className="w-1/2">
-                            <IsometricBar percentage="75%" color="#068B35" label="Sì, assolutamente" level={0.75} />
+                            <NeonGauge percentage="75%" color="#068B35" label="Sì" level={0.75} />
                           </div>
                         </div>
                       </HighlightCard>
@@ -248,7 +276,7 @@ export function AetherisLowerSections({
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -50 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
                     >
                       <HighlightCard animatedBorder={true} title="Utilità di un Totem Digitale?">
                         <div className="flex flex-col items-center gap-4 text-center">
@@ -274,10 +302,10 @@ export function AetherisLowerSections({
 
             </div>
           </AuroraBackground>
-          
+
           {/* Fade-in mask for smooth transition from the hero */}
           <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] from-10% via-[#050505]/80 to-transparent pointer-events-none z-0" />
-          
+
           {/* Fade-out mask for smooth transition to the next section */}
           <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pointer-events-none z-0" />
         </div>
@@ -300,7 +328,7 @@ export function AetherisLowerSections({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          
+
           {/* CARD 1 */}
           <div className="animated-border-card h-full shadow-lg group">
             {/* Inner Content Block */}
@@ -369,16 +397,16 @@ export function AetherisLowerSections({
       {/* MOCKUP MOBILE */}
       <div className="pt-16 pb-8 w-full">
         <div className="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]">
-          <img 
-            src="/project-01-mockup-mobile.jpg" 
+          <img
+            src="/project-01-mockup-mobile.jpg"
             alt="Bussola Verde Mobile Mockup 1"
             className="w-full h-auto object-cover block"
           />
-          <motion.img 
+          <motion.img
             initial={false}
             animate={{ opacity: mobileImageIndex === 1 ? 1 : 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            src="/project-01-mockup-mobile-2.jpg" 
+            src="/project-01-mockup-mobile-2.jpg"
             alt="Bussola Verde Mobile Mockup 2"
             className="w-full h-full object-cover absolute inset-0 z-10"
           />
@@ -400,9 +428,9 @@ export function AetherisLowerSections({
           {/* Left: Image & Identity */}
           <div className="flex flex-col gap-6 items-center lg:items-start w-full lg:w-1/3 z-10">
             <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#068B35]/30 shadow-lg shrink-0">
-              <img 
-                src="/mirella.png" 
-                alt="Mirella - User Persona" 
+              <img
+                src="/mirella.png"
+                alt="Mirella - User Persona"
                 className="w-full h-full object-cover grayscale contrast-110 brightness-95"
               />
             </div>
@@ -414,7 +442,7 @@ export function AetherisLowerSections({
 
           {/* Right: Facts & Bio in Grid */}
           <div className="flex flex-col gap-10 w-full lg:w-2/3 z-10">
-            
+
             <div className="bg-[#1A1D1B] p-6 sm:p-8 rounded-[2rem] border border-white/5 relative mt-4 lg:mt-0">
               <div className="text-5xl font-serif text-[#068B35]/40 absolute -top-4 left-4">"</div>
               <p className="text-base sm:text-lg italic text-neutral-200 leading-relaxed font-light text-center px-4 sm:px-8 relative z-10">
@@ -447,13 +475,13 @@ export function AetherisLowerSections({
 
       {/* NEW StickyCard002 Gallery Instead of Single Image */}
       <div className="relative z-10 w-full shrink-0 block">
-        <StickyCard002 
+        <StickyCard002
           cards={[
             { id: 1, image: "/mockup_totem_3.jpg", alt: "Totem Mockup 3" },
             { id: 2, image: "/mockup_totem.jpg", alt: "Totem Mockup" },
             { id: 3, image: "/mockup_cartello_zone_2.jpeg", alt: "Cartello Zone Mockup" },
             { id: 4, image: "/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
-          ]} 
+          ]}
         />
       </div>
 

@@ -89,12 +89,12 @@ const SpotlightFeatureCard: React.FC<{
   const Icon = feature.icon;
 
   // Theme Colors
-  const strokeColor = theme === 'red' ? 'rgba(232,48,42,0.8)' : 'rgba(16,185,129,0.8)';
-  const glowColor = theme === 'red' ? 'rgba(232,48,42,0.15)' : 'rgba(16,185,129,0.15)';
-  const iconGradientFrom = theme === 'red' ? 'from-[#E8302A]' : 'from-emerald-400';
-  const iconGradientTo = theme === 'red' ? 'to-[#8B0606]' : 'to-[#068B35]';
-  const iconTextColor = theme === 'red' ? 'text-[#E8302A]' : 'text-emerald-400';
-  const textHoverColor = theme === 'red' ? 'group-hover:text-[#E8302A]' : 'group-hover:text-emerald-400';
+  const strokeColor = theme === 'red' ? 'rgba(232,48,42,0.8)' : 'rgba(6,139,53,0.8)';
+  const glowColor = theme === 'red' ? 'rgba(232,48,42,0.15)' : 'rgba(6,139,53,0.15)';
+  const iconGradientFrom = theme === 'red' ? 'from-[#E8302A]' : 'from-[#068B35]';
+  const iconGradientTo = theme === 'red' ? 'to-[#8B0606]' : 'to-[#023011]';
+  const iconTextColor = theme === 'red' ? 'text-[#E8302A]' : 'text-[#068B35]';
+  const textHoverColor = theme === 'red' ? 'group-hover:text-[#E8302A]' : 'group-hover:text-[#068B35]';
 
   return (
     <div 

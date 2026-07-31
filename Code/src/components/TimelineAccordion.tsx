@@ -26,21 +26,21 @@ const phases = [
   {
     id: 'solutions',
     title: 'Soluzioni adottate',
-    icon: <Lightbulb className="w-5 h-5 text-emerald-400" />,
+    icon: <Lightbulb className="w-5 h-5 text-[#068B35]" />,
     features: ['Totem interattivi all\'ingresso', 'QR Code per approfondimenti', 'Web-App dedicata', 'Mappa digitale a portata di mano'],
     linkText: 'Scopri le soluzioni',
     linkHref: '#',
     textColors: {
       active: 'text-white',
-      hover: 'group-hover:text-emerald-400',
-      iconBorder: 'border-emerald-400',
-      iconGlow: 'bg-emerald-500/20',
-      gradientFrom: '#34d399', // emerald-400
-      gradientTo: '#068B35', 
-      check: 'text-emerald-400',
-      link: 'text-emerald-400',
-      linkBorder: 'border-emerald-400/30',
-      linkBorderHover: 'group-hover/link:border-emerald-400'
+      hover: 'group-hover:text-[#068B35]',
+      iconBorder: 'border-[#068B35]',
+      iconGlow: 'bg-[#068B35]/20',
+      gradientFrom: '#068B35', // classic green
+      gradientTo: '#023011', 
+      check: 'text-[#068B35]',
+      link: 'text-[#068B35]',
+      linkBorder: 'border-[#068B35]/30',
+      linkBorderHover: 'group-hover/link:border-[#068B35]'
     }
   }
 ];

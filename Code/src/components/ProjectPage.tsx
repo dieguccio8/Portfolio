@@ -42,7 +42,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
 import ThreeDMarquee from './ui/3d-marquee';
 import HighlightCard from './ui/highlight-card';
-import { HalftoneBackground } from './ui/halftone-background';
+
 
 function BeforeAfterSlider() {
   const [sliderPos, setSliderPos] = useState(50);

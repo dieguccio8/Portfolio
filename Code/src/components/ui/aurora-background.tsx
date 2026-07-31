@@ -40,7 +40,7 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         {/* Pulsing radial gradients */}
         <div
-          className="absolute inset-0 opacity-50"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
               radial-gradient(circle, ${colorA} 0%, transparent 80%),
@@ -59,7 +59,7 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
           transition={{ duration: 1, ease: "easeInOut" }}
         >
           <motion.div
-            className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-[#068B35] rounded-full filter blur-[120px] opacity-40"
+            className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-[#068B35] rounded-full filter blur-[120px] opacity-10"
             animate={{
               x: [-50, 50, -50],
               y: [-20, 20, -20],
@@ -73,7 +73,7 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
             }}
           />
           <motion.div
-            className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-[#046024] rounded-full filter blur-[120px] opacity-50"
+            className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-[#046024] rounded-full filter blur-[120px] opacity-15"
             animate={{
               x: [50, -50, 50],
               y: [20, -20, 20],
@@ -87,7 +87,7 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
             }}
           />
           <motion.div
-            className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-[#068B35] rounded-full filter blur-[120px] opacity-30"
+            className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-[#068B35] rounded-full filter blur-[120px] opacity-5"
             animate={{
               x: [20, -20, 20],
               y: [-30, 30, -30],
