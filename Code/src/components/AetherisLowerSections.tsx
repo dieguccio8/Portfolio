@@ -486,15 +486,7 @@ export function AetherisLowerSections({
         />
         
         {/* NEW 3D IPHONE MOCKUP SECTION */}
-        <div className="w-full relative mt-32 max-w-7xl mx-auto px-4 pb-32">
-          <div className="flex flex-col items-center justify-center text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
-              Il Prototipo Interattivo
-            </h2>
-            <p className="text-gray-400 max-w-2xl text-lg">
-              Esplora l'interfaccia utente ruotando liberamente il dispositivo 3D.
-            </p>
-          </div>
+        <div className="w-full relative mt-32">
           <IphoneMockup3D />
         </div>
       </div>

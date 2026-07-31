@@ -4,10 +4,16 @@ Command: npx gltfjsx@6.5.3 public/models/iphone16_mockup/iphone-16-pro.glb --typ
 */
 
 import * as THREE from 'three'
-import React, { useEffect, useRef, Suspense, Component, ReactNode } from 'react'
-import { useGLTF, useTexture, OrbitControls, Environment, ContactShadows, Html, Bounds, Center } from '@react-three/drei'
+import React, {  useEffect, useRef, Suspense, Component, ReactNode , useMemo } from 'react'
+import { useGLTF, useTexture,  Environment, ContactShadows, Html,  Center , Resize} from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { GLTF } from 'three-stdlib'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 
 class ErrorBoundary extends Component<{children: ReactNode, fallback: (error: Error) => ReactNode}, {hasError: boolean, error: Error | null}> {
   constructor(props: {children: ReactNode, fallback: (error: Error) => ReactNode}) {
@@ -124,6 +130,23 @@ export function Model(props: JSX.IntrinsicElements['group']) {
   // Fix texture orientation if necessary
   screenTexture.flipY = false;
 
+
+  const darkMat = useMemo(() => {
+    const mat = materials['iphone-16-pro-001.001'];
+    const clone = mat ? mat.clone() : new THREE.MeshStandardMaterial();
+    clone.color.set('#111111');
+    clone.roughness = 0.1;
+    return clone;
+  }, [materials]);
+  
+  const flashMat = useMemo(() => {
+    const mat = materials['iphone-16-pro-001.001'];
+    const clone = mat ? mat.clone() : new THREE.MeshStandardMaterial();
+    clone.color.set('#ffffee');
+    clone.emissive = new THREE.Color('#ffffee');
+    return clone;
+  }, [materials]);
+
   useEffect(() => {
     const mat = materials['iphone-16-pro-001.001'];
     if (mat) {
@@ -156,70 +179,70 @@ export function Model(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes['back-camera-lente-1-a'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-b'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-c'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-d'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-n'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-p'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-o'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-l'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-j'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-i'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-h'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-g'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-e'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-1-f'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-a'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-b'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-d'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-g'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-k'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-l'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-m'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-j'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-i'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-h'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-e'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-2-f'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-a'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-b'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-c'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-d'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-e'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-f'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-g'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-h'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-i'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-j'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-k'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-lente-3-l'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-flash-a'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-flash-b'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-flash-c'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-flash-d'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-flash-e'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['back-camera-flash-f'].geometry} material={materials['iphone-16-pro-001.001']} />
+            <mesh geometry={nodes['back-camera-lente-1-a'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-b'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-c'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-d'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-n'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-p'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-o'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-l'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-j'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-i'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-h'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-g'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-e'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-1-f'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-a'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-b'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-d'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-g'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-k'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-l'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-m'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-j'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-i'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-h'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-e'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-2-f'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-a'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-b'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-c'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-d'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-e'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-f'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-g'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-h'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-i'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-j'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-k'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-lente-3-l'].geometry} material={darkMat} />
+      <mesh geometry={nodes['back-camera-flash-a'].geometry} material={flashMat} />
+      <mesh geometry={nodes['back-camera-flash-b'].geometry} material={flashMat} />
+      <mesh geometry={nodes['back-camera-flash-c'].geometry} material={flashMat} />
+      <mesh geometry={nodes['back-camera-flash-d'].geometry} material={flashMat} />
+      <mesh geometry={nodes['back-camera-flash-e'].geometry} material={flashMat} />
+      <mesh geometry={nodes['back-camera-flash-f'].geometry} material={flashMat} />
       <mesh geometry={nodes['back-camera'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['back-camera-2'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['back-camera-3'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['back-camera-4'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-4'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-5'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-6'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-7'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-8'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-9'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-10'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-1'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['frontal-camera-2'].geometry} material={materials['iphone-16-pro-001.001']} />
+      <mesh geometry={nodes['frontal-camera-4'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-5'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-6'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-7'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-8'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-9'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-10'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-1'].geometry} material={darkMat} />
+      <mesh geometry={nodes['frontal-camera-2'].geometry} material={darkMat} />
       <mesh geometry={nodes['edge-a'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['edge-b'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['button-2'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['button-3'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['button-4'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['button-6'].geometry} material={materials['iphone-16-pro-001.001']} />
-      <mesh geometry={nodes['edge-display'].geometry} material={materials['iphone-16-pro-001.001']} />
+      <mesh geometry={nodes['edge-display'].geometry} material={darkMat} />
       <mesh geometry={nodes['button-5-center'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['button-5'].geometry} material={materials['iphone-16-pro-001.001']} />
       <mesh geometry={nodes['port-usb-1'].geometry} material={materials['iphone-16-pro-001.001']} />
@@ -247,28 +270,86 @@ export function Model(props: JSX.IntrinsicElements['group']) {
 
 useGLTF.preload('/models/iphone16_mockup/iphone-16-pro.glb')
 
+function AnimatedScene({ containerRef }: { containerRef: React.RefObject<HTMLDivElement> }) {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useGSAP(() => {
+    if (!groupRef.current || !containerRef.current) return;
+    
+    const isMobile = window.innerWidth < 768;
+    
+    // Top Right (massima estensione orizzontale sicura)
+    const startX = isMobile ? 35 : 100;
+    const startY = isMobile ? 25 : 30;
+    
+    // Bottom Left (massima estensione orizzontale sicura)
+    const endX = isMobile ? -35 : -100;
+    const endY = isMobile ? -25 : -30;
+    
+    // Setup initial position
+    // Starting at -Math.PI * 2 - (Math.PI / 4) will make it spin 360+45 degrees and end exactly at 0!
+    groupRef.current.position.set(startX, startY, 0);
+    groupRef.current.rotation.set(0.3, -Math.PI * 2 - (Math.PI / 4), 0.1);
+
+    // Create a scroll-driven timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1, // Smooth premium scrub
+      }
+    });
+
+    // Animate position from top-right to bottom-left
+    tl.to(groupRef.current.position, {
+      x: endX,
+      y: endY,
+      ease: "none"
+    }, 0);
+
+    // Animate rotation to end perfectly flat and straight (0,0,0)
+    tl.to(groupRef.current.rotation, {
+      x: 0,
+      y: 0, // Ends perfectly flat showing the screen
+      z: 0,
+      ease: "power1.inOut" // Smooth start and end to the rotation
+    }, 0);
+
+  }, { scope: containerRef, dependencies: [] });
+
+  return (
+    <>
+      <group ref={groupRef}>
+        <Resize scale={150}>
+          <Center>
+            {/* Rotating Math.PI on Y to show the screen first */}
+            <Model rotation={[0, Math.PI, 0]} />
+          </Center>
+        </Resize>
+      </group>
+    </>
+  );
+}
+
 export default function IphoneMockup3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
     <ErrorBoundary fallback={(err) => <div className="text-red-500 p-4 border border-red-500 rounded bg-red-900/20">Error 3D: {err.message}</div>}>
-      <div className="w-full h-[80vh] relative cursor-grab active:cursor-grabbing">
-        <Canvas camera={{ position: [0, 0, 300], fov: 45 }}>
-          <Suspense fallback={<Html center><div className="text-white text-xl">Caricamento 3D in corso...</div></Html>}>
-            <Environment preset="city" />
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[10, 10, 5]} intensity={1} />
-            
-            <OrbitControls makeDefault enableZoom={false} />
-            
-            <Bounds fit clip observe margin={1.2}>
-              <Center>
-                {/* Rotating Math.PI on Y to show the screen first */}
-                <Model rotation={[0, Math.PI, 0]} />
-              </Center>
-            </Bounds>
-            
-            <ContactShadows position={[0, -100, 0]} opacity={0.5} scale={150} blur={2} far={150} />
-          </Suspense>
-        </Canvas>
+      <div ref={containerRef} className="w-full h-[300vh] relative">
+        <div className="sticky top-0 w-full h-screen overflow-hidden">
+          <Canvas camera={{ position: [0, 0, 300], fov: 45 }}>
+            <Suspense fallback={<Html center><div className="text-white text-xl">Caricamento 3D in corso...</div></Html>}>
+              <Environment preset="city" />
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[10, 10, 5]} intensity={1} />
+              
+              <AnimatedScene containerRef={containerRef} />
+              
+            </Suspense>
+          </Canvas>
+        </div>
       </div>
     </ErrorBoundary>
   )
