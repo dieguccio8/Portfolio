@@ -5,6 +5,7 @@ import { StickyCard002 } from './ui/sticky-card';
 import InteractiveBentoSection from './InteractiveBentoSection';
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
+import IphoneMockup3D from './IphoneMockup3D';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -483,6 +484,19 @@ export function AetherisLowerSections({
             { id: 4, image: "/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
           ]}
         />
+        
+        {/* NEW 3D IPHONE MOCKUP SECTION */}
+        <div className="w-full relative mt-32 max-w-7xl mx-auto px-4 pb-32">
+          <div className="flex flex-col items-center justify-center text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+              Il Prototipo Interattivo
+            </h2>
+            <p className="text-gray-400 max-w-2xl text-lg">
+              Esplora l'interfaccia utente ruotando liberamente il dispositivo 3D.
+            </p>
+          </div>
+          <IphoneMockup3D />
+        </div>
       </div>
 
     </div>
