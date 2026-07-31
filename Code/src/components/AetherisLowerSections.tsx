@@ -313,105 +313,15 @@ export function AetherisLowerSections({
       </div>
 
       {/* 02 / ANALYSIS & STRATEGY: PROBLEMS VS SOLUTIONS */}
-      <div className="relative z-20 w-full -mt-[30vh] sm:-mt-[40vh]">
+      <div className="relative z-20 w-full mt-0 md:-mt-16">
         <InteractiveBentoSection />
       </div>
 
-      {/* 03 / L'ECOSISTEMA */}
-      <div className="pt-16 border-t border-white/5 flex flex-col gap-12">
-        <div className="flex flex-col gap-4 text-center items-center">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-raleway">
-            Cos'è Bussola Verde?
-          </h2>
-          <p className="text-base sm:text-lg text-neutral-400 font-light max-w-2xl mt-4">
-            Un ecosistema digitale che trasforma il parco in un percorso su misura, rendendo il visitatore esploratore attivo.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-
-          {/* CARD 1 */}
-          <div className="animated-border-card h-full shadow-lg group">
-            {/* Inner Content Block */}
-            <div className="animated-border-content p-8 flex flex-col gap-6 items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
-                <Compass className="w-8 h-8 animate-pulse" />
-              </div>
-              <div className="flex flex-col flex-1 z-10">
-                <h3 className="text-lg font-bold text-white font-raleway mb-2">Interattività</h3>
-                <p className="text-sm text-neutral-400 font-light leading-relaxed">Pannelli digitali e QR accrescono istantaneamente la conoscenza.</p>
-              </div>
-            </div>
-            {/* Add a transparent structural div just to give the card height since animated-border-content is absolute */}
-            <div className="p-8 flex flex-col gap-6 items-center text-center invisible pointer-events-none">
-              <div className="w-16 h-16 shrink-0" />
-              <div>
-                <h3 className="text-lg mb-2">Interattività</h3>
-                <p className="text-sm">Pannelli digitali e QR accrescono istantaneamente la conoscenza.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* CARD 2 */}
-          <div className="animated-border-card h-full shadow-lg group">
-            <div className="animated-border-content p-8 flex flex-col gap-6 items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
-                <ArrowRight className="w-8 h-8" />
-              </div>
-              <div className="flex flex-col flex-1 z-10">
-                <h3 className="text-lg font-bold text-white font-raleway mb-2">Percorsi Agili</h3>
-                <p className="text-sm text-neutral-400 font-light leading-relaxed">Itinerari personalizzati scelti tramite i Totem all'ingresso.</p>
-              </div>
-            </div>
-            <div className="p-8 flex flex-col gap-6 items-center text-center invisible pointer-events-none">
-              <div className="w-16 h-16 shrink-0" />
-              <div>
-                <h3 className="text-lg mb-2">Percorsi Agili</h3>
-                <p className="text-sm">Itinerari personalizzati scelti tramite i Totem all'ingresso.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* CARD 3 */}
-          <div className="animated-border-card h-full shadow-lg group">
-            <div className="animated-border-content p-8 flex flex-col gap-6 items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-[#068B35]/10 flex items-center justify-center text-[#068B35] group-hover:scale-110 transition-transform duration-500 shrink-0">
-                <div className="w-4 h-4 bg-[#068B35] rounded-full shadow-[0_0_15px_rgba(6,139,53,0.8)]" />
-              </div>
-              <div className="flex flex-col flex-1 z-10">
-                <h3 className="text-lg font-bold text-white font-raleway mb-2">Protagonismo</h3>
-                <p className="text-sm text-neutral-400 font-light leading-relaxed">Il visitatore è l'attore principale della propria esplorazione.</p>
-              </div>
-            </div>
-            <div className="p-8 flex flex-col gap-6 items-center text-center invisible pointer-events-none">
-              <div className="w-16 h-16 shrink-0" />
-              <div>
-                <h3 className="text-lg mb-2">Protagonismo</h3>
-                <p className="text-sm">Il visitatore è l'attore principale della propria esplorazione.</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* MOCKUP MOBILE */}
-      <div className="pt-16 pb-8 w-full">
-        <div className="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]">
-          <img
-            src="/project-01-mockup-mobile.jpg"
-            alt="Bussola Verde Mobile Mockup 1"
-            className="w-full h-auto object-cover block"
-          />
-          <motion.img
-            initial={false}
-            animate={{ opacity: mobileImageIndex === 1 ? 1 : 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            src="/project-01-mockup-mobile-2.jpg"
-            alt="Bussola Verde Mobile Mockup 2"
-            className="w-full h-full object-cover absolute inset-0 z-10"
-          />
-        </div>
+      {/* 03 / L'ECOSISTEMA (3D MOCKUP) */}
+      <div className="relative left-1/2 -translate-x-1/2 w-[100vw] -mt-10 md:-mt-20">
+        {/* Fade-in mask for smooth transition from the previous section */}
+        <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
+        <IphoneMockup3D />
       </div>
 
       {/* 04 / USER PERSONA */}
@@ -484,13 +394,7 @@ export function AetherisLowerSections({
             { id: 4, image: "/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
           ]}
         />
-        
-        {/* NEW 3D IPHONE MOCKUP SECTION */}
-        <div className="w-full relative mt-32">
-          <IphoneMockup3D />
-        </div>
       </div>
-
     </div>
   );
 }

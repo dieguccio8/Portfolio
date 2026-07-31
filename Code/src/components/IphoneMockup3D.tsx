@@ -11,7 +11,9 @@ import { GLTF } from 'three-stdlib'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
+import AuroraBackground from '@/components/ui/aurora-background';
+import HighlightCard from '@/components/ui/highlight-card';
+import { Compass, ArrowRight, Map as MapIcon } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger)
 
 
@@ -270,7 +272,7 @@ export function Model(props: any) {
 
 useGLTF.preload('/models/iphone16_mockup/iphone-16-pro.glb')
 
-function AnimatedScene({ containerRef, titleRef }: { containerRef: React.RefObject<HTMLDivElement>, titleRef: React.RefObject<HTMLHeadingElement> }) {
+function AnimatedScene({ containerRef, titleRef, cardsRef }: { containerRef: React.RefObject<HTMLDivElement>, titleRef: React.RefObject<HTMLDivElement>, cardsRef: React.RefObject<HTMLDivElement> }) {
   const groupRef = useRef<THREE.Group>(null);
 
   useGSAP(() => {
@@ -279,17 +281,19 @@ function AnimatedScene({ containerRef, titleRef }: { containerRef: React.RefObje
     const isMobile = window.innerWidth < 768;
     
     // Top Right (massima estensione orizzontale sicura)
-    const startX = isMobile ? 35 : 100;
+    const startX = isMobile ? 50 : 120;
     const startY = 0;
     
     // Bottom Left (massima estensione orizzontale sicura)
-    const endX = isMobile ? -35 : -100;
-    const endY = -20;
+    const endX = isMobile ? -60 : -110;
+    const endY = 0;
     
     // Setup initial position
     // Starting at -Math.PI * 2 - (Math.PI / 4) will make it spin 360+45 degrees and end exactly at 0!
-    groupRef.current.position.set(startX, startY, 0);
-    groupRef.current.rotation.set(0.3, -Math.PI * 2 - (Math.PI / 4), 0.1);
+    if (groupRef.current) {
+      groupRef.current.position.set(startX, startY, 0);
+      groupRef.current.rotation.set(0, -Math.PI * 2 - (Math.PI / 4), 0);
+    }
 
     // Create a scroll-driven timeline
     const tl = gsap.timeline({
@@ -305,16 +309,18 @@ function AnimatedScene({ containerRef, titleRef }: { containerRef: React.RefObje
     tl.to(groupRef.current.position, {
       x: endX,
       y: endY,
-      ease: "none"
+      z: 0,
+      ease: "power1.inOut"
     }, 0);
 
     // Animate rotation to end perfectly flat and straight (0,0,0)
     tl.to(groupRef.current.rotation, {
       x: 0,
-      y: 0, // Ends perfectly flat showing the screen
+      y: 0.3, // Slightly oriented towards the right
       z: 0,
       ease: "power1.inOut" // Smooth start and end to the rotation
     }, 0);
+    
     // Animate title to exit left
     if (titleRef.current) {
       tl.to(titleRef.current, {
@@ -323,6 +329,20 @@ function AnimatedScene({ containerRef, titleRef }: { containerRef: React.RefObje
         ease: "none"
       }, 0);
     }
+    
+    // Animate cards entering from right
+    if (cardsRef.current) {
+      // Set initial state: far to the right
+      gsap.set(cardsRef.current, { opacity: 0, x: 800 });
+      
+      tl.to(cardsRef.current, {
+        x: 0,
+        opacity: 1,
+        ease: "power2.out",
+        duration: 0.9 // Slower, matches the phone's 1.0 duration better
+      }, 0.1); // Starts almost immediately, following the phone
+    }
+
 
 
   }, { scope: containerRef, dependencies: [] });
@@ -343,28 +363,42 @@ function AnimatedScene({ containerRef, titleRef }: { containerRef: React.RefObje
 
 export default function IphoneMockup3D() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   return (
     <ErrorBoundary fallback={(err) => <div className="text-red-500 p-4 border border-red-500 rounded bg-red-900/20">Error 3D: {err.message}</div>}>
       <div ref={containerRef} className="w-full h-[300vh] relative">
         <div className="sticky top-0 w-full h-screen overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none flex flex-col justify-center pl-[5%] md:pl-[10%] lg:pl-[12%] pr-[5%] z-10">
-            <h1 ref={titleRef} className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-max leading-tight">
-               Cos'è<br />
-               <span className="text-[#068b35] whitespace-nowrap">Bussola Verde?</span>
-            </h1>
-          </div>
-          <Canvas camera={{ position: [0, 0, 300], fov: 45 }}>
-            <Suspense fallback={<Html center><div className="text-white text-xl">Caricamento 3D in corso...</div></Html>}>
-              <Environment preset="city" />
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[10, 10, 5]} intensity={1} />
-              
-              <AnimatedScene containerRef={containerRef} titleRef={titleRef} />
-              
-            </Suspense>
-          </Canvas>
+          <AuroraBackground className="!bg-transparent h-full w-full">
+            <div className="absolute inset-0 pointer-events-none flex flex-col justify-center pl-[5%] md:pl-[10%] lg:pl-[12%] pr-[5%] z-10">
+              <div ref={titleRef} className="flex flex-col gap-6 max-w-xl md:max-w-2xl">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-max leading-tight">
+                   Cos'è<br />
+                   <span className="text-[#068b35] whitespace-nowrap">Bussola Verde?</span>
+                </h1>
+                <p className="text-lg md:text-xl text-neutral-400 font-light leading-relaxed">
+                  Un ecosistema digitale che trasforma il parco in un percorso su misura, rendendo il visitatore esploratore attivo.
+                </p>
+              </div>
+            </div>
+            
+            <div ref={cardsRef} className="absolute right-[5%] md:right-[8%] lg:right-[10%] xl:right-[12%] top-[50%] -translate-y-1/2 w-[90vw] max-w-[320px] md:max-w-none md:w-[50vw] lg:w-[55vw] xl:w-[48vw] z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+               <HighlightCard animatedBorder={true} title="Interattività" description={["Pannelli digitali e QR accrescono la conoscenza."]} icon={<Compass className="w-6 h-6 text-[#068B35]" />} />
+               <HighlightCard animatedBorder={true} title="Percorsi Agili" description={["Itinerari scelti tramite i Totem all'ingresso."]} icon={<ArrowRight className="w-6 h-6 text-[#068B35]" />} />
+               <HighlightCard animatedBorder={true} title="Accessibilità" description={["App user-friendly e mappe inclusive per tutti."]} icon={<MapIcon className="w-6 h-6 text-[#068B35]" />} />
+            </div>
+            <Canvas camera={{ position: [0, 0, 300], fov: 45 }} className="!absolute inset-0 w-full h-full z-0">
+              <Suspense fallback={<Html center><div className="text-white text-xl">Caricamento 3D in corso...</div></Html>}>
+                <Environment preset="city" />
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[10, 10, 5]} intensity={1} />
+                
+                <AnimatedScene containerRef={containerRef} titleRef={titleRef} cardsRef={cardsRef} />
+                
+              </Suspense>
+            </Canvas>
+          </AuroraBackground>
         </div>
       </div>
     </ErrorBoundary>
