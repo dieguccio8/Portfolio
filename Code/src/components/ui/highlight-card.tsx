@@ -30,7 +30,7 @@ const HighlightCard: FC<ComponentProps> = ({ title, description, icon, children,
       onMouseMove={handleMouseMove}
       className={`group cursor-pointer transform transition-all duration-700 hover:-translate-y-2 h-full ${className || ''}`}
     >
-      <Card className="text-white rounded-[2rem] relative overflow-hidden w-full h-full border border-white/5 bg-[#030604] backdrop-blur-3xl flex flex-col justify-between p-8 sm:p-12 z-10 shadow-2xl">
+      <Card className="text-white rounded-[2rem] relative overflow-hidden w-full h-full border border-white/5 bg-[#030604] backdrop-blur-3xl flex flex-col justify-between p-6 sm:p-8 z-10 shadow-2xl">
         
         {/* Dynamic interactive mouse spotlight */}
         <div 
@@ -83,7 +83,7 @@ const HighlightCard: FC<ComponentProps> = ({ title, description, icon, children,
                 {description.map((line, idx) => (
                   <p
                     key={idx}
-                    className={`text-base leading-relaxed transition-colors duration-700 ${idx === description.length - 1 ? 'text-xs font-mono uppercase tracking-widest font-bold text-[#068B35] mt-6' : 'text-neutral-200'}`}
+                    className={`text-base leading-relaxed transition-colors duration-700 ${idx === description.length - 1 ? 'text-xs font-mono uppercase tracking-wide font-bold text-[#068B35] ' + (description.length > 1 ? 'mt-6' : 'mt-2') : 'text-neutral-200'}`}
                   >
                     {line}
                   </p>

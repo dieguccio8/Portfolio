@@ -26,7 +26,9 @@ import {
   Trash2,
   Upload,
   Image,
-  MessageSquare
+  MessageSquare,
+  Menu,
+  X
 } from 'lucide-react';
 import { Project } from '../types';
 import UserJourney from './UserJourney';
@@ -160,6 +162,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
   // General States
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeResearchTab, setActiveResearchTab] = useState<'desk' | 'sondaggi' | 'interviste'>('desk');
   const [activeProtoTab, setActiveProtoTab] = useState<'mobile' | 'totem'>('mobile');
   const [copiedLink, setCopiedLink] = useState(false);
@@ -288,67 +291,110 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           </div>
         )}
 
-        {/* 1. FIXED TOP HEADER (Pill shape, matches home navbar) */}
-        <header
-          className="fixed top-4 left-0 right-0 mx-auto z-50 w-[calc(100%-2rem)] max-w-5xl grid grid-cols-3 items-center text-sm uppercase tracking-widest font-normal border border-white/15 rounded-full px-6 py-2.5 bg-black/50 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
-          id="project-header"
+        {/* 1. FIXED TOP HEADER (Hamburger Menu) */}
+        <button
+          onClick={() => setIsMenuOpen(true)}
+          className="fixed top-6 left-6 z-[100] w-12 h-12 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)] hover:scale-105 transition-transform duration-300"
         >
-          {/* Left Area: Language Selector & Logo/Brand (returns to Home on click) */}
-          <div className="flex justify-start items-center gap-3">
-            {!isAetheris && setLang && (
-              <button
-                onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
-                className="flex items-center justify-center w-8 h-8 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/40 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-sm font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
-                title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
-              >
-                {lang.toUpperCase()}
-              </button>
-            )}
+          <Menu className="w-6 h-6 text-white" />
+        </button>
 
-            <div
-              onClick={onClose}
-              className="flex justify-start items-center gap-2.5 group/logo cursor-pointer"
-              title={lang === 'it' ? 'Torna alla Home' : 'Back to Home'}
+        {/* Hamburger Menu Drawer */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 bottom-0 w-[80vw] max-w-sm bg-[#050505]/95 backdrop-blur-3xl z-[150] border-r border-white/10 flex flex-col p-8 shadow-[30px_0_50px_rgba(0,0,0,0.5)]"
             >
-              <img
-                src="/logo_diego_cavallaro.png"
-                className="w-5 h-5 object-contain transition-all duration-300 hover:scale-105"
-                alt="Diego Cavallaro Logo"
-              />
-              <span className="text-white font-sans font-bold tracking-tight text-sm uppercase group-hover/logo:text-[#E8302A] transition-colors hidden md:inline-block font-sans">Diego Cavallaro</span>
-            </div>
-          </div>
-
-          {/* Center Area: Global Navigation (Back to Home button and current project tag) */}
-          <div className="flex justify-center items-center gap-4 sm:gap-6 col-start-2">
-            <nav className="flex justify-center items-center gap-4 sm:gap-6 text-white/80">
-              <span className="text-white font-semibold font-mono tracking-wider hidden sm:inline truncate max-w-[150px]">
-                {project.title}
-              </span>
-            </nav>
-          </div>
-
-          {/* Right Area: Contact / Let's Work Button */}
-          <div className="flex justify-end items-center gap-2 sm:gap-3">
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
-              target="_blank"
-              rel="noreferrer"
-              className={`text-white px-3 sm:px-5 py-2 rounded-full font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-sm uppercase text-center shrink-0 ${isAetheris ? 'bg-[#068B35] hover:bg-[#057A2E] shadow-[0_0_15px_rgba(6,139,53,0.3)]' : 'bg-[#E8302A] hover:bg-[#c9221d] shadow-[0_0_15px_rgba(232,48,42,0.3)]'}`}
-            >
-              {isAetheris ? (lang === 'it' ? 'Contattami' : 'Contact me') : (lang === 'it' ? 'Lavoriamo' : "Let's work")}
-            </a>
-            {isAetheris && setLang && (
               <button
-                onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
-                className="flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/30 hover:scale-[1.05] active:scale-[0.95] transition-all duration-300 text-sm font-mono font-bold text-white select-none cursor-pointer shadow-md shrink-0"
-                title={lang === 'it' ? 'Switch to English' : 'Passa in Italiano'}
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               >
-                {lang.toUpperCase()}
+                <X className="w-5 h-5 text-white" />
               </button>
-            )}
-          </div>
-        </header>
+
+              <div className="flex flex-col gap-12 mt-12 h-full">
+                {/* Logo / Back to Home */}
+                <div
+                  onClick={() => { setIsMenuOpen(false); onClose(); }}
+                  className="flex items-center gap-3 group/logo cursor-pointer"
+                  title={lang === 'it' ? 'Torna alla Home' : 'Back to Home'}
+                >
+                  <img
+                    src="/logo_diego_cavallaro.png"
+                    className="w-8 h-8 object-contain transition-transform duration-300 group-hover/logo:scale-110"
+                    alt="Diego Cavallaro Logo"
+                  />
+                  <span className="text-white font-sans font-bold tracking-tight text-lg uppercase group-hover/logo:text-[#E8302A] transition-colors">
+                    Diego Cavallaro
+                  </span>
+                </div>
+
+                {/* Project Title */}
+                <div className="flex flex-col gap-2">
+                  <span className="text-white/40 font-mono text-xs uppercase tracking-widest">
+                    {lang === 'it' ? 'Progetto Attuale' : 'Current Project'}
+                  </span>
+                  <span className="text-white font-semibold font-mono tracking-wider text-xl">
+                    {project.title}
+                  </span>
+                </div>
+
+                <div className="flex-grow" />
+
+                {/* Actions (Language & Contact) */}
+                <div className="flex flex-col gap-6">
+                  {setLang && (
+                    <div className="flex items-center gap-4">
+                      <span className="text-white/40 font-mono text-xs uppercase tracking-widest">
+                        {lang === 'it' ? 'Lingua' : 'Language'}
+                      </span>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => { setLang('it'); setIsMenuOpen(false); }}
+                          className={`px-4 py-2 rounded-full font-mono text-sm font-bold transition-colors ${lang === 'it' ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}
+                        >
+                          IT
+                        </button>
+                        <button
+                          onClick={() => { setLang('en'); setIsMenuOpen(false); }}
+                          className={`px-4 py-2 rounded-full font-mono text-sm font-bold transition-colors ${lang === 'en' ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}
+                        >
+                          EN
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`w-full text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm uppercase text-center ${isAetheris ? 'bg-[#068B35] hover:bg-[#057A2E] shadow-[0_0_15px_rgba(6,139,53,0.3)]' : 'bg-[#E8302A] hover:bg-[#c9221d] shadow-[0_0_15px_rgba(232,48,42,0.3)]'}`}
+                  >
+                    {isAetheris ? (lang === 'it' ? 'Contattami' : 'Contact me') : (lang === 'it' ? 'Lavoriamo' : "Let's work")}
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Overlay to close when clicking outside */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[140]"
+            />
+          )}
+        </AnimatePresence>
         {isKinetics ? (
           <section className="relative w-full pt-32 pb-16 min-h-[75vh] md:min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center overflow-hidden bg-[#0D0D0D] border-b-2 border-[#2B2B2B]">
             {/* 3.2 Scribble/tag pattern repeated background */}

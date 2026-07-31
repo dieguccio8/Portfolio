@@ -138,9 +138,12 @@ export function AetherisLowerSections({
           targetTab = 'sondaggi';
         } else if (progress > 0.66) {
           targetTab = 'interviste';
+        } else {
+          targetTab = 'desk';
         }
 
-        if (activeTabRef.current !== targetTab) {
+        // Only update if it actually changed to avoid overriding the initial state incorrectly on mount
+        if (activeTabRef.current !== targetTab && (progress > 0 || self.isActive)) {
           setActiveResearchTab(targetTab);
         }
       }
@@ -321,11 +324,31 @@ export function AetherisLowerSections({
       <div className="relative left-1/2 -translate-x-1/2 w-[100vw] -mt-10 md:-mt-20">
         {/* Fade-in mask for smooth transition from the previous section */}
         <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
+        
         <IphoneMockup3D />
+
+        {/* Fade-out mask for smooth transition to the next section */}
+        <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
+      </div>
+
+      {/* 03.5 / LOOPING MOCKUPS (Restored) */}
+      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[50vh] md:h-[80vh] mt-10 md:mt-20">
+        <div className="relative w-full h-full">
+          <img
+            src="/project-01-mockup-mobile.jpg"
+            alt="Bussola Verde App Preview 1"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
+          />
+          <img
+            src="/project-01-mockup-mobile-2.jpg"
+            alt="Bussola Verde App Preview 2"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
+          />
+        </div>
       </div>
 
       {/* 04 / USER PERSONA */}
-      <div className="pt-16 border-t border-white/5 flex flex-col gap-12 pb-16">
+      <div className="pt-8 md:pt-16 flex flex-col gap-12 pb-16 relative z-10 mt-[-2rem]">
         <div className="flex flex-col gap-4 text-center items-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-raleway">
             L'Utente Ideale

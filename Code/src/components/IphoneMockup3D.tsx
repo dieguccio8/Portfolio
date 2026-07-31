@@ -279,19 +279,21 @@ function AnimatedScene({ containerRef, titleRef, cardsRef }: { containerRef: Rea
     if (!groupRef.current || !containerRef.current) return;
     
     const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
     
-    // Top Right (massima estensione orizzontale sicura)
-    const startX = isMobile ? 50 : 120;
-    const startY = 0;
-    
-    // Bottom Left (massima estensione orizzontale sicura)
-    const endX = isMobile ? -60 : -110;
+    // Initial position for entering from right
+    gsap.set(groupRef.current.position, {
+      x: isMobile ? 80 : 150,
+      y: 0,
+      z: 0
+    });
+
+    const endX = isMobile ? 0 : isTablet ? -60 : -120;
     const endY = 0;
     
     // Setup initial position
     // Starting at -Math.PI * 2 - (Math.PI / 4) will make it spin 360+45 degrees and end exactly at 0!
     if (groupRef.current) {
-      groupRef.current.position.set(startX, startY, 0);
       groupRef.current.rotation.set(0, -Math.PI * 2 - (Math.PI / 4), 0);
     }
 
@@ -383,7 +385,7 @@ export default function IphoneMockup3D() {
               </div>
             </div>
             
-            <div ref={cardsRef} className="absolute right-[5%] md:right-[8%] lg:right-[10%] xl:right-[12%] top-[50%] -translate-y-1/2 w-[90vw] max-w-[320px] md:max-w-none md:w-[50vw] lg:w-[55vw] xl:w-[48vw] z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+            <div ref={cardsRef} className="absolute right-[2%] md:right-[5%] lg:right-[8%] xl:right-[10%] top-[50%] -translate-y-1/2 w-[95vw] max-w-[320px] md:max-w-none md:w-[55vw] lg:w-[58vw] xl:w-[55vw] z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
                <HighlightCard animatedBorder={true} title="Interattività" description={["Pannelli digitali e QR accrescono la conoscenza."]} icon={<Compass className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Percorsi Agili" description={["Itinerari scelti tramite i Totem all'ingresso."]} icon={<ArrowRight className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Accessibilità" description={["App user-friendly e mappe inclusive per tutti."]} icon={<MapIcon className="w-6 h-6 text-[#068B35]" />} />
