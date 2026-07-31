@@ -270,7 +270,7 @@ export function Model(props: any) {
 
 useGLTF.preload('/models/iphone16_mockup/iphone-16-pro.glb')
 
-function AnimatedScene({ containerRef }: { containerRef: React.RefObject<HTMLDivElement> }) {
+function AnimatedScene({ containerRef, titleRef }: { containerRef: React.RefObject<HTMLDivElement>, titleRef: React.RefObject<HTMLHeadingElement> }) {
   const groupRef = useRef<THREE.Group>(null);
 
   useGSAP(() => {
@@ -280,11 +280,11 @@ function AnimatedScene({ containerRef }: { containerRef: React.RefObject<HTMLDiv
     
     // Top Right (massima estensione orizzontale sicura)
     const startX = isMobile ? 35 : 100;
-    const startY = isMobile ? 25 : 30;
+    const startY = 0;
     
     // Bottom Left (massima estensione orizzontale sicura)
     const endX = isMobile ? -35 : -100;
-    const endY = isMobile ? -25 : -30;
+    const endY = -20;
     
     // Setup initial position
     // Starting at -Math.PI * 2 - (Math.PI / 4) will make it spin 360+45 degrees and end exactly at 0!
@@ -315,6 +315,15 @@ function AnimatedScene({ containerRef }: { containerRef: React.RefObject<HTMLDiv
       z: 0,
       ease: "power1.inOut" // Smooth start and end to the rotation
     }, 0);
+    // Animate title to exit left
+    if (titleRef.current) {
+      tl.to(titleRef.current, {
+        xPercent: -150,
+        opacity: 0,
+        ease: "none"
+      }, 0);
+    }
+
 
   }, { scope: containerRef, dependencies: [] });
 
@@ -334,18 +343,25 @@ function AnimatedScene({ containerRef }: { containerRef: React.RefObject<HTMLDiv
 
 export default function IphoneMockup3D() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   return (
     <ErrorBoundary fallback={(err) => <div className="text-red-500 p-4 border border-red-500 rounded bg-red-900/20">Error 3D: {err.message}</div>}>
       <div ref={containerRef} className="w-full h-[300vh] relative">
         <div className="sticky top-0 w-full h-screen overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none flex flex-col justify-center pl-[5%] md:pl-[10%] lg:pl-[12%] pr-[5%] z-10">
+            <h1 ref={titleRef} className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-max leading-tight">
+               Cos'è<br />
+               <span className="text-[#068b35] whitespace-nowrap">Bussola Verde?</span>
+            </h1>
+          </div>
           <Canvas camera={{ position: [0, 0, 300], fov: 45 }}>
             <Suspense fallback={<Html center><div className="text-white text-xl">Caricamento 3D in corso...</div></Html>}>
               <Environment preset="city" />
               <ambientLight intensity={0.5} />
               <directionalLight position={[10, 10, 5]} intensity={1} />
               
-              <AnimatedScene containerRef={containerRef} />
+              <AnimatedScene containerRef={containerRef} titleRef={titleRef} />
               
             </Suspense>
           </Canvas>
