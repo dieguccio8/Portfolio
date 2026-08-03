@@ -112,12 +112,12 @@
 
 .button3d {
   --white: #ebffef;
-  --green-100: #b1f0c3;
-  --green-200: #85e0a0;
-  --green-300: #58d07c;
-  --green-400: #2dbf58;
-  --green-500: #068B35;
-  --green-600: #046a28;
+  --green-100: #85e0a0;
+  --green-200: #58d07c;
+  --green-300: #2dbf58;
+  --green-400: #068B35;
+  --green-500: #046a28;
+  --green-600: #024a1b;
   --radius: 18px;
   border-radius: var(--radius);
   cursor: pointer;
@@ -243,13 +243,7 @@
   position: relative;
 }
 
-.button3d .char span:nth-child(5) {
-  margin-left: 5px;
-}
 
-.button3d .char.state-1 span:nth-child(5) {
-  margin-right: -3px;
-}
 
 .button3d .char.state-1 span {
   animation: charAppear 1.2s ease backwards calc(var(--i) * 30ms);

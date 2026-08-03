@@ -44,6 +44,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
 import ThreeDMarquee from './ui/3d-marquee';
 import HighlightCard from './ui/highlight-card';
+import AuroraBackground from './ui/aurora-background';
 import { Button3D } from './ui/3d-button';
 
 
@@ -125,10 +126,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-    
+
     // Force native scroll to top
     window.scrollTo(0, 0);
-    
+
     // If Lenis is active (SmoothScroll), force it to top immediately
     if ((window as any).__lenis) {
       (window as any).__lenis.scrollTo(0, { immediate: true });
@@ -182,7 +183,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
     try {
       const saved = localStorage.getItem('aetheris_wireframes');
       const parsed = saved ? JSON.parse(saved) : {};
-      
+
       const defaultImages: { [key: string]: string } = {
         hero_aetheris: '/Images/Project 01/hero.jpg',
         hero_kinetics: '/Images/Project 02/Mockup/mockup_desktop_2.jpg',
@@ -380,7 +381,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       </div>
                     </div>
                   )}
-                  
+
                   <a
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
                     target="_blank"
@@ -434,7 +435,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 py-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Left Column: Brand Info */}
               <div className="lg:col-span-7 flex flex-col gap-6 text-left">
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -449,7 +450,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </div>
                 </motion.div>
 
-                <motion.h1 
+                <motion.h1
                   initial={{ opacity: 0, scale: 0.95, y: 30 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.9, delay: 0.1, type: "spring", bounce: 0.3, visualDuration: 0.8 }}
@@ -465,7 +466,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </span>
                 </motion.h1>
 
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -478,7 +479,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 </motion.p>
 
                 {/* Sleek Horizontal Project Ledger - Magnetic Interaction */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -519,17 +520,17 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               </div>
 
               {/* Right Column: Stunning StreetArt Editorial Collage */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
                 className="lg:col-span-5 relative w-full aspect-[4/5] max-w-[450px] mx-auto lg:max-w-none flex items-center justify-center p-6 select-none z-10 mt-8 lg:mt-0 perspective-[1200px]"
               >
                 {/* 3.5 Alone/cornice geometrica di sfondo */}
-                <motion.div 
+                <motion.div
                   animate={{ rotate: [5, 6, 5] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-4 bg-[#FCD306] rotate-[5deg] -z-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-2 border-[#0D0D0D]" 
+                  className="absolute inset-4 bg-[#FCD306] rotate-[5deg] -z-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-2 border-[#0D0D0D]"
                 />
 
                 {/* Main Image with geometric torn corner (3.3) and rotation */}
@@ -557,7 +558,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 </motion.div>
 
                 {/* 3.4 Collage a due livelli: secondary inset image ruotata in senso opposto */}
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 0, scale: 1.1, z: 50, x: -10, y: -10 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className="absolute -bottom-6 -left-4 sm:-left-8 z-20 w-36 h-48 sm:w-44 sm:h-56 bg-[#1A1A1A] p-2 border-2 border-[#2B2B2B] shadow-[10px_10px_0px_#0D0D0D] rotate-[8deg]"
@@ -997,380 +998,380 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24" style={{ background: `radial-gradient(125% 125% at 50% 10%, #000 40%, ${isAetheris ? '#068b35' : primaryColor} 100%)` }}></div>
                   </div>
                   <div className="relative z-10 flex flex-col gap-6">
-                  <div className="flex flex-col gap-3">
-                    <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
-                      {lang === 'it'
-                        ? (isAetheris ? '01 / Ricerca ed Analisi' : '02 / Ricerca ed Analisi')
-                        : (isAetheris ? '01 / Research & Analysis' : '02 / Research & Analysis')
-                      }
-                    </span>
-                    <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight text-white ${isAetheris ? 'font-raleway' : 'font-sans'}`}>
-                      {lang === 'it'
-                        ? (isAetheris ? "Metodologia e Fasi di Ricerca" : "Fasi di Analisi & Ricerca Artistica")
-                        : (isAetheris ? "Research Methodology & Phases" : "Analysis Phases & Artistic Research")
-                      }
-                    </h2>
-                    <p className="text-sm leading-relaxed text-neutral-400 font-light">
-                      {lang === 'it' ? (
-                        isAetheris
-                          ? "Per approfondire il legame tra visitatore e giardino botanico, abbiamo strutturato l'analisi su three direttrici complementari. Utilizza il menu interattivo orizzontale sottostante per esplorare i risultati di ciascuna fase."
-                          : "Per catturare le dinamiche di fruizione dell'arte urbana e mappare i bisogni di appassionati e turisti, abbiamo strutturato una ricerca multi-metodo. Esplora le scoperte di ogni fase tramite il menu."
-                      ) : (
-                        isAetheris
-                          ? "To deepen the bond between visitor and botanical garden, we structured our analysis across three complementary directions. Use the horizontal interactive menu below to explore the results of each phase."
-                          : "To capture the usage dynamics of urban art and map the needs of enthusiasts and tourists, we structured a multi-method research. Explore the findings of each phase using the menu."
-                      )}
-                    </p>
-                  </div>
+                    <div className="flex flex-col gap-3">
+                      <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
+                        {lang === 'it'
+                          ? (isAetheris ? '01 / Ricerca ed Analisi' : '02 / Ricerca ed Analisi')
+                          : (isAetheris ? '01 / Research & Analysis' : '02 / Research & Analysis')
+                        }
+                      </span>
+                      <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight text-white ${isAetheris ? 'font-raleway' : 'font-sans'}`}>
+                        {lang === 'it'
+                          ? (isAetheris ? "Metodologia e Fasi di Ricerca" : "Fasi di Analisi & Ricerca Artistica")
+                          : (isAetheris ? "Research Methodology & Phases" : "Analysis Phases & Artistic Research")
+                        }
+                      </h2>
+                      <p className="text-sm leading-relaxed text-neutral-400 font-light">
+                        {lang === 'it' ? (
+                          isAetheris
+                            ? "Per approfondire il legame tra visitatore e giardino botanico, abbiamo strutturato l'analisi su three direttrici complementari. Utilizza il menu interattivo orizzontale sottostante per esplorare i risultati di ciascuna fase."
+                            : "Per catturare le dinamiche di fruizione dell'arte urbana e mappare i bisogni di appassionati e turisti, abbiamo strutturato una ricerca multi-metodo. Esplora le scoperte di ogni fase tramite il menu."
+                        ) : (
+                          isAetheris
+                            ? "To deepen the bond between visitor and botanical garden, we structured our analysis across three complementary directions. Use the horizontal interactive menu below to explore the results of each phase."
+                            : "To capture the usage dynamics of urban art and map the needs of enthusiasts and tourists, we structured a multi-method research. Explore the findings of each phase using the menu."
+                        )}
+                      </p>
+                    </div>
 
-                  {/* Menù orizzontale per cambiare tipologia di ricerca */}
-                  <div className={`flex bg-[#131514] border border-white/5 p-1 ${isAetheris ? 'rounded-full' : 'rounded-2xl'} shrink-0 self-start shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none`}>
-                    <button
-                      onClick={() => setActiveResearchTab('desk')}
-                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway ${activeResearchTab === 'desk' ? 'text-white' : 'text-neutral-400 hover:text-white'
-                        }`}
-                    >
+                    {/* Menù orizzontale per cambiare tipologia di ricerca */}
+                    <div className={`flex bg-[#131514] border border-white/5 p-1 ${isAetheris ? 'rounded-full' : 'rounded-2xl'} shrink-0 self-start shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none`}>
+                      <button
+                        onClick={() => setActiveResearchTab('desk')}
+                        className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway ${activeResearchTab === 'desk' ? 'text-white' : 'text-neutral-400 hover:text-white'
+                          }`}
+                      >
+                        {activeResearchTab === 'desk' && (
+                          <motion.div
+                            layoutId="active-research-bg"
+                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        <span className="relative">{lang === 'it' ? 'Ricerca Desk' : 'Desk Research'}</span>
+                      </button>
+                      <button
+                        onClick={() => setActiveResearchTab('sondaggi')}
+                        className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway ${activeResearchTab === 'sondaggi' ? 'text-white' : 'text-neutral-400 hover:text-white'
+                          }`}
+                      >
+                        {activeResearchTab === 'sondaggi' && (
+                          <motion.div
+                            layoutId="active-research-bg"
+                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        <span className="relative">{lang === 'it' ? 'Sondaggi' : 'Surveys'}</span>
+                      </button>
+                      <button
+                        onClick={() => setActiveResearchTab('interviste')}
+                        className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway ${activeResearchTab === 'interviste' ? 'text-white' : 'text-neutral-400 hover:text-white'
+                          }`}
+                      >
+                        {activeResearchTab === 'interviste' && (
+                          <motion.div
+                            layoutId="active-research-bg"
+                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        <span className="relative">{lang === 'it' ? 'Interviste' : 'Interviews'}</span>
+                      </button>
+                    </div>              {/* Contenuto Dinamico delle Ricerche */}
+                    <AnimatePresence mode="wait">
                       {activeResearchTab === 'desk' && (
                         <motion.div
-                          layoutId="active-research-bg"
-                          className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        />
+                          key="desk-tab"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="flex flex-col gap-6"
+                        >
+                          <p className="text-sm leading-relaxed text-neutral-400">
+                            {lang === 'it' ? (
+                              isAetheris
+                                ? "Abbiamo analizzato il sito ufficiale, articoli e recensioni online per comprendere il contesto dell’Orto Botanico e individuare le principali criticità dell’esperienza di visita."
+                                : "Abbiamo analizzato cataloghi d'arte, portali di turismo urbano e recensioni social per comprendere lo stato della street art in Sicilia e le problematiche di tracciamento delle opere."
+                            ) : (
+                              isAetheris
+                                ? "We analyzed the official website, articles, and online reviews to understand the context of the Botanical Garden and identify key issues in the visitor experience."
+                                : "We analyzed art catalogs, urban tourism portals, and social reviews to understand the status of street art in Sicily and the challenges of tracking the artworks."
+                            )}
+                          </p>
+
+                          {/* 3 card con opinioni utenti */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                            <HighlightCard animatedBorder={isAetheris}
+                              title={lang === 'it' ? 'Recensione 1' : 'Review 1'}
+                              description={[
+                                lang === 'it' ? (
+                                  isAetheris
+                                    ? "“Difficile per chi non conosce il mondo della botanica destreggiarsi fra le piante. Nessuna guida né spiegazione”"
+                                    : "“Ci sono murales incredibili a Catania e Palermo, ma non si trova mezza riga su chi li abbia dipinti o cosa vogliano dire.”"
+                                ) : (
+                                  isAetheris
+                                    ? "“Hard for those who do not know the world of botany to navigate among the plants. No guide or explanation”"
+                                    : "“There are incredible murals in Catania and Palermo, but you can't find a single line about who painted them or what they mean.”"
+                                ),
+                                lang === 'it' ? 'Criticità: Informazioni' : 'Issue: Information'
+                              ]}
+                              icon={<MessageSquare className="w-8 h-8 text-white" />}
+                            />
+                            <HighlightCard animatedBorder={isAetheris}
+                              title={lang === 'it' ? 'Recensione 2' : 'Review 2'}
+                              description={[
+                                lang === 'it' ? (
+                                  isAetheris
+                                    ? "“L’ho visitato da solo. E’ bello da vedere, si visita in 5 minuti ma non presenta nulla di particolare, forse necessitavo di una guida.”"
+                                    : "“Ho provato a fare un giro per vedere la street art a San Berillo, ma molte opere sono nei vicoli ciechi e senza una mappa è facilissimo perdersi.”"
+                                ) : (
+                                  isAetheris
+                                    ? "“I visited it alone. It's nice to look at, takes 5 minutes, but doesn't offer anything special, maybe I needed a guide.”"
+                                    : "“I tried walking around to see street art in San Berillo, but many works are in dead ends and without a map it's very easy to get lost.”"
+                                ),
+                                lang === 'it'
+                                  ? (isAetheris ? "Criticità: Coinvolgimento" : "Criticità: Navigazione")
+                                  : (isAetheris ? "Issue: Engagement" : "Issue: Navigation")
+                              ]}
+                              icon={<MessageSquare className="w-8 h-8 text-white" />}
+                            />
+                            <HighlightCard animatedBorder={isAetheris}
+                              title={lang === 'it' ? 'Recensione 3' : 'Review 3'}
+                              description={[
+                                lang === 'it' ? (
+                                  isAetheris
+                                    ? "“Bello, ma manca di spiegazioni riguardo le piante... oltre al nome scientifico nient’altro!”"
+                                    : "“Molti murales storici vengono coperti o vandalizzati senza che nessuno li documenti. Manca un archivio storico digitale.”"
+                                ) : (
+                                  isAetheris
+                                    ? "“Beautiful, but lacks explanations about the plants... other than the scientific name there's nothing else!”"
+                                    : "“Many historical murals are covered up or vandalized without anyone documenting them. A digital historical archive is missing.”"
+                                ),
+                                lang === 'it'
+                                  ? (isAetheris ? "Criticità: Informazioni" : "Criticità: Conservazione")
+                                  : (isAetheris ? "Issue: Information" : "Issue: Preservation")
+                              ]}
+                              icon={<MessageSquare className="w-8 h-8 text-white" />}
+                            />
+                          </div>
+                        </motion.div>
                       )}
-                      <span className="relative">{lang === 'it' ? 'Ricerca Desk' : 'Desk Research'}</span>
-                    </button>
-                    <button
-                      onClick={() => setActiveResearchTab('sondaggi')}
-                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway ${activeResearchTab === 'sondaggi' ? 'text-white' : 'text-neutral-400 hover:text-white'
-                        }`}
-                    >
+
                       {activeResearchTab === 'sondaggi' && (
                         <motion.div
-                          layoutId="active-research-bg"
-                          className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        />
+                          key="sondaggi-tab"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="flex flex-col gap-6"
+                        >
+                          <p className="text-sm leading-relaxed text-neutral-400">
+                            {lang === 'it' ? (
+                              isAetheris
+                                ? "Abbiamo raccolto dati tramite un sondaggio per capire come i visitatori si orientano all’interno dell’orto e il loro interesse verso strumenti digitali come QR code o app."
+                                : "Abbiamo interrogato un campione di turisti e appassionati sull'abitudine di cercare arte urbana e sull'efficacia delle mappe geolocalizzate durante i loro viaggi."
+                            ) : (
+                              isAetheris
+                                ? "We collected data through a survey to understand how visitors navigate the garden and their interest in digital tools like QR codes or apps."
+                                : "We surveyed a sample of tourists and enthusiasts about their habits when searching for urban art and the effectiveness of geolocation maps during their travels."
+                            )}
+                          </p>
+
+                          {/* Grafici risposte dei sondaggi */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 h-full">
+                            {/* Domanda 1 */}
+                            <HighlightCard animatedBorder={isAetheris}
+                              title={lang === 'it' ? (
+                                isAetheris
+                                  ? "“Come ti stai orientando nell’orto?”"
+                                  : "“Come scopri le opere di street art in una nuova città?”"
+                              ) : (
+                                isAetheris
+                                  ? "“How do you orient yourself in the garden?”"
+                                  : "“How do you discover street art in a new city?”"
+                              )}
+                            >
+                              <div className="flex flex-col gap-3 pt-2">
+                                {/* Prima Opzione */}
+                                <div className="flex flex-col gap-1">
+                                  <div className="flex justify-between text-sm font-raleway text-neutral-400">
+                                    <span>
+                                      {lang === 'it'
+                                        ? (isAetheris ? "In modo casuale" : "Camminando in modo casuale")
+                                        : (isAetheris ? "Randomly" : "Walking around randomly")
+                                      }
+                                    </span>
+                                    <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                                      {isAetheris ? "70%" : "65%"}
+                                    </span>
+                                  </div>
+                                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '70%' : '65%' }} />
+                                  </div>
+                                </div>
+
+                                {/* Seconda Opzione */}
+                                <div className="flex flex-col gap-1">
+                                  <div className="flex justify-between text-sm font-raleway text-neutral-400">
+                                    <span>
+                                      {lang === 'it'
+                                        ? (isAetheris ? "Segnaletica fisica" : "Social media & Blog d'arte")
+                                        : (isAetheris ? "Physical signage" : "Social media & Art blogs")
+                                      }
+                                    </span>
+                                    <span className="font-bold text-white">
+                                      {isAetheris ? "20%" : "25%"}
+                                    </span>
+                                  </div>
+                                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div className="bg-neutral-500 h-full rounded-full" style={{ width: isAetheris ? '20%' : '25%' }} />
+                                  </div>
+                                </div>
+
+                                {/* Terza Opzione */}
+                                <div className="flex flex-col gap-1">
+                                  <div className="flex justify-between text-sm font-raleway text-neutral-400">
+                                    <span>
+                                      {lang === 'it'
+                                        ? (isAetheris ? "Mappa cartacea" : "Guide turistiche ufficiali")
+                                        : (isAetheris ? "Paper map" : "Official tour guides")
+                                      }
+                                    </span>
+                                    <span className="font-bold text-neutral-400">10%</span>
+                                  </div>
+                                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div className="bg-neutral-700 h-full rounded-full" style={{ width: '10%' }} />
+                                  </div>
+                                </div>
+                              </div>
+                            </HighlightCard>
+
+                            {/* Domanda 2 */}
+                            <HighlightCard animatedBorder={isAetheris}
+                              title={lang === 'it' ? (
+                                isAetheris
+                                  ? "“Useresti il tuo smartphone per approfondire tramite QR code?”"
+                                  : "“Useresti un’app dedicata per fare tour autoguidati di street art?”"
+                              ) : (
+                                isAetheris
+                                  ? "“Would you use your smartphone to learn more via QR codes?”"
+                                  : "“Would you use a dedicated app to take self-guided street art tours?”"
+                              )}
+                            >
+                              <div className="flex flex-col gap-3 pt-2">
+                                {/* Opzione Sì */}
+                                <div className="flex flex-col gap-1">
+                                  <div className="flex justify-between text-sm font-raleway text-neutral-400">
+                                    <span>{lang === 'it' ? 'Sì' : 'Yes'}</span>
+                                    <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                                      {isAetheris ? "75%" : "80%"}
+                                    </span>
+                                  </div>
+                                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '75%' : '80%' }} />
+                                  </div>
+                                </div>
+
+                                {/* Opzione Forse */}
+                                <div className="flex flex-col gap-1">
+                                  <div className="flex justify-between text-sm font-raleway text-neutral-400">
+                                    <span>
+                                      {lang === 'it'
+                                        ? (isAetheris ? "Forse" : "Forse / Dipende")
+                                        : (isAetheris ? "Maybe" : "Maybe / Depends")
+                                      }
+                                    </span>
+                                    <span className="font-bold text-neutral-300">
+                                      {isAetheris ? "25%" : "20%"}
+                                    </span>
+                                  </div>
+                                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div className="bg-neutral-500 h-full rounded-full" style={{ width: isAetheris ? '25%' : '20%' }} />
+                                  </div>
+                                </div>
+                              </div>
+                            </HighlightCard>
+                          </div>
+                        </motion.div>
                       )}
-                      <span className="relative">{lang === 'it' ? 'Sondaggi' : 'Surveys'}</span>
-                    </button>
-                    <button
-                      onClick={() => setActiveResearchTab('interviste')}
-                      className={`flex items-center gap-2 px-4 py-2 ${isAetheris ? 'rounded-full' : 'rounded-xl'} text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway ${activeResearchTab === 'interviste' ? 'text-white' : 'text-neutral-400 hover:text-white'
-                        }`}
-                    >
+
                       {activeResearchTab === 'interviste' && (
                         <motion.div
-                          layoutId="active-research-bg"
-                          className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        />
+                          key="interviste-tab"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="flex flex-col gap-5"
+                        >
+                          <p className="text-sm leading-relaxed text-neutral-400">
+                            {lang === 'it' ? (
+                              isAetheris
+                                ? "Abbiamo intervistato alcuni visitatori per approfondire la loro esperienza e identificare bisogni, difficoltà e aspettative durante la visita."
+                                : "Abbiamo intervistato artisti locali e guide turistiche per capire come valorizzare al meglio le opere senza snaturarne lo spirito urbano."
+                            ) : (
+                              isAetheris
+                                ? "We interviewed several visitors to delve into their experience and identify needs, challenges, and expectations during their visit."
+                                : "We interviewed local artists and tour guides to understand how to best promote the artworks without altering their urban spirit."
+                            )}
+                          </p>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2 h-full">
+                            {/* Domanda 1 Interviste */}
+                            <HighlightCard animatedBorder={isAetheris}
+                              title={lang === 'it' ? (
+                                isAetheris
+                                  ? "Pensi che creare un totem digitale per aiutarti in un percorso all'interno di qui possa migliorare la tua esperienza?"
+                                  : "Qual è la sfida maggiore nel fare conoscere le tue opere al pubblico di passaggio?"
+                              ) : (
+                                isAetheris
+                                  ? "Do you think creating a digital kiosk to guide you through a path inside could improve your experience?"
+                                  : "What is the biggest challenge in making your artworks known to the passing public?"
+                              )}
+                            >
+                              <div className="flex gap-3 items-start mt-4">
+                                <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-raleway text-sm font-bold">{lang === 'it' ? 'R1' : 'A1'}</span>
+                                <div className="flex flex-col gap-1 text-left">
+                                  <span className="text-sm font-raleway text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
+                                  <p className="text-sm sm:text-sm italic text-neutral-300 leading-relaxed font-light">
+                                    {lang === 'it' ? (
+                                      isAetheris
+                                        ? "“Un totem digitale potrebbe migliorare l’esperienza di visita, permettendo di informarsi e orientarsi meglio prima e durante la visita.”"
+                                        : "“La street art nasce per essere pubblica ma spesso rimane muta. Un supporto digitale che colleghi il muro alla nostra voce o a video del backstage sarebbe straordinario.”"
+                                    ) : (
+                                      isAetheris
+                                        ? "“A digital kiosk could improve the visitor experience, allowing them to gather information and navigate better before and during the visit.”"
+                                        : "“Street art is born to be public but often remains silent. A digital support linking the wall to our voice or backstage videos would be extraordinary.”"
+                                    )}
+                                  </p>
+                                </div>
+                              </div>
+                            </HighlightCard>
+
+                            {/* Domanda 2 Interviste */}
+                            <HighlightCard animatedBorder={isAetheris}
+                              title={lang === 'it' ? (
+                                isAetheris
+                                  ? "C'è qualcosa che volevi sapere ma non hai trovato l'informazione adatta qui?"
+                                  : "Quali difficoltà incontrano i turisti che vogliono esplorare l'arte urbana?"
+                              ) : (
+                                isAetheris
+                                  ? "Is there anything you wanted to know but couldn't find the right information for here?"
+                                  : "What challenges do tourists face when they want to explore urban art?"
+                              )}
+                            >
+                              <div className="flex gap-3 items-start mt-4">
+                                <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-raleway text-sm font-bold">{lang === 'it' ? 'R2' : 'A2'}</span>
+                                <div className="flex flex-col gap-1 text-left">
+                                  <span className="text-sm font-raleway text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
+                                  <p className="text-sm sm:text-sm italic text-neutral-300 leading-relaxed font-light">
+                                    {lang === 'it' ? (
+                                      isAetheris
+                                        ? "“Le informazioni disponibili online sull’orto botanico non sono complete, soprattutto per chi non conosce il luogo o viene da fuori città.”"
+                                        : "“Manca del tutto il contesto. Molti murales contengono messaggi sociali e politici legati alla storia del quartiere che un esterno non può cogliere senza una guida.”"
+                                    ) : (
+                                      isAetheris
+                                        ? "“The information available online about the botanical garden is incomplete, especially for those who do not know the place or come from out of town.”"
+                                        : "“Context is entirely missing. Many murals contain social and political messages linked to the neighborhood's history that an outsider cannot grasp without a guide.”"
+                                    )}
+                                  </p>
+                                </div>
+                              </div>
+                            </HighlightCard>
+                          </div>
+                        </motion.div>
                       )}
-                      <span className="relative">{lang === 'it' ? 'Interviste' : 'Interviews'}</span>
-                    </button>
-                  </div>              {/* Contenuto Dinamico delle Ricerche */}
-                  <AnimatePresence mode="wait">
-                    {activeResearchTab === 'desk' && (
-                      <motion.div
-                        key="desk-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="flex flex-col gap-6"
-                      >
-                        <p className="text-sm leading-relaxed text-neutral-400">
-                          {lang === 'it' ? (
-                            isAetheris
-                              ? "Abbiamo analizzato il sito ufficiale, articoli e recensioni online per comprendere il contesto dell’Orto Botanico e individuare le principali criticità dell’esperienza di visita."
-                              : "Abbiamo analizzato cataloghi d'arte, portali di turismo urbano e recensioni social per comprendere lo stato della street art in Sicilia e le problematiche di tracciamento delle opere."
-                          ) : (
-                            isAetheris
-                              ? "We analyzed the official website, articles, and online reviews to understand the context of the Botanical Garden and identify key issues in the visitor experience."
-                              : "We analyzed art catalogs, urban tourism portals, and social reviews to understand the status of street art in Sicily and the challenges of tracking the artworks."
-                          )}
-                        </p>
-
-                        {/* 3 card con opinioni utenti */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                          <HighlightCard animatedBorder={isAetheris}
-                            title={lang === 'it' ? 'Recensione 1' : 'Review 1'}
-                            description={[
-                              lang === 'it' ? (
-                                isAetheris
-                                  ? "“Difficile per chi non conosce il mondo della botanica destreggiarsi fra le piante. Nessuna guida né spiegazione”"
-                                  : "“Ci sono murales incredibili a Catania e Palermo, ma non si trova mezza riga su chi li abbia dipinti o cosa vogliano dire.”"
-                              ) : (
-                                isAetheris
-                                  ? "“Hard for those who do not know the world of botany to navigate among the plants. No guide or explanation”"
-                                  : "“There are incredible murals in Catania and Palermo, but you can't find a single line about who painted them or what they mean.”"
-                              ),
-                              lang === 'it' ? 'Criticità: Informazioni' : 'Issue: Information'
-                            ]}
-                            icon={<MessageSquare className="w-8 h-8 text-white" />}
-                          />
-                          <HighlightCard animatedBorder={isAetheris}
-                            title={lang === 'it' ? 'Recensione 2' : 'Review 2'}
-                            description={[
-                              lang === 'it' ? (
-                                isAetheris
-                                  ? "“L’ho visitato da solo. E’ bello da vedere, si visita in 5 minuti ma non presenta nulla di particolare, forse necessitavo di una guida.”"
-                                  : "“Ho provato a fare un giro per vedere la street art a San Berillo, ma molte opere sono nei vicoli ciechi e senza una mappa è facilissimo perdersi.”"
-                              ) : (
-                                isAetheris
-                                  ? "“I visited it alone. It's nice to look at, takes 5 minutes, but doesn't offer anything special, maybe I needed a guide.”"
-                                  : "“I tried walking around to see street art in San Berillo, but many works are in dead ends and without a map it's very easy to get lost.”"
-                              ),
-                              lang === 'it'
-                                ? (isAetheris ? "Criticità: Coinvolgimento" : "Criticità: Navigazione")
-                                : (isAetheris ? "Issue: Engagement" : "Issue: Navigation")
-                            ]}
-                            icon={<MessageSquare className="w-8 h-8 text-white" />}
-                          />
-                          <HighlightCard animatedBorder={isAetheris}
-                            title={lang === 'it' ? 'Recensione 3' : 'Review 3'}
-                            description={[
-                              lang === 'it' ? (
-                                isAetheris
-                                  ? "“Bello, ma manca di spiegazioni riguardo le piante... oltre al nome scientifico nient’altro!”"
-                                  : "“Molti murales storici vengono coperti o vandalizzati senza che nessuno li documenti. Manca un archivio storico digitale.”"
-                              ) : (
-                                isAetheris
-                                  ? "“Beautiful, but lacks explanations about the plants... other than the scientific name there's nothing else!”"
-                                  : "“Many historical murals are covered up or vandalized without anyone documenting them. A digital historical archive is missing.”"
-                              ),
-                              lang === 'it'
-                                ? (isAetheris ? "Criticità: Informazioni" : "Criticità: Conservazione")
-                                : (isAetheris ? "Issue: Information" : "Issue: Preservation")
-                            ]}
-                            icon={<MessageSquare className="w-8 h-8 text-white" />}
-                          />
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeResearchTab === 'sondaggi' && (
-                      <motion.div
-                        key="sondaggi-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="flex flex-col gap-6"
-                      >
-                        <p className="text-sm leading-relaxed text-neutral-400">
-                          {lang === 'it' ? (
-                            isAetheris
-                              ? "Abbiamo raccolto dati tramite un sondaggio per capire come i visitatori si orientano all’interno dell’orto e il loro interesse verso strumenti digitali come QR code o app."
-                              : "Abbiamo interrogato un campione di turisti e appassionati sull'abitudine di cercare arte urbana e sull'efficacia delle mappe geolocalizzate durante i loro viaggi."
-                          ) : (
-                            isAetheris
-                              ? "We collected data through a survey to understand how visitors navigate the garden and their interest in digital tools like QR codes or apps."
-                              : "We surveyed a sample of tourists and enthusiasts about their habits when searching for urban art and the effectiveness of geolocation maps during their travels."
-                          )}
-                        </p>
-
-                        {/* Grafici risposte dei sondaggi */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 h-full">
-                          {/* Domanda 1 */}
-                          <HighlightCard animatedBorder={isAetheris}
-                            title={lang === 'it' ? (
-                                  isAetheris
-                                    ? "“Come ti stai orientando nell’orto?”"
-                                    : "“Come scopri le opere di street art in una nuova città?”"
-                                ) : (
-                                  isAetheris
-                                    ? "“How do you orient yourself in the garden?”"
-                                    : "“How do you discover street art in a new city?”"
-                                )}
-                          >
-                            <div className="flex flex-col gap-3 pt-2">
-                              {/* Prima Opzione */}
-                              <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-sm font-raleway text-neutral-400">
-                                  <span>
-                                    {lang === 'it'
-                                      ? (isAetheris ? "In modo casuale" : "Camminando in modo casuale")
-                                      : (isAetheris ? "Randomly" : "Walking around randomly")
-                                    }
-                                  </span>
-                                  <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
-                                    {isAetheris ? "70%" : "65%"}
-                                  </span>
-                                </div>
-                                <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                                  <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '70%' : '65%' }} />
-                                </div>
-                              </div>
-
-                              {/* Seconda Opzione */}
-                              <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-sm font-raleway text-neutral-400">
-                                  <span>
-                                    {lang === 'it'
-                                      ? (isAetheris ? "Segnaletica fisica" : "Social media & Blog d'arte")
-                                      : (isAetheris ? "Physical signage" : "Social media & Art blogs")
-                                    }
-                                  </span>
-                                  <span className="font-bold text-white">
-                                    {isAetheris ? "20%" : "25%"}
-                                  </span>
-                                </div>
-                                <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                                  <div className="bg-neutral-500 h-full rounded-full" style={{ width: isAetheris ? '20%' : '25%' }} />
-                                </div>
-                              </div>
-
-                              {/* Terza Opzione */}
-                              <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-sm font-raleway text-neutral-400">
-                                  <span>
-                                    {lang === 'it'
-                                      ? (isAetheris ? "Mappa cartacea" : "Guide turistiche ufficiali")
-                                      : (isAetheris ? "Paper map" : "Official tour guides")
-                                    }
-                                  </span>
-                                  <span className="font-bold text-neutral-400">10%</span>
-                                </div>
-                                <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                                  <div className="bg-neutral-700 h-full rounded-full" style={{ width: '10%' }} />
-                                </div>
-                              </div>
-                            </div>
-                          </HighlightCard>
-
-                          {/* Domanda 2 */}
-                          <HighlightCard animatedBorder={isAetheris}
-                            title={lang === 'it' ? (
-                                  isAetheris
-                                    ? "“Useresti il tuo smartphone per approfondire tramite QR code?”"
-                                    : "“Useresti un’app dedicata per fare tour autoguidati di street art?”"
-                                ) : (
-                                  isAetheris
-                                    ? "“Would you use your smartphone to learn more via QR codes?”"
-                                    : "“Would you use a dedicated app to take self-guided street art tours?”"
-                                )}
-                          >
-                            <div className="flex flex-col gap-3 pt-2">
-                              {/* Opzione Sì */}
-                              <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-sm font-raleway text-neutral-400">
-                                  <span>{lang === 'it' ? 'Sì' : 'Yes'}</span>
-                                  <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
-                                    {isAetheris ? "75%" : "80%"}
-                                  </span>
-                                </div>
-                                <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                                  <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '75%' : '80%' }} />
-                                </div>
-                              </div>
-
-                              {/* Opzione Forse */}
-                              <div className="flex flex-col gap-1">
-                                <div className="flex justify-between text-sm font-raleway text-neutral-400">
-                                  <span>
-                                    {lang === 'it'
-                                      ? (isAetheris ? "Forse" : "Forse / Dipende")
-                                      : (isAetheris ? "Maybe" : "Maybe / Depends")
-                                    }
-                                  </span>
-                                  <span className="font-bold text-neutral-300">
-                                    {isAetheris ? "25%" : "20%"}
-                                  </span>
-                                </div>
-                                <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                                  <div className="bg-neutral-500 h-full rounded-full" style={{ width: isAetheris ? '25%' : '20%' }} />
-                                </div>
-                              </div>
-                            </div>
-                          </HighlightCard>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeResearchTab === 'interviste' && (
-                      <motion.div
-                        key="interviste-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="flex flex-col gap-5"
-                      >
-                        <p className="text-sm leading-relaxed text-neutral-400">
-                          {lang === 'it' ? (
-                            isAetheris
-                              ? "Abbiamo intervistato alcuni visitatori per approfondire la loro esperienza e identificare bisogni, difficoltà e aspettative durante la visita."
-                              : "Abbiamo intervistato artisti locali e guide turistiche per capire come valorizzare al meglio le opere senza snaturarne lo spirito urbano."
-                          ) : (
-                            isAetheris
-                              ? "We interviewed several visitors to delve into their experience and identify needs, challenges, and expectations during their visit."
-                              : "We interviewed local artists and tour guides to understand how to best promote the artworks without altering their urban spirit."
-                          )}
-                        </p>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2 h-full">
-                          {/* Domanda 1 Interviste */}
-                          <HighlightCard animatedBorder={isAetheris}
-                            title={lang === 'it' ? (
-                                    isAetheris
-                                      ? "Pensi che creare un totem digitale per aiutarti in un percorso all'interno di qui possa migliorare la tua esperienza?"
-                                      : "Qual è la sfida maggiore nel fare conoscere le tue opere al pubblico di passaggio?"
-                                  ) : (
-                                    isAetheris
-                                      ? "Do you think creating a digital kiosk to guide you through a path inside could improve your experience?"
-                                      : "What is the biggest challenge in making your artworks known to the passing public?"
-                                  )}
-                          >
-                            <div className="flex gap-3 items-start mt-4">
-                              <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-raleway text-sm font-bold">{lang === 'it' ? 'R1' : 'A1'}</span>
-                              <div className="flex flex-col gap-1 text-left">
-                                <span className="text-sm font-raleway text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
-                                <p className="text-sm sm:text-sm italic text-neutral-300 leading-relaxed font-light">
-                                  {lang === 'it' ? (
-                                    isAetheris
-                                      ? "“Un totem digitale potrebbe migliorare l’esperienza di visita, permettendo di informarsi e orientarsi meglio prima e durante la visita.”"
-                                      : "“La street art nasce per essere pubblica ma spesso rimane muta. Un supporto digitale che colleghi il muro alla nostra voce o a video del backstage sarebbe straordinario.”"
-                                  ) : (
-                                    isAetheris
-                                      ? "“A digital kiosk could improve the visitor experience, allowing them to gather information and navigate better before and during the visit.”"
-                                      : "“Street art is born to be public but often remains silent. A digital support linking the wall to our voice or backstage videos would be extraordinary.”"
-                                  )}
-                                </p>
-                              </div>
-                            </div>
-                          </HighlightCard>
-
-                          {/* Domanda 2 Interviste */}
-                          <HighlightCard animatedBorder={isAetheris}
-                            title={lang === 'it' ? (
-                                    isAetheris
-                                      ? "C'è qualcosa che volevi sapere ma non hai trovato l'informazione adatta qui?"
-                                      : "Quali difficoltà incontrano i turisti che vogliono esplorare l'arte urbana?"
-                                  ) : (
-                                    isAetheris
-                                      ? "Is there anything you wanted to know but couldn't find the right information for here?"
-                                      : "What challenges do tourists face when they want to explore urban art?"
-                                  )}
-                          >
-                            <div className="flex gap-3 items-start mt-4">
-                              <span className="w-6 h-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 font-raleway text-sm font-bold">{lang === 'it' ? 'R2' : 'A2'}</span>
-                              <div className="flex flex-col gap-1 text-left">
-                                <span className="text-sm font-raleway text-neutral-400 uppercase font-semibold">{lang === 'it' ? 'Risposta' : 'Answer'}</span>
-                                <p className="text-sm sm:text-sm italic text-neutral-300 leading-relaxed font-light">
-                                  {lang === 'it' ? (
-                                    isAetheris
-                                      ? "“Le informazioni disponibili online sull’orto botanico non sono complete, soprattutto per chi non conosce il luogo o viene da fuori città.”"
-                                      : "“Manca del tutto il contesto. Molti murales contengono messaggi sociali e politici legati alla storia del quartiere che un esterno non può cogliere senza una guida.”"
-                                  ) : (
-                                    isAetheris
-                                      ? "“The information available online about the botanical garden is incomplete, especially for those who do not know the place or come from out of town.”"
-                                      : "“Context is entirely missing. Many murals contain social and political messages linked to the neighborhood's history that an outsider cannot grasp without a guide.”"
-                                  )}
-                                </p>
-                              </div>
-                            </div>
-                          </HighlightCard>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    </AnimatePresence>
                   </div>
                 </div>
 
@@ -2247,406 +2248,347 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             )
           )}
 
-          {/* COLOR PALETTE & TYPOGRAPHY STYLE GUIDE */}
-          {isAetheris ? (
-            <div className="pt-12 border-t border-white/5 flex flex-col gap-6 mt-12 text-left" id="orto-design-system-section">
-              {/* Header section removed per request */}
+        </div>
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8">
 
-              {/* Design System Bento Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
-                
-                {/* Top Left: Color palette principale */}
-                <div className="md:col-span-3 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col items-start shadow-2xl relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <h3 className="text-sm font-raleway uppercase tracking-widest text-neutral-400 font-bold mb-8 relative z-10">Color Palette</h3>
-                  
-                  <div className="flex flex-wrap gap-6 relative z-10">
-                    {/* Verde Primario */}
-                    <button onClick={() => handleCopyHex('#068B35')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
-                      <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#068B35' }} />
-                      <div className="text-center">
-                        <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#068B35' ? 'Copied' : '#068B35'}</span>
-                      </div>
-                    </button>
+              {/* COLOR PALETTE & TYPOGRAPHY STYLE GUIDE */}
+              {isAetheris ? (
+                <div className="flex flex-col gap-6 text-left" id="orto-design-system-section">
+                  {/* Header section removed per request */}
 
-                    {/* Bianco */}
-                    <button onClick={() => handleCopyHex('#FFFFFF')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
-                      <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 bg-white transition-transform group-hover/btn:scale-110" />
-                      <div className="text-center">
-                        <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#FFFFFF' ? 'Copied' : '#FFFFFF'}</span>
-                      </div>
-                    </button>
+                  {/* Design System Bento Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
 
-                    {/* Grigio Chiaro */}
-                    <button onClick={() => handleCopyHex('#EBEBEB')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
-                      <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#EBEBEB' }} />
-                      <div className="text-center">
-                        <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#EBEBEB' ? 'Copied' : '#EBEBEB'}</span>
-                      </div>
-                    </button>
-                  </div>
-                </div>
+                    {/* Top Left: Color palette principale */}
+                    <div className="md:col-span-3 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-center shadow-2xl relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <h3 className="text-sm font-raleway uppercase tracking-widest text-neutral-400 font-bold mb-8 relative z-10 text-center">Color Palette</h3>
 
-                {/* Top Right: Colori pillole categoria */}
-                <div className="md:col-span-9 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-tl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="flex flex-wrap gap-x-6 gap-y-5 relative z-10 w-full" id="orto-categories-row">
-                    {[
-                      { labelIt: 'Orto Generale', labelEn: 'General Garden', bg: '#0054F0', text: '#FFFFFF' },
-                      { labelIt: 'Tropicale', labelEn: 'Tropical', bg: '#EEBE00', text: '#0A0A0A' },
-                      { labelIt: 'Orto Siculo', labelEn: 'Sicilian Garden', bg: '#28BF31', text: '#FFFFFF' },
-                      { labelIt: 'Arido', labelEn: 'Arid', bg: '#CE2B37', text: '#FFFFFF' },
-                      { labelIt: 'Mediterraneo', labelEn: 'Mediterranean', bg: '#6B4FD4', text: '#FFFFFF' },
-                      { labelIt: 'Fontanella', labelEn: 'Water Fountain', bg: '#39A1F6', text: '#FFFFFF' },
-                      { labelIt: 'Bagni', labelEn: 'Restrooms', bg: '#00025D', text: '#FFFFFF' }
-                    ].map((item, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleCopyHex(item.bg)}
-                        className="flex items-center gap-3 group/pill cursor-pointer"
-                        id={`category-pill-${index}`}
-                      >
-                        <div className="w-6 h-6 rounded-full shadow-md border border-white/10 shrink-0 transition-transform group-hover/pill:scale-110" style={{ backgroundColor: item.bg }} />
-                        <div className="text-left">
-                          <span className="font-semibold text-sm text-white/90 block">
-                            {lang === 'it' ? item.labelIt : item.labelEn}
-                          </span>
-                          <span className="font-raleway text-[11px] text-neutral-500 group-hover/pill:text-white transition-colors">
-                            {copiedColor === item.bg ? 'Copied!' : item.bg}
-                          </span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                      <div className="flex flex-wrap justify-center gap-6 relative z-10">
+                        {/* Verde Primario */}
+                        <button onClick={() => handleCopyHex('#068B35')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
+                          <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#068B35' }} />
+                          <div className="text-center">
+                            <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#068B35' ? 'Copied' : '#068B35'}</span>
+                          </div>
+                        </button>
 
-                {/* Bottom Left: Componenti Core */}
-                <div className="md:col-span-7 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 shadow-2xl relative overflow-hidden group flex flex-col gap-12" id="orto-block-components">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  
-                  {/* Top Section: Card Pianta + Searchbars + Buttons + Controls */}
-                  <div className="flex flex-col lg:flex-row justify-center gap-8 lg:gap-10 relative z-10 w-full items-start">
-                    
-                    {/* Left Column */}
-                    <div className="flex flex-col gap-6 w-full lg:w-auto lg:min-w-[320px] xl:min-w-[380px]">
-                      <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                      <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                      <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                      
-                      <div className="mt-8">
-                        <img src="/design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                        {/* Bianco */}
+                        <button onClick={() => handleCopyHex('#FFFFFF')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
+                          <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 bg-white transition-transform group-hover/btn:scale-110" />
+                          <div className="text-center">
+                            <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#FFFFFF' ? 'Copied' : '#FFFFFF'}</span>
+                          </div>
+                        </button>
+
+                        {/* Grigio Chiaro */}
+                        <button onClick={() => handleCopyHex('#EBEBEB')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
+                          <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#EBEBEB' }} />
+                          <div className="text-center">
+                            <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#EBEBEB' ? 'Copied' : '#EBEBEB'}</span>
+                          </div>
+                        </button>
                       </div>
                     </div>
 
-                    {/* Right Column */}
-                    <div className="flex flex-col gap-8 items-start w-full lg:w-auto">
-                      {/* Pianta Card - reduced size */}
-                      <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
-                      
-                      {/* Tags */}
-                      <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                    {/* Top Right: Colori pillole categoria */}
+                    <div className="md:col-span-9 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-center shadow-2xl relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-gradient-to-tl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                      {/* Language and Scopri Pianta */}
-                      <div className="flex items-center gap-8">
-                        <img src="/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
-                        <img src="/design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src='/design_system/button_scopri_pianta.png'} />
+                      <div className="flex flex-wrap justify-center gap-x-6 gap-y-5 relative z-10 w-full" id="orto-categories-row">
+                        {[
+                          { labelIt: 'Orto Generale', labelEn: 'General Garden', bg: '#0054F0', text: '#FFFFFF' },
+                          { labelIt: 'Tropicale', labelEn: 'Tropical', bg: '#EEBE00', text: '#0A0A0A' },
+                          { labelIt: 'Orto Siculo', labelEn: 'Sicilian Garden', bg: '#28BF31', text: '#FFFFFF' },
+                          { labelIt: 'Arido', labelEn: 'Arid', bg: '#CE2B37', text: '#FFFFFF' },
+                          { labelIt: 'Mediterraneo', labelEn: 'Mediterranean', bg: '#6B4FD4', text: '#FFFFFF' },
+                          { labelIt: 'Fontanella', labelEn: 'Water Fountain', bg: '#39A1F6', text: '#FFFFFF' },
+                          { labelIt: 'Bagni', labelEn: 'Restrooms', bg: '#00025D', text: '#FFFFFF' }
+                        ].map((item, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleCopyHex(item.bg)}
+                            className="flex items-center gap-3 group/pill cursor-pointer"
+                            id={`category-pill-${index}`}
+                          >
+                            <div className="w-6 h-6 rounded-full shadow-md border border-white/10 shrink-0 transition-transform group-hover/pill:scale-110" style={{ backgroundColor: item.bg }} />
+                            <div className="text-left">
+                              <span className="font-semibold text-sm text-white/90 block">
+                                {lang === 'it' ? item.labelIt : item.labelEn}
+                              </span>
+                              <span className="font-raleway text-[11px] text-neutral-500 group-hover/pill:text-white transition-colors">
+                                {copiedColor === item.bg ? 'Copied!' : item.bg}
+                              </span>
+                            </div>
+                          </button>
+                        ))}
                       </div>
-
-                      {/* Percorso */}
-                      <div className="mt-4 -ml-12 lg:-ml-20 xl:-ml-36">
-                        <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
-                      </div>
                     </div>
-                  </div>
 
-                  {/* Bottom Row: Pillole Categorie Mappa */}
-                  <div className="w-full relative z-10 pt-8 lg:pt-12 border-t border-white/5 mt-4">
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-4 w-full mx-auto">
-                      {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
-                        <img
-                          key={variant}
-                          src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
-                          alt={`Categoria ${variant}`}
-                          className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                    {/* Bottom Left: Componenti Core */}
+                    <div className="md:col-span-7 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 shadow-2xl relative overflow-hidden group flex flex-col gap-12" id="orto-block-components">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                {/* Bottom Right: Body and H1 */}
-                <div className="md:col-span-5 flex flex-col gap-6">
-                  {/* Body Text Demo */}
-                  <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-10 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
-                    <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="flex flex-col gap-2 relative z-10">
-                      <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">Body / Raleway, Regular, 28px</span>
-                      <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-xl md:text-2xl leading-relaxed font-light">
-                        {lang === 'it' ? (
-                          "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
-                        ) : (
-                          "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
-                        )}
-                      </p>
-                    </div>
-                  </div>
+                      {/* Top Section: Card Pianta + Searchbars + Buttons + Controls */}
+                      <div className="flex flex-col lg:flex-row justify-center gap-8 lg:gap-10 relative z-10 w-full items-start">
 
-                  {/* H1 Demo */}
-                  <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="flex flex-col gap-2 relative z-10 w-full">
-                      <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">H1 / Raleway, Semibold, 62px</span>
-                      <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
-                        {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
-                      </h1>
-                    </div>
-                  </div>
-                </div>
+                        {/* Left Column */}
+                        <div className="flex flex-col gap-6 w-full lg:w-auto lg:min-w-[320px] xl:min-w-[380px]">
+                          <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                          <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                          <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
 
-              </div>
-
-
-            </div>
-          ) : (
-            <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
-              <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                {/* Palette */}
-                <div className="flex flex-col gap-3">
-                  <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Color Palette</h4>
-                  <div className="flex flex-col gap-2">
-                    {project.colorPalette?.map((color, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleCopyHex(color.hex)}
-                        className={`flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer group text-left w-full ${isAetheris
-                          ? 'bg-[#131514] border-white/5 hover:border-[#2E8B3A]/40 hover:bg-[#2E8B3A]/10'
-                          : 'bg-neutral-950/60 border-white/5 hover:border-white/20 hover:bg-neutral-900/60'
-                          }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`w-8 h-8 rounded-lg border shrink-0 ${isAetheris ? 'border-white/10' : 'border-white/10'}`}
-                            style={{ backgroundColor: color.hex }}
-                          />
-                          <div>
-                            <span className={`text-sm font-bold block ${isAetheris ? 'text-white' : 'text-white'}`}>{color.name}</span>
-                            <span className={`text-sm font-raleway block ${isAetheris ? 'text-neutral-400' : 'text-white/40'}`}>{color.hex}</span>
+                          <div className="mt-8">
+                            <img src="/design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                           </div>
                         </div>
-                        <div className={`text-sm font-raleway transition-colors shrink-0 ${isAetheris
-                          ? 'text-neutral-400 group-hover:text-emerald-400'
-                          : 'text-white/30 group-hover:text-[#E8302A]'
-                          }`}>
-                          {copiedColor === color.hex ? 'Copied!' : 'Copy Hex'}
+
+                        {/* Right Column */}
+                        <div className="flex flex-col gap-8 items-start w-full lg:w-auto">
+                          {/* Pianta Card - reduced size */}
+                          <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
+
+                          {/* Tags */}
+                          <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+
+                          {/* Language and Scopri Pianta */}
+                          <div className="flex items-center gap-8">
+                            <img src="/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
+                            <img src="/design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src = '/design_system/button_scopri_pianta.png'} />
+                          </div>
+
+                          {/* Percorso */}
+                          <div className="mt-4 -ml-12 lg:-ml-20 xl:-ml-36">
+                            <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                          </div>
                         </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                      </div>
 
-                {/* Typography */}
-                <div className="flex flex-col gap-3">
-                  <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Typography Spec</h4>
-                  <div className={`p-4 rounded-xl border ${isAetheris ? 'bg-[#131514] border-white/5' : 'bg-neutral-950/60 border-white/5'
-                    }`}>
-                    <span className={`text-sm font-raleway block mb-1 ${isAetheris ? 'text-neutral-500' : 'text-white/30'}`}>Font Pairings</span>
-                    <span className={`text-sm leading-relaxed font-raleway block ${isAetheris ? 'text-white' : 'text-white'}`}>
-                      {getLocalizedField('typography')}
-                    </span>
+                      {/* Bottom Row: Pillole Categorie Mappa */}
+                      <div className="w-full relative z-10 pt-8 lg:pt-12 border-t border-white/5 mt-4">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-4 w-full mx-auto">
+                          {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
+                            <img
+                              key={variant}
+                              src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
+                              alt={`Categoria ${variant}`}
+                              className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Right: Body and H1 */}
+                    <div className="md:col-span-5 flex flex-col gap-6">
+                      {/* Body Text Demo */}
+                      <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-10 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
+                        <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="flex flex-col gap-2 relative z-10">
+                          <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">Body / Raleway, Regular, 28px</span>
+                          <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-xl md:text-2xl leading-relaxed font-light">
+                            {lang === 'it' ? (
+                              "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
+                            ) : (
+                              "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* H1 Demo */}
+                      <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="flex flex-col gap-2 relative z-10 w-full">
+                          <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">H1 / Raleway, Semibold, 62px</span>
+                          <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
+                            {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              ) : (
+                <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
+                  <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    {/* Palette */}
+                    <div className="flex flex-col gap-3">
+                      <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Color Palette</h4>
+                      <div className="flex flex-col gap-2">
+                        {project.colorPalette?.map((color, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => handleCopyHex(color.hex)}
+                            className={`flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer group text-left w-full ${isAetheris
+                              ? 'bg-[#131514] border-white/5 hover:border-[#2E8B3A]/40 hover:bg-[#2E8B3A]/10'
+                              : 'bg-neutral-950/60 border-white/5 hover:border-white/20 hover:bg-neutral-900/60'
+                              }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div
+                                className={`w-8 h-8 rounded-lg border shrink-0 ${isAetheris ? 'border-white/10' : 'border-white/10'}`}
+                                style={{ backgroundColor: color.hex }}
+                              />
+                              <div>
+                                <span className={`text-sm font-bold block ${isAetheris ? 'text-white' : 'text-white'}`}>{color.name}</span>
+                                <span className={`text-sm font-raleway block ${isAetheris ? 'text-neutral-400' : 'text-white/40'}`}>{color.hex}</span>
+                              </div>
+                            </div>
+                            <div className={`text-sm font-raleway transition-colors shrink-0 ${isAetheris
+                              ? 'text-neutral-400 group-hover:text-emerald-400'
+                              : 'text-white/30 group-hover:text-[#E8302A]'
+                              }`}>
+                              {copiedColor === color.hex ? 'Copied!' : 'Copy Hex'}
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Typography */}
+                    <div className="flex flex-col gap-3">
+                      <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Typography Spec</h4>
+                      <div className={`p-4 rounded-xl border ${isAetheris ? 'bg-[#131514] border-white/5' : 'bg-neutral-950/60 border-white/5'
+                        }`}>
+                        <span className={`text-sm font-raleway block mb-1 ${isAetheris ? 'text-neutral-500' : 'text-white/30'}`}>Font Pairings</span>
+                        <span className={`text-sm leading-relaxed font-raleway block ${isAetheris ? 'text-white' : 'text-white'}`}>
+                          {getLocalizedField('typography')}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
-          )}
 
-          {/* 3D Marquee Section */}
-          <div className="py-16 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
-            <ThreeDMarquee />
-          </div>
 
-          {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
-          {isAetheris && (
-            <div className="flex flex-col gap-6 pt-10 border-t border-white/5" id="orto-interactive-prototypes-section">
-              <div className="flex flex-col gap-3">
-                <span className="text-sm font-raleway uppercase tracking-widest font-bold text-[#068B35]">
-                  {lang === 'it' ? '07 / Sperimenta l’Esperienza' : '07 / Experience the Design'}
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">{lang === 'it' ? 'Provalo' : 'Try It'}</h2>
-                <div className="my-2">
-                  <Button3D />
-                </div>
-                <p className="text-sm leading-relaxed font-light text-neutral-300">
-                  {lang === 'it'
-                    ? "Naviga all’interno dei prototipi interattivi realizzati per l'Orto Botanico. Scegli tra la versione mobile progettata per l’esplorazione sul campo e la versione totem dedicata ai punti informativi fisici."
-                    : "Explore the interactive prototypes built for the Botanical Garden. Select the mobile version designed for on-site navigation, or the totem kiosk version made for physical visitor information points."
-                  }
-                </p>
-              </div>
 
-              {/* Menu Orizzontale Capsule */}
-              <div className="flex justify-center mt-4">
-                <div className="flex bg-[#131514] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none">
-                  <button
-                    onClick={() => setActiveProtoTab('mobile')}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
-                      }`}
-                  >
-                    {activeProtoTab === 'mobile' && (
-                      <motion.div
-                        layoutId="active-proto-tab-bg"
-                        className="absolute inset-0 bg-[#068B35] rounded-xl"
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                    <span className="relative flex items-center gap-1.5">
-                      <Smartphone className="w-3.5 h-3.5" />
-                      {lang === 'it' ? 'Versione Mobile' : 'Mobile Version'}
-                    </span>
-                  </button>
+        {/* 3D Marquee Section */}
+        <div className="pt-32 pb-16 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
+          <ThreeDMarquee />
+        </div>
 
-                  <button
-                    onClick={() => setActiveProtoTab('totem')}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
-                      }`}
-                  >
-                    {activeProtoTab === 'totem' && (
-                      <motion.div
-                        layoutId="active-proto-tab-bg"
-                        className="absolute inset-0 bg-[#068B35] rounded-xl"
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                    <span className="relative flex items-center gap-1.5">
-                      <Compass className="w-3.5 h-3.5" />
-                      {lang === 'it' ? 'Versione Totem' : 'Totem Version'}
-                    </span>
-                  </button>
-                </div>
-              </div>
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8">
+              {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
+              {isAetheris && (
+                <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-16 w-full" id="orto-interactive-prototypes-section">
+                  
+                  {/* Left Column: Prototypes */}
+                  <div className="lg:col-span-5 flex flex-col gap-6 items-center w-full">
+                    {/* Menu Orizzontale Capsule */}
+                    <div className="flex justify-center w-full">
+                      <div className="flex bg-[#131514] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none">
+                        <button
+                          onClick={() => setActiveProtoTab('mobile')}
+                          className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                            }`}
+                        >
+                          {activeProtoTab === 'mobile' && (
+                            <motion.div
+                              layoutId="active-proto-tab-bg"
+                              className="absolute inset-0 bg-[#068B35] rounded-xl"
+                              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                            />
+                          )}
+                          <span className="relative flex items-center gap-1.5">
+                            <Smartphone className="w-3.5 h-3.5" />
+                            {lang === 'it' ? 'Versione Mobile' : 'Mobile Version'}
+                          </span>
+                        </button>
 
-              {/* Prototype Containers */}
-              <div className="w-full flex flex-col items-center mt-2 overflow-hidden">
-                <AnimatePresence mode="wait">
-                  {activeProtoTab === 'totem' ? (
-                    <motion.div
-                      key="totem-proto"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full max-w-6xl h-[600px] sm:h-[800px] lg:h-[920px] flex justify-center items-center"
-                    >
-                      <iframe
-                        id="totem-prototype-iframe"
-                        style={{ border: 'none', width: '100%', height: '100%' }}
-                        width="100%"
-                        height="100%"
-                        src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
-                        allowFullScreen
-                      />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="mobile-proto"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full max-w-5xl h-[550px] sm:h-[700px] lg:h-[820px] flex justify-center items-center"
-                    >
-                      <iframe
-                        id="mobile-prototype-iframe"
-                        style={{ border: 'none', width: '100%', height: '100%' }}
-                        width="100%"
-                        height="100%"
-                        src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&scaling=contain&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
-                        allowFullScreen
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                        <button
+                          onClick={() => setActiveProtoTab('totem')}
+                          className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                            }`}
+                        >
+                          {activeProtoTab === 'totem' && (
+                            <motion.div
+                              layoutId="active-proto-tab-bg"
+                              className="absolute inset-0 bg-[#068B35] rounded-xl"
+                              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                            />
+                          )}
+                          <span className="relative flex items-center gap-1.5">
+                            <Compass className="w-3.5 h-3.5" />
+                            {lang === 'it' ? 'Versione Totem' : 'Totem Version'}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
 
-              {/* QR Code Section to Try Prototype */}
-              <div className="mt-10 w-full max-w-5xl bg-[#131514]/60 border border-white/5 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center gap-8 shadow-2xl relative overflow-hidden self-center">
-                {/* Background decorative gradients */}
-                <div className="absolute top-0 right-0 w-48 h-48 bg-[#068B35]/5 rounded-full filter blur-[60px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-500/5 rounded-full filter blur-[60px] pointer-events-none" />
-
-                {/* Left Side: QR Code Frame */}
-                <div className="relative shrink-0 flex flex-col items-center justify-center p-4 bg-white rounded-2xl group shadow-lg w-44 h-44 sm:w-48 sm:h-48">
-                  <img
-                    src={
-                      activeProtoTab === 'mobile'
-                        ? `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&scaling=contain&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774')}`
-                        : `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1')}`
-                    }
-                    alt={`QR Code Prototipo ${activeProtoTab === 'mobile' ? 'Mobile' : 'Totem'}`}
-                    className="w-full h-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-
-                {/* Right Side: Description and Direct Actions */}
-                <div className="flex-1 text-center md:text-left">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#068B35]/10 border border-[#068B35]/20 rounded-full text-sm text-emerald-400 font-semibold uppercase tracking-wider mb-4 font-raleway">
-                    <QrCode className="w-3.5 h-3.5" />
-                    <span>{lang === 'it' ? 'Inquadra e Prova' : 'Scan & Try'}</span>
+                    {/* Prototype Containers */}
+                    <div className="w-full flex flex-col items-center mt-2 overflow-hidden">
+                      <AnimatePresence mode="wait">
+                        {activeProtoTab === 'totem' ? (
+                          <motion.div
+                            key="totem-proto"
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -15 }}
+                            transition={{ duration: 0.3 }}
+                            className="w-full h-[550px] sm:h-[700px] lg:h-[800px] flex justify-center items-center"
+                          >
+                            <iframe
+                              id="totem-prototype-iframe"
+                              style={{ border: 'none', width: '100%', height: '100%' }}
+                              width="100%"
+                              height="100%"
+                              src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
+                              allowFullScreen
+                            />
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            key="mobile-proto"
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -15 }}
+                            transition={{ duration: 0.3 }}
+                            className="w-full h-[550px] sm:h-[700px] lg:h-[800px] flex justify-center items-center"
+                          >
+                            <iframe
+                              id="mobile-prototype-iframe"
+                              style={{ border: 'none', width: '100%', height: '100%' }}
+                              width="100%"
+                              height="100%"
+                              src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1&hide-ui=1&embed-host=share&bg-color=050505"
+                              allowFullScreen
+                            />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
 
-                  <h4 className="text-xl font-bold text-white mb-2 uppercase tracking-tight">
-                    {lang === 'it'
-                      ? `Scansiona per testare la ${activeProtoTab === 'mobile' ? 'Versione Mobile' : 'Versione Totem'}`
-                      : `Scan to test the ${activeProtoTab === 'mobile' ? 'Mobile Version' : 'Totem Version'}`
-                    }
-                  </h4>
-
-                  <p className="text-sm text-neutral-400 leading-relaxed mb-6">
-                    {lang === 'it'
-                      ? "Inquadra il codice QR con il tuo smartphone o tablet per provare l'interfaccia interattiva a schermo intero sul tuo dispositivo reale. Naviga i menu, scopri i percorsi e sperimenta l'esperienza utente originale."
-                      : "Scan the QR code with your smartphone or tablet to experience the interactive full-screen interface on a real device. Browse the menus, discover paths, and feel the original UX."
-                    }
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start">
-                    <a
-                      href={
-                        activeProtoTab === 'mobile'
-                          ? 'https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&scaling=contain&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774'
-                          : 'https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1'
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#068B35] text-white hover:bg-emerald-700 font-bold uppercase tracking-wider text-sm rounded-xl hover:scale-105 active:scale-95 transition-all w-full sm:w-auto justify-center cursor-pointer"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span>{lang === 'it' ? 'Apri Prototipo' : 'Open Prototype'}</span>
-                    </a>
-
-                    <button
-                      onClick={() => {
-                        const link = activeProtoTab === 'mobile'
-                          ? 'https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&scaling=contain&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774'
-                          : 'https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1';
-                        navigator.clipboard.writeText(link);
-                        setCopiedLink(true);
-                        setTimeout(() => setCopiedLink(false), 2000);
-                      }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1a1c1a] hover:bg-[#252825] border border-white/5 text-neutral-300 font-semibold uppercase tracking-wider text-sm rounded-xl transition-all w-full sm:w-auto justify-center cursor-pointer"
-                    >
-                      {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                      <span>{copiedLink ? (lang === 'it' ? 'Copiato!' : 'Copied!') : (lang === 'it' ? 'Copia Link' : 'Copy Link')}</span>
-                    </button>
+                  {/* Right Column: Text & Button */}
+                  <div className="lg:col-span-7 flex flex-col justify-center items-start gap-6 lg:gap-8 px-4 lg:px-8">
+                    <h2 className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight text-[#068B35] font-raleway leading-none">
+                      Provalo
+                    </h2>
+                    <p className="text-2xl md:text-3xl lg:text-4xl text-white font-medium leading-[1.3] max-w-xl font-raleway">
+                      {lang === 'it' 
+                        ? "Puoi provare il prototipo dall'anteprima a sinistra o cliccando sul pulsante qui sotto"
+                        : "You can test the prototype from the preview on the left or by clicking the button below"}
+                    </p>
+                    <div className="mt-8 flex flex-col gap-8 w-full max-w-sm">
+                      <a href="https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1" target="_blank" rel="noopener noreferrer" className="block w-fit">
+                        <Button3D />
+                      </a>
+                    </div>
                   </div>
+
                 </div>
-              </div>
+              )}
             </div>
-          )}
 
 
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full">
 
         </div>
 

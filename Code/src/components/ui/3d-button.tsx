@@ -34,6 +34,7 @@ export const Button3D = () => {
               <span data-label="a" style={{ "--i": 5 } as any}>a</span>
               <span data-label="l" style={{ "--i": 6 } as any}>l</span>
               <span data-label="o" style={{ "--i": 7 } as any}>o</span>
+              <span data-label="!" style={{ "--i": 8 } as any}>!</span>
             </span>
             <div className="icon">
               <div />
@@ -46,6 +47,7 @@ export const Button3D = () => {
               <span data-label="a" style={{ "--i": 5 } as any}>a</span>
               <span data-label="l" style={{ "--i": 6 } as any}>l</span>
               <span data-label="o" style={{ "--i": 7 } as any}>o</span>
+              <span data-label="!" style={{ "--i": 8 } as any}>!</span>
             </span>
           </div>
         </div>
