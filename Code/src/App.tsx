@@ -37,6 +37,7 @@ import { ScrollReveal } from './components/ScrollReveal.tsx';
 import { CircularGalleryDemo } from './components/CircularGalleryDemo.tsx';
 import { GridVignetteBackground } from './components/ui/vignette-grid-background.tsx';
 
+
 const PenNibIcon = ({ className, strokeWidth = 2 }: { className?: string; strokeWidth?: number }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -1531,6 +1532,8 @@ export default function App() {
           )}
 
         </AnimatePresence>
+        
+
       </div>
     </SmoothScroll>
   );

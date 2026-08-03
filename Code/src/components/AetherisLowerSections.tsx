@@ -4,6 +4,7 @@ import { Compass, AlertTriangle, Check, ArrowRight, Star } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
 import InteractiveBentoSection from './InteractiveBentoSection';
 import HighlightCard from './ui/highlight-card';
+import { GridVignetteBackground } from './ui/vignette-grid-background';
 import AuroraBackground from './ui/aurora-background';
 import IphoneMockup3D from './IphoneMockup3D';
 import { gsap } from 'gsap';
@@ -74,12 +75,77 @@ const NeonGauge = ({ percentage, color, label, level }: { percentage: string, co
       </div>
       
       {/* Label under the gauge */}
-      <div className="mt-4 text-xs font-mono text-neutral-400 uppercase tracking-widest font-semibold group-hover:text-neutral-200 transition-colors text-center">
+      <div className="mt-4 text-xs font-raleway text-neutral-400 uppercase tracking-widest font-semibold group-hover:text-neutral-200 transition-colors text-center">
         {label}
       </div>
     </div>
   );
 };
+
+const PersonaTestNode = ({ top, left, label, content, align }: { top: string, left: string, label: string, content: string, align: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' }) => {
+  const labelClasses = {
+    'top-left': 'bottom-5 right-5 text-right',
+    'top-right': 'bottom-5 left-5 text-left',
+    'bottom-left': 'top-5 right-5 text-right',
+    'bottom-right': 'top-5 left-5 text-left',
+    'top-center': 'bottom-5 left-1/2 -translate-x-1/2 text-center'
+  }[align];
+
+  const boxClasses = {
+    'top-left': 'bottom-3 right-3 origin-bottom-right',
+    'top-right': 'bottom-3 left-3 origin-bottom-left',
+    'bottom-left': 'top-3 right-3 origin-top-right',
+    'bottom-right': 'top-3 left-3 origin-top-left',
+    'top-center': 'bottom-3 left-1/2 -translate-x-1/2 origin-bottom'
+  }[align];
+
+  return (
+    <div className="absolute z-30 flex items-center justify-center w-0 h-0 group/node" style={{ top, left }}>
+      {/* Invisible hover area */}
+      <div className="absolute w-32 h-32 rounded-full cursor-pointer z-10" />
+      
+      {/* Label styled like HighlightCard */}
+      <div className={`absolute ${labelClasses} whitespace-nowrap transition-all duration-300 group-hover/node:opacity-0 group-hover/node:-translate-y-2 pointer-events-auto cursor-pointer`}>
+        <div className="relative overflow-hidden border border-white/5 bg-[#030604] backdrop-blur-3xl px-5 py-2.5 sm:px-6 sm:py-3 rounded-2xl shadow-2xl">
+          <div className="absolute inset-0 shadow-[inset_0_2px_4px_rgba(255,255,255,0.05),_inset_0_0_20px_rgba(6,139,53,0.05)] rounded-2xl pointer-events-none" />
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[140%] h-16 bg-[#068B35]/40 blur-[15px] opacity-80 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#068B35] to-transparent opacity-100 pointer-events-none" />
+          
+          <span className="relative z-10 text-xs sm:text-sm font-raleway uppercase tracking-widest text-white font-medium drop-shadow-md">{label}</span>
+        </div>
+      </div>
+
+      {/* Expanded Content Box styled like HighlightCard */}
+      <div className={`absolute ${boxClasses} w-48 sm:w-56 bg-[#030604] backdrop-blur-3xl border border-white/5 rounded-[2rem] p-5 sm:p-6 opacity-0 scale-90 pointer-events-none transition-all duration-400 group-hover/node:opacity-100 group-hover/node:scale-100 group-hover/node:pointer-events-auto shadow-2xl z-20 overflow-hidden`}>
+        <div className="absolute inset-0 shadow-[inset_0_2px_4px_rgba(255,255,255,0.05),_inset_0_0_20px_rgba(6,139,53,0.05)] rounded-[2rem] pointer-events-none" />
+        <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[140%] h-32 bg-[#068B35]/30 blur-[40px] opacity-90 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#068B35] to-transparent opacity-100 pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+        
+        <div className="relative z-10">
+          <span className="text-[10px] font-raleway text-[#068B35] uppercase tracking-widest block mb-3 font-bold">{label}</span>
+          <p className="text-sm font-light text-white leading-relaxed">{content}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PopOutImage = ({ className }: { className?: string }) => (
+  <div className={`relative shrink-0 group/img cursor-pointer ${className}`}>
+    {/* Base Circle with hidden overflow for the bottom */}
+    <div className="absolute inset-0 rounded-full border-2 sm:border-[3px] border-[#068B35] bg-[#131514] overflow-hidden shadow-[0_0_50px_rgba(6,139,53,0.15)]">
+      <img src="/mirella_no_bg.png" alt="Mirella Base" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom transition-transform duration-700 origin-bottom group-hover/img:scale-110" />
+    </div>
+    {/* Top Half popping out - exact same positioning but clipped */}
+    <img 
+      src="/mirella_no_bg.png" 
+      alt="Mirella Pop Out" 
+      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom z-10 pointer-events-none drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-transform duration-700 origin-bottom group-hover/img:scale-110" 
+      style={{ clipPath: 'inset(0 0 50% 0)' }} 
+    />
+  </div>
+);
 
 interface Props {
   project: any;
@@ -131,6 +197,9 @@ export function AetherisLowerSections({
       end: 'bottom bottom',
       scrub: true,
       onUpdate: (self) => {
+        // Prevent initial evaluation on mount from overwriting the default 'desk' state
+        if (self.direction === 0) return;
+
         const progress = self.progress;
 
         let targetTab = 'desk';
@@ -142,8 +211,9 @@ export function AetherisLowerSections({
           targetTab = 'desk';
         }
 
-        // Only update if it actually changed to avoid overriding the initial state incorrectly on mount
-        if (activeTabRef.current !== targetTab && (progress > 0 || self.isActive)) {
+        // Update the tab state if it has changed. 
+        // This ensures that if progress drops back to 0 (e.g. scrolling to top), it resets to 'desk' correctly.
+        if (activeTabRef.current !== targetTab) {
           setActiveResearchTab(targetTab);
         }
       }
@@ -191,7 +261,7 @@ export function AetherisLowerSections({
                   <button
                     key={tab}
                     onClick={() => handleTabClick(tab, index)}
-                    className={`flex items-center justify-center pb-2 text-xs sm:text-sm tracking-widest transition-all duration-300 relative z-10 uppercase font-mono ${activeResearchTab === tab ? 'text-white/90 font-bold' : 'text-white/40 hover:text-white/70'
+                    className={`flex items-center justify-center pb-2 text-xs sm:text-sm tracking-widest transition-all duration-300 relative z-10 uppercase font-raleway ${activeResearchTab === tab ? 'text-white/90 font-bold' : 'text-white/40 hover:text-white/70'
                       }`}
                   >
                     {activeResearchTab === tab && (
@@ -284,7 +354,7 @@ export function AetherisLowerSections({
                     >
                       <HighlightCard animatedBorder={true} title="Utilità di un Totem Digitale?">
                         <div className="flex flex-col items-center gap-4 text-center">
-                          <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q1</span>
+                          <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-raleway border border-[#068B35]/20 shrink-0">Q1</span>
                           <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
                             "Migliorerebbe l'esperienza, permettendo di orientarsi e prepararsi prima della visita."
                           </p>
@@ -293,7 +363,7 @@ export function AetherisLowerSections({
 
                       <HighlightCard animatedBorder={true} title="Mancanze Informative?">
                         <div className="flex flex-col items-center gap-4 text-center">
-                          <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-mono border border-[#068B35]/20 shrink-0">Q2</span>
+                          <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-raleway border border-[#068B35]/20 shrink-0">Q2</span>
                           <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
                             "Sì, mancano dettagli scientifici chiari oltre al nome della pianta."
                           </p>
@@ -348,62 +418,56 @@ export function AetherisLowerSections({
       </div>
 
       {/* 04 / USER PERSONA */}
-      {/* 04 / USER PERSONA */}
-      <div className="pt-8 md:pt-16 flex flex-col gap-12 pb-16 relative z-10 mt-[-2rem]">
-        <div className="flex flex-col gap-4 text-center items-center">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white font-raleway">
-            L'Utente Ideale
-          </h2>
+      <div className="py-20 md:py-32 relative z-10 w-[100vw] ml-[calc(50%-50vw)] flex flex-col items-center overflow-hidden">
+        
+        {/* Background Grid Vignette */}
+        <GridVignetteBackground className="opacity-100" horizontalVignetteSize={50} verticalVignetteSize={50} intensity={100} />
+        
+        {/* Header Block (Standard Flow) */}
+        <div className="flex flex-col items-center gap-6 w-[90vw] max-w-2xl mb-16 md:mb-24 relative z-30">
+          <h3 className="text-4xl sm:text-5xl font-raleway tracking-wide drop-shadow-md leading-none text-center">
+            <span className="font-black text-[#068B35]">Mirella</span>
+            <span className="text-neutral-500 font-light mx-3 sm:mx-4">•</span>
+            <span className="font-light text-white">L'utente Ideale</span>
+          </h3>
+          <p className="text-sm md:text-base italic text-neutral-200 font-light leading-relaxed text-center drop-shadow-md">
+            "Voglio connettermi alla natura e approfondire la mia conoscenza scientifica senza barriere, in modo dinamico e intuitivo."
+          </p>
         </div>
 
-        <div className="bg-[#131514] rounded-[3rem] border border-[#068B35]/20 p-8 sm:p-12 md:p-16 flex flex-col lg:flex-row gap-16 items-center lg:items-start shadow-2xl relative overflow-hidden">
-          {/* Decorative Glow */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#068B35]/5 rounded-full blur-[100px] pointer-events-none" />
+        {/* Diagram Area */}
+        <div className="relative w-full max-w-4xl aspect-square md:aspect-[4/3] flex items-center justify-center">
+          
+          {/* SVG Lines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" preserveAspectRatio="none">
+            
+            {/* Status (Top Left) */}
+            <line x1="15%" y1="15%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="15%" cy="15%" r="4" fill="rgba(255,255,255,0.15)" />
+            
+            {/* Necessità (Top Right) */}
+            <line x1="85%" y1="15%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="85%" cy="15%" r="4" fill="rgba(255,255,255,0.15)" />
+            
+            {/* Obiettivo (Bottom Left) */}
+            <line x1="15%" y1="85%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="15%" cy="85%" r="4" fill="rgba(255,255,255,0.15)" />
+            
+            {/* Origine (Bottom Right) */}
+            <line x1="85%" y1="85%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="85%" cy="85%" r="4" fill="rgba(255,255,255,0.15)" />
+          </svg>
 
-          {/* Left: Image & Identity */}
-          <div className="flex flex-col gap-6 items-center lg:items-start w-full lg:w-1/3 z-10">
-            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#068B35]/30 shadow-lg shrink-0">
-              <img
-                src="/mirella.png"
-                alt="Mirella - User Persona"
-                className="w-full h-full object-cover grayscale contrast-110 brightness-95"
-              />
-            </div>
-            <div className="text-center lg:text-left flex flex-col gap-2">
-              <h3 className="text-4xl font-black text-white font-raleway">Mirella</h3>
-              <span className="text-sm font-mono uppercase tracking-widest text-[#068B35] font-bold bg-[#068B35]/10 px-4 py-1.5 rounded-full inline-block">Profilo Accademico</span>
-            </div>
-          </div>
+          {/* Interactive Nodes */}
+          <PersonaTestNode top="15%" left="15%" label="Status" content="Nuova residente a Catania (Studentessa)." align="top-left" />
+          <PersonaTestNode top="15%" left="85%" label="Necessità" content="Informazioni repentine tramite smartphone." align="top-right" />
+          <PersonaTestNode top="85%" left="15%" label="Obiettivo" content="Esplorazione scientifica intuitiva." align="bottom-left" />
+          <PersonaTestNode top="85%" left="85%" label="Origine" content="Colombia, ricca di biodiversità." align="bottom-right" />
 
-          {/* Right: Facts & Bio in Grid */}
-          <div className="flex flex-col gap-10 w-full lg:w-2/3 z-10">
-
-            <div className="bg-[#1A1D1B] p-6 sm:p-8 rounded-[2rem] border border-white/5 relative mt-4 lg:mt-0">
-              <div className="text-5xl font-serif text-[#068B35]/40 absolute -top-4 left-4">"</div>
-              <p className="text-base sm:text-lg italic text-neutral-200 leading-relaxed font-light text-center px-4 sm:px-8 relative z-10">
-                Voglio connettermi alla natura e approfondire la mia conoscenza scientifica senza barriere, in modo dinamico e intuitivo.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div className="flex flex-col gap-2">
-                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Origine</span>
-                <span className="text-base font-bold text-white">Colombia, ricca di biodiversità.</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Status</span>
-                <span className="text-base font-bold text-white">Nuova residente a Catania (Studentessa).</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Obiettivo</span>
-                <span className="text-base font-bold text-white">Esplorazione scientifica intuitiva.</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-sm font-mono text-neutral-500 uppercase tracking-widest">Necessità</span>
-                <span className="text-base font-bold text-white">Informazioni repentine tramite smartphone.</span>
-              </div>
-            </div>
-
+          {/* Center Image */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center">
+            {/* Pop-out Image Component */}
+            <PopOutImage className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64" />
           </div>
         </div>
       </div>

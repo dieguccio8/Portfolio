@@ -86,11 +86,11 @@ export default function ProjectRightColumn({ project }: ProjectRightColumnProps)
           {project.id === 'chronos' && (
             <div className="flex flex-col gap-4">
               <div className="flex justify-between items-center border-b border-white/5 pb-2">
-                <h4 className="text-sm uppercase font-mono tracking-widest text-[#9E1C1F] flex items-center gap-1.5">
+                <h4 className="text-sm uppercase font-raleway tracking-widest text-[#9E1C1F] flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-ping" />
                   <span>Live Ticket Generator</span>
                 </h4>
-                <span className="text-xs font-mono text-white/30">ITALO-PASS-GEN</span>
+                <span className="text-xs font-raleway text-white/30">ITALO-PASS-GEN</span>
               </div>
 
               <p className="text-sm leading-relaxed text-white/60">
@@ -100,25 +100,25 @@ export default function ProjectRightColumn({ project }: ProjectRightColumnProps)
               <form onSubmit={handleGenerateTicket} className="flex flex-col gap-3">
                 <div className="grid grid-cols-2 gap-2">
                   <div className="flex flex-col gap-1">
-                    <label className="text-xs font-mono text-white/40 uppercase">Passeggero</label>
+                    <label className="text-xs font-raleway text-white/40 uppercase">Passeggero</label>
                     <input
                       type="text"
                       required
                       value={ticketForm.passengerName}
                       onChange={(e) => setTicketForm({ ...ticketForm, passengerName: e.target.value })}
                       placeholder="Mario Rossi"
-                      className="px-3 py-1.5 bg-black border border-white/10 rounded-lg text-sm text-white focus:border-[#9E1C1F] outline-none font-mono"
+                      className="px-3 py-1.5 bg-black border border-white/10 rounded-lg text-sm text-white focus:border-[#9E1C1F] outline-none font-raleway"
                     />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="text-xs font-mono text-white/40 uppercase">Tratta</label>
+                    <label className="text-xs font-raleway text-white/40 uppercase">Tratta</label>
                     <select
                       value={`${ticketForm.from}-${ticketForm.to}`}
                       onChange={(e) => {
                         const [from, to] = e.target.value.split('-');
                         setTicketForm({ ...ticketForm, from, to });
                       }}
-                      className="px-3 py-1.5 bg-black border border-white/10 rounded-lg text-sm text-white focus:border-[#9E1C1F] outline-none font-mono"
+                      className="px-3 py-1.5 bg-black border border-white/10 rounded-lg text-sm text-white focus:border-[#9E1C1F] outline-none font-raleway"
                     >
                       <option value="Catania Centrale-Palermo Centrale">Catania ➔ Palermo</option>
                       <option value="Catania Centrale-Messina Centrale">Catania ➔ Messina</option>
@@ -129,7 +129,7 @@ export default function ProjectRightColumn({ project }: ProjectRightColumnProps)
                 <button
                   type="submit"
                   disabled={isGeneratingTicket}
-                  className="w-full py-2.5 bg-[#9E1C1F] hover:bg-[#b02225] disabled:opacity-40 text-white font-bold rounded-xl text-sm uppercase font-mono tracking-widest transition-colors cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-2.5 bg-[#9E1C1F] hover:bg-[#b02225] disabled:opacity-40 text-white font-bold rounded-xl text-sm uppercase font-raleway tracking-widest transition-colors cursor-pointer flex items-center justify-center gap-2"
                 >
                   {isGeneratingTicket ? (
                     <>
@@ -152,13 +152,13 @@ export default function ProjectRightColumn({ project }: ProjectRightColumnProps)
                     {/* Top ticket strip */}
                     <div className="flex justify-between items-start border-b border-black/10 pb-2">
                       <div>
-                        <span className="text-xs font-bold text-[#9E1C1F] font-mono block">italotreno.it</span>
+                        <span className="text-xs font-bold text-[#9E1C1F] font-raleway block">italotreno.it</span>
                         <span className="text-sm font-black tracking-tight">{generatedTicket.trainNum}</span>
                       </div>
                       <QrCode className="w-8 h-8 text-black" />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 text-sm font-mono">
+                    <div className="grid grid-cols-2 gap-2 text-sm font-raleway">
                       <div>
                         <span className="text-black/40 block">DA:</span>
                         <span className="font-bold">{generatedTicket.from}</span>
@@ -169,14 +169,14 @@ export default function ProjectRightColumn({ project }: ProjectRightColumnProps)
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2 text-xs font-mono border-t border-black/5 pt-2">
+                    <div className="grid grid-cols-3 gap-2 text-xs font-raleway border-t border-black/5 pt-2">
                       <div>
                         <span className="text-black/40 block">CARROZZA</span>
-                        <span className="font-bold font-mono">{generatedTicket.coach}</span>
+                        <span className="font-bold font-raleway">{generatedTicket.coach}</span>
                       </div>
                       <div>
                         <span className="text-black/40 block">POSTO</span>
-                        <span className="font-bold font-mono">{generatedTicket.seat}</span>
+                        <span className="font-bold font-raleway">{generatedTicket.seat}</span>
                       </div>
                       <div>
                         <span className="text-black/40 block">PNR</span>
@@ -186,11 +186,11 @@ export default function ProjectRightColumn({ project }: ProjectRightColumnProps)
 
                     <div className="flex justify-between items-center border-t border-black/5 pt-2">
                       <div>
-                        <span className="text-[8px] font-mono text-black/40 block">PASSEGGERO</span>
+                        <span className="text-[8px] font-raleway text-black/40 block">PASSEGGERO</span>
                         <span className="text-sm font-bold uppercase truncate max-w-[120px] block">{generatedTicket.passengerName}</span>
                       </div>
                       <div className="text-right">
-                        <span className="text-[8px] font-mono text-black/40 block">TARIFFA PRENOTATA</span>
+                        <span className="text-[8px] font-raleway text-black/40 block">TARIFFA PRENOTATA</span>
                         <span className="text-sm font-black text-black">€{generatedTicket.price}</span>
                       </div>
                     </div>
@@ -200,7 +200,7 @@ export default function ProjectRightColumn({ project }: ProjectRightColumnProps)
                         setDownloadSuccess(true);
                         setTimeout(() => setDownloadSuccess(false), 2000);
                       }}
-                      className="w-full mt-1 py-1.5 bg-black hover:bg-neutral-800 text-white font-bold rounded-lg text-xs uppercase font-mono tracking-widest transition-colors cursor-pointer flex items-center justify-center gap-1"
+                      className="w-full mt-1 py-1.5 bg-black hover:bg-neutral-800 text-white font-bold rounded-lg text-xs uppercase font-raleway tracking-widest transition-colors cursor-pointer flex items-center justify-center gap-1"
                     >
                       {downloadSuccess ? (
                         <>
