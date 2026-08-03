@@ -44,6 +44,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
 import ThreeDMarquee from './ui/3d-marquee';
 import HighlightCard from './ui/highlight-card';
+import { Button3D } from './ui/3d-button';
 
 
 function BeforeAfterSlider() {
@@ -2248,14 +2249,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
           {/* COLOR PALETTE & TYPOGRAPHY STYLE GUIDE */}
           {isAetheris ? (
-            <div className="pt-12 border-t border-white/5 flex flex-col gap-12 mt-12 text-left" id="orto-design-system-section">
+            <div className="pt-12 border-t border-white/5 flex flex-col gap-6 mt-12 text-left" id="orto-design-system-section">
               {/* Header section removed per request */}
 
               {/* Design System Bento Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
                 
                 {/* Top Left: Color palette principale */}
-                <div className="md:col-span-4 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col items-start shadow-2xl relative overflow-hidden group">
+                <div className="md:col-span-3 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col items-start shadow-2xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <h3 className="text-sm font-raleway uppercase tracking-widest text-neutral-400 font-bold mb-8 relative z-10">Color Palette</h3>
                   
@@ -2287,7 +2288,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 </div>
 
                 {/* Top Right: Colori pillole categoria */}
-                <div className="md:col-span-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group">
+                <div className="md:col-span-9 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="flex flex-wrap gap-x-6 gap-y-5 relative z-10 w-full" id="orto-categories-row">
@@ -2320,87 +2321,92 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </div>
                 </div>
 
-                {/* Bottom Left: H1 Demo */}
-                <div className="md:col-span-7 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group min-h-[240px]">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="flex flex-col gap-2 relative z-10 w-full">
-                    <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">H1 / Raleway, Semibold, 62px</span>
-                    <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
-                      {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
-                    </h1>
-                  </div>
-                </div>
-
-                {/* Bottom Right: Body Text Demo */}
-                <div className="md:col-span-5 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-10 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group min-h-[240px]">
-                  <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="flex flex-col gap-2 relative z-10">
-                    <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">Body / Raleway, Regular, 28px</span>
-                    <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-xl md:text-2xl leading-relaxed font-light">
-                      {lang === 'it' ? (
-                        "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
-                      ) : (
-                        "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
-                      )}
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Block 3: Componenti Core */}
-              <div id="orto-block-components" className="w-full">
-                <div className="rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 lg:p-16 shadow-2xl relative overflow-hidden group flex flex-col gap-12 lg:gap-16">
+                {/* Bottom Left: Componenti Core */}
+                <div className="md:col-span-7 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 shadow-2xl relative overflow-hidden group flex flex-col gap-12" id="orto-block-components">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   
                   {/* Top Section: Card Pianta + Searchbars + Buttons + Controls */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 w-full items-center">
+                  <div className="flex flex-col lg:flex-row justify-center gap-8 lg:gap-10 relative z-10 w-full items-start">
                     
-                    {/* Left: Card Pianta (4 cols) */}
-                    <div className="lg:col-span-4 flex justify-center">
-                      <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[280px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
+                    {/* Left Column */}
+                    <div className="flex flex-col gap-6 w-full lg:w-auto lg:min-w-[320px] xl:min-w-[380px]">
+                      <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      
+                      <div className="mt-8">
+                        <img src="/design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                      </div>
                     </div>
 
-                    {/* Right: Searchbars & Controls (8 cols) */}
-                    <div className="lg:col-span-8 flex flex-col gap-12">
-                      {/* Searchbars */}
-                      <div className="flex flex-col gap-5 w-full max-w-[380px]">
-                        <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                        <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                        <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                    {/* Right Column */}
+                    <div className="flex flex-col gap-8 items-start w-full lg:w-auto">
+                      {/* Pianta Card - reduced size */}
+                      <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
+                      
+                      {/* Tags */}
+                      <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+
+                      {/* Language and Scopri Pianta */}
+                      <div className="flex items-center gap-8">
+                        <img src="/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
+                        <img src="/design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src='/design_system/button_scopri_pianta.png'} />
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                        {/* Bottoni Navigazione */}
-                        <div className="flex flex-wrap justify-center md:justify-start items-center gap-5">
-                          <img src="/design_system/button_primary.svg" alt="Button Primary" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
-                          <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
-                          <img src="/design_system/button_scopri_pianta.png" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
-                        </div>
-
-                        {/* Controlli UI */}
-                        <div className="flex flex-row justify-center md:justify-end items-center gap-8">
-                          <img src="/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
-                          <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" />
-                        </div>
+                      {/* Percorso */}
+                      <div className="mt-4 -ml-12 lg:-ml-20 xl:-ml-36">
+                        <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                       </div>
                     </div>
                   </div>
 
                   {/* Bottom Row: Pillole Categorie Mappa */}
-                  <div className="grid grid-cols-4 md:grid-cols-8 gap-4 w-full relative z-10 pt-8 lg:pt-12 border-t border-white/5">
-                    {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
-                      <img
-                        key={variant}
-                        src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
-                        alt={`Categoria ${variant}`}
-                        className="w-full h-auto max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
-                      />
-                    ))}
+                  <div className="w-full relative z-10 pt-8 lg:pt-12 border-t border-white/5 mt-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-4 w-full mx-auto">
+                      {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
+                        <img
+                          key={variant}
+                          src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
+                          alt={`Categoria ${variant}`}
+                          className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Right: Body and H1 */}
+                <div className="md:col-span-5 flex flex-col gap-6">
+                  {/* Body Text Demo */}
+                  <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-10 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
+                    <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="flex flex-col gap-2 relative z-10">
+                      <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">Body / Raleway, Regular, 28px</span>
+                      <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-xl md:text-2xl leading-relaxed font-light">
+                        {lang === 'it' ? (
+                          "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
+                        ) : (
+                          "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
+                        )}
+                      </p>
+                    </div>
                   </div>
 
+                  {/* H1 Demo */}
+                  <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="flex flex-col gap-2 relative z-10 w-full">
+                      <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">H1 / Raleway, Semibold, 62px</span>
+                      <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
+                        {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
+                      </h1>
+                    </div>
+                  </div>
                 </div>
+
               </div>
+
+
             </div>
           ) : (
             <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
@@ -2469,6 +2475,9 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   {lang === 'it' ? '07 / Sperimenta l’Esperienza' : '07 / Experience the Design'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">{lang === 'it' ? 'Provalo' : 'Try It'}</h2>
+                <div className="my-2">
+                  <Button3D />
+                </div>
                 <p className="text-sm leading-relaxed font-light text-neutral-300">
                   {lang === 'it'
                     ? "Naviga all’interno dei prototipi interattivi realizzati per l'Orto Botanico. Scegli tra la versione mobile progettata per l’esplorazione sul campo e la versione totem dedicata ai punti informativi fisici."
@@ -2535,7 +2544,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         style={{ border: 'none', width: '100%', height: '100%' }}
                         width="100%"
                         height="100%"
-                        src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=121312"
+                        src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
                         allowFullScreen
                       />
                     </motion.div>
@@ -2553,7 +2562,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         style={{ border: 'none', width: '100%', height: '100%' }}
                         width="100%"
                         height="100%"
-                        src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&scaling=contain&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=121312"
+                        src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&scaling=contain&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
                         allowFullScreen
                       />
                     </motion.div>
