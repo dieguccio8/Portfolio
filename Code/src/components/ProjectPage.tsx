@@ -2371,11 +2371,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
 
         {/* 3D Marquee Section */}
-        <div className="pt-32 pb-16 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
+        <div className="pt-16 pb-8 md:pb-12 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
           <ThreeDMarquee />
         </div>
 
-        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8">
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8 md:pt-12">
               {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
               {isAetheris && (
                 <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-16 w-full" id="orto-interactive-prototypes-section">
@@ -2424,46 +2424,52 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     </div>
 
                     {/* Prototype Containers */}
-                    <div className="w-full flex flex-col items-center mt-2 overflow-hidden">
-                      <AnimatePresence mode="wait">
-                        {activeProtoTab === 'totem' ? (
-                          <motion.div
-                            key="totem-proto"
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -15 }}
-                            transition={{ duration: 0.3 }}
-                            className="w-full h-[550px] sm:h-[700px] lg:h-[800px] flex justify-center items-center"
-                          >
-                            <iframe
-                              id="totem-prototype-iframe"
-                              style={{ border: 'none', width: '100%', height: '100%' }}
-                              width="100%"
-                              height="100%"
-                              src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
-                              allowFullScreen
-                            />
-                          </motion.div>
-                        ) : (
-                          <motion.div
-                            key="mobile-proto"
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -15 }}
-                            transition={{ duration: 0.3 }}
-                            className="w-full h-[550px] sm:h-[700px] lg:h-[800px] flex justify-center items-center"
-                          >
-                            <iframe
-                              id="mobile-prototype-iframe"
-                              style={{ border: 'none', width: '100%', height: '100%' }}
-                              width="100%"
-                              height="100%"
-                              src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1&hide-ui=1&embed-host=share&bg-color=050505"
-                              allowFullScreen
-                            />
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                    <div className="relative w-full h-[550px] sm:h-[700px] lg:h-[800px] mt-2 flex justify-center items-center">
+                      <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ 
+                          opacity: activeProtoTab === 'totem' ? 1 : 0, 
+                          y: activeProtoTab === 'totem' ? 0 : 15 
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0 w-full h-full flex justify-center items-center"
+                        style={{ 
+                          pointerEvents: activeProtoTab === 'totem' ? 'auto' : 'none',
+                          zIndex: activeProtoTab === 'totem' ? 10 : 1 
+                        }}
+                      >
+                        <iframe
+                          id="totem-prototype-iframe"
+                          style={{ border: 'none', width: '100%', height: '100%' }}
+                          width="100%"
+                          height="100%"
+                          src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
+                          allowFullScreen
+                        />
+                      </motion.div>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ 
+                          opacity: activeProtoTab === 'mobile' ? 1 : 0, 
+                          y: activeProtoTab === 'mobile' ? 0 : 15 
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0 w-full h-full flex justify-center items-center"
+                        style={{ 
+                          pointerEvents: activeProtoTab === 'mobile' ? 'auto' : 'none',
+                          zIndex: activeProtoTab === 'mobile' ? 10 : 1 
+                        }}
+                      >
+                        <iframe
+                          id="mobile-prototype-iframe"
+                          style={{ border: 'none', width: '100%', height: '100%' }}
+                          width="100%"
+                          height="100%"
+                          src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1&hide-ui=1&embed-host=share&bg-color=050505"
+                          allowFullScreen
+                        />
+                      </motion.div>
                     </div>
                   </div>
 
@@ -2478,8 +2484,29 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         : "You can test the prototype from the preview on the left or by clicking the button below"}
                     </p>
                     <div className="mt-8 flex flex-col gap-8 w-full max-w-sm">
-                      <a href="https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1" target="_blank" rel="noopener noreferrer" className="block w-fit">
-                        <Button3D />
+                      <a href="https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1" target="_blank" rel="noopener noreferrer" className="block w-fit group">
+                        <motion.button 
+                          animate={{ 
+                            boxShadow: [
+                              "0px 0px 15px rgba(6,139,53,0.1)", 
+                              "0px 0px 35px rgba(6,139,53,0.4)", 
+                              "0px 0px 15px rgba(6,139,53,0.1)"
+                            ],
+                            scale: [1, 1.02, 1]
+                          }}
+                          transition={{ 
+                            duration: 2.5, 
+                            repeat: Infinity, 
+                            ease: "easeInOut" 
+                          }}
+                          className="relative flex items-center gap-3 px-8 py-4 bg-[#068B35] hover:bg-[#057A2E] text-white rounded-full transition-colors duration-300 overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                          <span className="relative font-raleway font-semibold tracking-wide text-sm md:text-base">
+                            {lang === 'it' ? "Prova il Prototipo" : "Try the Prototype"}
+                          </span>
+                          <ArrowUpRight className="relative w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
+                        </motion.button>
                       </a>
                     </div>
                   </div>

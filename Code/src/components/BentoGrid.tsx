@@ -172,13 +172,13 @@ export default function BentoGrid({ activePhase }: { activePhase: string }) {
   const theme = isProblems ? 'red' : 'emerald';
 
   return (
-    <div className="relative w-full h-full max-w-2xl mx-auto flex items-center justify-center pt-16">
+    <div className="relative w-full h-full max-w-2xl mx-auto flex items-center justify-center">
       
       {/* Container for the 2x2 grid */}
       <div className="relative w-full grid grid-cols-1 gap-y-20 md:grid-cols-2 md:grid-rows-2 md:gap-y-0 text-center z-10">
         
         {/* Horizontal & Vertical Cross Dividers (Hidden on mobile) */}
-        <span className="hidden md:block absolute top-[-5%] left-[50%] h-[110%] w-[1px] bg-gradient-to-b from-transparent via-white/15 to-transparent pointer-events-none z-30 transition-opacity duration-500"></span>
+        <span className="hidden md:block absolute top-[0%] left-[50%] h-[100%] w-[1px] bg-gradient-to-b from-transparent via-white/15 to-transparent pointer-events-none z-30 transition-opacity duration-500"></span>
         <span className="hidden md:block absolute top-[50%] left-[-10%] w-[120%] h-[1px] -translate-y-1/2 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none z-30 transition-opacity duration-500"></span>
 
         {activeFeatures.map((feature, idx) => (

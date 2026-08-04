@@ -47,7 +47,7 @@ const phases = [
 
 export default function TimelineAccordion({ activePhase, onPhaseChange }: { activePhase: string, onPhaseChange: (phase: string) => void }) {
   return (
-    <div className="pointer-events-auto col-span-full duration-500 ease-in-out lg:col-span-4 w-full max-w-lg font-raleway mx-auto lg:ml-12">
+    <div className="pointer-events-auto col-span-full duration-500 ease-in-out lg:col-span-4 w-full max-w-lg font-raleway mx-auto lg:ml-12 grid auto-rows-fr">
       {phases.map((phase, index) => {
         const isActive = activePhase === phase.id;
         const colors = phase.textColors;

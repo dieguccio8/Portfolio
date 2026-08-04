@@ -197,9 +197,7 @@ export function AetherisLowerSections({
       end: 'bottom bottom',
       scrub: true,
       onUpdate: (self) => {
-        // Prevent initial evaluation on mount from overwriting the default 'desk' state
-        if (self.direction === 0) return;
-
+        // We always want to sync state with the actual scroll position, even on refresh/mount
         const progress = self.progress;
 
         let targetTab = 'desk';
@@ -251,7 +249,7 @@ export function AetherisLowerSections({
             <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">
               <div className="flex flex-col gap-4">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">
-                  Metodologia a Scansione
+                  Metodologia di Ricerca
                 </h2>
               </div>
 
