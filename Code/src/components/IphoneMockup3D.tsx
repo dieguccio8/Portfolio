@@ -375,7 +375,7 @@ export default function IphoneMockup3D() {
           <AuroraBackground className="!bg-transparent h-full w-full">
             <div className="absolute inset-0 pointer-events-none flex flex-col justify-center pl-[5%] md:pl-[10%] lg:pl-[12%] pr-[5%] z-10">
               <div ref={titleRef} className="flex flex-col gap-6 max-w-xl md:max-w-2xl">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-max leading-tight">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-max leading-none">
                    Cos'è<br />
                    <span className="text-[#068b35] whitespace-nowrap">Bussola Verde?</span>
                 </h1>

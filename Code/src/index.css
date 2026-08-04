@@ -36,10 +36,10 @@
 }
 
 /* Base custom styles to respect selection and overall dark theme */
-::selection {
+/* ::selection {
   background: #E8302A;
   color: #FFFFFF;
-}
+} */
 
 html, body {
   background-color: #050505;

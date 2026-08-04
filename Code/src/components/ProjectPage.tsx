@@ -37,6 +37,7 @@ import InteractiveBentoSection from './InteractiveBentoSection';
 import KineticsLowerSections from './KineticsLowerSections';
 import ChronosLowerSections from './ChronosLowerSections';
 import { AetherisLowerSections } from './AetherisLowerSections';
+import IphoneMockup3D from './IphoneMockup3D';
 import { CustomCursor } from './CustomCursor';
 import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from './ScrollProgress';
@@ -256,7 +257,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
       <CustomCursor color={primaryColor} />
       <ScrollProgress color={primaryColor} />
       <ScrollReveal />
-      <div id="project-page-root" className={`min-h-screen pb-24 relative ${isKinetics ? 'font-urbanist bg-[#0D0D0D] text-[#F5F5F0] selection:bg-[#FCD306] selection:text-[#0D0D0D]' : isAetheris ? 'font-raleway bg-[#050505] text-white selection:bg-[#068B35]/30 selection:text-white' : isChronos ? 'font-sans bg-black text-white selection:bg-[#9E1C1F] selection:text-white' : 'font-sans bg-black text-white selection:bg-[#E8302A] selection:text-white'}`}>
+      <div id="project-page-root" className={`min-h-screen pb-24 relative ${isKinetics ? 'font-urbanist bg-[#0D0D0D] text-[#F5F5F0] selection:bg-[#FCD306] selection:text-[#0D0D0D]' : isAetheris ? 'font-raleway bg-[#050505] text-white selection:bg-[#068B35] selection:text-white' : isChronos ? 'font-sans bg-black text-white selection:bg-[#9E1C1F] selection:text-white' : 'font-sans bg-black text-white selection:bg-[#E8302A] selection:text-white'}`}>
 
         {/* Ambient soft primary glows */}
         {!isAetheris && (
@@ -311,6 +312,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         >
           <Menu className="w-6 h-6 text-white" />
         </button>
+
+        {/* Orto Botanico Logo Card */}
+        {isAetheris && (
+          <div className="fixed top-6 right-6 z-[100] h-14 md:h-16 px-6 md:px-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
+            <img src="/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-8 md:h-10 w-auto object-contain" />
+          </div>
+        )}
 
         {/* Hamburger Menu Drawer */}
         <AnimatePresence>
@@ -786,6 +794,19 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               {!isAetheris && <div className={`w-12 h-1 ${isKinetics ? 'bg-[#FCD306]' : 'bg-[#E8302A]'}`} />}
             </div>
           </section>
+        )}
+
+        {/* 03 / L'ECOSISTEMA (3D MOCKUP) (Moved under hero for Aetheris) */}
+        {isAetheris && (
+          <div className="relative left-1/2 -translate-x-1/2 w-[100vw] mt-12 sm:mt-16 mb-8">
+            {/* Fade-in mask for smooth transition from the previous section */}
+            <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
+
+            <IphoneMockup3D />
+
+            {/* Fade-out mask for smooth transition to the next section */}
+            <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
+          </div>
         )}
 
         {/* 3. CASE STUDY GRID */}
@@ -1488,126 +1509,6 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </div>
                 </div>
 
-                {/* Sezione Cos'è Bussola Verde */}
-                <div className="pt-10 border-t border-white/5 flex flex-col gap-6">
-                  <div className="flex flex-col gap-3">
-                    <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
-                      {lang === 'it'
-                        ? (isAetheris ? '03 / Il Progetto' : '04 / Il Progetto')
-                        : (isAetheris ? '03 / The Project' : '04 / The Project')
-                      }
-                    </span>
-                    <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight text-white ${isAetheris ? 'font-raleway' : 'font-sans'}`}>
-                      {lang === 'it' ? (
-                        isAetheris ? "Cos’è “Bussola Verde”?" : "Cos’è “Urban StreetArt Sicily”?"
-                      ) : (
-                        isAetheris ? "What is “Bussola Verde”?" : "What is “Urban StreetArt Sicily”?"
-                      )}
-                    </h2>
-                  </div>
-
-                  <div className={`bg-gradient-to-br from-[#131514] to-[#1a1d1b] border rounded-3xl p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden group shadow-md ${isAetheris ? 'border-[#068B35]/20' : 'border-[#E8302A]/20'
-                    }`}>
-                    <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none transition-all duration-700 ${isAetheris ? 'bg-[#068B35]/5 group-hover:bg-[#068B35]/10' : 'bg-[#E8302A]/5 group-hover:bg-[#E8302A]/10'
-                      }`} />
-
-                    <div className="flex items-start gap-4">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${isAetheris ? 'bg-[#068B35]/10 border-[#068B35]/30 text-emerald-400' : 'bg-[#E8302A]/10 border-[#E8302A]/30 text-rose-400'
-                        }`}>
-                        <Compass className="w-5 h-5 animate-pulse" />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <p className="text-base sm:text-lg font-semibold text-white leading-relaxed">
-                          {lang === 'it' ? (
-                            isAetheris
-                              ? "È un ecosistema digitale che combina totem interattivi e tecnologia QR code."
-                              : "È una piattaforma digitale integrata con geolocalizzazione live e archivio monografico."
-                          ) : (
-                            isAetheris
-                              ? "It is a digital ecosystem combining interactive kiosks and QR code technology."
-                              : "It is an integrated digital platform with live geolocation and a monographic archive."
-                          )}
-                        </p>
-                        <p className="text-sm sm:text-base leading-relaxed text-neutral-300 font-light">
-                          {lang === 'it' ? (
-                            isAetheris
-                              ? "All’ingresso, ogni visitatore può scegliere uno dei percorsi in base ai propri interessi e, tramite la scansione di un QR code dedicato, proseguire da smartphone."
-                              : "L'applicazione mappa e cataloga le opere monumentali di street art sul territorio, permettendo ai viaggiatori di costruire itinerari d'arte urbana personalizzati e autonomi."
-                          ) : (
-                            isAetheris
-                              ? "At the entrance, each visitor can choose one of the pathways based on their interests and, by scanning a dedicated QR code, continue from their smartphone."
-                              : "The application maps and catalogs monumental street art works in the region, allowing travelers to build personalized and autonomous urban art itineraries."
-                          )}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="h-[1px] bg-white/5 my-1" />
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="flex flex-col gap-3 p-4 bg-[#131514] rounded-2xl border border-white/5 shadow-sm">
-                        <div className={`flex items-center gap-2 text-sm font-raleway font-semibold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
-                          <span className={`w-1.5 h-1.5 rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
-                          <span>
-                            {lang === 'it'
-                              ? (isAetheris ? "INTERATTIVITÀ" : "GEOLOCALIZZAZIONE")
-                              : (isAetheris ? "INTERACTIVITY" : "GEOLOCATION")
-                            }
-                          </span>
-                        </div>
-                        <p className="text-sm sm:text-sm leading-relaxed text-neutral-300 font-light">
-                          {lang === 'it' ? (
-                            isAetheris
-                              ? "L’ esperienza continua attraverso la segnaletica interattiva delle piante, che andrà ad accrescere la conoscenza del visitatore."
-                              : "La localizzazione interattiva guida gli utenti fisicamente nel cuore delle opere murali, offrendo coordinate geografiche in tempo reale."
-                          ) : (
-                            isAetheris
-                              ? "The experience continues through interactive plant signage, which will expand the visitor's botanical knowledge."
-                              : "Interactive mapping physically guides users into the heart of mural locations, providing real-time geographical coordinates."
-                          )}
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col gap-3 p-4 bg-[#131514] rounded-2xl border border-white/5 shadow-sm">
-                        <div className={`flex items-center gap-2 text-sm font-raleway font-semibold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
-                          <span className={`w-1.5 h-1.5 rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
-                          <span>
-                            {lang === 'it'
-                              ? (isAetheris ? "VISITATORE PROTAGONISTA" : "VALORIZZAZIONE CULTURALE")
-                              : (isAetheris ? "VISITOR EMBOLDENED" : "CULTURAL PROMOTION")
-                            }
-                          </span>
-                        </div>
-                        <p className="text-sm sm:text-sm leading-relaxed text-neutral-300 font-light">
-                          {lang === 'it' ? (
-                            isAetheris
-                              ? "Nasce dall’obiettivo di voler trasformare la visita tradicional in un'esperienza su misura, rendendo il visitatore protagonista attivo della propria esplorazione."
-                              : "Funge da museo digitale a cielo aperto, mettendo in connessione diretta l'artista con il visitatore attraverso contenuti d'archivio esclusivi."
-                          ) : (
-                            isAetheris
-                              ? "Born with the goal of transforming traditional tours into tailor-made journeys, making the visitor an active driver of their own discovery."
-                              : "Acts as an open-air digital museum, directly connecting artists and visitors through exclusive archived multimedia contents."
-                          )}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className={`p-4 sm:p-5 border rounded-2xl mt-2 ${isAetheris ? 'bg-[#068B35]/10 border-[#068B35]/20 text-emerald-300' : 'bg-[#E8302A]/10 border-[#E8302A]/20 text-rose-300'
-                      }`}>
-                      <p className="text-sm sm:text-sm leading-relaxed text-center font-medium">
-                        {lang === 'it' ? (
-                          isAetheris
-                            ? "Il progetto mira a integrare l'innovazione digitale nei sentieri del giardino, dando vita a un percorso di scoperta che valorizza l’intero patrimonio botanico."
-                            : "La piattaforma punta a unire design system contemporaneo e patrimonio artistico, per preservare e raccontare l'anima viva dell'arte urbana contemporanea."
-                        ) : (
-                          isAetheris
-                            ? "The project aims to integrate digital innovation within the garden's trails, birthing a journey of discovery that enhances the botanical heritage."
-                            : "The platform aims to unite a contemporary design system with artistic heritage to preserve and narrate the living soul of modern street art."
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                </div>
 
                 {/* Sezione User Persona */}
                 <div className="pt-10 border-t border-white/5 flex flex-col gap-6">

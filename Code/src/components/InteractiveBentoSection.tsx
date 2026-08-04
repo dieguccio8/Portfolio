@@ -36,7 +36,7 @@ export default function InteractiveBentoSection() {
       
       {/* VISUAL CONTAINER (Sticky) */}
       {/* Su desktop resta incollato in alto. Su mobile è relativo e ha la sua altezza naturale. */}
-      <div className="w-full lg:sticky lg:top-0 lg:left-0 lg:h-screen flex lg:items-start justify-center relative z-10 lg:pt-32">
+      <div className="w-full lg:sticky lg:top-0 lg:left-0 lg:h-screen flex lg:items-center justify-center relative z-10">
         {/* Sfondo full-bleed per uscire dai margini del parent in ProjectPage, 
             con gradiente in cima per sfumare perfettamente con la sezione precedente */}
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[100vw] bg-gradient-to-b from-transparent via-[#050505] via-15% to-[#050505] -z-10" />

@@ -73,7 +73,43 @@ export default function App() {
   // Navigation & Interactive States
   const [activeOverlay, setActiveOverlay] = useState<'none' | 'projects' | 'about' | 'contact'>('none');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [activeProjectPage, setActiveProjectPage] = useState<Project | null>(null);
+  const [activeProjectPage, setActiveProjectPage] = useState<Project | null>(() => {
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('project');
+    if (projectId) {
+      return PROJECTS.find(p => p.id === projectId) || null;
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (activeProjectPage) {
+      if (url.searchParams.get('project') !== activeProjectPage.id) {
+        url.searchParams.set('project', activeProjectPage.id);
+        window.history.pushState({ projectId: activeProjectPage.id }, '', url);
+      }
+    } else {
+      if (url.searchParams.has('project')) {
+        url.searchParams.delete('project');
+        window.history.pushState({ projectId: null }, '', url);
+      }
+    }
+  }, [activeProjectPage]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const projectId = params.get('project');
+      if (projectId) {
+        setActiveProjectPage(PROJECTS.find(p => p.id === projectId) || null);
+      } else {
+        setActiveProjectPage(null);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Smooth scroll to element helper
   const scrollToSection = (id: string) => {
@@ -315,7 +351,7 @@ export default function App() {
       <CustomCursor />
       <ScrollProgress />
       <ScrollReveal />
-      <div className="relative min-h-screen bg-[#050505] text-white font-sans select-none flex flex-col scroll-smooth overflow-x-clip">
+      <div className="relative min-h-screen bg-[#050505] text-white font-sans select-none flex flex-col scroll-smooth overflow-x-clip selection:bg-[#E8302A] selection:text-white">
 
         {/* SECTION 1: HERO VIEW CONTAINER */}
         <section className="relative w-full min-h-screen flex flex-col justify-between p-6 sm:p-10 md:p-14 bg-[#050505] overflow-hidden" id="hero-section">
@@ -335,19 +371,18 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/85 via-transparent to-[#050505] pointer-events-none" />
           </div>
 
-          {/* HEADER SECTION - Floating Pill Navbar */}
           <motion.header
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className={`fixed top-4 left-0 right-0 mx-auto z-50 grid grid-cols-3 items-center justify-between text-sm uppercase tracking-widest font-normal transition-all duration-700 ease-[0.16,1,0.3,1] ${isScrolled
+            className={`fixed top-4 left-0 right-0 mx-auto z-50 flex items-center justify-between text-sm uppercase tracking-widest font-normal transition-all duration-700 ease-[0.16,1,0.3,1] ${isScrolled
               ? "w-[calc(100%-2rem)] max-w-5xl border border-white/10 rounded-full px-4 md:px-6 py-2.5 bg-white/[0.03] backdrop-blur-[16px] shadow-2xl shadow-black/60"
               : "w-full max-w-none border-transparent rounded-none px-6 sm:px-10 md:px-14 py-2 bg-transparent backdrop-blur-none shadow-none"
               }`}
             id="app-header"
           >
             {/* Left Area: Logo/Brand */}
-            <div className="flex items-center gap-3 md:col-start-1 justify-start">
+            <div className="flex items-center gap-3 justify-start flex-shrink-0">
               {/* Mobile Only Language Switcher (Left Side) */}
               <button
                 onClick={() => {
@@ -378,7 +413,7 @@ export default function App() {
             </div>
 
             {/* Center Area: Mobile Only Logo & Desktop Center Navigation */}
-            <div className={`flex justify-center items-center md:col-start-2 transition-all duration-700 ease-[0.16,1,0.3,1] ${!isScrolled ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}`}>
+            <div className={`absolute left-1/2 -translate-x-1/2 flex justify-center items-center transition-all duration-700 ease-[0.16,1,0.3,1] ${!isScrolled ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}`}>
               {/* Mobile Only Center Logo */}
               <div className="flex md:hidden justify-center items-center cursor-pointer" onClick={() => { scrollToSection('hero-section'); setMobileMenuOpen(false); }}>
                 <img
@@ -411,9 +446,9 @@ export default function App() {
             </div>
 
             {/* Right Area: Action buttons (desktop) & Hamburger menu toggle (mobile) */}
-            <div className="flex justify-end items-center gap-2 md:col-start-3">
+            <div className="flex justify-end items-center gap-2 flex-shrink-0">
               {/* Desktop Only Actions */}
-              <div className={`items-center gap-3 transition-all duration-700 ease-[0.16,1,0.3,1] overflow-hidden whitespace-nowrap flex ${!isScrolled ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-0 opacity-0 md:max-w-[300px] md:opacity-100'}`} id="header-cta-container">
+              <div className={`items-center gap-3 transition-all duration-700 ease-[0.16,1,0.3,1] overflow-hidden whitespace-nowrap flex ${!isScrolled ? 'max-w-0 opacity-0 pointer-events-none' : 'max-w-0 opacity-0 md:max-w-[500px] md:opacity-100'}`} id="header-cta-container">
                 <button
                   id="nav-cv-btn"
                   onClick={() => {

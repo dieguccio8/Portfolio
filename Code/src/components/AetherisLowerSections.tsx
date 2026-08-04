@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Compass, AlertTriangle, Check, ArrowRight, Star } from 'lucide-react';
+import { Compass, AlertTriangle, Check, ArrowRight, Star, MapPin, Clock, FileQuestion } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
 import InteractiveBentoSection from './InteractiveBentoSection';
 import HighlightCard from './ui/highlight-card';
@@ -246,8 +246,8 @@ export function AetherisLowerSections({
 
       {/* 01 / RESEARCH & ANALYSIS */}
       <div ref={pinRef} className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
-        <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col">
-          <AuroraBackground className="!bg-transparent h-full w-full pt-32 sm:pt-40 pb-20">
+        <div className="sticky top-0 w-full h-auto overflow-hidden flex flex-col pb-20">
+          <AuroraBackground className="!bg-transparent h-auto w-full pt-32 sm:pt-40 pb-20">
             <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">
               <div className="flex flex-col gap-4">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">
@@ -293,17 +293,17 @@ export function AetherisLowerSections({
                       <HighlightCard animatedBorder={true}
                         title="Orientamento"
                         description={["Nessuna guida per non esperti."]}
-                        icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                        icon={<MapPin className="w-8 h-8 text-white" />}
                       />
                       <HighlightCard animatedBorder={true}
                         title="Coinvolgimento"
                         description={["Esperienza passiva e veloce (5 min)."]}
-                        icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                        icon={<Clock className="w-8 h-8 text-white" />}
                       />
                       <HighlightCard animatedBorder={true}
                         title="Informazioni"
                         description={["Mancano spiegazioni oltre al nome scientifico."]}
-                        icon={<AlertTriangle className="w-8 h-8 text-white" />}
+                        icon={<FileQuestion className="w-8 h-8 text-white" />}
                       />
                     </motion.div>
                   )}
@@ -386,23 +386,12 @@ export function AetherisLowerSections({
       </div>
 
       {/* 02 / ANALYSIS & STRATEGY: PROBLEMS VS SOLUTIONS */}
-      <div className="relative z-20 w-full mt-0 md:-mt-16">
+      <div className="relative z-20 w-full -mt-[10vh] md:-mt-[25vh]">
         <InteractiveBentoSection />
       </div>
 
-      {/* 03 / L'ECOSISTEMA (3D MOCKUP) */}
-      <div className="relative left-1/2 -translate-x-1/2 w-[100vw] -mt-10 md:-mt-20">
-        {/* Fade-in mask for smooth transition from the previous section */}
-        <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
-
-        <IphoneMockup3D />
-
-        {/* Fade-out mask for smooth transition to the next section */}
-        <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
-      </div>
-
       {/* 03.5 / LOOPING MOCKUPS (Restored) */}
-      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[50vh] md:h-[80vh] -mt-8 md:-mt-[12vh]">
+      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] -mt-[10vh] md:-mt-[25vh]">
         <div className="relative w-full h-full">
           <img
             src="/project-01-mockup-mobile.jpg"
