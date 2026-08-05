@@ -416,177 +416,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             />
           )}
         </AnimatePresence>
-        {isKinetics ? (
-          <section className="relative w-full pt-32 pb-16 min-h-[75vh] md:min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center overflow-hidden bg-[#0D0D0D] border-b-2 border-[#2B2B2B]">
-            {/* 3.2 Scribble/tag pattern repeated background */}
-            <svg className="absolute inset-0 w-full h-full opacity-[0.05] pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
-              <pattern id="scribble-pattern-hero" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
-                <path d="M10,15 Q30,10 40,25 T60,15 T80,30" fill="none" stroke="#FCD306" strokeWidth="1" strokeLinecap="round" />
-                <path d="M5,50 Q25,60 50,45 T95,55" fill="none" stroke="#FCD306" strokeWidth="0.8" strokeLinecap="round" />
-                <path d="M30,80 Q55,70 70,90 T90,75" fill="none" stroke="#FCD306" strokeWidth="1.2" strokeLinecap="round" />
-                <circle cx="85" cy="15" r="1.5" fill="#FCD306" />
-                <circle cx="15" cy="70" r="1" fill="#FCD306" />
-              </pattern>
-              <rect width="100%" height="100%" fill="url(#scribble-pattern-hero)" />
-            </svg>
-
-            {/* 3.1 Yellow organic wave background crossing the top/right area */}
-            <div className="absolute top-0 right-0 w-full h-full overflow-hidden z-0 pointer-events-none opacity-20 select-none">
-              <svg className="absolute -top-16 -right-16 w-[550px] h-[550px] text-[#FCD306]" viewBox="0 0 200 200" fill="currentColor">
-                <path d="M44.3,-76.3C57.4,-70.5,68.2,-58.5,75.8,-44.6C83.4,-30.7,87.8,-15.4,87,-0.5C86.1,14.4,80.1,28.7,71.7,41C63.2,53.2,52.4,63.3,39.6,70.9C26.8,78.5,13.4,83.6,-1,85.2C-15.3,86.9,-30.6,85.1,-44,78.1C-57.4,71.1,-68.8,59,-76.4,45C-84.1,31,-87.9,15.5,-87.7,0.1C-87.5,-15.3,-83.3,-30.6,-75.4,-44.1C-67.5,-57.6,-55.9,-69.3,-42.2,-74.7C-28.5,-80.1,-14.2,-79.1,0.5,-80C15.2,-80.9,31.2,-82.1,44.3,-76.3Z" transform="translate(100, 100)" />
-              </svg>
-              <svg className="absolute top-1/4 -left-10 w-[300px] h-[300px] text-[#FCD306]/40" viewBox="0 0 200 200" fill="currentColor">
-                <path d="M38.5,-64.1C47.2,-56.3,49.8,-41.3,55.1,-28.4C60.4,-15.6,68.4,-4.9,70,6.5C71.5,17.9,66.6,30.1,58.7,40.1C50.7,50,39.7,57.7,27.5,62.8C15.2,67.8,1.7,70.2,-11.3,67.7C-24.3,65.3,-36.8,58,-47,48.4C-57.3,38.9,-65.2,27.2,-68,14.2C-70.8,1.1,-68.5,-13.2,-62.4,-25.1C-56.3,-37,-46.4,-46.5,-35.3,-53.4C-24.2,-60.3,-12.1,-64.7,1.8,-67.5C15.7,-70.3,31.4,-71.5,38.5,-64.1Z" transform="translate(100, 100)" />
-              </svg>
-            </div>
-
-            <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 py-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Left Column: Brand Info */}
-              <div className="lg:col-span-7 flex flex-col gap-6 text-left">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col gap-2"
-                >
-                  <span className="text-sm sm:text-sm font-raleway uppercase tracking-[0.25em] text-[#FCD306] font-bold font-urbanist block">
-                    01 / REBRANDING & EDITORIAL SYSTEM
-                  </span>
-                  <div className="flex items-center gap-2 text-sm font-raleway tracking-widest text-[#A8A8A2] uppercase font-medium">
-                    <span className="w-2 h-2 rounded-full bg-[#FCD306] animate-pulse" />
-                    <span>PHASE 02 / GEOMETRIC EVOLUTION</span>
-                  </div>
-                </motion.div>
-
-                <motion.h1
-                  initial={{ opacity: 0, scale: 0.95, y: 30 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.9, delay: 0.1, type: "spring", bounce: 0.3, visualDuration: 0.8 }}
-                  className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tighter uppercase font-urbanist text-[#F5F5F0] leading-[0.9] max-w-2xl"
-                >
-                  {lang === 'it' ? 'Da Community' : 'From Community'} <br />
-                  <span className="text-[#FCD306] relative inline-block group cursor-default">
-                    {lang === 'it' ? 'a Brand.' : 'to Brand.'}
-                    {/* 3.6 Drip accent under keyword */}
-                    <svg className="absolute left-2 -bottom-6 sm:-bottom-7 w-16 h-8 text-[#FCD306] pointer-events-none group-hover:scale-110 transition-transform duration-500" viewBox="0 0 60 30" fill="currentColor">
-                      <path d="M0,0 L60,0 L60,5 C55,5 53,8 53,12 C53,18 47,18 47,12 L47,5 C40,5 38,10 38,15 C38,22 32,22 32,15 L32,5 C25,5 23,12 23,18 C23,26 15,26 15,18 L15,5 C10,5 8,8 8,10 C8,12 5,12 5,10 L5,0 Z" />
-                    </svg>
-                  </span>
-                </motion.h1>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-base sm:text-lg text-[#A8A8A2] leading-relaxed font-normal font-urbanist max-w-xl mt-4"
-                >
-                  {lang === 'it'
-                    ? "Diego Cavallaro ha guidato il rebranding completo di Urban StreetArt Sicily, evolvendo la community locale in un sistema editoriale phygital strutturato, pronto a lanciare edizioni limitate e collezioni streetwear."
-                    : "Diego Cavallaro led the complete rebranding of Urban StreetArt Sicily, evolving the local community into a structured phygital editorial system, ready to launch limited editions and streetwear collections."
-                  }
-                </motion.p>
-
-                {/* Sleek Horizontal Project Ledger - Magnetic Interaction */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 mt-4 border-t border-[#2B2B2B] max-w-xl font-urbanist"
-                >
-                  <div className="group cursor-default">
-                    <span className="text-xs font-raleway uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Client</span>
-                    <span className="text-sm sm:text-sm font-bold text-[#F5F5F0]">{project.client}</span>
-                  </div>
-                  <div className="group cursor-default">
-                    <span className="text-xs font-raleway uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">Year</span>
-                    <span className="text-sm sm:text-sm font-bold text-[#F5F5F0]">{project.year}</span>
-                  </div>
-                  <div className="group cursor-default">
-                    <span className="text-xs font-raleway uppercase text-[#A8A8A2] tracking-wider block mb-1 group-hover:text-[#FCD306] transition-colors">My Role</span>
-                    <span className="text-sm sm:text-sm font-bold text-[#F5F5F0]">{project.role}</span>
-                  </div>
-                  <div>
-                    <span className="text-xs font-raleway uppercase text-[#A8A8A2] tracking-wider block mb-1">Applied Stack</span>
-                    <div className="flex flex-wrap gap-2 mt-1.5 perspective-[1000px]">
-                      {project.tags.map((tag, i) => {
-                        const rots = ['rotate-[-4deg]', 'rotate-[3deg]', 'rotate-[-2deg]', 'rotate-[5deg]'];
-                        const rot = rots[i % rots.length];
-                        return (
-                          <motion.span
-                            whileHover={{ scale: 1.15, rotate: 0, z: 20 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                            key={tag}
-                            className={`text-xs font-raleway px-2.5 py-1 bg-[#FCD306] text-[#0D0D0D] rounded-none border-2 border-[#0D0D0D] uppercase font-black shadow-[3px_3px_0px_#1A1A1A] inline-block ${rot}`}
-                          >
-                            {tag}
-                          </motion.span>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Right Column: Stunning StreetArt Editorial Collage */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
-                className="lg:col-span-5 relative w-full aspect-[4/5] max-w-[450px] mx-auto lg:max-w-none flex items-center justify-center p-6 select-none z-10 mt-8 lg:mt-0 perspective-[1200px]"
-              >
-                {/* 3.5 Alone/cornice geometrica di sfondo */}
-                <motion.div
-                  animate={{ rotate: [5, 6, 5] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-4 bg-[#FCD306] rotate-[5deg] -z-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-2 border-[#0D0D0D]"
-                />
-
-                {/* Main Image with geometric torn corner (3.3) and rotation */}
-                <motion.div
-                  whileHover={{ rotate: 0, scale: 1.02, z: 20 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="w-full h-full relative z-10 rotate-[-2deg] overflow-hidden bg-[#1A1A1A] border-2 border-[#2B2B2B] shadow-2xl cursor-pointer"
-                  style={{
-                    clipPath: "polygon(0 0, 100% 0, 100% 86%, 86% 100%, 0 100%)"
-                  }}
-                >
-                  <img
-                    src={wireframeImages[`hero_${project.id}`] || project.heroImage}
-                    alt={project.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover grayscale brightness-[0.8] contrast-[1.1] hover:grayscale-0 transition-all duration-700"
-                  />
-                  {/* Visual vignette overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/15 pointer-events-none" />
-
-                  {/* 3.8 Micro-icona geometrica in un angolo */}
-                  <div className="absolute top-4 left-4 z-20 w-8 h-8 rounded-none border border-[#FCD306]/40 flex items-center justify-center bg-[#0D0D0D]/70 backdrop-blur-sm">
-                    <span className="text-sm font-raleway text-[#FCD306] font-bold">✦</span>
-                  </div>
-                </motion.div>
-
-                {/* 3.4 Collage a due livelli: secondary inset image ruotata in senso opposto */}
-                <motion.div
-                  whileHover={{ rotate: 0, scale: 1.1, z: 50, x: -10, y: -10 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="absolute -bottom-6 -left-4 sm:-left-8 z-20 w-36 h-48 sm:w-44 sm:h-56 bg-[#1A1A1A] p-2 border-2 border-[#2B2B2B] shadow-[10px_10px_0px_#0D0D0D] rotate-[8deg]"
-                >
-                  <div className="w-full h-full overflow-hidden bg-[#0D0D0D] relative group">
-                    <img
-                      src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=300&auto=format&fit=crop"
-                      alt="Sicily street art closeup detail"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover grayscale brightness-[0.85] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
-                    />
-                    <div className="absolute bottom-1 right-2 text-[7px] font-raleway text-[#A8A8A2] uppercase tracking-wider font-urbanist">
-                      REF. GEOM-92
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
-          </section>
-        ) : isChronos ? (
+        {isChronos ? (
           <section className="relative w-full pt-20 h-auto min-h-[75vh] md:min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center overflow-hidden bg-black border-b border-white/5">
             {/* Subtle grid background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
@@ -755,8 +585,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             </div>
 
             <div className="relative z-10 max-w-[1600px] mx-auto w-full flex flex-col gap-3">
-              {!isAetheris && (
-                <span className={`text-sm font-raleway uppercase tracking-[0.25em] ${isKinetics ? 'text-[#FCD306] font-bold font-urbanist' : 'text-[#E8302A]'}`}>
+              {!(isAetheris || isKinetics) && (
+                <span className="text-sm font-raleway uppercase tracking-[0.25em] text-[#E8302A]">
                   {getLocalizedField('category')}
                 </span>
               )}
@@ -772,32 +602,32 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </>
                 ) : !isAetheris ? project.title : null}
               </h1>
-              {isAetheris && (
+              {(isAetheris || isKinetics) && (
                 <div className="flex flex-col gap-1 w-full items-center justify-center mb-4">
                   {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}
                   <div className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 w-full">
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className="text-sm font-raleway uppercase text-[#068B35] tracking-wider">Year:</span>
+                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : 'text-[#068B35]'}`}>Year:</span>
                       <span className="text-sm sm:text-sm font-semibold text-white">{project.year}</span>
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className="text-sm font-raleway uppercase text-[#068B35] tracking-wider">Role:</span>
+                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : 'text-[#068B35]'}`}>Role:</span>
                       <span className="text-sm sm:text-sm font-semibold text-white">{project.role}</span>
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className="text-sm font-raleway uppercase text-[#068B35] tracking-wider">Type:</span>
+                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : 'text-[#068B35]'}`}>Type:</span>
                       <span className="text-sm sm:text-sm font-semibold text-white">Team Project</span>
                     </div>
                   </div>
                 </div>
               )}
-              {!isAetheris && <div className={`w-12 h-1 ${isKinetics ? 'bg-[#FCD306]' : 'bg-[#E8302A]'}`} />}
+              {!(isAetheris || isKinetics) && <div className="w-12 h-1 bg-[#E8302A]" />}
             </div>
           </section>
         )}
 
         {/* 03 / L'ECOSISTEMA (3D MOCKUP) (Moved under hero for Aetheris) */}
-        {isAetheris && (
+        {(isAetheris || isKinetics) && (
           <div className="relative left-1/2 -translate-x-1/2 w-[100vw] mt-12 sm:mt-16 mb-8">
             {/* Fade-in mask for smooth transition from the previous section */}
             <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
@@ -810,7 +640,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         )}
 
         {/* 3. CASE STUDY GRID */}
-        {!isAetheris && (
+        {!(isAetheris || isKinetics) && (
           <section className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
             {/* Left Core Narrative (Column span 7, or 12 if kinetics to take full space) */}
@@ -986,7 +816,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         )}
 
         {/* 4. FULL-WIDTH LOWER CASE STUDY SECTIONS */}
-        <div className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 flex flex-col gap-16 w-full pb-12 ${isAetheris ? '' : 'mt-16'}`}>
+        <div className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 flex flex-col gap-16 w-full pb-12 ${(isAetheris || isKinetics) ? '' : 'mt-16'}`}>
           {isKinetics ? (
             <KineticsLowerSections
               project={project}

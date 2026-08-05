@@ -298,6 +298,75 @@ async function scrape(url) {
            foundCode = true;
        }
     }
+    // Estrazione del prompt/recipe (per componenti ASCII/generativi che non hanno codice)
+    const recipeMatch = html.match(/(?:\\\\*[\"'])recipeJson(?:\\\\*[\"'])\s*:\s*(\{(?:[^{}]|(?:\{(?:[^{}]|(?:\{[^{}]*\})*)*\})*)*\})/);
+    let recipeStr = '';
+    if (recipeMatch) {
+       recipeStr = recipeMatch[1].replace(/\\\\\"/g, '\"').replace(/\\\\/g, '');
+    } else {
+       const idx = html.indexOf('recipeJson');
+       if (idx > -1) {
+          let sub = html.substring(idx + 12);
+          let endIdx = sub.indexOf('},\\"isPublished\\"');
+          if (endIdx === -1) endIdx = sub.indexOf('},"isPublished"');
+          if (endIdx > -1) {
+             recipeStr = sub.substring(0, endIdx+1).replace(/\\\\\"/g, '\"').replace(/\\\\/g, '');
+          }
+       }
+    }
+    
+    let isGenerativePromptOnly = false;
+    if (recipeStr) {
+       try {
+          recipeStr = recipeStr.replace(/\\"/g, '"').replace(/\\\\/g, '');
+          const parsed = JSON.parse(recipeStr);
+          const formattedJson = JSON.stringify(parsed, null, 2);
+          
+          // Extract nice title from HTML
+          let niceTitle = componentName;
+          const titleMatch = html.match(/<title>([^<]+)<\/title>/);
+          if (titleMatch) {
+            niceTitle = titleMatch[1].split('—')[0].trim();
+          }
+
+          const template = `Recreate the "${niceTitle}" ASCII-art effect from 21st.dev (https://21st.dev/community/ascii) using Canvas2D (or an equivalent 2D raster API).
+
+Source photo: ${parsed.sourceUrl || '/ascii-editor/demos/generated/ref-002.webp'}
+
+Render pipeline (reimplement, don't assume our internal code is available):
+1. Draw the source photo into a canvas at the target size; \`bgMode\`/\`bgBlur\`/\`bgOpacity\` control what shows behind the effect (blurred copy, solid color, the original photo, or nothing).
+2. Divide the canvas into a grid of \`cellSize\`px cells and sample the average color/luminance of each cell.
+3. For each cell, draw a shape per \`renderMode\`: "characters" draws a glyph from \`charSet\` sized/colored by luminance; "dither"/"mosaic"/"pixel"/"dots"/"cross"/"diamond"/"voxel"/"lego"/"mixed"/"lines"/"diagonal"/"braille"/"disco"/"hexdump" (hex-digit glyphs)/"matrix" (green code rain, self-animated)/"rings"/"hearts"/"stars"/"hexagons" (honeycomb)/"triangles" (low-poly)/"bubbles"/"hatch" (pencil cross-hatch)/"contour" (topographic iso-lines)/"halfblocks" (double vertical detail) each draw their own primitive shape instead. Respect \`coverage\` (% of cells drawn), \`density\`, \`invert\`, and \`edgeEmphasis\`.
+4. Apply color adjustments in order: \`brightness\`, \`contrast\`, \`saturation\`, \`grayscale\`, then the \`tint\` color at \`tintOpacity\` via \`overlayBlend\`, then \`blurType\`/\`blurAmount\`.
+5. Layer post-effects from \`pfx\` for every key where \`enabled\` is true, at its \`intensity\` (0-100): scanLines, vignette, bloom, chromatic, filmGrain, glitch, halftone, pixelate, filmDust.
+6. If \`lights.enabled\`, add glow at each point in \`lights.points\` (normalized x/y, radius, intensity).
+7. If \`mask.enabled\`, use \`mask.dataUrl\` as a reveal mask back to the plain photo (inverted if \`mask.invert\`).
+8. This look is animated — see \`animSpeed\`, \`animStyle\` (wave/pulse/shimmer/ripple/flicker), and \`animIntensity\` for how it moves over time.
+
+Full parameters (JSON):
+\`\`\`json
+${formattedJson}
+\`\`\``;
+          
+          if (!foundCode) {
+             outputText = `${template}\n`;
+             isGenerativePromptOnly = true;
+          } else {
+             outputText = `## PROMPT DI GENERAZIONE (21st.dev Template)\n\n${template}\n\n=======================\n\n` + outputText;
+          }
+       } catch (e) {
+          // Fallback if parsing fails
+          recipeStr = recipeStr.replace(/\\"/g, '"');
+          if (!foundCode) {
+             outputText = `\`\`\`json\n${recipeStr}\n\`\`\`\n`;
+             isGenerativePromptOnly = true;
+          } else {
+             outputText += `## PROMPT ESTRATTO (recipeJson)\n\n\`\`\`json\n${recipeStr}\n\`\`\`\n\n`;
+          }
+       }
+       console.log(`[Scraper] Trovato prompt/recipe JSON integrato nel payload!`);
+       foundCode = true;
+    }
 
     if (!foundCode) {
       console.log("\n[Scraper] ATTENZIONE: Impossibile trovare il codice su 21st.dev.");
@@ -318,9 +387,11 @@ async function scrape(url) {
       }
     } catch(e) {}
 
-    // Always search for alternative sources on the web to find Github repos or other implementations
-    const alternativeOutput = await searchAlternativeSources(page, componentName, authorName, foundCode);
-    outputText += alternativeOutput;
+    if (!isGenerativePromptOnly) {
+      // Always search for alternative sources on the web to find Github repos or other implementations
+      const alternativeOutput = await searchAlternativeSources(page, componentName, authorName, foundCode);
+      outputText += alternativeOutput;
+    }
     
     // Save to components/<componentName>/<componentName>.txt
     const baseDir = path.join(process.cwd(), 'components');

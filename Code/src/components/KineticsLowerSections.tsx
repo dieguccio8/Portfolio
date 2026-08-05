@@ -1,401 +1,475 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'motion/react';
-import { 
-  Trash2,
-  Upload
-} from 'lucide-react';
-import { Project } from '../types';
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Compass, AlertTriangle, Check, ArrowRight, Star, MapPin, Clock, FileQuestion } from 'lucide-react';
+import { StickyCard002 } from './ui/sticky-card';
+import InteractiveBentoSection from './InteractiveBentoSection';
+import HighlightCard from './ui/highlight-card';
+import { GridVignetteBackground } from './ui/vignette-grid-background';
+import AuroraBackground from './ui/aurora-background';
+import IphoneMockup3D from './IphoneMockup3D';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
-interface KineticsLowerSectionsProps {
-  project: Project;
-  activeResearchTab: 'desk' | 'sondaggi' | 'interviste';
-  setActiveResearchTab: (tab: 'desk' | 'sondaggi' | 'interviste') => void;
-  wireframeImages: { [key: string]: string };
-  handleImageUpload: (id: string, e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleRemoveImage: (id: string) => void;
-  copiedColor: string | null;
-  handleCopyHex: (hex: string) => void;
-  lang?: string;
+gsap.registerPlugin(ScrollTrigger);
+
+const NeonGauge = ({ percentage, color, label, level }: { percentage: string, color: string, label: string, level: number }) => {
+  return (
+    <div className="relative w-full flex flex-col items-center justify-end group mt-4">
+      <div className="relative w-full flex items-end justify-center">
+        <svg viewBox="0 -10 200 130" className="w-full h-auto overflow-visible">
+          <defs>
+            <linearGradient id={`grad-${color.replace('#', '')}`} x1="0%" y1="100%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor={color} stopOpacity="0.2" />
+              <stop offset="100%" stopColor={color} stopOpacity="1" />
+            </linearGradient>
+            <filter id={`glow-${color.replace('#', '')}`} x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          {/* Background Track */}
+          <path
+            d="M 20 100 A 80 80 0 0 1 180 100"
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="6"
+            strokeOpacity="0.05"
+            strokeLinecap="round"
+          />
+
+          {/* Active Track */}
+          <path
+            d="M 20 100 A 80 80 0 0 1 180 100"
+            fill="none"
+            stroke={`url(#grad-${color.replace('#', '')})`}
+            strokeWidth="6"
+            strokeLinecap="round"
+            pathLength="1"
+            strokeDasharray="1"
+            strokeDashoffset={1 - level}
+            filter={`url(#glow-${color.replace('#', '')})`}
+            className="transition-all duration-1000 ease-out"
+          />
+
+          {/* Knob */}
+          <circle
+            cx={100 - 80 * Math.cos(level * Math.PI)}
+            cy={100 - 80 * Math.sin(level * Math.PI)}
+            r="8"
+            fill="#0D0D0D"
+            stroke={color}
+            strokeWidth="2"
+            filter={`url(#glow-${color.replace('#', '')})`}
+            className="transition-all duration-1000 ease-out"
+          />
+        </svg>
+
+        {/* Percentage Text inside the arc */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center">
+          <span className="text-4xl font-urbanist font-medium tracking-tight text-white drop-shadow-lg">
+            {percentage}
+          </span>
+        </div>
+      </div>
+
+      {/* Label under the gauge */}
+      <div className="mt-4 text-xs font-urbanist text-neutral-400 uppercase tracking-widest font-semibold group-hover:text-neutral-200 transition-colors text-center">
+        {label}
+      </div>
+    </div>
+  );
+};
+
+const PersonaTestNode = ({ top, left, label, content, align }: { top: string, left: string, label: string, content: string, align: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' }) => {
+  const labelClasses = {
+    'top-left': 'bottom-5 right-5 text-right',
+    'top-right': 'bottom-5 left-5 text-left',
+    'bottom-left': 'top-5 right-5 text-right',
+    'bottom-right': 'top-5 left-5 text-left',
+    'top-center': 'bottom-5 left-1/2 -translate-x-1/2 text-center'
+  }[align];
+
+  const boxClasses = {
+    'top-left': 'bottom-3 right-3 origin-bottom-right',
+    'top-right': 'bottom-3 left-3 origin-bottom-left',
+    'bottom-left': 'top-3 right-3 origin-top-right',
+    'bottom-right': 'top-3 left-3 origin-top-left',
+    'top-center': 'bottom-3 left-1/2 -translate-x-1/2 origin-bottom'
+  }[align];
+
+  return (
+    <div className="absolute z-30 flex items-center justify-center w-0 h-0 group/node" style={{ top, left }}>
+      {/* Invisible hover area */}
+      <div className="absolute w-32 h-32 rounded-full cursor-pointer z-10" />
+
+      {/* Label styled like HighlightCard */}
+      <div className={`absolute ${labelClasses} whitespace-nowrap transition-all duration-300 group-hover/node:opacity-0 group-hover/node:-translate-y-2 pointer-events-auto cursor-pointer`}>
+        <div className="relative overflow-hidden border border-white/5 bg-[#0D0D0D] backdrop-blur-3xl px-5 py-2.5 sm:px-6 sm:py-3 rounded-2xl shadow-2xl">
+          <div className="absolute inset-0 shadow-[inset_0_2px_4px_rgba(255,255,255,0.05),_inset_0_0_20px_rgba(252,211,6,0.05)] rounded-2xl pointer-events-none" />
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[140%] h-16 bg-[#FCD306]/40 blur-[15px] opacity-80 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FCD306] to-transparent opacity-100 pointer-events-none" />
+
+          <span className="relative z-10 text-xs sm:text-sm font-urbanist uppercase tracking-widest text-white font-medium drop-shadow-md">{label}</span>
+        </div>
+      </div>
+
+      {/* Expanded Content Box styled like HighlightCard */}
+      <div className={`absolute ${boxClasses} w-48 sm:w-56 bg-[#0D0D0D] backdrop-blur-3xl border border-white/5 rounded-[2rem] p-5 sm:p-6 opacity-0 scale-90 pointer-events-none transition-all duration-400 group-hover/node:opacity-100 group-hover/node:scale-100 group-hover/node:pointer-events-auto shadow-2xl z-20 overflow-hidden`}>
+        <div className="absolute inset-0 shadow-[inset_0_2px_4px_rgba(255,255,255,0.05),_inset_0_0_20px_rgba(252,211,6,0.05)] rounded-[2rem] pointer-events-none" />
+        <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[140%] h-32 bg-[#FCD306]/30 blur-[40px] opacity-90 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FCD306] to-transparent opacity-100 pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+
+        <div className="relative z-10">
+          <span className="text-[10px] font-urbanist text-[#FCD306] uppercase tracking-widest block mb-3 font-bold">{label}</span>
+          <p className="text-sm font-light text-white leading-relaxed">{content}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PopOutImage = ({ className }: { className?: string }) => (
+  <div className={`relative shrink-0 group/img cursor-pointer ${className}`}>
+    {/* Base Circle with hidden overflow for the bottom */}
+    <div className="absolute inset-0 rounded-full border-2 sm:border-[3px] border-[#FCD306] bg-[#1A1A1A] overflow-hidden shadow-[0_0_50px_rgba(252,211,6,0.15)]">
+      <img src="/mirella_no_bg.png" alt="Mirella Base" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom transition-transform duration-700 origin-bottom group-hover/img:scale-110" />
+    </div>
+    {/* Top Half popping out - exact same positioning but clipped */}
+    <img
+      src="/mirella_no_bg.png"
+      alt="Mirella Pop Out"
+      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom z-10 pointer-events-none drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-transform duration-700 origin-bottom group-hover/img:scale-110"
+      style={{ clipPath: 'inset(0 0 50% 0)' }}
+    />
+  </div>
+);
+
+interface Props {
+  project: any;
+  activeResearchTab: string;
+  setActiveResearchTab: (tab: string) => void;
+  lang: string;
 }
+
+const problems = [
+  {
+    title: "Disorientamento",
+    description: "I visitatori si perdono facilmente senza mappe interattive.",
+    icon: AlertTriangle
+  },
+  {
+    title: "Mancanza di contesto",
+    description: "Le informazioni scientifiche risultano spesso ostiche o incomplete.",
+    icon: AlertTriangle
+  },
+  {
+    title: "Esperienza passiva",
+    description: "La visita si limita a un percorso osservativo senza interazione.",
+    icon: AlertTriangle
+  }
+];
 
 export default function KineticsLowerSections({
   project,
-  wireframeImages,
-  handleImageUpload,
-  handleRemoveImage,
-  lang = 'it'
-}: KineticsLowerSectionsProps) {
-  
-  // Interactive Region Switcher State (Section 3)
-  const regions = ['SICILY', 'TUSCANY', 'LOMBARDY'];
-  const [currentRegionIndex, setCurrentRegionIndex] = useState(0);
+  activeResearchTab,
+  setActiveResearchTab,
+  lang
+}: Props) {
+  const [mobileImageIndex, setMobileImageIndex] = React.useState(0);
+  const pinRef = React.useRef<HTMLDivElement>(null);
 
-  // Auto-switch regions every 3.5 seconds
-  useEffect(() => {
+  // Using a ref to hold the current tab for the GSAP callback
+  // This prevents the GSAP hook from recreating every time state changes
+  const activeTabRef = React.useRef(activeResearchTab);
+  React.useEffect(() => {
+    activeTabRef.current = activeResearchTab;
+  }, [activeResearchTab]);
+
+  useGSAP(() => {
+    if (!pinRef.current) return;
+
+    ScrollTrigger.create({
+      trigger: pinRef.current,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+      onUpdate: (self) => {
+        // We always want to sync state with the actual scroll position, even on refresh/mount
+        const progress = self.progress;
+
+        let targetTab = 'desk';
+        if (progress > 0.33 && progress <= 0.66) {
+          targetTab = 'sondaggi';
+        } else if (progress > 0.66) {
+          targetTab = 'interviste';
+        } else {
+          targetTab = 'desk';
+        }
+
+        // Update the tab state if it has changed. 
+        // This ensures that if progress drops back to 0 (e.g. scrolling to top), it resets to 'desk' correctly.
+        if (activeTabRef.current !== targetTab) {
+          setActiveResearchTab(targetTab);
+        }
+      }
+    });
+  }, { scope: pinRef });
+
+  React.useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentRegionIndex((prev) => (prev + 1) % regions.length);
-    }, 3500);
+      setMobileImageIndex(prev => (prev === 0 ? 1 : 0));
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
-  // Sticky Scroll Refs
-  const processRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: processRef,
-    offset: ["start end", "end start"]
-  });
-
-  const blueprintY = useTransform(scrollYProgress, [0, 1], [150, -150]);
-  const blueprintRotate = useTransform(scrollYProgress, [0, 1], [-5, 5]);
-  const smoothY = useSpring(blueprintY, { stiffness: 100, damping: 30 });
+  // Update tab click to use GSAP ScrollTo plugin if available, or just window.scrollTo
+  const handleTabClick = (tab: string, index: number) => {
+    if (!pinRef.current) return;
+    const trigger = ScrollTrigger.getById(pinRef.current.id) || ScrollTrigger.getAll().find(st => st.trigger === pinRef.current);
+    if (trigger) {
+      const start = trigger.start;
+      const end = trigger.end;
+      // We offset slightly to land squarely in the middle of each section's trigger zone
+      const progress = index === 0 ? 0.15 : index === 1 ? 0.5 : 0.85;
+      const scrollPos = start + (end - start) * progress;
+      window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <div className="flex flex-col gap-24 w-full">
-      
-      {/* SECTION 3: THE PROCESS - BRAND ARCHITECTURE */}
-      <section ref={processRef} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-12 border-t border-[#2B2B2B] relative">
-        {/* Left Column: Branding Concept */}
-        <div className="lg:col-span-6 flex flex-col gap-8">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#F5F5F0] uppercase font-urbanist relative">
-              {lang === 'it' ? (
-                <>Un sistema, <span className="text-[#FCD306]">infinite geografie.</span></>
-              ) : (
-                <>One system, <span className="text-[#FCD306]">infinite geographies.</span></>
-              )}
-            </h2>
-            <p className="text-base leading-relaxed text-[#A8A8A2] font-normal font-urbanist">
-              {lang === 'it' ? (
-                <>Il nuovo logo non è statico, ma un framework. L'intersezione di geometrie decise crea una griglia modulare che permette al brand di espandersi: Sicily, Tuscany, Lombardy. Il font <span className="font-semibold text-[#FCD306]">Urbanist</span> assicura un impatto crudo, tipico della street culture, ma geometricamente rigoroso.</>
-              ) : (
-                <>The new logo is not static, but a framework. The intersection of sharp geometries creates a modular grid that allows the brand to expand: Sicily, Tuscany, Lombardy. The <span className="font-semibold text-[#FCD306]">Urbanist</span> font ensures a raw impact, typical of street culture, but geometrically rigorous.</>
-              )}
-            </p>
-          </div>
+    <div className="flex flex-col gap-24 sm:gap-32 w-full">
 
-          {/* Interactive Region Badge Showcase */}
-          <div className="bg-[#1A1A1A]/60 border border-[#2B2B2B] p-6 relative overflow-hidden flex flex-col gap-4 shadow-lg">
-            <div className="absolute top-2 right-3 text-[8px] font-mono text-[#A8A8A2] uppercase">Active Matrix</div>
-            <span className="text-sm font-mono text-[#A8A8A2] uppercase tracking-wider block">Dynamic Area Expansion</span>
-            <div className="flex gap-3">
-              {regions.map((region, i) => (
-                <button
-                  key={region}
-                  onClick={() => setCurrentRegionIndex(i)}
-                  className={`px-3 py-1 text-sm font-mono font-bold transition-all border ${
-                    i === currentRegionIndex 
-                      ? 'bg-[#FCD306] text-[#0D0D0D] border-[#FCD306] scale-105' 
-                      : 'bg-[#0D0D0D] text-[#A8A8A2] border-[#2B2B2B] hover:border-[#FCD306]'
-                  }`}
-                >
-                  {region}
-                </button>
-              ))}
-            </div>
-            <div className="mt-2 p-4 bg-[#0D0D0D] border border-[#2B2B2B] font-mono text-center relative overflow-hidden">
-              <span className="text-lg sm:text-2xl font-black uppercase text-white tracking-widest block font-urbanist">
-                URBAN STREETART <span className="text-[#FCD306]">{regions[currentRegionIndex]}</span>
-              </span>
-              <div className="absolute top-0 bottom-0 left-0 w-1 bg-[#FCD306]" />
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: Logo Exploded Blueprint (Sticky & Scroll-linked) */}
-        <div className="lg:col-span-6 flex flex-col gap-6 lg:sticky lg:top-32">
-          <div className="flex justify-between items-center">
-            <span className="text-sm font-mono text-[#A8A8A2] uppercase tracking-widest font-urbanist">
-              Logo Anatomy & Geometric System
-            </span>
-            <span className="text-xs font-mono text-[#0D0D0D] bg-[#FCD306] border border-[#FCD306]/20 px-2 py-0.5 rounded-none font-bold font-urbanist">
-              GRID: 8X8 SYSTEM
-            </span>
-          </div>
-
-          {/* Exploded Blueprint Interactive Card */}
-          <motion.div 
-            style={{ y: smoothY, rotate: blueprintRotate }}
-            className="bg-[#1A1A1A] border border-[#2B2B2B] rounded-none p-8 md:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between aspect-square lg:aspect-auto lg:h-[480px] group cursor-crosshair"
-          >
-            {/* Technical grid overlays */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:1.5rem_1.5rem]" />
-            
-            {/* Dimension lines and metadata */}
-            <div className="absolute top-4 left-6 text-[8px] font-mono text-[#A8A8A2] flex flex-col font-urbanist">
-              <span>COORD: ART-S90 // LAVA_FLARE</span>
-              <span>ANGLE: 45.00° REGULAR</span>
-            </div>
-            
-            <div className="absolute top-4 right-6 text-[8px] font-mono text-[#A8A8A2] text-right font-urbanist">
-              <span>SCALE: 1:1.24</span>
-              <span>H: 140MM / W: 140MM</span>
-            </div>
-
-            {/* Geometric Exploded Visual */}
-            <div className="relative flex-1 flex items-center justify-center scale-95 md:scale-100">
-              {/* Outer circular boundary */}
-              <div className="absolute w-56 h-56 rounded-full border border-dashed border-white/5 flex items-center justify-center">
-                <div className="w-40 h-40 rounded-full border border-dashed border-white/10" />
+      {/* 01 / RESEARCH & ANALYSIS */}
+      <div ref={pinRef} className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
+        <div className="sticky top-0 w-full h-auto overflow-hidden flex flex-col pb-20">
+          <AuroraBackground className="!bg-transparent h-auto w-full pt-32 sm:pt-40 pb-20">
+            <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">
+              <div className="flex flex-col gap-4">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-urbanist">
+                  Metodologia di Ricerca
+                </h2>
               </div>
 
-              {/* Architectural logo building blocks */}
-              <div className="relative flex items-center gap-6">
-                {/* Block 'U' */}
-                <div className="relative flex flex-col items-center gap-2">
-                  <div className="w-16 h-24 border border-dashed border-[#FCD306]/40 flex items-end justify-center p-1.5 rounded-none">
-                    <div className="w-full h-12 bg-[#F5F5F0] rounded-none relative group-hover:bg-[#FCD306] transition-colors duration-700">
-                      {/* Anchor lines */}
-                      <div className="absolute -left-3 top-0 w-3 h-[1px] bg-[#2B2B2B]" />
-                      <div className="absolute -left-3 bottom-0 w-3 h-[1px] bg-[#2B2B2B]" />
-                      <div className="absolute -left-3 top-0 bottom-0 w-[1px] bg-[#2B2B2B]/50" />
-                      <span className="absolute -left-8 top-3 text-[7px] font-mono text-[#A8A8A2] font-urbanist">h: 48px</span>
-                    </div>
-                  </div>
-                  <span className="text-sm font-mono text-[#A8A8A2] font-urbanist">BLOCK_U (STEM)</span>
-                </div>
-
-                {/* Block 'S' */}
-                <div className="relative flex flex-col items-center gap-2">
-                  <div className="w-16 h-24 border border-dashed border-[#FCD306]/40 flex flex-col justify-between p-1.5 rounded-none">
-                    {/* Top part of S */}
-                    <div className="w-full h-8 bg-[#FCD306] rounded-none relative group-hover:bg-[#F5F5F0] transition-colors duration-700">
-                      <div className="absolute -right-3 top-0 w-3 h-[1px] bg-[#2B2B2B]" />
-                      <div className="absolute -right-3 bottom-0 w-3 h-[1px] bg-[#2B2B2B]" />
-                      <div className="absolute -right-3 top-0 bottom-0 w-[1px] bg-[#2B2B2B]/50" />
-                      <span className="absolute -right-8 top-2 text-[7px] font-mono text-[#A8A8A2] font-urbanist">w: 64px</span>
-                    </div>
-                    {/* Bottom part of S */}
-                    <div className="w-full h-8 bg-[#FCD306]/30 border border-[#2B2B2B] rounded-none relative group-hover:border-[#FCD306] transition-colors duration-700" />
-                  </div>
-                  <span className="text-sm font-mono text-[#A8A8A2] font-urbanist">BLOCK_S (CURVE)</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom explanatory technical legend */}
-            <div className="border-t border-[#2B2B2B] pt-4 text-left z-10">
-              <span className="text-sm font-mono uppercase text-[#FCD306] block mb-1 font-bold font-urbanist">
-                GEOMETRIC INTEGRITY
-              </span>
-              <p className="text-sm text-[#A8A8A2] leading-relaxed font-normal font-urbanist">
-                {lang === 'it' 
-                  ? "Ogni lettera è progettata su una griglia fissa 8x8 con raccordi geometrici a 45 gradi. L'equilibrio tra pieni e vuoti garantisce una leggibilità eccellente, sia stampata a piccolissime dimensioni sulle etichette delle t-shirt, sia scalata su mega-cartelloni urbani." 
-                  : "Each letter is designed on a fixed 8x8 grid with 45-degree geometric connections. The balance between solid and empty spaces guarantees excellent readability, whether printed at extremely small sizes on t-shirt labels or scaled on mega urban billboards."}
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 4: THE SOLUTION - DIGITAL SOCIAL EXPERIENCE */}
-      <section className="flex flex-col gap-10 pt-12 border-t border-[#2B2B2B]">
-        <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-          <div className="flex-1 flex flex-col gap-2 text-left">
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#F5F5F0] uppercase font-urbanist">
-              {lang === 'it' ? "Il palcoscenico per l'arte." : "The stage for art."}
-            </h2>
-            <p className="text-base leading-relaxed text-[#A8A8A2] font-normal font-urbanist max-w-3xl">
-              {lang === 'it' 
-                ? "I template social e i touchpoint digitali sono stati riprogettati per dare respiro alle immagini, riducendo il rumore visivo e mettendo l'artista al centro del racconto editoriale." 
-                : "The social templates and digital touchpoints have been redesigned to let the images breathe, reducing visual noise and placing the artist at the center of the editorial narrative."}
-            </p>
-          </div>
-          <span className="text-xs font-mono text-[#A8A8A2] uppercase tracking-widest hidden md:block font-urbanist">
-            Instagram Feed Templates
-          </span>
-        </div>
-
-        {/* Centered Smartphone Mockup Showcase */}
-        <div className="flex justify-center mt-4">
-          
-          {/* Mockup 1: Dark Mode Instagram Feed */}
-          <div className="flex flex-col gap-4 items-center font-urbanist">
-            <span className="text-sm font-mono text-[#A8A8A2]">
-              {lang === 'it' ? "Mockup A: Grid Instagram Editoriale" : "Mockup A: Editorial Instagram Grid"}
-            </span>
-            
-            {/* Phone Outer Frame */}
-            <div className="w-[290px] sm:w-[320px] aspect-[9/19] bg-[#1A1A1A] rounded-[3rem] p-3 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] border-4 border-[#2B2B2B] relative overflow-hidden flex flex-col">
-              {/* Speaker & Camera Notch */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-30 flex justify-center items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-neutral-800" />
-                <span className="w-10 h-1 bg-neutral-900 rounded-full" />
-              </div>
-              
-              {/* Phone Content (Instagram Profile Page) */}
-              <div className="flex-1 bg-[#0D0D0D] rounded-[2.5rem] overflow-hidden flex flex-col pt-6 text-[#F5F5F0] text-sm select-none">
-                {/* Instagram Header */}
-                <div className="px-4 py-3 border-b border-[#2B2B2B] flex justify-between items-center shrink-0">
-                  <span className="font-bold text-sm font-urbanist">urbanstreetart.sicily</span>
-                  <div className="flex gap-2.5 text-[#A8A8A2]">
-                    <span className="w-2.5 h-2.5 border border-white rounded-sm" />
-                    <span className="font-bold text-sm">•••</span>
-                  </div>
-                </div>
-
-                {/* Profile Info */}
-                <div className="p-4 flex flex-col gap-3 text-left">
-                  <div className="flex items-center gap-4">
-                    {/* Rebranded Avatar */}
-                    <div className="w-12 h-12 rounded-full bg-[#FCD306] p-[1.5px] flex items-center justify-center shrink-0">
-                      <div className="w-full h-full bg-[#0D0D0D] rounded-full overflow-hidden p-[1px]">
-                        <img 
-                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" 
-                          alt="Avatar"
-                          className="w-full h-full object-cover rounded-full grayscale"
-                          referrerPolicy="no-referrer"
-                        />
-                      </div>
-                    </div>
-                    {/* Stats */}
-                    <div className="flex-1 flex justify-around text-center text-sm">
-                      <div className="flex flex-col"><span className="font-bold text-white">142</span><span className="text-[8px] text-[#A8A8A2] uppercase font-mono">Posts</span></div>
-                      <div className="flex flex-col"><span className="font-bold text-white">48.2K</span><span className="text-[8px] text-[#A8A8A2] uppercase font-mono">Followers</span></div>
-                      <div className="flex flex-col"><span className="font-bold text-white">405</span><span className="text-[8px] text-[#A8A8A2] uppercase font-mono">Following</span></div>
-                    </div>
-                  </div>
-
-                  {/* Bio Description */}
-                  <div className="flex flex-col gap-1">
-                    <span className="font-bold text-[#F5F5F0] text-sm font-urbanist">Urban StreetArt Sicily</span>
-                    <span className="text-[#A8A8A2] text-sm leading-relaxed font-urbanist">
-                      {lang === 'it' 
-                        ? "Ecosistema editoriale indipendente dedicato alla street art in Sicilia. Rebranding ed identità modulare." 
-                        : "Independent editorial ecosystem dedicated to street art in Sicily. Rebranding and modular identity."}
+              {/* Tab Selector */}
+              <div className="flex gap-8 sm:gap-12 shrink-0 self-start relative overflow-x-auto scrollbar-none w-full sm:w-auto border-b border-white/10 pb-3 px-2 mt-16">
+                {['desk', 'sondaggi', 'interviste'].map((tab, index) => (
+                  <button
+                    key={tab}
+                    onClick={() => handleTabClick(tab, index)}
+                    className={`flex items-center justify-center pb-2 text-xs sm:text-sm tracking-widest transition-all duration-300 relative z-10 uppercase font-urbanist ${activeResearchTab === tab ? 'text-white/90 font-bold' : 'text-white/40 hover:text-white/70'
+                      }`}
+                  >
+                    {activeResearchTab === tab && (
+                      <motion.div
+                        layoutId="active-research-bg-kinetics"
+                        className="absolute -bottom-[13px] left-0 right-0 h-[2px] bg-white/80"
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-20">
+                      {tab === 'desk' ? 'Desk' : tab === 'sondaggi' ? 'Sondaggi' : 'Interviste'}
                     </span>
-                    <span className="text-[#FCD306] text-xs font-mono uppercase tracking-wider font-semibold font-urbanist">
-                      linkin.bio/urbanstreetart
-                    </span>
-                  </div>
-                </div>
-
-                {/* Rebranded Instagram Feed Thumbnails Grid */}
-                <div className="flex-1 overflow-y-auto px-4 pb-4 scrollbar-none">
-                  <div className="grid grid-cols-3 gap-1">
-                    {[
-                      { url: "https://images.unsplash.com/photo-1561055657-b9e0bf0fa360?q=80&w=300&auto=format&fit=crop", rot: "rotate-[1deg]" },
-                      { url: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=300&auto=format&fit=crop", rot: "rotate-[-1.5deg]" },
-                      { url: "https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=300&auto=format&fit=crop", rot: "rotate-[1deg]" },
-                      { url: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=300&auto=format&fit=crop", rot: "rotate-[-1deg]" },
-                      { url: "https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?q=80&w=300&auto=format&fit=crop", rot: "rotate-[1.5deg]" },
-                      { url: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=300&auto=format&fit=crop", rot: "rotate-[-1deg]" }
-                    ].map((item, i) => (
-                      <div key={i} className={`aspect-square bg-[#1A1A1A] border border-[#2B2B2B] relative group/item overflow-hidden rounded-none ${item.rot} hover:rotate-0 hover:scale-105 hover:z-10 transition-all duration-300 shadow-sm`}>
-                        <img 
-                          src={item.url} 
-                          alt="Streetart post" 
-                          className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-300"
-                          referrerPolicy="no-referrer"
-                        />
-                        {/* Custom visual geometric alignment box inside each post to show branding */}
-                        <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-[#FCD306]/60" />
-                        <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-[#FCD306]/60" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                  </button>
+                ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* SECTION 5: THE SOLUTION - PHYGITAL REAL-WORLD PRODUCTS */}
-      <section className="flex flex-col gap-10 pt-12 border-t border-[#2B2B2B]">
-        <div className="flex flex-col gap-3 text-left">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#F5F5F0] uppercase font-urbanist">
-            {lang === 'it' ? "Dalla strada, per la strada." : "From the street, for the street."}
-          </h2>
-          <p className="text-base leading-relaxed text-[#F5F5F0] font-normal font-urbanist max-w-4xl">
-            {lang === 'it' ? (
-              <>Una community forte richiede simboli di appartenenza. Il rebranding ha permesso la naturale estensione del progetto in un ecosistema <span className="font-semibold text-[#FCD306]">"Phygital"</span>: un magazine stampato curato in carta premium a tiratura limitata e una linea di merchandising streetwear geometrico coerente con la nuova identità visiva.</>
-            ) : (
-              <>A strong community requires symbols of belonging. The rebranding allowed the natural extension of the project into a <span className="font-semibold text-[#FCD306]">"Phygital"</span> ecosystem: a printed magazine curated on premium paper in a limited edition and a line of geometric streetwear merchandising consistent with the new visual identity.</>
-            )}
+              {/* Dynamic Content Area */}
+              <div className="flex-1 relative w-full mt-24">
+                <AnimatePresence mode="wait">
+                  {activeResearchTab === 'desk' && (
+                    <motion.div
+                      key="desk-tab"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+                    >
+                      <HighlightCard animatedBorder={true}
+                        title="Orientamento"
+                        description={["Nessuna guida per non esperti."]}
+                        icon={<MapPin className="w-8 h-8 text-white" />}
+                      />
+                      <HighlightCard animatedBorder={true}
+                        title="Coinvolgimento"
+                        description={["Esperienza passiva e veloce (5 min)."]}
+                        icon={<Clock className="w-8 h-8 text-white" />}
+                      />
+                      <HighlightCard animatedBorder={true}
+                        title="Informazioni"
+                        description={["Mancano spiegazioni oltre al nome scientifico."]}
+                        icon={<FileQuestion className="w-8 h-8 text-white" />}
+                      />
+                    </motion.div>
+                  )}
+
+                  {activeResearchTab === 'sondaggi' && (
+                    <motion.div
+                      key="sondaggi-tab"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                    >
+                      {/* Chart 1 */}
+                      <HighlightCard animatedBorder={true} title="Come ti orienti?">
+                        <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
+                          <div className="w-1/2">
+                            <NeonGauge percentage="20%" color="#FFFFFF" label="Segnaletica" level={0.2} />
+                          </div>
+                          <div className="w-1/2">
+                            <NeonGauge percentage="70%" color="#FCD306" label="Casuale" level={0.7} />
+                          </div>
+                        </div>
+                      </HighlightCard>
+
+                      {/* Chart 2 */}
+                      <HighlightCard animatedBorder={true} title="Useresti QR code interattivi?">
+                        <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
+                          <div className="w-1/2">
+                            <NeonGauge percentage="25%" color="#FFFFFF" label="Forse" level={0.25} />
+                          </div>
+                          <div className="w-1/2">
+                            <NeonGauge percentage="75%" color="#FCD306" label="Sì" level={0.75} />
+                          </div>
+                        </div>
+                      </HighlightCard>
+                    </motion.div>
+                  )}
+
+                  {activeResearchTab === 'interviste' && (
+                    <motion.div
+                      key="interviste-tab"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                    >
+                      <HighlightCard animatedBorder={true} title="Utilità di un Totem Digitale?">
+                        <div className="flex flex-col items-center gap-4 text-center">
+                          <span className="w-12 h-12 rounded-full bg-[#FCD306]/10 text-[#FCD306] flex items-center justify-center font-bold font-urbanist border border-[#FCD306]/20 shrink-0">Q1</span>
+                          <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#FCD306] pl-4 italic">
+                            "Migliorerebbe l'esperienza, permettendo di orientarsi e prepararsi prima della visita."
+                          </p>
+                        </div>
+                      </HighlightCard>
+
+                      <HighlightCard animatedBorder={true} title="Mancanze Informative?">
+                        <div className="flex flex-col items-center gap-4 text-center">
+                          <span className="w-12 h-12 rounded-full bg-[#FCD306]/10 text-[#FCD306] flex items-center justify-center font-bold font-urbanist border border-[#FCD306]/20 shrink-0">Q2</span>
+                          <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#FCD306] pl-4 italic">
+                            "Sì, mancano dettagli scientifici chiari oltre al nome della pianta."
+                          </p>
+                        </div>
+                      </HighlightCard>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+            </div>
+          </AuroraBackground>
+
+          {/* Fade-in mask for smooth transition from the hero */}
+          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] from-10% via-[#050505]/80 to-transparent pointer-events-none z-0" />
+
+          {/* Fade-out mask for smooth transition to the next section */}
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pointer-events-none z-0" />
+        </div>
+      </div>
+
+      {/* 02 / ANALYSIS & STRATEGY: PROBLEMS VS SOLUTIONS */}
+      <div className="relative z-20 w-full -mt-[10vh] md:-mt-[25vh]">
+        <InteractiveBentoSection />
+      </div>
+
+      {/* 03.5 / LOOPING MOCKUPS (Restored) */}
+      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] -mt-[10vh] md:-mt-[25vh]">
+        <div className="relative w-full h-full">
+          <img
+            src="/project-01-mockup-mobile.jpg"
+            alt="Bussola Verde App Preview 1"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
+          />
+          <img
+            src="/project-01-mockup-mobile-2.jpg"
+            alt="Bussola Verde App Preview 2"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
+          />
+        </div>
+      </div>
+
+      {/* 04 / USER PERSONA */}
+      <div className="py-20 md:py-32 relative z-10 w-[100vw] ml-[calc(50%-50vw)] flex flex-col items-center overflow-hidden">
+
+        {/* Background Grid Vignette */}
+        <GridVignetteBackground className="opacity-100" horizontalVignetteSize={50} verticalVignetteSize={50} intensity={100} />
+
+        {/* Header Block (Standard Flow) */}
+        <div className="flex flex-col items-center gap-6 w-[90vw] max-w-2xl mb-16 md:mb-24 relative z-30">
+          <h3 className="text-4xl sm:text-5xl font-urbanist tracking-wide drop-shadow-md leading-none text-center">
+            <span className="font-black text-[#FCD306]">Mirella</span>
+            <span className="text-neutral-500 font-light mx-3 sm:mx-4">•</span>
+            <span className="font-light text-white">L'utente Ideale</span>
+          </h3>
+          <p className="text-sm md:text-base italic text-neutral-200 font-light leading-relaxed text-center drop-shadow-md">
+            "Voglio connettermi alla natura e approfondire la mia conoscenza scientifica senza barriere, in modo dinamico e intuitivo."
           </p>
         </div>
 
-        {/* Uploadable Products Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" id="kinetics-products-grid">
-          {[
-            { id: 'prod_01', title: lang === 'it' ? '01. Copertina Magazine' : '01. Magazine Cover', layoutDesc: lang === 'it' ? 'Copertina dell\'Edizione Limitata' : 'Limited Edition Cover', height: 'h-[320px] sm:h-[360px]', rot: 'rotate-[1deg]' },
-            { id: 'prod_02', title: lang === 'it' ? '02. Doppia Pagina Magazine' : '02. Double Page Magazine', layoutDesc: lang === 'it' ? 'Interno editoriale del libro d\'arte' : 'Editorial interior of the art book', height: 'h-[320px] sm:h-[360px]', rot: 'rotate-[-1deg]' },
-            { id: 'prod_03', title: lang === 'it' ? '03. Felpa Streetwear' : '03. Streetwear Hoodie', layoutDesc: lang === 'it' ? 'Oversized hoodie della collezione' : 'Oversized hoodie from the collection', height: 'h-[280px] sm:h-[320px]', rot: 'rotate-[1.5deg]' },
-            { id: 'prod_04', title: lang === 'it' ? '04. Cappellino Streetwear' : '04. Streetwear Cap', layoutDesc: lang === 'it' ? 'Track cap con brand geometrizzato' : 'Track cap with geometrized branding', height: 'h-[280px] sm:h-[320px]', rot: 'rotate-[-1.5deg]' }
-          ].map((prod) => {
-            const hasImg = !!wireframeImages[prod.id];
-            return (
-              <motion.div 
-                whileHover={{ scale: 1.02, rotateX: 5, rotateY: -5, z: 20 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                key={prod.id} 
-                className="relative rounded-none bg-[#1A1A1A] border border-[#2B2B2B] hover:border-[#FCD306] hover:shadow-[0_20px_50px_rgba(252,211,6,0.15)] transition-all duration-300 overflow-hidden flex flex-col p-6 gap-4 group perspective-[1000px]"
-              >
-                <div className="flex items-center justify-between border-b border-[#2B2B2B] pb-2 shrink-0">
-                  <div>
-                    <span className="text-sm font-mono uppercase tracking-wider text-[#FCD306] font-bold font-urbanist">{prod.title}</span>
-                  </div>
-                  {hasImg && (
-                    <button 
-                      onClick={() => handleRemoveImage(prod.id)}
-                      className="text-[#A8A8A2] hover:text-[#FCD306] p-1 rounded-none transition-colors cursor-pointer"
-                      title={lang === 'it' ? "Rimuovi immagine" : "Remove image"}
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  )}
-                </div>
+        {/* Diagram Area */}
+        <div className="relative w-full max-w-4xl aspect-square md:aspect-[4/3] flex items-center justify-center">
 
-                <div className={`w-full ${prod.height} overflow-hidden rounded-none bg-[#0D0D0D] relative flex items-center justify-center border border-dashed border-[#2B2B2B] group-hover:border-[#FCD306]/20 transition-all duration-300`}>
-                  {hasImg ? (
-                    <motion.div 
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      className={`relative w-full h-full flex items-center justify-center p-2 ${prod.rot}`}
-                    >
-                      <img 
-                        src={wireframeImages[prod.id]} 
-                        alt={prod.title} 
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-contain rounded-none block shadow-2xl"
-                      />
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                        <label className="cursor-pointer bg-[#FCD306] hover:bg-white text-black border-2 border-black font-bold uppercase text-sm rounded-none p-3 shadow-[4px_4px_0px_#000] transition-all">
-                          <Upload className="w-4 h-4 inline-block mr-2" />
-                          REPLACE
-                          <input 
-                            type="file" 
-                            accept="image/*" 
-                            className="hidden" 
-                            onChange={(e) => handleImageUpload(prod.id, e)} 
-                          />
-                        </label>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <label className="cursor-pointer absolute inset-0 flex flex-col items-center justify-center p-4 text-center hover:bg-[#FCD306]/[0.02] transition-colors">
-                      <input 
-                        type="file" 
-                        accept="image/*" 
-                        className="hidden" 
-                        onChange={(e) => handleImageUpload(prod.id, e)} 
-                      />
-                      <div className="w-10 h-10 rounded-none bg-[#FCD306]/10 flex items-center justify-center text-[#FCD306] mb-3 group-hover:scale-110 transition-transform">
-                        <Upload className="w-5 h-5" />
-                      </div>
-                      <span className="text-sm font-mono text-[#F5F5F0] uppercase tracking-wider block font-urbanist group-hover:text-[#FCD306]">
-                        {lang === 'it' ? "Carica Immagine" : "Upload Image"}
-                      </span>
-                      <span className="text-sm text-[#A8A8A2] font-mono mt-1 block leading-relaxed font-urbanist">{prod.layoutDesc}</span>
-                    </label>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
+          {/* SVG Lines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" preserveAspectRatio="none">
+
+            {/* Status (Top Left) */}
+            <line x1="15%" y1="15%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="15%" cy="15%" r="4" fill="rgba(255,255,255,0.15)" />
+
+            {/* Necessità (Top Right) */}
+            <line x1="85%" y1="15%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="85%" cy="15%" r="4" fill="rgba(255,255,255,0.15)" />
+
+            {/* Obiettivo (Bottom Left) */}
+            <line x1="15%" y1="85%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="15%" cy="85%" r="4" fill="rgba(255,255,255,0.15)" />
+
+            {/* Origine (Bottom Right) */}
+            <line x1="85%" y1="85%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
+            <circle cx="85%" cy="85%" r="4" fill="rgba(255,255,255,0.15)" />
+          </svg>
+
+          {/* Interactive Nodes */}
+          <PersonaTestNode top="15%" left="15%" label="Status" content="Nuova residente a Catania (Studentessa)." align="top-left" />
+          <PersonaTestNode top="15%" left="85%" label="Necessità" content="Informazioni repentine tramite smartphone." align="top-right" />
+          <PersonaTestNode top="85%" left="15%" label="Obiettivo" content="Esplorazione scientifica intuitiva." align="bottom-left" />
+          <PersonaTestNode top="85%" left="85%" label="Origine" content="Colombia, ricca di biodiversità." align="bottom-right" />
+
+          {/* Center Image */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center">
+            {/* Pop-out Image Component */}
+            <PopOutImage className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64" />
+          </div>
         </div>
-      </section>
+      </div>
 
+      {/* NEW StickyCard002 Gallery Instead of Single Image */}
+      <div className="relative z-10 w-full shrink-0 block">
+        <StickyCard002
+          cards={[
+            { id: 1, image: "/mockup_totem_3.jpg", alt: "Totem Mockup 3" },
+            { id: 2, image: "/mockup_totem.jpg", alt: "Totem Mockup" },
+            { id: 3, image: "/mockup_cartello_zone_2.jpeg", alt: "Cartello Zone Mockup" },
+            { id: 4, image: "/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
+          ]}
+        />
+      </div>
     </div>
   );
 }
