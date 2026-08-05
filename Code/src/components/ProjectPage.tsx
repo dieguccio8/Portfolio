@@ -271,15 +271,15 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
         {/* Orto Botanico Logo Card */}
         {isAetheris && (
-          <div className="fixed top-6 right-6 z-[100] h-14 md:h-16 px-6 md:px-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <img src="/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-8 md:h-10 w-auto object-contain" />
+          <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
+            <img src="/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-10 md:h-12 w-auto object-contain" />
           </div>
         )}
 
         {/* Kinetics Logo Card */}
         {isKinetics && (
-          <div className="fixed top-6 right-6 z-[100] h-14 md:h-16 px-6 md:px-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <img src="/logo_uss.jpg" alt="Urban StreetArt Sicily Logo" className="h-8 md:h-10 w-auto object-contain rounded-md" />
+          <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
+            <img src="/logo_uss.png" alt="Urban StreetArt Sicily Logo" className="h-10 md:h-12 w-auto object-contain rounded-md" />
           </div>
         )}
 
