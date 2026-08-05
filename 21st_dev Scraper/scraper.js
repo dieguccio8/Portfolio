@@ -219,22 +219,17 @@ async function scrape(url) {
       } catch(e) {}
     }
 
-    // AI Prompt Generation
-    let outputText = `Prompt AI per l'IDE:\n"Crea un componente React chiamato '${componentName}'. Usa il codice sottostante come implementazione di base. Assicurati che il risultato visivo corrisponda PERFETTAMENTE all'immagine 'preview.png' allegata. Non omettere parti funzionali.\n\nISTRUZIONI CRITICHE:\n1. Se noti che manca il codice CSS (o mancano le definizioni di alcune classi), analizza i link forniti nella 'RICERCA ALTERNATIVA SUL WEB' per recuperare i file di stile originali.\n2. Se non riesci a trovare il CSS online, devi INVENTARE il design basandoti esclusivamente sull'immagine 'preview.png' (utilizzando Tailwind CSS), ma mantenendo il codice sorgente fornito per la struttura e il funzionamento logico."\n\n`;
-    outputText += `Componente: ${componentName}\nURL: ${url}\n\n`;
-    
+    let outputText = `You are given a task to integrate an existing React component in the codebase\n\nThe codebase should support:\n- shadcn project structure  \n- Tailwind CSS\n- Typescript\n\nIf it doesn't, provide instructions on how to setup project via shadcn CLI, install Tailwind or Typescript.\n\nDetermine the default path for components and styles. \nIf default path for components is not /components/ui, provide instructions on why it's important to create this folder\nCopy-paste this component to /components/ui folder:\n`;
+
     if (depsStr || regDepsStr) {
-      outputText += `=========== DIPENDENZE ===========\n`;
-      if (depsStr) outputText += `Installa questi pacchetti:\nnpm install ${depsStr}\n\n`;
-      if (regDepsStr) outputText += `Componenti shadcn richiesti:\nnpx shadcn-ui@latest add ${regDepsStr}\n\n`;
-      outputText += `====================================\n\n`;
+      outputText += `\nInstall NPM dependencies:\n\`\`\`bash\n${depsStr} ${regDepsStr}\n\`\`\`\n\n`;
     }
 
     let foundCode = false;
 
     // OTTIMIZZAZIONE IMPECCABILE: Estrae tutti i file (CSS, TSX, JS, TS) direttamente dai link CDN!
     const allLinks = new Set();
-    const cdnRegex = /https:\/\/cdn\.21st\.dev\/[^"'\\]+\.(css|tsx|jsx|ts|js|html)/g;
+    const cdnRegex = /https:\/\/cdn\.21st\.dev\/[^"'\\]+\.(css|tsx|jsx|ts|js)/g;
     let m;
     while ((m = cdnRegex.exec(html)) !== null) {
       allLinks.add(m[0]);
@@ -251,8 +246,13 @@ async function scrape(url) {
          const fileRes = await fetch(fileUrl);
          if (fileRes.ok) {
             const fileText = await fileRes.text();
-            const fileName = fileUrl.split('/').pop() || 'file';
+            const parts = fileUrl.split('/');
+            let fileName = parts.pop() || 'file';
             const ext = fileName.split('.').pop();
+            // Se è un file demo, includiamo la cartella padre per distinguerli (es. default, character-scale)
+            if (fileName.includes('demo') && parts.length > 0) {
+               fileName = parts.pop() + '/' + fileName;
+            }
             
             // Separa il tipo di file per rendere il markdown leggibile
             if (ext === 'css') {
@@ -260,24 +260,19 @@ async function scrape(url) {
                if (fileName.includes('compiled') && filesToDownload.some(u => u.endsWith('.css') && !u.includes('compiled'))) {
                   continue; // Saltiamo il compiled.css se esiste un index.css!
                }
-               outputText += `## STILE CSS (${fileName})\n\n\`\`\`css\n${fileText}\n\`\`\`\n\n`;
-            } else if (ext === 'html') {
-               // Estrazione degli stili iniettati inline da Vite nel tag <style>
-               const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
-               let styleMatch;
-               let inlineStylesFound = false;
-               while ((styleMatch = styleRegex.exec(fileText)) !== null) {
-                 const cssContent = styleMatch[1].trim();
-                 if (cssContent.length > 0) {
-                    outputText += `## STILE INLINE ESTRATTO (${fileName})\n\n\`\`\`css\n${cssContent}\n\`\`\`\n\n`;
-                    inlineStylesFound = true;
-                 }
-               }
-               if (inlineStylesFound) {
-                 console.log(`[Scraper] Estratto CSS inline dal file HTML ${fileName}`);
-               }
+               outputText += `\`\`\`css\n${fileName}\n${fileText}\n\`\`\`\n\n`;
             } else {
-               outputText += `## CODICE SORGENTE (${fileName})\n\n\`\`\`${ext}\n${fileText}\n\`\`\`\n\n`;
+               // Formatta come richiesto: nome file seguito dal codice
+               let cleanFileName = fileName;
+               if (cleanFileName.includes('demo')) {
+                   cleanFileName = cleanFileName.replace('code.demo.', 'demo.').replace(/\\.[0-9]+/, '');
+               } else if (cleanFileName.includes('registry')) {
+                   cleanFileName = 'registry.' + ext;
+               } else {
+                   cleanFileName = componentName + '.' + ext;
+               }
+               
+               outputText += `\`\`\`${ext}\n${cleanFileName}\n${fileText}\n\`\`\`\n\n`;
             }
             foundCode = true;
          }
@@ -298,6 +293,20 @@ async function scrape(url) {
            foundCode = true;
        }
     }
+    // Estrazione eventuale del prompt AI testuale (se presente nel payload)
+    let aiPrompt = '';
+    const aiPromptMatch = html.match(/(?:\\*[\"'])prompt(?:\\*[\"'])\s*:\s*(?:\\*[\"'])((?:[^\"\\\\]|\\\\.)*)(?:\\*[\"'])/i);
+    if (aiPromptMatch) {
+       try {
+          aiPrompt = aiPromptMatch[1].replace(/\\"/g, '"').replace(/\\\\/g, '\\').replace(/\\n/g, '\n');
+       } catch(e) {}
+    }
+
+    if (aiPrompt) {
+       outputText = `## PROMPT AI ORIGINALE\n\n> "${aiPrompt}"\n\n=======================\n\n` + outputText;
+       console.log(`[Scraper] Estratto Prompt AI originale dal payload!`);
+    }
+
     // Estrazione del prompt/recipe (per componenti ASCII/generativi che non hanno codice)
     const recipeMatch = html.match(/(?:\\\\*[\"'])recipeJson(?:\\\\*[\"'])\s*:\s*(\{(?:[^{}]|(?:\{(?:[^{}]|(?:\{[^{}]*\})*)*\})*)*\})/);
     let recipeStr = '';
@@ -393,6 +402,9 @@ ${formattedJson}
       outputText += alternativeOutput;
     }
     
+    // Aggiungi le linee guida finali come nel prompt originale
+    outputText += `\nImplementation Guidelines\n 1. Analyze the component structure and identify all required dependencies\n 2. Review the component's argumens and state\n 3. Identify any required context providers or hooks and install them\n 4. Questions to Ask\n - What data/props will be passed to this component?\n - Are there any specific state management requirements?\n - Are there any required assets (images, icons, etc.)?\n - What is the expected responsive behavior?\n - What is the best place to use this component in the app?\n\nSteps to integrate\n 0. Copy paste all the code above in the correct directories\n 1. Install external dependencies\n 2. Fill image assets with Unsplash stock images you know exist\n 3. Use lucide-react icons for svgs or logos if component requires them\n`;
+
     // Save to components/<componentName>/<componentName>.txt
     const baseDir = path.join(process.cwd(), 'components');
     const compDir = path.join(baseDir, componentName);

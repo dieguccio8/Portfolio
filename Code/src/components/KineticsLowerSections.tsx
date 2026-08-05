@@ -149,9 +149,10 @@ const PopOutImage = ({ className }: { className?: string }) => (
 
 interface Props {
   project: any;
-  activeResearchTab: string;
-  setActiveResearchTab: (tab: string) => void;
-  lang: string;
+  activeResearchTab: any;
+  setActiveResearchTab: any;
+  lang?: string;
+  [key: string]: any;
 }
 
 const problems = [
@@ -245,7 +246,7 @@ export default function KineticsLowerSections({
       {/* 01 / RESEARCH & ANALYSIS */}
       <div ref={pinRef} className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
         <div className="sticky top-0 w-full h-auto overflow-hidden flex flex-col pb-20">
-          <AuroraBackground className="!bg-transparent h-auto w-full pt-32 sm:pt-40 pb-20">
+          <div className="h-auto w-full pt-32 sm:pt-40 pb-20">
             <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">
               <div className="flex flex-col gap-4">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-urbanist">
@@ -373,13 +374,7 @@ export default function KineticsLowerSections({
               </div>
 
             </div>
-          </AuroraBackground>
-
-          {/* Fade-in mask for smooth transition from the hero */}
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#050505] from-10% via-[#050505]/80 to-transparent pointer-events-none z-0" />
-
-          {/* Fade-out mask for smooth transition to the next section */}
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent pointer-events-none z-0" />
+          </div>
         </div>
       </div>
 

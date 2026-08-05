@@ -259,51 +259,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
       <ScrollReveal />
       <div id="project-page-root" className={`min-h-screen pb-24 relative ${isKinetics ? 'font-urbanist bg-[#0D0D0D] text-[#F5F5F0] selection:bg-[#FCD306] selection:text-[#0D0D0D]' : isAetheris ? 'font-raleway bg-[#050505] text-white selection:bg-[#068B35] selection:text-white' : isChronos ? 'font-sans bg-black text-white selection:bg-[#9E1C1F] selection:text-white' : 'font-sans bg-black text-white selection:bg-[#E8302A] selection:text-white'}`}>
 
-        {/* Ambient soft primary glows */}
-        {!isAetheris && (
-          <div className="fixed inset-0 pointer-events-none opacity-20 scale-[2.2] -translate-y-[35%] md:translate-y-0 md:scale-100 origin-center z-0">
-            <FloatingPaths position={1} />
-            <FloatingPaths position={-1} />
-          </div>
-        )}
 
-        {isKinetics ? (
-          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            {/* Subtle concrete grain noise overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.06] z-0 mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
-
-            {/* Scribble texture on the whole page */}
-            <div className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none z-0">
-              <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                <pattern id="scribble-pattern-global" x="0" y="0" width="150" height="150" patternUnits="userSpaceOnUse">
-                  <path d="M15,20 Q35,15 45,30 T65,20 T85,35" fill="none" stroke="#FCD306" strokeWidth="1" strokeLinecap="round" />
-                  <path d="M8,60 Q28,70 53,55 T98,65" fill="none" stroke="#FCD306" strokeWidth="0.8" strokeLinecap="round" />
-                  <path d="M35,90 Q60,80 75,100 T95,85" fill="none" stroke="#FCD306" strokeWidth="1.2" strokeLinecap="round" />
-                  <circle cx="90" cy="20" r="1.5" fill="#FCD306" />
-                  <circle cx="20" cy="80" r="1" fill="#FCD306" />
-                </pattern>
-                <rect width="100%" height="100%" fill="url(#scribble-pattern-global)" />
-              </svg>
-            </div>
-
-            {/* Yellow Spray Blurs */}
-            <div className="absolute top-[15%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#FCD306]/15 blur-[120px]" />
-            <div className="absolute top-[50%] left-[5%] w-[600px] h-[600px] rounded-full bg-[#FCD306]/10 blur-[150px]" />
-            <div className="absolute bottom-[15%] right-[15%] w-[450px] h-[450px] rounded-full bg-[#FCD306]/12 blur-[100px]" />
-          </div>
-        ) : isAetheris ? (
-          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] rounded-full bg-[#068B35]/5 blur-[120px]" />
-            <div className="absolute top-[50%] right-[5%] w-[600px] h-[600px] rounded-full bg-[#068B35]/4 blur-[140px]" />
-            <div className="absolute bottom-[15%] left-[5%] w-[450px] h-[450px] rounded-full bg-[#068B35]/5 blur-[100px]" />
-          </div>
-        ) : (
-          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] rounded-full bg-[#E8302A]/5 blur-[120px]" />
-            <div className="absolute top-[50%] right-[5%] w-[600px] h-[600px] rounded-full bg-[#E8302A]/4 blur-[140px]" />
-            <div className="absolute bottom-[15%] left-[5%] w-[450px] h-[450px] rounded-full bg-[#E8302A]/5 blur-[100px]" />
-          </div>
-        )}
 
         {/* 1. FIXED TOP HEADER (Hamburger Menu) */}
         <button
@@ -317,6 +273,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {isAetheris && (
           <div className="fixed top-6 right-6 z-[100] h-14 md:h-16 px-6 md:px-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
             <img src="/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-8 md:h-10 w-auto object-contain" />
+          </div>
+        )}
+
+        {/* Kinetics Logo Card */}
+        {isKinetics && (
+          <div className="fixed top-6 right-6 z-[100] h-14 md:h-16 px-6 md:px-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
+            <img src="/logo_uss.jpg" alt="Urban StreetArt Sicily Logo" className="h-8 md:h-10 w-auto object-contain rounded-md" />
           </div>
         )}
 
@@ -573,6 +536,15 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   playsInline
                   className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
                 />
+              ) : isKinetics ? (
+                <video
+                  src="/hero_video_02_wide.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
+                />
               ) : (
                 <img
                   src={wireframeImages[`hero_${project.id}`] || project.heroImage}
@@ -581,7 +553,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   className={`w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] ${isKinetics ? 'grayscale brightness-[0.3] contrast-[1.15] hover:grayscale-0' : 'grayscale brightness-[0.4] hover:grayscale-0'}`}
                 />
               )}
-              <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/50 to-transparent' : isAetheris ? 'bg-gradient-to-t from-[#050505] from-10% via-[#050505]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
+              <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-[radial-gradient(ellipse_at_center,_transparent_30%,_rgba(13,13,13,0.85)_100%)]' : isAetheris ? 'bg-gradient-to-t from-[#050505] from-10% via-[#050505]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
             </div>
 
             <div className="relative z-10 max-w-[1600px] mx-auto w-full flex flex-col gap-3">
@@ -590,18 +562,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   {getLocalizedField('category')}
                 </span>
               )}
-              <h1 className={`font-black tracking-tighter uppercase mb-2 ${isKinetics ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-urbanist text-[#F5F5F0]' : isAetheris ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-raleway font-bold text-white' : 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans text-white'}`}>
-                {isKinetics ? (
-                  <>
-                    Urban StreetArt <span className="text-[#FCD306] relative inline-block">
-                      Sicily
-                      <svg className="absolute left-0 -bottom-3 sm:-bottom-4 w-full h-5 text-[#FCD306] pointer-events-none" viewBox="0 0 100 20" fill="currentColor">
-                        <path d="M0,4 Q20,6 40,4 T80,5 T100,3 L100,8 Q85,13 80,16 Q75,13 70,8 Q50,13 45,17 Q40,13 35,6 Q15,12 0,4 Z" />
-                      </svg>
-                    </span>
-                  </>
-                ) : !isAetheris ? project.title : null}
-              </h1>
+              {!isKinetics && (
+                <h1 className={`font-black tracking-tighter uppercase mb-2 ${isAetheris ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-raleway font-bold text-white' : 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans text-white'}`}>
+                  {!isAetheris ? project.title : null}
+                </h1>
+              )}
               {(isAetheris || isKinetics) && (
                 <div className="flex flex-col gap-1 w-full items-center justify-center mb-4">
                   {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}

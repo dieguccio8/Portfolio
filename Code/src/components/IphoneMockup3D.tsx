@@ -125,9 +125,9 @@ type GLTFResult = GLTF & {
   animations: any[]
 }
 
-export function Model(props: any) {
+export function Model({ imagePath = '/models/iphone16_mockup/screen.jpg', ...props }: any) {
   const { nodes, materials } = (useGLTF('/models/iphone16_mockup/iphone-16-pro.glb') as unknown) as GLTFResult
-  const screenTexture = useTexture('/models/iphone16_mockup/screen.jpg')
+  const screenTexture = useTexture(imagePath) as THREE.Texture
 
   // Fix texture orientation if necessary
   screenTexture.flipY = false;
@@ -272,7 +272,7 @@ export function Model(props: any) {
 
 useGLTF.preload('/models/iphone16_mockup/iphone-16-pro.glb')
 
-function AnimatedScene({ containerRef, titleRef, cardsRef }: { containerRef: React.RefObject<HTMLDivElement>, titleRef: React.RefObject<HTMLDivElement>, cardsRef: React.RefObject<HTMLDivElement> }) {
+function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { containerRef: React.RefObject<HTMLDivElement>, titleRef: React.RefObject<HTMLDivElement>, cardsRef: React.RefObject<HTMLDivElement>, imagePath?: string }) {
   const groupRef = useRef<THREE.Group>(null);
 
   useGSAP(() => {
@@ -355,7 +355,7 @@ function AnimatedScene({ containerRef, titleRef, cardsRef }: { containerRef: Rea
         <Resize scale={150}>
           <Center>
             {/* Rotating Math.PI on Y to show the screen first */}
-            <Model rotation={[0, Math.PI, 0]} />
+            <Model rotation={[0, Math.PI, 0]} imagePath={imagePath} />
           </Center>
         </Resize>
       </group>
@@ -363,7 +363,7 @@ function AnimatedScene({ containerRef, titleRef, cardsRef }: { containerRef: Rea
   );
 }
 
-export default function IphoneMockup3D() {
+export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -396,7 +396,7 @@ export default function IphoneMockup3D() {
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[10, 10, 5]} intensity={1} />
                 
-                <AnimatedScene containerRef={containerRef} titleRef={titleRef} cardsRef={cardsRef} />
+                <AnimatedScene containerRef={containerRef} titleRef={titleRef} cardsRef={cardsRef} imagePath={imagePath} />
                 
               </Suspense>
             </Canvas>
