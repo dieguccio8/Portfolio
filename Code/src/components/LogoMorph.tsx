@@ -14,32 +14,40 @@ const newPaths = [
   "M256.534 3.05176e-05V134.113L342.068 117.333L344.8 127.299L256.534 144.613V208H486.4V90.6667L391.027 73.468L392.998 63.4147L486.398 80.2574L486.4 90.6667V69.8147V3.05176e-05H256.534Z"
 ];
 
+function splitFirstLetter(pathStr: string) {
+  const splitIndex = pathStr.indexOf("ZM");
+  if (splitIndex === -1) return { first: pathStr, rest: "" };
+  const first = pathStr.substring(0, splitIndex + 1);
+  const rest = "M" + pathStr.substring(splitIndex + 2);
+  return { first, rest };
+}
+
+const oldPathsObj = oldPaths.map(splitFirstLetter);
+
 export function LogoMorph() {
   const progress = useMotionValue(0);
 
-  // Generiamo gli interpolatori UNA SOLA VOLTA e in modo forzato
-  const interp1 = useMemo(() => interpolate(oldPaths[0], newPaths[1]), []);
-  const interp2 = useMemo(() => interpolate(oldPaths[1], newPaths[0]), []);
-  const interp3 = useMemo(() => interpolate(oldPaths[2], newPaths[2]), []);
+  // Forziamo useTransform a calcolare sempre tramite interpolatore usando SOLO la prima lettera
+  const interp1 = useMemo(() => interpolate(oldPathsObj[0].first, newPaths[1]), []);
+  const interp2 = useMemo(() => interpolate(oldPathsObj[1].first, newPaths[0]), []);
+  const interp3 = useMemo(() => interpolate(oldPathsObj[2].first, newPaths[2]), []);
 
-  // Forziamo useTransform a calcolare sempre tramite interpolatore
   const path1 = useTransform(progress, t => interp1(t));
   const path2 = useTransform(progress, t => interp2(t));
   const path3 = useTransform(progress, t => interp3(t));
 
-  // Assegniamo i colori (senza sfasamenti)
+  // Assegniamo i colori
   const color1 = useTransform(progress, [0, 1], ["#FFFFFF", "#F7F9FB"]);
   const color2 = useTransform(progress, [0, 1], ["#FFFFFF", "#FED402"]);
   const color3 = useTransform(progress, [0, 1], ["#FFFFFF", "#F7F9FB"]);
 
   useEffect(() => {
-    // Animazione in loop nativo semplice
     const controls = animate(progress, 1, {
-      duration: 1.0, // Transizione più veloce (da 1.5s a 1.0s)
+      duration: 1.0,
       ease: "easeInOut",
       repeat: Infinity,
       repeatType: "mirror",
-      repeatDelay: 2.5 // Pausa più lunga sui loghi statici (da 1.5s a 2.5s)
+      repeatDelay: 2.5
     });
     return controls.stop;
   }, [progress]);
@@ -48,7 +56,8 @@ export function LogoMorph() {
   const x = useTransform(progress, [0, 1], [47.75, 0]);
   const y = useTransform(progress, [0, 1], [8.5, 0]);
 
-  // Transizioni fluide per l'opacità dei testi
+  // Transizioni fluide per il "resto" delle lettere e per i testi
+  const restOpacity = useTransform(progress, [0, 0.15], [1, 0]);
   const opacityPrima = useTransform(progress, [0, 0.4], [1, 0]);
   const opacityDopo = useTransform(progress, [0.6, 1], [0, 1]);
 
@@ -63,9 +72,15 @@ export function LogoMorph() {
           style={{ overflow: 'visible' }}
         >
           <motion.g style={{ scale, x, y, originX: 0, originY: 0 }}>
+            {/* Morphing solo della prima lettera (U, S, S) */}
             <motion.path d={path1} fill={color1} />
             <motion.path d={path2} fill={color2} />
             <motion.path d={path3} fill={color3} />
+            
+            {/* Il "resto" delle parole sfuma in dissolvenza (crossfade) senza deformarsi */}
+            <motion.path d={oldPathsObj[0].rest} fill="#FFFFFF" style={{ opacity: restOpacity }} />
+            <motion.path d={oldPathsObj[1].rest} fill="#FFFFFF" style={{ opacity: restOpacity }} />
+            <motion.path d={oldPathsObj[2].rest} fill="#FFFFFF" style={{ opacity: restOpacity }} />
           </motion.g>
         </svg>
       </div>
