@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, AlertTriangle, Check, ArrowRight, Star, MapPin, Clock, FileQuestion } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
-import InteractiveBentoSection from './InteractiveBentoSection';
+import LogoGridConstruction from './LogoGridConstruction';
 import HighlightCard from './ui/highlight-card';
 import { GridVignetteBackground } from './ui/vignette-grid-background';
 import AuroraBackground from './ui/aurora-background';
@@ -221,7 +221,7 @@ export default function KineticsLowerSections({
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setMobileImageIndex(prev => (prev === 0 ? 1 : 0));
+      setMobileImageIndex(prev => (prev + 1) % 3);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
@@ -243,158 +243,29 @@ export default function KineticsLowerSections({
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
 
-      {/* 01 / RESEARCH & ANALYSIS */}
-      <div ref={pinRef} className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
-        <div className="sticky top-0 w-full h-auto overflow-hidden flex flex-col pb-20">
-          <div className="h-auto w-full pt-32 sm:pt-40 pb-20">
-            <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">
-              <div className="flex flex-col gap-4">
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-urbanist">
-                  Metodologia di Ricerca
-                </h2>
-              </div>
 
-              {/* Tab Selector */}
-              <div className="flex gap-8 sm:gap-12 shrink-0 self-start relative overflow-x-auto scrollbar-none w-full sm:w-auto border-b border-white/10 pb-3 px-2 mt-16">
-                {['desk', 'sondaggi', 'interviste'].map((tab, index) => (
-                  <button
-                    key={tab}
-                    onClick={() => handleTabClick(tab, index)}
-                    className={`flex items-center justify-center pb-2 text-xs sm:text-sm tracking-widest transition-all duration-300 relative z-10 uppercase font-urbanist ${activeResearchTab === tab ? 'text-white/90 font-bold' : 'text-white/40 hover:text-white/70'
-                      }`}
-                  >
-                    {activeResearchTab === tab && (
-                      <motion.div
-                        layoutId="active-research-bg-kinetics"
-                        className="absolute -bottom-[13px] left-0 right-0 h-[2px] bg-white/80"
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                    <span className="relative z-20">
-                      {tab === 'desk' ? 'Desk' : tab === 'sondaggi' ? 'Sondaggi' : 'Interviste'}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Dynamic Content Area */}
-              <div className="flex-1 relative w-full mt-24">
-                <AnimatePresence mode="wait">
-                  {activeResearchTab === 'desk' && (
-                    <motion.div
-                      key="desk-tab"
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -50 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
-                    >
-                      <HighlightCard animatedBorder={true}
-                        title="Orientamento"
-                        description={["Nessuna guida per non esperti."]}
-                        icon={<MapPin className="w-8 h-8 text-white" />}
-                      />
-                      <HighlightCard animatedBorder={true}
-                        title="Coinvolgimento"
-                        description={["Esperienza passiva e veloce (5 min)."]}
-                        icon={<Clock className="w-8 h-8 text-white" />}
-                      />
-                      <HighlightCard animatedBorder={true}
-                        title="Informazioni"
-                        description={["Mancano spiegazioni oltre al nome scientifico."]}
-                        icon={<FileQuestion className="w-8 h-8 text-white" />}
-                      />
-                    </motion.div>
-                  )}
-
-                  {activeResearchTab === 'sondaggi' && (
-                    <motion.div
-                      key="sondaggi-tab"
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -50 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
-                    >
-                      {/* Chart 1 */}
-                      <HighlightCard animatedBorder={true} title="Come ti orienti?">
-                        <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
-                          <div className="w-1/2">
-                            <NeonGauge percentage="20%" color="#FFFFFF" label="Segnaletica" level={0.2} />
-                          </div>
-                          <div className="w-1/2">
-                            <NeonGauge percentage="70%" color="#FCD306" label="Casuale" level={0.7} />
-                          </div>
-                        </div>
-                      </HighlightCard>
-
-                      {/* Chart 2 */}
-                      <HighlightCard animatedBorder={true} title="Useresti QR code interattivi?">
-                        <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
-                          <div className="w-1/2">
-                            <NeonGauge percentage="25%" color="#FFFFFF" label="Forse" level={0.25} />
-                          </div>
-                          <div className="w-1/2">
-                            <NeonGauge percentage="75%" color="#FCD306" label="Sì" level={0.75} />
-                          </div>
-                        </div>
-                      </HighlightCard>
-                    </motion.div>
-                  )}
-
-                  {activeResearchTab === 'interviste' && (
-                    <motion.div
-                      key="interviste-tab"
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -50 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
-                    >
-                      <HighlightCard animatedBorder={true} title="Utilità di un Totem Digitale?">
-                        <div className="flex flex-col items-center gap-4 text-center">
-                          <span className="w-12 h-12 rounded-full bg-[#FCD306]/10 text-[#FCD306] flex items-center justify-center font-bold font-urbanist border border-[#FCD306]/20 shrink-0">Q1</span>
-                          <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#FCD306] pl-4 italic">
-                            "Migliorerebbe l'esperienza, permettendo di orientarsi e prepararsi prima della visita."
-                          </p>
-                        </div>
-                      </HighlightCard>
-
-                      <HighlightCard animatedBorder={true} title="Mancanze Informative?">
-                        <div className="flex flex-col items-center gap-4 text-center">
-                          <span className="w-12 h-12 rounded-full bg-[#FCD306]/10 text-[#FCD306] flex items-center justify-center font-bold font-urbanist border border-[#FCD306]/20 shrink-0">Q2</span>
-                          <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#FCD306] pl-4 italic">
-                            "Sì, mancano dettagli scientifici chiari oltre al nome della pianta."
-                          </p>
-                        </div>
-                      </HighlightCard>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 02 / ANALYSIS & STRATEGY: PROBLEMS VS SOLUTIONS */}
-      <div className="relative z-20 w-full -mt-[10vh] md:-mt-[25vh]">
-        <InteractiveBentoSection />
+      {/* 02 / LOGO CONSTRUCTION GRID */}
+      <div className="relative z-20 w-full my-4 md:my-8">
+        <LogoGridConstruction />
       </div>
 
       {/* 03.5 / LOOPING MOCKUPS (Restored) */}
-      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] -mt-[10vh] md:-mt-[25vh]">
+      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] mt-[5vh] md:mt-[10vh]">
         <div className="relative w-full h-full">
           <img
-            src="/project-01-mockup-mobile.jpg"
-            alt="Bussola Verde App Preview 1"
+            src="/Images/Project 02/Mockup/mockup_tshirt.jpg"
+            alt="Urban StreetArt Sicily Mockup T-Shirt"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
           />
           <img
-            src="/project-01-mockup-mobile-2.jpg"
-            alt="Bussola Verde App Preview 2"
+            src="/Images/Project 02/Mockup/mockup_cappello.jpg"
+            alt="Urban StreetArt Sicily Mockup Cappello"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
+          />
+          <img
+            src="/Images/Project 02/Mockup/mockup_totebag.jpg"
+            alt="Urban StreetArt Sicily Mockup Tote Bag"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 2 ? 'opacity-100' : 'opacity-0'}`}
           />
         </div>
       </div>

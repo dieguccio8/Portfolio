@@ -620,7 +620,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               </div>
               <div className="flex items-center">
                 <p className="text-white font-urbanist text-xl md:text-2xl lg:text-[28px] leading-[1.4] font-light tracking-tight">
-                  La comunicazione visiva risultava poco strutturata e non valorizzava pienamente il potenziale dell'urban art siciliana. Mancava un'identità visiva forte e riconoscibile.
+                  <span className="font-semibold text-[#FCD306]">Rebranding dell'identità visiva di Urban StreetArt Sicily:</span> pagina Instagram dedicata alla diffusione dell'arte urbana in Sicilia, con l'obiettivo di trasformarla in un vero e proprio portale digitale.
                 </p>
               </div>
             </div>
