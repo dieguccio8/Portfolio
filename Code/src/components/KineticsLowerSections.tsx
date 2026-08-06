@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, AlertTriangle, Check, ArrowRight, Star, MapPin, Clock, FileQuestion } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
 import LogoGridConstruction from './LogoGridConstruction';
+import { DesignSystemSection } from './DesignSystemSection';
 import HighlightCard from './ui/highlight-card';
 import { GridVignetteBackground } from './ui/vignette-grid-background';
 import AuroraBackground from './ui/aurora-background';
@@ -243,13 +244,30 @@ export default function KineticsLowerSections({
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
       {/* YELLOW OBJECTIVE SECTION */}
-      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#FCD306] z-10 mt-12 -mb-4 sm:-mb-8 py-24 sm:py-32 md:py-40 flex flex-col items-center justify-center text-[#111111] px-6">
-        <h2 className="text-7xl sm:text-[100px] md:text-[140px] font-urbanist font-black tracking-tighter leading-none mb-6 sm:mb-8 text-center uppercase">
-          Obiettivo
-        </h2>
-        <p className="max-w-4xl text-center text-lg sm:text-xl md:text-3xl font-light leading-[1.4] tracking-tight text-[#111111]/90">
-          Creare un’identità visiva forte, contemporanea e coerente, capace di rappresentare l’energia dell’arte urbana e rendere il progetto riconoscibile su tutti i canali digitali.
-        </p>
+      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#FCD306] z-10 mt-12 -mb-4 sm:-mb-8 py-24 sm:py-32 md:py-40 flex flex-col items-center justify-center text-[#111111] px-6 overflow-hidden">
+        
+        {/* Decorative Triangles (Strictly following original logo mark aspect ratio and orientation) */}
+        <svg viewBox="0 0 230 208" className="absolute top-0 right-0 w-64 md:w-[600px] h-auto opacity-[0.05] translate-x-1/4 pointer-events-none">
+          <path d="M229.9 0L229.8 208L0 0Z" fill="#111111"/>
+        </svg>
+        <svg viewBox="0 0 230 208" className="absolute bottom-0 left-0 w-48 md:w-[400px] h-auto opacity-[0.1] -translate-x-1/4 translate-y-1/4 pointer-events-none">
+          <path d="M229.9 0L229.8 208L0 0Z" fill="#ffffff"/>
+        </svg>
+        <svg viewBox="0 0 230 208" className="absolute top-1/4 left-[8%] w-12 md:w-20 h-auto opacity-40 pointer-events-none">
+          <path d="M229.9 0L229.8 208L0 0Z" fill="#111111"/>
+        </svg>
+        <svg viewBox="0 0 230 208" className="absolute bottom-1/4 right-[10%] w-10 md:w-16 h-auto opacity-50 pointer-events-none hidden md:block">
+          <path d="M229.9 0L229.8 208L0 0Z" fill="#ffffff"/>
+        </svg>
+
+        <div className="relative z-10 flex flex-col items-center">
+          <h2 className="text-7xl sm:text-[100px] md:text-[140px] font-urbanist font-black tracking-tighter leading-none mb-6 sm:mb-8 text-center uppercase">
+            Obiettivo
+          </h2>
+          <p className="max-w-4xl text-center text-lg sm:text-xl md:text-3xl font-light leading-[1.4] tracking-tight text-[#111111]/90">
+            Creare un’identità visiva forte, contemporanea e coerente, capace di rappresentare l’energia dell’arte urbana e rendere il progetto riconoscibile su tutti i canali digitali.
+          </p>
+        </div>
       </div>
 
       {/* 02 / LOGO CONSTRUCTION GRID */}
@@ -257,30 +275,8 @@ export default function KineticsLowerSections({
         <LogoGridConstruction />
       </div>
 
-      {/* 02.5 / INFINITE MARQUEE */}
-      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 overflow-hidden flex bg-[#111111] py-8 md:py-12 my-8 border-y border-white/5 z-20">
-        <motion.div
-          className="flex whitespace-nowrap items-center"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            repeat: Infinity,
-            ease: "linear",
-            duration: 45,
-          }}
-        >
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex items-center shrink-0">
-              <span className="text-lg md:text-2xl font-urbanist font-medium uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-400 pl-8 md:pl-16">
-                Obiettivo: Creare un’identità visiva forte, contemporanea e coerente, capace di rappresentare l’energia dell’arte urbana e rendere il progetto riconoscibile su tutti i canali digitali.
-              </span>
-              <span className="text-lg md:text-2xl text-[#FCD306] pl-8 md:pl-16 font-black shrink-0">•</span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-
       {/* 03.5 / LOOPING MOCKUPS (Restored) */}
-      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] mt-[5vh] md:mt-[10vh]">
+      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] mt-0">
         <div className="relative w-full h-full">
           <img
             src="/Images/Project 02/Mockup/mockup_tshirt.jpg"
@@ -299,6 +295,9 @@ export default function KineticsLowerSections({
           />
         </div>
       </div>
+
+      {/* DESIGN SYSTEM SECTION */}
+      <DesignSystemSection />
 
       {/* EMPTY PLACEHOLDER SECTION */}
       <div className="w-full h-[80vh] flex items-center justify-center">
