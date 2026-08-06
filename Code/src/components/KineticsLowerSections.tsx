@@ -242,11 +242,41 @@ export default function KineticsLowerSections({
 
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
-
+      {/* YELLOW OBJECTIVE SECTION */}
+      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#FCD306] z-10 mt-12 -mb-4 sm:-mb-8 py-24 sm:py-32 md:py-40 flex flex-col items-center justify-center text-[#111111] px-6">
+        <h2 className="text-7xl sm:text-[100px] md:text-[140px] font-urbanist font-black tracking-tighter leading-none mb-6 sm:mb-8 text-center uppercase">
+          Obiettivo
+        </h2>
+        <p className="max-w-4xl text-center text-lg sm:text-xl md:text-3xl font-light leading-[1.4] tracking-tight text-[#111111]/90">
+          Creare un’identità visiva forte, contemporanea e coerente, capace di rappresentare l’energia dell’arte urbana e rendere il progetto riconoscibile su tutti i canali digitali.
+        </p>
+      </div>
 
       {/* 02 / LOGO CONSTRUCTION GRID */}
       <div className="relative z-20 w-full my-4 md:my-8">
         <LogoGridConstruction />
+      </div>
+
+      {/* 02.5 / INFINITE MARQUEE */}
+      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 overflow-hidden flex bg-[#111111] py-8 md:py-12 my-8 border-y border-white/5 z-20">
+        <motion.div
+          className="flex whitespace-nowrap items-center"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            repeat: Infinity,
+            ease: "linear",
+            duration: 45,
+          }}
+        >
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex items-center shrink-0">
+              <span className="text-lg md:text-2xl font-urbanist font-medium uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-400 pl-8 md:pl-16">
+                Obiettivo: Creare un’identità visiva forte, contemporanea e coerente, capace di rappresentare l’energia dell’arte urbana e rendere il progetto riconoscibile su tutti i canali digitali.
+              </span>
+              <span className="text-lg md:text-2xl text-[#FCD306] pl-8 md:pl-16 font-black shrink-0">•</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
       {/* 03.5 / LOOPING MOCKUPS (Restored) */}
@@ -270,59 +300,9 @@ export default function KineticsLowerSections({
         </div>
       </div>
 
-      {/* 04 / USER PERSONA */}
-      <div className="py-20 md:py-32 relative z-10 w-[100vw] ml-[calc(50%-50vw)] flex flex-col items-center overflow-hidden">
-
-        {/* Background Grid Vignette */}
-        <GridVignetteBackground className="opacity-100" horizontalVignetteSize={50} verticalVignetteSize={50} intensity={100} />
-
-        {/* Header Block (Standard Flow) */}
-        <div className="flex flex-col items-center gap-6 w-[90vw] max-w-2xl mb-16 md:mb-24 relative z-30">
-          <h3 className="text-4xl sm:text-5xl font-urbanist tracking-wide drop-shadow-md leading-none text-center">
-            <span className="font-black text-[#FCD306]">Mirella</span>
-            <span className="text-neutral-500 font-light mx-3 sm:mx-4">•</span>
-            <span className="font-light text-white">L'utente Ideale</span>
-          </h3>
-          <p className="text-sm md:text-base italic text-neutral-200 font-light leading-relaxed text-center drop-shadow-md">
-            "Voglio connettermi alla natura e approfondire la mia conoscenza scientifica senza barriere, in modo dinamico e intuitivo."
-          </p>
-        </div>
-
-        {/* Diagram Area */}
-        <div className="relative w-full max-w-4xl aspect-square md:aspect-[4/3] flex items-center justify-center">
-
-          {/* SVG Lines */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" preserveAspectRatio="none">
-
-            {/* Status (Top Left) */}
-            <line x1="15%" y1="15%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
-            <circle cx="15%" cy="15%" r="4" fill="rgba(255,255,255,0.15)" />
-
-            {/* Necessità (Top Right) */}
-            <line x1="85%" y1="15%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
-            <circle cx="85%" cy="15%" r="4" fill="rgba(255,255,255,0.15)" />
-
-            {/* Obiettivo (Bottom Left) */}
-            <line x1="15%" y1="85%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
-            <circle cx="15%" cy="85%" r="4" fill="rgba(255,255,255,0.15)" />
-
-            {/* Origine (Bottom Right) */}
-            <line x1="85%" y1="85%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeOpacity="1" />
-            <circle cx="85%" cy="85%" r="4" fill="rgba(255,255,255,0.15)" />
-          </svg>
-
-          {/* Interactive Nodes */}
-          <PersonaTestNode top="15%" left="15%" label="Status" content="Nuova residente a Catania (Studentessa)." align="top-left" />
-          <PersonaTestNode top="15%" left="85%" label="Necessità" content="Informazioni repentine tramite smartphone." align="top-right" />
-          <PersonaTestNode top="85%" left="15%" label="Obiettivo" content="Esplorazione scientifica intuitiva." align="bottom-left" />
-          <PersonaTestNode top="85%" left="85%" label="Origine" content="Colombia, ricca di biodiversità." align="bottom-right" />
-
-          {/* Center Image */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center">
-            {/* Pop-out Image Component */}
-            <PopOutImage className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64" />
-          </div>
-        </div>
+      {/* EMPTY PLACEHOLDER SECTION */}
+      <div className="w-full h-[80vh] flex items-center justify-center">
+        {/* Spazio vuoto da riempire */}
       </div>
 
       {/* NEW StickyCard002 Gallery Instead of Single Image */}
