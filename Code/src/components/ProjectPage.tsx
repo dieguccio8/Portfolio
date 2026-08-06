@@ -37,6 +37,7 @@ import InteractiveBentoSection from './InteractiveBentoSection';
 import KineticsLowerSections from './KineticsLowerSections';
 import ChronosLowerSections from './ChronosLowerSections';
 import { AetherisLowerSections } from './AetherisLowerSections';
+import { LogoMorph } from './LogoMorph';
 import IphoneMockup3D from './IphoneMockup3D';
 import { CustomCursor } from './CustomCursor';
 import { SmoothScroll } from './SmoothScroll';
@@ -538,12 +539,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 />
               ) : isKinetics ? (
                 <video
-                  src="/hero_video_02_wide.mp4"
+                  src="https://assets.21st.dev/ascii-recipes/videos/user_3FUPLeY5ayOz7rm8Knytc8YH56C/c5082e47-b010-45cf-8007-9f05cbdf07ae.mp4"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
+                  style={{ imageRendering: 'pixelated' }}
+                  className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] [image-rendering:pixelated]"
                 />
               ) : (
                 <img
@@ -591,17 +593,38 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           </section>
         )}
 
-        {/* 03 / L'ECOSISTEMA (3D MOCKUP) (Moved under hero for Aetheris) */}
-        {(isAetheris || isKinetics) && (
-          <div className="relative left-1/2 -translate-x-1/2 w-[100vw] mt-12 sm:mt-16 mb-8">
-            {/* Fade-in mask for smooth transition from the previous section */}
-            <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
-
-            <IphoneMockup3D />
-
-            {/* Fade-out mask for smooth transition to the next section */}
-            <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#050505] from-20% via-[#050505]/80 to-transparent pointer-events-none z-20" />
+        {/* Marquee Introduzione per Project 02 (Kinetics) */}
+        {isKinetics && (
+          <div className="relative left-1/2 -translate-x-1/2 w-[100vw] overflow-hidden border-b-2 border-[#0D0D0D] py-2 sm:py-3 z-20 flex items-center bg-[#FCD306]">
+            <motion.div
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
+              className="flex whitespace-nowrap gap-8 text-[#0D0D0D] font-urbanist font-black text-xl sm:text-2xl uppercase tracking-widest"
+            >
+              {[...Array(20)].map((_, i) => (
+                <React.Fragment key={i}>
+                  <span>INTRODUZIONE</span>
+                  <span className="text-[#0D0D0D] text-lg sm:text-xl">✦</span>
+                </React.Fragment>
+              ))}
+            </motion.div>
           </div>
+        )}
+
+        {/* Nuova sezione: Logo Prima/Dopo o Problem Statement */}
+        {isKinetics && (
+          <section className="w-full relative z-20 flex flex-col items-center justify-center pt-32 sm:pt-40 pb-20 px-6 sm:px-12 md:px-16 max-w-[1600px] mx-auto mb-8">
+            <div className="w-full max-w-5xl p-10 md:p-16 lg:p-0 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+              <div className="flex flex-col items-center justify-center gap-8">
+                <LogoMorph />
+              </div>
+              <div className="flex items-center">
+                <p className="text-white font-urbanist text-xl md:text-2xl lg:text-[28px] leading-[1.4] font-light tracking-tight">
+                  La comunicazione visiva risultava poco strutturata e non valorizzava pienamente il potenziale dell'urban art siciliana. Mancava un'identità visiva forte e riconoscibile.
+                </p>
+              </div>
+            </div>
+          </section>
         )}
 
         {/* 3. CASE STUDY GRID */}
@@ -1947,221 +1970,221 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         </div>
         <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8">
 
-              {/* COLOR PALETTE & TYPOGRAPHY STYLE GUIDE */}
-              {isAetheris ? (
-                <div className="flex flex-col gap-6 text-left" id="orto-design-system-section">
-                  {/* Header section removed per request */}
+          {/* COLOR PALETTE & TYPOGRAPHY STYLE GUIDE */}
+          {isAetheris ? (
+            <div className="flex flex-col gap-6 text-left" id="orto-design-system-section">
+              {/* Header section removed per request */}
 
-                  {/* Design System Bento Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
+              {/* Design System Bento Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
 
-                    {/* Top Left: Color palette principale */}
-                    <div className="md:col-span-3 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-center shadow-2xl relative overflow-hidden group">
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <h3 className="text-sm font-raleway uppercase tracking-widest text-neutral-400 font-bold mb-8 relative z-10 text-center">Color Palette</h3>
+                {/* Top Left: Color palette principale */}
+                <div className="md:col-span-3 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-center shadow-2xl relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <h3 className="text-sm font-raleway uppercase tracking-widest text-neutral-400 font-bold mb-8 relative z-10 text-center">Color Palette</h3>
 
-                      <div className="flex flex-wrap justify-center gap-6 relative z-10">
-                        {/* Verde Primario */}
-                        <button onClick={() => handleCopyHex('#068B35')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
-                          <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#068B35' }} />
-                          <div className="text-center">
-                            <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#068B35' ? 'Copied' : '#068B35'}</span>
-                          </div>
-                        </button>
-
-                        {/* Bianco */}
-                        <button onClick={() => handleCopyHex('#FFFFFF')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
-                          <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 bg-white transition-transform group-hover/btn:scale-110" />
-                          <div className="text-center">
-                            <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#FFFFFF' ? 'Copied' : '#FFFFFF'}</span>
-                          </div>
-                        </button>
-
-                        {/* Grigio Chiaro */}
-                        <button onClick={() => handleCopyHex('#EBEBEB')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
-                          <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#EBEBEB' }} />
-                          <div className="text-center">
-                            <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#EBEBEB' ? 'Copied' : '#EBEBEB'}</span>
-                          </div>
-                        </button>
+                  <div className="flex flex-wrap justify-center gap-6 relative z-10">
+                    {/* Verde Primario */}
+                    <button onClick={() => handleCopyHex('#068B35')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
+                      <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#068B35' }} />
+                      <div className="text-center">
+                        <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#068B35' ? 'Copied' : '#068B35'}</span>
                       </div>
-                    </div>
+                    </button>
 
-                    {/* Top Right: Colori pillole categoria */}
-                    <div className="md:col-span-9 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-center shadow-2xl relative overflow-hidden group">
-                      <div className="absolute inset-0 bg-gradient-to-tl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                      <div className="flex flex-wrap justify-center gap-x-6 gap-y-5 relative z-10 w-full" id="orto-categories-row">
-                        {[
-                          { labelIt: 'Orto Generale', labelEn: 'General Garden', bg: '#0054F0', text: '#FFFFFF' },
-                          { labelIt: 'Tropicale', labelEn: 'Tropical', bg: '#EEBE00', text: '#0A0A0A' },
-                          { labelIt: 'Orto Siculo', labelEn: 'Sicilian Garden', bg: '#28BF31', text: '#FFFFFF' },
-                          { labelIt: 'Arido', labelEn: 'Arid', bg: '#CE2B37', text: '#FFFFFF' },
-                          { labelIt: 'Mediterraneo', labelEn: 'Mediterranean', bg: '#6B4FD4', text: '#FFFFFF' },
-                          { labelIt: 'Fontanella', labelEn: 'Water Fountain', bg: '#39A1F6', text: '#FFFFFF' },
-                          { labelIt: 'Bagni', labelEn: 'Restrooms', bg: '#00025D', text: '#FFFFFF' }
-                        ].map((item, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleCopyHex(item.bg)}
-                            className="flex items-center gap-3 group/pill cursor-pointer"
-                            id={`category-pill-${index}`}
-                          >
-                            <div className="w-6 h-6 rounded-full shadow-md border border-white/10 shrink-0 transition-transform group-hover/pill:scale-110" style={{ backgroundColor: item.bg }} />
-                            <div className="text-left">
-                              <span className="font-semibold text-sm text-white/90 block">
-                                {lang === 'it' ? item.labelIt : item.labelEn}
-                              </span>
-                              <span className="font-raleway text-[11px] text-neutral-500 group-hover/pill:text-white transition-colors">
-                                {copiedColor === item.bg ? 'Copied!' : item.bg}
-                              </span>
-                            </div>
-                          </button>
-                        ))}
+                    {/* Bianco */}
+                    <button onClick={() => handleCopyHex('#FFFFFF')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
+                      <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 bg-white transition-transform group-hover/btn:scale-110" />
+                      <div className="text-center">
+                        <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#FFFFFF' ? 'Copied' : '#FFFFFF'}</span>
                       </div>
-                    </div>
+                    </button>
 
-                    {/* Bottom Left: Componenti Core */}
-                    <div className="md:col-span-7 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 shadow-2xl relative overflow-hidden group flex flex-col gap-12" id="orto-block-components">
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                      {/* Top Section: Card Pianta + Searchbars + Buttons + Controls */}
-                      <div className="flex flex-col lg:flex-row justify-center gap-8 lg:gap-10 relative z-10 w-full items-start">
-
-                        {/* Left Column */}
-                        <div className="flex flex-col gap-6 w-full lg:w-auto lg:min-w-[320px] xl:min-w-[380px]">
-                          <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                          <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                          <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-
-                          <div className="mt-8">
-                            <img src="/design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
-                          </div>
-                        </div>
-
-                        {/* Right Column */}
-                        <div className="flex flex-col gap-8 items-start w-full lg:w-auto">
-                          {/* Pianta Card - reduced size */}
-                          <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
-
-                          {/* Tags */}
-                          <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
-
-                          {/* Language and Scopri Pianta */}
-                          <div className="flex items-center gap-8">
-                            <img src="/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
-                            <img src="/design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src = '/design_system/button_scopri_pianta.png'} />
-                          </div>
-
-                          {/* Percorso */}
-                          <div className="mt-4 -ml-12 lg:-ml-20 xl:-ml-36">
-                            <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
-                          </div>
-                        </div>
+                    {/* Grigio Chiaro */}
+                    <button onClick={() => handleCopyHex('#EBEBEB')} className="group/btn flex flex-col items-center gap-3 cursor-pointer">
+                      <div className="w-14 h-14 rounded-full shadow-lg border border-white/10 shrink-0 transition-transform group-hover/btn:scale-110" style={{ backgroundColor: '#EBEBEB' }} />
+                      <div className="text-center">
+                        <span className="text-[11px] font-raleway text-neutral-500 group-hover/btn:text-white transition-colors">{copiedColor === '#EBEBEB' ? 'Copied' : '#EBEBEB'}</span>
                       </div>
-
-                      {/* Bottom Row: Pillole Categorie Mappa */}
-                      <div className="w-full relative z-10 pt-8 lg:pt-12 border-t border-white/5 mt-4">
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-4 w-full mx-auto">
-                          {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
-                            <img
-                              key={variant}
-                              src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
-                              alt={`Categoria ${variant}`}
-                              className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Right: Body and H1 */}
-                    <div className="md:col-span-5 flex flex-col gap-6">
-                      {/* Body Text Demo */}
-                      <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-10 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
-                        <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="flex flex-col gap-2 relative z-10">
-                          <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">Body / Raleway, Regular, 28px</span>
-                          <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-xl md:text-2xl leading-relaxed font-light">
-                            {lang === 'it' ? (
-                              "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
-                            ) : (
-                              "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
-                            )}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* H1 Demo */}
-                      <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="flex flex-col gap-2 relative z-10 w-full">
-                          <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">H1 / Raleway, Semibold, 62px</span>
-                          <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
-                            {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
-                          </h1>
-                        </div>
-                      </div>
-                    </div>
-
+                    </button>
                   </div>
-
-
                 </div>
-              ) : (
-                <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
-                  <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    {/* Palette */}
-                    <div className="flex flex-col gap-3">
-                      <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Color Palette</h4>
-                      <div className="flex flex-col gap-2">
-                        {project.colorPalette?.map((color, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => handleCopyHex(color.hex)}
-                            className={`flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer group text-left w-full ${isAetheris
-                              ? 'bg-[#131514] border-white/5 hover:border-[#2E8B3A]/40 hover:bg-[#2E8B3A]/10'
-                              : 'bg-neutral-950/60 border-white/5 hover:border-white/20 hover:bg-neutral-900/60'
-                              }`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div
-                                className={`w-8 h-8 rounded-lg border shrink-0 ${isAetheris ? 'border-white/10' : 'border-white/10'}`}
-                                style={{ backgroundColor: color.hex }}
-                              />
-                              <div>
-                                <span className={`text-sm font-bold block ${isAetheris ? 'text-white' : 'text-white'}`}>{color.name}</span>
-                                <span className={`text-sm font-raleway block ${isAetheris ? 'text-neutral-400' : 'text-white/40'}`}>{color.hex}</span>
-                              </div>
-                            </div>
-                            <div className={`text-sm font-raleway transition-colors shrink-0 ${isAetheris
-                              ? 'text-neutral-400 group-hover:text-emerald-400'
-                              : 'text-white/30 group-hover:text-[#E8302A]'
-                              }`}>
-                              {copiedColor === color.hex ? 'Copied!' : 'Copy Hex'}
-                            </div>
-                          </button>
-                        ))}
+                {/* Top Right: Colori pillole categoria */}
+                <div className="md:col-span-9 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 flex flex-col justify-center items-center shadow-2xl relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-tl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <div className="flex flex-wrap justify-center gap-x-6 gap-y-5 relative z-10 w-full" id="orto-categories-row">
+                    {[
+                      { labelIt: 'Orto Generale', labelEn: 'General Garden', bg: '#0054F0', text: '#FFFFFF' },
+                      { labelIt: 'Tropicale', labelEn: 'Tropical', bg: '#EEBE00', text: '#0A0A0A' },
+                      { labelIt: 'Orto Siculo', labelEn: 'Sicilian Garden', bg: '#28BF31', text: '#FFFFFF' },
+                      { labelIt: 'Arido', labelEn: 'Arid', bg: '#CE2B37', text: '#FFFFFF' },
+                      { labelIt: 'Mediterraneo', labelEn: 'Mediterranean', bg: '#6B4FD4', text: '#FFFFFF' },
+                      { labelIt: 'Fontanella', labelEn: 'Water Fountain', bg: '#39A1F6', text: '#FFFFFF' },
+                      { labelIt: 'Bagni', labelEn: 'Restrooms', bg: '#00025D', text: '#FFFFFF' }
+                    ].map((item, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleCopyHex(item.bg)}
+                        className="flex items-center gap-3 group/pill cursor-pointer"
+                        id={`category-pill-${index}`}
+                      >
+                        <div className="w-6 h-6 rounded-full shadow-md border border-white/10 shrink-0 transition-transform group-hover/pill:scale-110" style={{ backgroundColor: item.bg }} />
+                        <div className="text-left">
+                          <span className="font-semibold text-sm text-white/90 block">
+                            {lang === 'it' ? item.labelIt : item.labelEn}
+                          </span>
+                          <span className="font-raleway text-[11px] text-neutral-500 group-hover/pill:text-white transition-colors">
+                            {copiedColor === item.bg ? 'Copied!' : item.bg}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Left: Componenti Core */}
+                <div className="md:col-span-7 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 shadow-2xl relative overflow-hidden group flex flex-col gap-12" id="orto-block-components">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* Top Section: Card Pianta + Searchbars + Buttons + Controls */}
+                  <div className="flex flex-col lg:flex-row justify-center gap-8 lg:gap-10 relative z-10 w-full items-start">
+
+                    {/* Left Column */}
+                    <div className="flex flex-col gap-6 w-full lg:w-auto lg:min-w-[320px] xl:min-w-[380px]">
+                      <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+
+                      <div className="mt-8">
+                        <img src="/design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                       </div>
                     </div>
 
-                    {/* Typography */}
-                    <div className="flex flex-col gap-3">
-                      <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Typography Spec</h4>
-                      <div className={`p-4 rounded-xl border ${isAetheris ? 'bg-[#131514] border-white/5' : 'bg-neutral-950/60 border-white/5'
-                        }`}>
-                        <span className={`text-sm font-raleway block mb-1 ${isAetheris ? 'text-neutral-500' : 'text-white/30'}`}>Font Pairings</span>
-                        <span className={`text-sm leading-relaxed font-raleway block ${isAetheris ? 'text-white' : 'text-white'}`}>
-                          {getLocalizedField('typography')}
-                        </span>
+                    {/* Right Column */}
+                    <div className="flex flex-col gap-8 items-start w-full lg:w-auto">
+                      {/* Pianta Card - reduced size */}
+                      <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
+
+                      {/* Tags */}
+                      <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+
+                      {/* Language and Scopri Pianta */}
+                      <div className="flex items-center gap-8">
+                        <img src="/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
+                        <img src="/design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src = '/design_system/button_scopri_pianta.png'} />
+                      </div>
+
+                      {/* Percorso */}
+                      <div className="mt-4 -ml-12 lg:-ml-20 xl:-ml-36">
+                        <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                       </div>
                     </div>
                   </div>
+
+                  {/* Bottom Row: Pillole Categorie Mappa */}
+                  <div className="w-full relative z-10 pt-8 lg:pt-12 border-t border-white/5 mt-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-4 w-full mx-auto">
+                      {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
+                        <img
+                          key={variant}
+                          src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
+                          alt={`Categoria ${variant}`}
+                          className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              )}
+
+                {/* Bottom Right: Body and H1 */}
+                <div className="md:col-span-5 flex flex-col gap-6">
+                  {/* Body Text Demo */}
+                  <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-10 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
+                    <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="flex flex-col gap-2 relative z-10">
+                      <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">Body / Raleway, Regular, 28px</span>
+                      <p style={{ fontFamily: "'Raleway', sans-serif" }} className="text-[#EBEBEB] text-xl md:text-2xl leading-relaxed font-light">
+                        {lang === 'it' ? (
+                          "Esplora la ricca biodiversità della nostra collezione di piante tropicali, progettata per stupire e ispirare."
+                        ) : (
+                          "Explore the rich biodiversity of our tropical plant collection, designed to amaze and inspire."
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* H1 Demo */}
+                  <div className="rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-center items-start shadow-2xl relative overflow-hidden group flex-1">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="flex flex-col gap-2 relative z-10 w-full">
+                      <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">H1 / Raleway, Semibold, 62px</span>
+                      <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
+                        {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
             </div>
+          ) : (
+            <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
+              <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                {/* Palette */}
+                <div className="flex flex-col gap-3">
+                  <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Color Palette</h4>
+                  <div className="flex flex-col gap-2">
+                    {project.colorPalette?.map((color, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleCopyHex(color.hex)}
+                        className={`flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer group text-left w-full ${isAetheris
+                          ? 'bg-[#131514] border-white/5 hover:border-[#2E8B3A]/40 hover:bg-[#2E8B3A]/10'
+                          : 'bg-neutral-950/60 border-white/5 hover:border-white/20 hover:bg-neutral-900/60'
+                          }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-8 h-8 rounded-lg border shrink-0 ${isAetheris ? 'border-white/10' : 'border-white/10'}`}
+                            style={{ backgroundColor: color.hex }}
+                          />
+                          <div>
+                            <span className={`text-sm font-bold block ${isAetheris ? 'text-white' : 'text-white'}`}>{color.name}</span>
+                            <span className={`text-sm font-raleway block ${isAetheris ? 'text-neutral-400' : 'text-white/40'}`}>{color.hex}</span>
+                          </div>
+                        </div>
+                        <div className={`text-sm font-raleway transition-colors shrink-0 ${isAetheris
+                          ? 'text-neutral-400 group-hover:text-emerald-400'
+                          : 'text-white/30 group-hover:text-[#E8302A]'
+                          }`}>
+                          {copiedColor === color.hex ? 'Copied!' : 'Copy Hex'}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Typography */}
+                <div className="flex flex-col gap-3">
+                  <h4 className={`text-sm uppercase tracking-widest font-raleway ${isAetheris ? 'text-neutral-400' : 'text-white/60'}`}>Typography Spec</h4>
+                  <div className={`p-4 rounded-xl border ${isAetheris ? 'bg-[#131514] border-white/5' : 'bg-neutral-950/60 border-white/5'
+                    }`}>
+                    <span className={`text-sm font-raleway block mb-1 ${isAetheris ? 'text-neutral-500' : 'text-white/30'}`}>Font Pairings</span>
+                    <span className={`text-sm leading-relaxed font-raleway block ${isAetheris ? 'text-white' : 'text-white'}`}>
+                      {getLocalizedField('typography')}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
 
 
 
@@ -2171,144 +2194,144 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         </div>
 
         <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8 md:pt-12">
-              {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
-              {isAetheris && (
-                <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-16 w-full" id="orto-interactive-prototypes-section">
-                  
-                  {/* Left Column: Prototypes */}
-                  <div className="lg:col-span-5 flex flex-col gap-6 items-center w-full">
-                    {/* Menu Orizzontale Capsule */}
-                    <div className="flex justify-center w-full">
-                      <div className="flex bg-[#131514] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none">
-                        <button
-                          onClick={() => setActiveProtoTab('mobile')}
-                          className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
-                            }`}
-                        >
-                          {activeProtoTab === 'mobile' && (
-                            <motion.div
-                              layoutId="active-proto-tab-bg"
-                              className="absolute inset-0 bg-[#068B35] rounded-xl"
-                              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            />
-                          )}
-                          <span className="relative flex items-center gap-1.5">
-                            <Smartphone className="w-3.5 h-3.5" />
-                            {lang === 'it' ? 'Versione Mobile' : 'Mobile Version'}
-                          </span>
-                        </button>
+          {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
+          {isAetheris && (
+            <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-16 w-full" id="orto-interactive-prototypes-section">
 
-                        <button
-                          onClick={() => setActiveProtoTab('totem')}
-                          className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
-                            }`}
-                        >
-                          {activeProtoTab === 'totem' && (
-                            <motion.div
-                              layoutId="active-proto-tab-bg"
-                              className="absolute inset-0 bg-[#068B35] rounded-xl"
-                              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            />
-                          )}
-                          <span className="relative flex items-center gap-1.5">
-                            <Compass className="w-3.5 h-3.5" />
-                            {lang === 'it' ? 'Versione Totem' : 'Totem Version'}
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Prototype Containers */}
-                    <div className="relative w-full h-[550px] sm:h-[700px] lg:h-[800px] mt-2 flex justify-center items-center">
-                      <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ 
-                          opacity: activeProtoTab === 'totem' ? 1 : 0, 
-                          y: activeProtoTab === 'totem' ? 0 : 15 
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute inset-0 w-full h-full flex justify-center items-center"
-                        style={{ 
-                          pointerEvents: activeProtoTab === 'totem' ? 'auto' : 'none',
-                          zIndex: activeProtoTab === 'totem' ? 10 : 1 
-                        }}
-                      >
-                        <iframe
-                          id="totem-prototype-iframe"
-                          style={{ border: 'none', width: '100%', height: '100%' }}
-                          width="100%"
-                          height="100%"
-                          src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
-                          allowFullScreen
+              {/* Left Column: Prototypes */}
+              <div className="lg:col-span-5 flex flex-col gap-6 items-center w-full">
+                {/* Menu Orizzontale Capsule */}
+                <div className="flex justify-center w-full">
+                  <div className="flex bg-[#131514] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none">
+                    <button
+                      onClick={() => setActiveProtoTab('mobile')}
+                      className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                        }`}
+                    >
+                      {activeProtoTab === 'mobile' && (
+                        <motion.div
+                          layoutId="active-proto-tab-bg"
+                          className="absolute inset-0 bg-[#068B35] rounded-xl"
+                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         />
-                      </motion.div>
+                      )}
+                      <span className="relative flex items-center gap-1.5">
+                        <Smartphone className="w-3.5 h-3.5" />
+                        {lang === 'it' ? 'Versione Mobile' : 'Mobile Version'}
+                      </span>
+                    </button>
 
-                      <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ 
-                          opacity: activeProtoTab === 'mobile' ? 1 : 0, 
-                          y: activeProtoTab === 'mobile' ? 0 : 15 
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute inset-0 w-full h-full flex justify-center items-center"
-                        style={{ 
-                          pointerEvents: activeProtoTab === 'mobile' ? 'auto' : 'none',
-                          zIndex: activeProtoTab === 'mobile' ? 10 : 1 
-                        }}
-                      >
-                        <iframe
-                          id="mobile-prototype-iframe"
-                          style={{ border: 'none', width: '100%', height: '100%' }}
-                          width="100%"
-                          height="100%"
-                          src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1&hide-ui=1&embed-host=share&bg-color=050505"
-                          allowFullScreen
+                    <button
+                      onClick={() => setActiveProtoTab('totem')}
+                      className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                        }`}
+                    >
+                      {activeProtoTab === 'totem' && (
+                        <motion.div
+                          layoutId="active-proto-tab-bg"
+                          className="absolute inset-0 bg-[#068B35] rounded-xl"
+                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                         />
-                      </motion.div>
-                    </div>
+                      )}
+                      <span className="relative flex items-center gap-1.5">
+                        <Compass className="w-3.5 h-3.5" />
+                        {lang === 'it' ? 'Versione Totem' : 'Totem Version'}
+                      </span>
+                    </button>
                   </div>
-
-                  {/* Right Column: Text & Button */}
-                  <div className="lg:col-span-7 flex flex-col justify-center items-start gap-6 lg:gap-8 px-4 lg:px-8">
-                    <h2 className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight text-[#068B35] font-raleway leading-none">
-                      Provalo
-                    </h2>
-                    <p className="text-2xl md:text-3xl lg:text-4xl text-white font-medium leading-[1.3] max-w-xl font-raleway">
-                      {lang === 'it' 
-                        ? "Puoi provare il prototipo dall'anteprima a sinistra o cliccando sul pulsante qui sotto"
-                        : "You can test the prototype from the preview on the left or by clicking the button below"}
-                    </p>
-                    <div className="mt-8 flex flex-col gap-8 w-full max-w-sm">
-                      <a href="https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1" target="_blank" rel="noopener noreferrer" className="block w-fit group">
-                        <motion.button 
-                          animate={{ 
-                            boxShadow: [
-                              "0px 0px 15px rgba(6,139,53,0.1)", 
-                              "0px 0px 35px rgba(6,139,53,0.4)", 
-                              "0px 0px 15px rgba(6,139,53,0.1)"
-                            ],
-                            scale: [1, 1.02, 1]
-                          }}
-                          transition={{ 
-                            duration: 2.5, 
-                            repeat: Infinity, 
-                            ease: "easeInOut" 
-                          }}
-                          className="relative flex items-center gap-3 px-8 py-4 bg-[#068B35] hover:bg-[#057A2E] text-white rounded-full transition-colors duration-300 overflow-hidden"
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                          <span className="relative font-raleway font-semibold tracking-wide text-sm md:text-base">
-                            {lang === 'it' ? "Prova il Prototipo" : "Try the Prototype"}
-                          </span>
-                          <ArrowUpRight className="relative w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
-                        </motion.button>
-                      </a>
-                    </div>
-                  </div>
-
                 </div>
-              )}
+
+                {/* Prototype Containers */}
+                <div className="relative w-full h-[550px] sm:h-[700px] lg:h-[800px] mt-2 flex justify-center items-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{
+                      opacity: activeProtoTab === 'totem' ? 1 : 0,
+                      y: activeProtoTab === 'totem' ? 0 : 15
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 w-full h-full flex justify-center items-center"
+                    style={{
+                      pointerEvents: activeProtoTab === 'totem' ? 'auto' : 'none',
+                      zIndex: activeProtoTab === 'totem' ? 10 : 1
+                    }}
+                  >
+                    <iframe
+                      id="totem-prototype-iframe"
+                      style={{ border: 'none', width: '100%', height: '100%' }}
+                      width="100%"
+                      height="100%"
+                      src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
+                      allowFullScreen
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{
+                      opacity: activeProtoTab === 'mobile' ? 1 : 0,
+                      y: activeProtoTab === 'mobile' ? 0 : 15
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 w-full h-full flex justify-center items-center"
+                    style={{
+                      pointerEvents: activeProtoTab === 'mobile' ? 'auto' : 'none',
+                      zIndex: activeProtoTab === 'mobile' ? 10 : 1
+                    }}
+                  >
+                    <iframe
+                      id="mobile-prototype-iframe"
+                      style={{ border: 'none', width: '100%', height: '100%' }}
+                      width="100%"
+                      height="100%"
+                      src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1&hide-ui=1&embed-host=share&bg-color=050505"
+                      allowFullScreen
+                    />
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Right Column: Text & Button */}
+              <div className="lg:col-span-7 flex flex-col justify-center items-start gap-6 lg:gap-8 px-4 lg:px-8">
+                <h2 className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight text-[#068B35] font-raleway leading-none">
+                  Provalo
+                </h2>
+                <p className="text-2xl md:text-3xl lg:text-4xl text-white font-medium leading-[1.3] max-w-xl font-raleway">
+                  {lang === 'it'
+                    ? "Puoi provare il prototipo dall'anteprima a sinistra o cliccando sul pulsante qui sotto"
+                    : "You can test the prototype from the preview on the left or by clicking the button below"}
+                </p>
+                <div className="mt-8 flex flex-col gap-8 w-full max-w-sm">
+                  <a href="https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1" target="_blank" rel="noopener noreferrer" className="block w-fit group">
+                    <motion.button
+                      animate={{
+                        boxShadow: [
+                          "0px 0px 15px rgba(6,139,53,0.1)",
+                          "0px 0px 35px rgba(6,139,53,0.4)",
+                          "0px 0px 15px rgba(6,139,53,0.1)"
+                        ],
+                        scale: [1, 1.02, 1]
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="relative flex items-center gap-3 px-8 py-4 bg-[#068B35] hover:bg-[#057A2E] text-white rounded-full transition-colors duration-300 overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                      <span className="relative font-raleway font-semibold tracking-wide text-sm md:text-base">
+                        {lang === 'it' ? "Prova il Prototipo" : "Try the Prototype"}
+                      </span>
+                      <ArrowUpRight className="relative w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
+                    </motion.button>
+                  </a>
+                </div>
+              </div>
+
             </div>
+          )}
+        </div>
 
 
         <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full">
