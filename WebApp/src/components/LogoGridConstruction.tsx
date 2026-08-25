@@ -46,7 +46,7 @@ export default function LogoGridConstruction() {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden my-12 py-12"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-12"
     >
       <div className="relative w-[60%] max-w-[500px] flex items-center justify-center">
         

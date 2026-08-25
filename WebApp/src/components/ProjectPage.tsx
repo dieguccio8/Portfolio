@@ -44,7 +44,7 @@ import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from './ScrollProgress';
 import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
-import ThreeDMarquee from './ui/3d-marquee';
+
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
 import { Button3D } from './ui/3d-button';
@@ -273,14 +273,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {/* Orto Botanico Logo Card */}
         {isAetheris && (
           <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <img src="/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-10 md:h-12 w-auto object-contain" />
+            <img src="/Images/Project 01/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-10 md:h-12 w-auto object-contain" />
           </div>
         )}
 
         {/* Kinetics Logo Card */}
         {isKinetics && (
           <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <img src="/logo_uss.png" alt="Urban StreetArt Sicily Logo" className="h-10 md:h-12 w-auto object-contain rounded-md" />
+            <img src="/Images/Project 02/Logo/logo_uss.png" alt="Urban StreetArt Sicily Logo" className="h-10 md:h-12 w-auto object-contain rounded-md" />
           </div>
         )}
 
@@ -309,7 +309,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   title={lang === 'it' ? 'Torna alla Home' : 'Back to Home'}
                 >
                   <img
-                    src="/logo_diego_cavallaro.png"
+                    src="/Images/Home/logo_diego_cavallaro.png"
                     className="w-8 h-8 object-contain transition-transform duration-300 group-hover/logo:scale-110"
                     alt="Diego Cavallaro Logo"
                   />
@@ -530,7 +530,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             <div className="absolute inset-0 z-0">
               {isAetheris ? (
                 <video
-                  src="/hero_video.mov"
+                  src="/Video/Project 01/hero_video.mov"
                   autoPlay
                   loop
                   muted
@@ -613,7 +613,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
         {/* Nuova sezione: Logo Prima/Dopo o Problem Statement */}
         {isKinetics && (
-          <section className="w-full relative z-20 flex flex-col items-center justify-center pt-32 sm:pt-40 pb-20 px-6 sm:px-12 md:px-16 max-w-[1600px] mx-auto mb-8">
+          <section className="w-full relative z-20 flex flex-col items-center justify-center min-h-screen py-20 px-6 sm:px-12 md:px-16 max-w-[1600px] mx-auto">
             <div className="w-full max-w-5xl p-10 md:p-16 lg:p-0 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
               <div className="flex flex-col items-center justify-center gap-8">
                 <LogoMorph />
@@ -2188,11 +2188,6 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         </div>
 
 
-
-        {/* 3D Marquee Section */}
-        <div className="pt-16 pb-8 md:pb-12 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
-          <ThreeDMarquee />
-        </div>
 
         <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8 md:pt-12">
           {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}

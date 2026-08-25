@@ -4,10 +4,11 @@ import { Compass, AlertTriangle, Check, ArrowRight, Star, MapPin, Clock, FileQue
 import { StickyCard002 } from './ui/sticky-card';
 import LogoGridConstruction from './LogoGridConstruction';
 import { DesignSystemSection } from './DesignSystemSection';
-import HighlightCard from './ui/highlight-card';
 import { GridVignetteBackground } from './ui/vignette-grid-background';
 import AuroraBackground from './ui/aurora-background';
 import IphoneMockup3D from './IphoneMockup3D';
+import { UrbanStreetArtAppMockup } from './UrbanStreetArtAppMockup';
+import { UrbanStreetArtMapSection } from './UrbanStreetArtMapSection';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -136,11 +137,11 @@ const PopOutImage = ({ className }: { className?: string }) => (
   <div className={`relative shrink-0 group/img cursor-pointer ${className}`}>
     {/* Base Circle with hidden overflow for the bottom */}
     <div className="absolute inset-0 rounded-full border-2 sm:border-[3px] border-[#FCD306] bg-[#1A1A1A] overflow-hidden shadow-[0_0_50px_rgba(252,211,6,0.15)]">
-      <img src="/mirella_no_bg.png" alt="Mirella Base" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom transition-transform duration-700 origin-bottom group-hover/img:scale-110" />
+      <img src="/Images/Project 01/mirella_no_bg.png" alt="Mirella Base" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom transition-transform duration-700 origin-bottom group-hover/img:scale-110" />
     </div>
     {/* Top Half popping out - exact same positioning but clipped */}
     <img
-      src="/mirella_no_bg.png"
+      src="/Images/Project 01/mirella_no_bg.png"
       alt="Mirella Pop Out"
       className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom z-10 pointer-events-none drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-transform duration-700 origin-bottom group-hover/img:scale-110"
       style={{ clipPath: 'inset(0 0 50% 0)' }}
@@ -244,7 +245,7 @@ export default function KineticsLowerSections({
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
       {/* YELLOW OBJECTIVE SECTION */}
-      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#FCD306] z-10 mt-12 -mb-4 sm:-mb-8 py-24 sm:py-32 md:py-40 flex flex-col items-center justify-center text-[#111111] px-6 overflow-hidden">
+      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#FCD306] z-10 mt-12 -mb-4 sm:-mb-8 min-h-screen py-20 flex flex-col items-center justify-center text-[#111111] px-6 overflow-hidden">
         
         {/* Decorative Triangles (Strictly following original logo mark aspect ratio and orientation) */}
         <svg viewBox="0 0 230 208" className="absolute top-0 right-0 w-64 md:w-[600px] h-auto opacity-[0.05] translate-x-1/4 pointer-events-none">
@@ -271,7 +272,7 @@ export default function KineticsLowerSections({
       </div>
 
       {/* 02 / LOGO CONSTRUCTION GRID */}
-      <div className="relative z-20 w-full my-4 md:my-8">
+      <div className="relative z-20 w-full">
         <LogoGridConstruction />
       </div>
 
@@ -291,30 +292,21 @@ export default function KineticsLowerSections({
           <img
             src="/Images/Project 02/Mockup/mockup_totebag.jpg"
             alt="Urban StreetArt Sicily Mockup Tote Bag"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 2 ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 w-full h-full object-cover object-[center_75%] transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 2 ? 'opacity-100' : 'opacity-0'}`}
           />
         </div>
       </div>
 
       {/* DESIGN SYSTEM SECTION */}
-      <DesignSystemSection />
-
-      {/* EMPTY PLACEHOLDER SECTION */}
-      <div className="w-full h-[80vh] flex items-center justify-center">
-        {/* Spazio vuoto da riempire */}
+      <div className="-mt-24 sm:-mt-32 w-full">
+        <DesignSystemSection />
       </div>
 
-      {/* NEW StickyCard002 Gallery Instead of Single Image */}
-      <div className="relative z-10 w-full shrink-0 block">
-        <StickyCard002
-          cards={[
-            { id: 1, image: "/mockup_totem_3.jpg", alt: "Totem Mockup 3" },
-            { id: 2, image: "/mockup_totem.jpg", alt: "Totem Mockup" },
-            { id: 3, image: "/mockup_cartello_zone_2.jpeg", alt: "Cartello Zone Mockup" },
-            { id: 4, image: "/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
-          ]}
-        />
-      </div>
+      {/* URBAN STREETART APP MOCKUP */}
+      <UrbanStreetArtAppMockup />
+
+      {/* DYNAMIC MAP SECTION */}
+      <UrbanStreetArtMapSection />
     </div>
   );
 }

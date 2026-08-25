@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export const DesignSystemSection: React.FC = () => {
   return (
-    <section className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#111111] text-white py-24 sm:py-32 md:py-48 px-6 md:px-12 lg:px-24 overflow-hidden border-t border-white/10 mt-12 md:mt-24">
+    <section className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#111111] text-white py-24 sm:py-32 md:py-48 px-6 md:px-12 lg:px-24 overflow-hidden border-t border-white/10">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#FCD306] opacity-[0.02] blur-[150px] pointer-events-none rounded-full translate-x-1/2 -translate-y-1/2" />
       

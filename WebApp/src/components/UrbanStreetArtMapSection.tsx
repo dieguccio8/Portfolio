@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useMemo, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Html, Line, useTexture } from '@react-three/drei';
@@ -6,9 +6,9 @@ import * as THREE from 'three';
 import { createNoise2D } from 'simplex-noise';
 
 const REGIONS = {
-  Lombardy: { color: '#EE4256', pos: [-1.5, 1.5, -3.5] as [number, number, number], image: '/Images/Project 02/StreetArt/lombardy.jpg' },
-  Tuscany: { color: '#A1D884', pos: [-0.5, 1.5, -1.0] as [number, number, number], image: '/Images/Project 02/StreetArt/tuscany.jpg' },
-  Campania: { color: '#1FA9E5', pos: [2.5, 1.5, 3.5] as [number, number, number], image: '/Images/Project 02/StreetArt/campania.jpg' },
+  Lombardy: { color: '#EE4256', pos: [-1.5, 1.5, -3.5] as [number, number, number], image: '/Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/lombardy.jpg' },
+  Tuscany: { color: '#A1D884', pos: [-0.5, 1.5, -1.0] as [number, number, number], image: '/Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/tuscany.jpg' },
+  Campania: { color: '#1FA9E5', pos: [2.5, 1.5, 3.5] as [number, number, number], image: '/Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/campania.jpg' },
 };
 
 type RegionKey = keyof typeof REGIONS;
@@ -37,7 +37,7 @@ const DynamicLogo = ({ region, onClick }: { region: RegionKey, onClick: () => vo
 
 // Procedural 3D Terrain representing Italy
 const Terrain = () => {
-  const alphaMap = useTexture('/images/italy_alpha.svg');
+  const alphaMap = useTexture('/Images/Project 02/italy_alpha.svg');
   const noise2D = useMemo(() => createNoise2D(), []);
 
   const geometry = useMemo(() => {
@@ -295,7 +295,9 @@ export const UrbanStreetArtMapSection: React.FC = () => {
       <div className="absolute inset-0 w-full h-full z-0 cursor-move">
         <Canvas camera={{ position: [0, 6, 8], fov: 45 }}>
           <ambientLight intensity={0.5} />
-          <MapScene region={region} onRegionSelect={handleMarkerClick} />
+          <Suspense fallback={null}>
+            <MapScene region={region} onRegionSelect={handleMarkerClick} />
+          </Suspense>
         </Canvas>
       </div>
 
