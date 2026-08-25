@@ -539,7 +539,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 />
               ) : isKinetics ? (
                 <video
-                  src="https://assets.21st.dev/ascii-recipes/videos/user_3FUPLeY5ayOz7rm8Knytc8YH56C/c5082e47-b010-45cf-8007-9f05cbdf07ae.mp4"
+                  src="/Video/Project 02/hero_video_02_wide.mp4"
                   autoPlay
                   loop
                   muted
@@ -2132,8 +2132,9 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
             </div>
           ) : (
-            <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
-              <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
+            !isKinetics && (
+              <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
+                <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#2E8B3A] font-bold' : 'text-[#E8302A]'}`}>{isAetheris ? '06 / Design System Spec' : '04 / Design System Spec'}</span>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {/* Palette */}
@@ -2183,7 +2184,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 </div>
               </div>
             </div>
-          )}
+          ))}
         </div>
 
 
