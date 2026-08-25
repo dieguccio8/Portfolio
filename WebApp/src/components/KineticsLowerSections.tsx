@@ -307,6 +307,15 @@ export default function KineticsLowerSections({
 
       {/* DYNAMIC MAP SECTION */}
       <UrbanStreetArtMapSection />
+
+      {/* MAGAZINE MOCKUP */}
+      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh]">
+        <img 
+          src="/Images/Project 02/Mockup/mockup_magazine.jpg" 
+          alt="Urban StreetArt Sicily Magazine Mockup" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
     </div>
   );
 }

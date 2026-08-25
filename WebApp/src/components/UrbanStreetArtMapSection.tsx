@@ -285,6 +285,9 @@ export const UrbanStreetArtMapSection: React.FC = () => {
         />
       ))}
 
+      {/* Bottom Fade to blend image with background */}
+      <div className="absolute bottom-0 left-0 w-full h-32 md:h-64 bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/80 to-transparent z-0 pointer-events-none" />
+
       {/* Background Glow */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[150px] opacity-10 pointer-events-none transition-colors duration-1000 z-0"
