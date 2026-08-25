@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Preparazione dell'ambiente su Mac in corso..."
 cd "$(dirname "$0")"
-cd Code
+cd WebApp
 
 # Installa i pacchetti se necessario
 npm install

@@ -4,7 +4,7 @@ echo Avvio del progetto in corso...
 echo ==========================================
 
 :: 1. Entra nella cartella dove risiede il codice del progetto
-cd Code
+cd WebApp
 
 :: 2. Controlla se le dipendenze sono gia state installate. 
 :: Se manca la cartella node_modules, le installa automaticamente.
