@@ -28,7 +28,9 @@ import {
   Image,
   MessageSquare,
   Menu,
-  X
+  X,
+  ChevronUp,
+  ChevronDown
 } from 'lucide-react';
 import { Project } from '../types';
 import UserJourney from './UserJourney';
@@ -178,6 +180,10 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
   // General States
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const currentIndex = allProjects.findIndex(p => p.id === project.id);
+  const prevProject = allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length];
+  const nextProject = allProjects[(currentIndex + 1) % allProjects.length];
   const [activeResearchTab, setActiveResearchTab] = useState<'desk' | 'sondaggi' | 'interviste'>('desk');
   const [activeProtoTab, setActiveProtoTab] = useState<'mobile' | 'totem'>('mobile');
   const [copiedLink, setCopiedLink] = useState(false);
@@ -292,76 +298,90 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 bottom-0 w-[80vw] max-w-sm bg-[#050505]/95 backdrop-blur-3xl z-[150] border-r border-white/10 flex flex-col p-8 shadow-[30px_0_50px_rgba(0,0,0,0.5)]"
+              className="fixed top-0 left-0 bottom-0 w-[80vw] max-w-sm bg-[#050505]/95 backdrop-blur-3xl z-[150] border-r border-white/10 flex flex-col p-8 shadow-[30px_0_50px_rgba(0,0,0,0.5)] overflow-y-auto"
             >
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50"
               >
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              <div className="flex flex-col gap-12 mt-12 h-full">
-                {/* Logo / Back to Home */}
+              <div className="flex flex-col items-center justify-center gap-10 w-full h-full my-auto pt-8 pb-4">
+                {/* TOP: HOME */}
                 <div
                   onClick={() => { setIsMenuOpen(false); onClose(); }}
-                  className="flex items-center gap-3 group/logo cursor-pointer"
-                  title={lang === 'it' ? 'Torna alla Home' : 'Back to Home'}
+                  className="cursor-pointer group flex flex-col items-center hover:scale-105 transition-transform duration-300 mb-12"
+                  title="Torna alla Home"
                 >
-                  <img
-                    src="/Images/Home/logo_diego_cavallaro.png"
-                    className="w-8 h-8 object-contain transition-transform duration-300 group-hover/logo:scale-110"
-                    alt="Diego Cavallaro Logo"
-                  />
-                  <span className="text-white font-sans font-bold tracking-tight text-lg uppercase group-hover/logo:text-[#E8302A] transition-colors">
-                    Diego Cavallaro
-                  </span>
+                  <img src="/Images/Home/logo_diego_cavallaro.png" alt="Home" className="w-8 h-8 object-contain" />
                 </div>
 
-                {/* Project Title */}
-                <div className="flex flex-col gap-2">
-                  <span className="text-white/40 font-raleway text-xs uppercase tracking-widest">
-                    {lang === 'it' ? 'Progetto Attuale' : 'Current Project'}
-                  </span>
-                  <span className="text-white font-semibold font-raleway tracking-wider text-xl">
-                    {project.title}
-                  </span>
-                </div>
-
-                <div className="flex-grow" />
-
-                {/* Actions (Language & Contact) */}
-                <div className="flex flex-col gap-6">
-                  {setLang && (
-                    <div className="flex items-center gap-4">
-                      <span className="text-white/40 font-raleway text-xs uppercase tracking-widest">
-                        {lang === 'it' ? 'Lingua' : 'Language'}
-                      </span>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => { setLang('it'); setIsMenuOpen(false); }}
-                          className={`px-4 py-2 rounded-full font-raleway text-sm font-bold transition-colors ${lang === 'it' ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}
-                        >
-                          IT
-                        </button>
-                        <button
-                          onClick={() => { setLang('en'); setIsMenuOpen(false); }}
-                          className={`px-4 py-2 rounded-full font-raleway text-sm font-bold transition-colors ${lang === 'en' ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}
-                        >
-                          EN
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=diegocavallaro8@gmail.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`w-full text-white px-6 py-4 rounded-xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm uppercase text-center ${isAetheris ? 'bg-[#068B35] hover:bg-[#057A2E] shadow-[0_0_15px_rgba(6,139,53,0.3)]' : 'bg-[#E8302A] hover:bg-[#c9221d] shadow-[0_0_15px_rgba(232,48,42,0.3)]'}`}
+                {/* MIDDLE: PROJECTS CAROUSEL LIST */}
+                <div className="flex flex-col items-center gap-8 w-full max-w-sm relative">
+                  <div 
+                    className="p-2 cursor-pointer group"
+                    onClick={() => { setIsMenuOpen(false); onNavigateToProject(prevProject); }}
                   >
-                    {isAetheris ? (lang === 'it' ? 'Contattami' : 'Contact me') : (lang === 'it' ? 'Lavoriamo' : "Let's work")}
-                  </a>
+                    <ChevronUp className="w-8 h-8 text-white/30 group-hover:text-white transition-colors" strokeWidth={1.5} />
+                  </div>
+                  
+                  {/* Orto Botanico */}
+                  <div 
+                    onClick={() => { setIsMenuOpen(false); onNavigateToProject(allProjects[0]); }}
+                    className={`cursor-pointer transition-all duration-500 hover:scale-105 flex justify-center items-center h-14 w-full ${project.id === 'aetheris' ? 'opacity-100 scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'opacity-20 hover:opacity-100 grayscale hover:grayscale-0'}`}
+                  >
+                    <img src="/Images/Project 01/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico" className="max-h-full max-w-[180px] object-contain" />
+                  </div>
+
+                  {/* Urban StreetArt Sicily */}
+                  <div 
+                    onClick={() => { setIsMenuOpen(false); onNavigateToProject(allProjects[1]); }}
+                    className={`cursor-pointer transition-all duration-500 hover:scale-105 flex justify-center items-center h-14 w-full ${project.id === 'kinetics' ? 'opacity-100 scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'opacity-20 hover:opacity-100 grayscale hover:grayscale-0'}`}
+                  >
+                    <img src="/Images/Project 02/Logo/logo_uss.png" alt="Urban StreetArt Sicily" className="max-h-full max-w-[180px] object-contain rounded-md" />
+                  </div>
+
+                  {/* Italo Treni / Chronos */}
+                  <div 
+                    onClick={() => { setIsMenuOpen(false); onNavigateToProject(allProjects[2]); }}
+                    className={`cursor-pointer transition-all duration-500 hover:scale-105 flex justify-center items-center h-14 w-full ${project.id === 'chronos' ? 'opacity-100 scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'opacity-20 hover:opacity-100 grayscale hover:grayscale-0'}`}
+                  >
+                    <span className="text-xl sm:text-2xl font-black tracking-[0.2em] uppercase font-sans text-white text-center">Italo<br/><span className="text-lg sm:text-xl text-[#9E1C1F]">Treni</span></span>
+                  </div>
+
+                  <div 
+                    className="p-2 cursor-pointer group"
+                    onClick={() => { setIsMenuOpen(false); onNavigateToProject(nextProject); }}
+                  >
+                    <ChevronDown className="w-8 h-8 text-white/30 group-hover:text-white transition-colors" strokeWidth={1.5} />
+                  </div>
+                </div>
+
+                {/* BOTTOM: CONTATTI and LANG */}
+                <div className="flex flex-col items-center gap-4 mt-auto w-full px-2">
+                  <button
+                    onClick={() => { 
+                      setIsMenuOpen(false); 
+                      onClose(); 
+                      setTimeout(() => document.getElementById('direct-contact-section')?.scrollIntoView({behavior: 'smooth'}), 300); 
+                    }}
+                    className="w-full py-3.5 bg-[#E8302A] hover:bg-[#c9221d] rounded-xl text-white font-bold text-center transition-all text-sm uppercase tracking-wider shadow-lg"
+                  >
+                    {lang === 'it' ? 'Contattami' : 'Contact me'}
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      if (setLang) {
+                        setLang(lang === 'it' ? 'en' : 'it');
+                        setIsMenuOpen(false);
+                      }
+                    }}
+                    className="w-full py-3.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-white font-bold text-center transition-all text-sm uppercase tracking-wider mt-2"
+                  >
+                    {lang === 'it' ? 'Lingua: IT' : 'Language: EN'}
+                  </button>
                 </div>
               </div>
             </motion.div>
