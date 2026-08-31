@@ -279,14 +279,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {/* Orto Botanico Logo Card */}
         {isAetheris && (
           <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <img src="/Images/Project 01/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-10 md:h-12 w-auto object-contain" />
+            <img src="./Images/Project 01/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico Logo" className="h-10 md:h-12 w-auto object-contain" />
           </div>
         )}
 
         {/* Kinetics Logo Card */}
         {isKinetics && (
           <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <img src="/Images/Project 02/Logo/logo_uss.png" alt="Urban StreetArt Sicily Logo" className="h-10 md:h-12 w-auto object-contain rounded-md" />
+            <img src="./Images/Project 02/Logo/logo_uss.png" alt="Urban StreetArt Sicily Logo" className="h-10 md:h-12 w-auto object-contain rounded-md" />
           </div>
         )}
 
@@ -314,7 +314,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   className="cursor-pointer group flex flex-col items-center hover:scale-105 transition-transform duration-300 mb-12"
                   title="Torna alla Home"
                 >
-                  <img src="/Images/Home/logo_diego_cavallaro.png" alt="Home" className="w-8 h-8 object-contain" />
+                  <img src="./Images/Home/logo_diego_cavallaro.png" alt="Home" className="w-8 h-8 object-contain" />
                 </div>
 
                 {/* MIDDLE: PROJECTS CAROUSEL LIST */}
@@ -331,7 +331,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     onClick={() => { setIsMenuOpen(false); onNavigateToProject(allProjects[0]); }}
                     className={`cursor-pointer transition-all duration-500 hover:scale-105 flex justify-center items-center h-14 w-full ${project.id === 'aetheris' ? 'opacity-100 scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'opacity-20 hover:opacity-100 grayscale hover:grayscale-0'}`}
                   >
-                    <img src="/Images/Project 01/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico" className="max-h-full max-w-[180px] object-contain" />
+                    <img src="./Images/Project 01/logo_orto_botanico_testo_bianco.png" alt="Orto Botanico" className="max-h-full max-w-[180px] object-contain" />
                   </div>
 
                   {/* Urban StreetArt Sicily */}
@@ -339,7 +339,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     onClick={() => { setIsMenuOpen(false); onNavigateToProject(allProjects[1]); }}
                     className={`cursor-pointer transition-all duration-500 hover:scale-105 flex justify-center items-center h-14 w-full ${project.id === 'kinetics' ? 'opacity-100 scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'opacity-20 hover:opacity-100 grayscale hover:grayscale-0'}`}
                   >
-                    <img src="/Images/Project 02/Logo/logo_uss.png" alt="Urban StreetArt Sicily" className="max-h-full max-w-[180px] object-contain rounded-md" />
+                    <img src="./Images/Project 02/Logo/logo_uss.png" alt="Urban StreetArt Sicily" className="max-h-full max-w-[180px] object-contain rounded-md" />
                   </div>
 
                   {/* Italo Treni / Chronos */}
@@ -550,7 +550,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             <div className="absolute inset-0 z-0">
               {isAetheris ? (
                 <video
-                  src="/Video/Project 01/hero_video.mov"
+                  src="./Video/Project 01/hero_video.mov"
                   autoPlay
                   loop
                   muted
@@ -559,7 +559,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 />
               ) : isKinetics ? (
                 <video
-                  src="/Video/Project 02/hero_video_02_wide.mp4"
+                  src="./Video/Project 02/hero_video_02_wide.mp4"
                   autoPlay
                   loop
                   muted
@@ -2073,32 +2073,32 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     {/* Left Column */}
                     <div className="flex flex-col gap-6 w-full lg:w-auto lg:min-w-[320px] xl:min-w-[380px]">
-                      <img src="/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                      <img src="/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                      <img src="/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="./design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="./design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="./design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
 
                       <div className="mt-8">
-                        <img src="/design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                        <img src="./design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                       </div>
                     </div>
 
                     {/* Right Column */}
                     <div className="flex flex-col gap-8 items-start w-full lg:w-auto">
                       {/* Pianta Card - reduced size */}
-                      <img src="/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
+                      <img src="./design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
 
                       {/* Tags */}
-                      <img src="/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                      <img src="./design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
 
                       {/* Language and Scopri Pianta */}
                       <div className="flex items-center gap-8">
-                        <img src="/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
-                        <img src="/design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src = '/design_system/button_scopri_pianta.png'} />
+                        <img src="./design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
+                        <img src="./design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src = '/design_system/button_scopri_pianta.png'} />
                       </div>
 
                       {/* Percorso */}
                       <div className="mt-4 -ml-12 lg:-ml-20 xl:-ml-36">
-                        <img src="/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                        <img src="./design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                       </div>
                     </div>
                   </div>

@@ -359,7 +359,7 @@ export default function App() {
           {/* Background Image with high-fidelity matching portrait of Diego Cavallaro */}
           <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden opacity-75" id="hero-bg-media">
             <img
-              src="/Images/Home/hero.jpg"
+              src="./Images/Home/hero.jpg"
               alt="Diego Cavallaro - Junior UX/UI & Visual Designer Portrait"
               className="hero-bg-img w-full h-full object-cover scale-110 object-[65%_top] md:object-center"
               data-cursor="image"
@@ -402,7 +402,7 @@ export default function App() {
               >
                 <div className={`items-center justify-center transition-all duration-700 ease-[0.16,1,0.3,1] rounded-full flex overflow-hidden shrink-0 ${!isScrolled ? 'w-10 h-10 backdrop-blur-md bg-white/[0.05] border border-white/20 opacity-100' : 'w-0 h-0 opacity-0 border-0 md:w-8 md:h-8 md:opacity-100'}`}>
                   <img
-                    src="/Images/Home/logo_diego_cavallaro.png"
+                    src="./Images/Home/logo_diego_cavallaro.png"
                     className="w-5 h-5 min-w-[20px] object-contain transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover/logo:scale-105"
                     alt="Diego Cavallaro Logo"
                     id="header-logo-img"
@@ -417,7 +417,7 @@ export default function App() {
               {/* Mobile Only Center Logo */}
               <div className="flex md:hidden justify-center items-center cursor-pointer" onClick={() => { scrollToSection('hero-section'); setMobileMenuOpen(false); }}>
                 <img
-                  src="/Images/Home/logo_diego_cavallaro.png"
+                  src="./Images/Home/logo_diego_cavallaro.png"
                   className="w-5 h-5 object-contain"
                   alt="Diego Cavallaro Logo"
                 />
@@ -683,7 +683,7 @@ export default function App() {
                   data-delay="0"
                 >
                   <img
-                    src="/project_cards_cover/orto_botanico.svg"
+                    src="./project_cards_cover/orto_botanico.svg"
                     alt="Orto Botanico"
                     className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
@@ -708,7 +708,7 @@ export default function App() {
                   data-delay="120"
                 >
                   <img
-                    src="/project_cards_cover/uss.svg"
+                    src="./project_cards_cover/uss.svg"
                     alt="Urban StreetArt Sicily"
                     className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
@@ -733,7 +733,7 @@ export default function App() {
                   data-delay="240"
                 >
                   <img
-                    src="/project_cards_cover/italo.svg"
+                    src="./project_cards_cover/italo.svg"
                     alt="Italo Treni"
                     className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />

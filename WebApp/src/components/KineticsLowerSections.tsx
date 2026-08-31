@@ -137,11 +137,11 @@ const PopOutImage = ({ className }: { className?: string }) => (
   <div className={`relative shrink-0 group/img cursor-pointer ${className}`}>
     {/* Base Circle with hidden overflow for the bottom */}
     <div className="absolute inset-0 rounded-full border-2 sm:border-[3px] border-[#FCD306] bg-[#1A1A1A] overflow-hidden shadow-[0_0_50px_rgba(252,211,6,0.15)]">
-      <img src="/Images/Project 01/mirella_no_bg.png" alt="Mirella Base" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom transition-transform duration-700 origin-bottom group-hover/img:scale-110" />
+      <img src="./Images/Project 01/mirella_no_bg.png" alt="Mirella Base" className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom transition-transform duration-700 origin-bottom group-hover/img:scale-110" />
     </div>
     {/* Top Half popping out - exact same positioning but clipped */}
     <img
-      src="/Images/Project 01/mirella_no_bg.png"
+      src="./Images/Project 01/mirella_no_bg.png"
       alt="Mirella Pop Out"
       className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[115%] max-w-none h-auto object-contain object-bottom z-10 pointer-events-none drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-transform duration-700 origin-bottom group-hover/img:scale-110"
       style={{ clipPath: 'inset(0 0 50% 0)' }}
@@ -280,17 +280,17 @@ export default function KineticsLowerSections({
       <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] mt-0">
         <div className="relative w-full h-full">
           <img
-            src="/Images/Project 02/Mockup/mockup_tshirt.jpg"
+            src="./Images/Project 02/Mockup/mockup_tshirt.jpg"
             alt="Urban StreetArt Sicily Mockup T-Shirt"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
           />
           <img
-            src="/Images/Project 02/Mockup/mockup_cappello.jpg"
+            src="./Images/Project 02/Mockup/mockup_cappello.jpg"
             alt="Urban StreetArt Sicily Mockup Cappello"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
           />
           <img
-            src="/Images/Project 02/Mockup/mockup_totebag.jpg"
+            src="./Images/Project 02/Mockup/mockup_totebag.jpg"
             alt="Urban StreetArt Sicily Mockup Tote Bag"
             className={`absolute inset-0 w-full h-full object-cover object-[center_75%] transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 2 ? 'opacity-100' : 'opacity-0'}`}
           />
@@ -311,7 +311,7 @@ export default function KineticsLowerSections({
       {/* MAGAZINE MOCKUP */}
       <div className="relative w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh]">
         <img 
-          src="/Images/Project 02/Mockup/mockup_magazine.jpg" 
+          src="./Images/Project 02/Mockup/mockup_magazine.jpg" 
           alt="Urban StreetArt Sicily Magazine Mockup" 
           className="absolute inset-0 w-full h-full object-cover"
         />

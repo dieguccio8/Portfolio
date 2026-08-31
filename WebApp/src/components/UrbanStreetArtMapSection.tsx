@@ -6,9 +6,9 @@ import * as THREE from 'three';
 import { createNoise2D } from 'simplex-noise';
 
 const REGIONS = {
-  Lombardy: { color: '#EE4256', pos: [-1.5, 1.5, -3.5] as [number, number, number], image: '/Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/lombardy.jpg' },
-  Tuscany: { color: '#A1D884', pos: [-0.5, 1.5, -1.0] as [number, number, number], image: '/Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/tuscany.jpg' },
-  Campania: { color: '#1FA9E5', pos: [2.5, 1.5, 3.5] as [number, number, number], image: '/Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/campania.jpg' },
+  Lombardy: { color: '#EE4256', pos: [-1.5, 1.5, -3.5] as [number, number, number], image: './Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/lombardy.jpg' },
+  Tuscany: { color: '#A1D884', pos: [-0.5, 1.5, -1.0] as [number, number, number], image: './Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/tuscany.jpg' },
+  Campania: { color: '#1FA9E5', pos: [2.5, 1.5, 3.5] as [number, number, number], image: './Images/Project 02/Street Art Photos/Campania_Lombardia_Toscana/campania.jpg' },
 };
 
 type RegionKey = keyof typeof REGIONS;
@@ -37,7 +37,7 @@ const DynamicLogo = ({ region, onClick }: { region: RegionKey, onClick: () => vo
 
 // Procedural 3D Terrain representing Italy
 const Terrain = () => {
-  const alphaMap = useTexture('/Images/Project 02/italy_alpha.svg');
+  const alphaMap = useTexture(import.meta.env.BASE_URL + 'Images/Project 02/italy_alpha.svg');
   const noise2D = useMemo(() => createNoise2D(), []);
 
   const geometry = useMemo(() => {

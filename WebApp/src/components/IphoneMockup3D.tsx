@@ -126,8 +126,8 @@ type GLTFResult = GLTF & {
 }
 
 export function Model({ imagePath = '/models/iphone16_mockup/screen.jpg', ...props }: any) {
-  const { nodes, materials } = (useGLTF('/models/iphone16_mockup/iphone-16-pro.glb') as unknown) as GLTFResult
-  const screenTexture = useTexture(imagePath) as THREE.Texture
+  const { nodes, materials } = (useGLTF(import.meta.env.BASE_URL + 'models/iphone16_mockup/iphone-16-pro.glb') as unknown) as GLTFResult
+  const screenTexture = useTexture(imagePath.startsWith('/') ? import.meta.env.BASE_URL + imagePath.slice(1) : imagePath) as THREE.Texture
 
   // Fix texture orientation if necessary
   screenTexture.flipY = false;
@@ -270,7 +270,7 @@ export function Model({ imagePath = '/models/iphone16_mockup/screen.jpg', ...pro
   )
 }
 
-useGLTF.preload('/models/iphone16_mockup/iphone-16-pro.glb')
+useGLTF.preload(import.meta.env.BASE_URL + 'models/iphone16_mockup/iphone-16-pro.glb')
 
 function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { containerRef: React.RefObject<HTMLDivElement>, titleRef: React.RefObject<HTMLDivElement>, cardsRef: React.RefObject<HTMLDivElement>, imagePath?: string }) {
   const groupRef = useRef<THREE.Group>(null);

@@ -58,7 +58,7 @@ export const UrbanStreetArtAppMockup: React.FC = () => {
         <div className="absolute top-0 left-0 w-full px-12 h-[90px] flex justify-between items-center z-40 text-white">
           <div className="flex items-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
              <img 
-               src="/Images/Project 02/Logo/bianco_logotipo.svg" 
+               src="./Images/Project 02/Logo/bianco_logotipo.svg" 
                alt="Urban StreetArt Sicily" 
                className="h-12 w-auto object-contain" 
              />
