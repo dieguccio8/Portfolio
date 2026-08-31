@@ -2,7 +2,28 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AlertTriangle, Lightbulb, Check } from 'lucide-react';
 
-const phases = [
+export interface PhaseData {
+  id: string;
+  title: string;
+  icon: React.ReactNode;
+  features: string[];
+  linkText: string;
+  linkHref: string;
+  textColors: {
+    active: string;
+    hover: string;
+    iconBorder: string;
+    iconGlow: string;
+    gradientFrom: string;
+    gradientTo: string;
+    check: string;
+    link: string;
+    linkBorder: string;
+    linkBorderHover: string;
+  };
+}
+
+export const defaultPhases: PhaseData[] = [
   {
     id: 'problems',
     title: 'Problemi riscontrati',
@@ -45,7 +66,15 @@ const phases = [
   }
 ];
 
-export default function TimelineAccordion({ activePhase, onPhaseChange }: { activePhase: string, onPhaseChange: (phase: string) => void }) {
+export default function TimelineAccordion({ 
+  activePhase, 
+  onPhaseChange,
+  phases = defaultPhases
+}: { 
+  activePhase: string, 
+  onPhaseChange: (phase: string) => void,
+  phases?: PhaseData[]
+}) {
   return (
     <div className="pointer-events-auto col-span-full duration-500 ease-in-out lg:col-span-4 w-full max-w-lg font-raleway mx-auto lg:ml-12 grid auto-rows-fr">
       {phases.map((phase, index) => {

@@ -1,11 +1,22 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import TimelineAccordion from './TimelineAccordion';
-import BentoGrid from './BentoGrid';
+import BentoGrid, { FeatureData } from './BentoGrid';
+import { PhaseData } from './TimelineAccordion';
 
-export default function InteractiveBentoSection() {
+export default function InteractiveBentoSection({
+  phases,
+  problemsFeatures,
+  solutionsFeatures,
+  themeConfig
+}: {
+  phases?: PhaseData[],
+  problemsFeatures?: FeatureData[],
+  solutionsFeatures?: FeatureData[],
+  themeConfig?: { problems: 'red' | 'emerald', solutions: 'red' | 'emerald' }
+}) {
   const [activePhase, setActivePhase] = useState('problems');
-  const phases = ['problems', 'solutions'];
+  const phaseKeys = ['problems', 'solutions'];
   const triggersRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -45,12 +56,17 @@ export default function InteractiveBentoSection() {
           
           {/* Left Side: Timeline */}
           <div className="flex-1 w-full max-w-lg">
-            <TimelineAccordion activePhase={activePhase} onPhaseChange={setActivePhase} />
+            <TimelineAccordion activePhase={activePhase} onPhaseChange={setActivePhase} phases={phases} />
           </div>
           
           {/* Right Side: Bento Grid */}
           <div className="flex-1 w-full max-w-xl mt-12 xl:mt-0">
-            <BentoGrid activePhase={activePhase} />
+            <BentoGrid 
+              activePhase={activePhase} 
+              problemsFeatures={problemsFeatures}
+              solutionsFeatures={solutionsFeatures}
+              themeConfig={themeConfig}
+            />
           </div>
 
         </div>
@@ -60,7 +76,7 @@ export default function InteractiveBentoSection() {
       {/* Questi trigger sono mappati in modo assoluto sull'intero contenitore da 200vh. */}
       {/* Il primo copre la prima metà (0-100vh), il secondo la seconda metà (100-200vh). */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none hidden lg:flex flex-col z-0">
-        {phases.map((phase, index) => (
+        {phaseKeys.map((phase, index) => (
           <div
             key={phase}
             data-phase={phase}

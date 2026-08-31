@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { MapPinOff, FileText, Frown, SearchX, MonitorSmartphone, QrCode, Smartphone, Map } from 'lucide-react';
 
-const problemsFeatures = [
+export const defaultProblemsFeatures = [
   {
     title: 'Disorientamento',
     description: 'I visitatori si perdono facilmente senza mappe interattive.',
@@ -25,7 +25,7 @@ const problemsFeatures = [
   }
 ];
 
-const solutionsFeatures = [
+export const defaultSolutionsFeatures = [
   {
     title: 'Totem all\'ingresso',
     description: 'Selezione immediata di percorsi tematici e mappa generale.',
@@ -48,8 +48,14 @@ const solutionsFeatures = [
   }
 ];
 
+export interface FeatureData {
+  title: string;
+  description: string;
+  icon: React.ElementType;
+}
+
 const SpotlightFeatureCard: React.FC<{ 
-  feature: typeof problemsFeatures[0]; 
+  feature: FeatureData; 
   idx: number; 
   animationDelay: string;
   theme: 'red' | 'emerald';
@@ -166,10 +172,20 @@ const SpotlightFeatureCard: React.FC<{
   );
 }
 
-export default function BentoGrid({ activePhase }: { activePhase: string }) {
+export default function BentoGrid({ 
+  activePhase, 
+  problemsFeatures = defaultProblemsFeatures, 
+  solutionsFeatures = defaultSolutionsFeatures,
+  themeConfig = { problems: 'red', solutions: 'emerald' }
+}: { 
+  activePhase: string,
+  problemsFeatures?: FeatureData[],
+  solutionsFeatures?: FeatureData[],
+  themeConfig?: { problems: 'red' | 'emerald', solutions: 'red' | 'emerald' }
+}) {
   const isProblems = activePhase === 'problems';
   const activeFeatures = isProblems ? problemsFeatures : solutionsFeatures;
-  const theme = isProblems ? 'red' : 'emerald';
+  const theme = isProblems ? themeConfig.problems : themeConfig.solutions;
 
   return (
     <div className="relative w-full h-full max-w-2xl mx-auto flex items-center justify-center">

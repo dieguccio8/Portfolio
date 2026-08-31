@@ -37,7 +37,7 @@ import UserJourney from './UserJourney';
 import ProjectRightColumn from './ProjectRightColumn';
 import InteractiveBentoSection from './InteractiveBentoSection';
 import KineticsLowerSections from './KineticsLowerSections';
-import ChronosLowerSections from './ChronosLowerSections';
+
 import { AetherisLowerSections } from './AetherisLowerSections';
 import { LogoMorph } from './LogoMorph';
 import IphoneMockup3D from './IphoneMockup3D';
@@ -284,9 +284,16 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         )}
 
         {/* Kinetics Logo Card */}
-        {isKinetics && (
+        {isKinetics && !isMenuOpen && (
           <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
             <img src="./Images/Project 02/Logo/logo_uss.png" alt="Urban StreetArt Sicily Logo" className="h-10 md:h-12 w-auto object-contain rounded-md" />
+          </div>
+        )}
+
+        {/* Chronos Logo Card */}
+        {isChronos && !isMenuOpen && (
+          <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
+            <img src="./Images/Project 03/italo_logo.webp" alt="Italo Treni Logo" className="h-10 md:h-12 w-auto object-contain" />
           </div>
         )}
 
@@ -400,152 +407,6 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             />
           )}
         </AnimatePresence>
-        {isChronos ? (
-          <section className="relative w-full pt-20 h-auto min-h-[75vh] md:min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-center overflow-hidden bg-black border-b border-white/5">
-            {/* Subtle grid background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
-            <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] rounded-full bg-[#9E1C1F]/5 blur-[120px] pointer-events-none" />
-
-            <div className="relative z-10 max-w-[1600px] mx-auto w-full px-6 sm:px-12 md:px-16 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Left Column: Brand Info */}
-              <div className="lg:col-span-6 flex flex-col gap-6 text-left">
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2 text-sm font-raleway tracking-widest text-[#9E1C1F] uppercase font-bold">
-                    <span className="w-2 h-2 rounded-full bg-[#9E1C1F] animate-pulse" />
-                    <span>2025 / Concept Redesign, UX/UI & System Architecture</span>
-                  </div>
-                  <span className="text-sm font-raleway uppercase tracking-[0.2em] text-neutral-400 font-bold">
-                    Italo Treni
-                  </span>
-                </div>
-
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight uppercase font-sans text-white leading-[1.05] max-w-xl">
-                  L'Alta Velocità Inizia Prima di Salire a Bordo.
-                </h1>
-
-                <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-light max-w-lg">
-                  Restyling UX/UI dell'App Italo Treno: come ho trasformato un'esperienza di acquisto macchinosa in un flusso di navigazione fluido, migliorando l'esperienza utente a 300 km/h.
-                </p>
-
-                {/* Sleek Horizontal Project Ledger */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 mt-2 border-t border-white/5 max-w-xl">
-                  <div>
-                    <span className="text-xs font-raleway uppercase text-neutral-500 tracking-wider block mb-1">Client</span>
-                    <span className="text-sm sm:text-sm font-semibold text-neutral-300">{project.client}</span>
-                  </div>
-                  <div>
-                    <span className="text-xs font-raleway uppercase text-neutral-500 tracking-wider block mb-1">Year</span>
-                    <span className="text-sm sm:text-sm font-semibold text-neutral-300">{project.year}</span>
-                  </div>
-                  <div>
-                    <span className="text-xs font-raleway uppercase text-neutral-500 tracking-wider block mb-1">My Role</span>
-                    <span className="text-sm sm:text-sm font-semibold text-neutral-300">{project.role}</span>
-                  </div>
-                  <div>
-                    <span className="text-xs font-raleway uppercase text-neutral-500 tracking-wider block mb-1">Applied Stack</span>
-                    <div className="flex flex-wrap gap-1 mt-0.5">
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="text-[8px] font-raleway px-1.5 py-0.5 bg-white/5 text-neutral-300 rounded border border-white/10 uppercase font-medium">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 mt-2">
-                  <div className="h-[1px] w-12 bg-[#9E1C1F]" />
-                  <span className="text-sm font-raleway text-neutral-500 uppercase tracking-wider">
-                    Case Study UX/UI Restyling
-                  </span>
-                </div>
-              </div>
-
-              {/* Right Column: iPhone 15 Pro Mockup with speed motion blur background */}
-              <div className="lg:col-span-6 flex items-center justify-center relative py-12">
-                {/* Speed motion blur background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-red-950/20 via-black to-red-950/10 pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,rgba(158,28,31,0.12)_0%,transparent_70%)] pointer-events-none" />
-
-                {/* Animated motion blur speed-line accents behind the phone */}
-                <div className="absolute inset-x-0 top-[30%] h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent blur-[1px] animate-pulse" />
-                <div className="absolute inset-x-0 top-[60%] h-[1.5px] bg-gradient-to-r from-transparent via-[#9E1C1F]/30 to-transparent blur-[1.5px] animate-pulse delay-500" />
-
-                {/* iPhone 15 Pro slightly tilted container */}
-                <div className="relative w-[280px] sm:w-[310px] aspect-[9/19] bg-neutral-900 rounded-[3rem] p-3 shadow-[0_35px_80px_-20px_rgba(0,0,0,0.9)] border-4 border-neutral-800 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-[0.16,1,0.3,1] overflow-hidden flex flex-col z-10 group">
-
-                  {/* Dynamic Notch / Island */}
-                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-30 flex justify-center items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-neutral-800" />
-                    <span className="w-8 h-1 bg-neutral-900 rounded-full" />
-                  </div>
-
-                  {/* Screen Content */}
-                  <div className="flex-1 bg-[#090909] rounded-[2.5rem] overflow-hidden flex flex-col pt-7 text-white relative">
-                    {/* Glowing background in app */}
-                    <div className="absolute -top-12 -left-12 w-32 h-32 rounded-full bg-[#9E1C1F]/25 blur-3xl" />
-
-                    {/* App Header */}
-                    <div className="px-4 py-3 border-b border-white/5 flex justify-between items-center z-10 shrink-0">
-                      <span className="font-sans font-black tracking-tight text-sm text-[#9E1C1F]">italo.</span>
-                      <span className="text-xs font-raleway text-neutral-400">BIGLIETTERIA RAPIDA</span>
-                    </div>
-
-                    {/* App Home View */}
-                    <div className="p-4 flex-1 flex flex-col gap-4 text-left justify-between z-10">
-                      <div className="flex flex-col gap-1 mt-2">
-                        <span className="text-sm font-raleway text-[#9E1C1F] uppercase font-bold tracking-wider">Benvenuto a bordo</span>
-                        <h4 className="text-sm font-sans font-bold leading-tight">Dove desideri viaggiare oggi?</h4>
-                      </div>
-
-                      {/* Booking Panel Component */}
-                      <div className="bg-neutral-900/90 border border-white/10 rounded-2xl p-3 flex flex-col gap-2.5 shadow-lg">
-                        {/* From/To Stations */}
-                        <div className="flex flex-col gap-1 bg-black/40 p-2 rounded-xl border border-white/5">
-                          <div className="flex justify-between items-center text-sm font-sans font-medium text-neutral-400">
-                            <span>DA</span>
-                            <span>A</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm font-bold text-white font-sans">Catania C.le</span>
-                            <span className="text-[#9E1C1F] font-bold text-sm font-raleway">➔</span>
-                            <span className="text-sm font-bold text-white font-sans">Milano Centrale</span>
-                          </div>
-                        </div>
-
-                        {/* Date & Passenger Selection */}
-                        <div className="grid grid-cols-2 gap-2 text-sm">
-                          <div className="bg-black/40 p-2 rounded-xl border border-white/5">
-                            <span className="text-neutral-500 block uppercase font-raleway mb-0.5">Andata</span>
-                            <span className="font-sans font-bold text-white">08 Luglio, 2026</span>
-                          </div>
-                          <div className="bg-black/40 p-2 rounded-xl border border-white/5">
-                            <span className="text-neutral-500 block uppercase font-raleway mb-0.5">Passeggeri</span>
-                            <span className="font-sans font-bold text-white">1 Adulto</span>
-                          </div>
-                        </div>
-
-                        {/* Search Button */}
-                        <div className="w-full py-2.5 bg-[#9E1C1F] hover:bg-red-700 transition-colors rounded-xl text-sm font-raleway text-white uppercase tracking-widest font-bold text-center">
-                          Cerca Soluzioni
-                        </div>
-                      </div>
-
-                      {/* Recent Trips Shortcuts */}
-                      <div className="flex flex-col gap-1.5 mt-auto mb-2">
-                        <span className="text-[8px] font-raleway text-neutral-500 uppercase tracking-wider">Tratte Recenti</span>
-                        <div className="flex gap-2">
-                          <span className="px-2 py-1 bg-neutral-900 border border-white/5 rounded text-xs font-sans font-medium text-neutral-300">Catania ➔ Palermo</span>
-                          <span className="px-2 py-1 bg-neutral-900 border border-white/5 rounded text-xs font-sans font-medium text-neutral-300">Roma ➔ Milano</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : (
           <section className={`relative w-full pt-20 min-h-[100svh] flex flex-col justify-end p-6 sm:p-12 md:p-16 overflow-hidden ${isKinetics ? 'bg-[#0D0D0D]' : ''}`}>
             <div className="absolute inset-0 z-0">
               {isAetheris ? (
@@ -555,6 +416,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   loop
                   muted
                   playsInline
+                  className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
+                />
+              ) : isChronos ? (
+                <img
+                  src="./Images/Project 03/hero.jpg"
+                  alt={project.title}
                   className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
                 />
               ) : isKinetics ? (
@@ -575,21 +442,21 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   className={`w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1] ${isKinetics ? 'grayscale brightness-[0.3] contrast-[1.15] hover:grayscale-0' : 'grayscale brightness-[0.4] hover:grayscale-0'}`}
                 />
               )}
-              <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-[radial-gradient(ellipse_at_center,_transparent_30%,_rgba(13,13,13,0.85)_100%)]' : isAetheris ? 'bg-gradient-to-t from-[#050505] from-10% via-[#050505]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
+              <div className={`absolute inset-0 pointer-events-none ${isKinetics ? 'bg-[radial-gradient(ellipse_at_center,_transparent_30%,_rgba(13,13,13,0.85)_100%)]' : (isAetheris || isChronos) ? 'bg-gradient-to-t from-[#050505] from-10% via-[#050505]/50 to-transparent' : 'bg-gradient-to-t from-black via-black/40 to-transparent'}`} />
             </div>
 
             <div className="relative z-10 max-w-[1600px] mx-auto w-full flex flex-col gap-3">
-              {!(isAetheris || isKinetics) && (
+              {!(isAetheris || isChronos || isKinetics) && (
                 <span className="text-sm font-raleway uppercase tracking-[0.25em] text-[#E8302A]">
                   {getLocalizedField('category')}
                 </span>
               )}
               {!isKinetics && (
-                <h1 className={`font-black tracking-tighter uppercase mb-2 ${isAetheris ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-raleway font-bold text-white' : 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans text-white'}`}>
-                  {!isAetheris ? project.title : null}
+                <h1 className={`font-black tracking-tighter uppercase mb-2 ${(isAetheris || isChronos) ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-raleway font-bold text-white' : 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans text-white'}`}>
+                  {!(isAetheris || isChronos) ? project.title : null}
                 </h1>
               )}
-              {(isAetheris || isKinetics) && (
+              {(isAetheris || isChronos || isKinetics) && (
                 <div className="flex flex-col gap-1 w-full items-center justify-center mb-4">
                   {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}
                   <div className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 w-full">
@@ -608,11 +475,9 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </div>
                 </div>
               )}
-              {!(isAetheris || isKinetics) && <div className="w-12 h-1 bg-[#E8302A]" />}
+              {!(isAetheris || isChronos || isKinetics) && <div className="w-12 h-1 bg-[#E8302A]" />}
             </div>
           </section>
-        )}
-
         {/* Marquee Introduzione per Project 02 (Kinetics) */}
         {isKinetics && (
           <div className="relative left-1/2 -translate-x-1/2 w-[100vw] overflow-hidden border-b-2 border-[#0D0D0D] py-2 sm:py-3 z-20 flex items-center bg-[#FCD306]">
@@ -836,12 +701,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               copiedColor={copiedColor}
               handleCopyHex={handleCopyHex}
             />
-          ) : isChronos ? (
-            <ChronosLowerSections
-              copiedColor={copiedColor}
-              handleCopyHex={handleCopyHex}
-            />
-          ) : isAetheris ? (
+          ) : (isAetheris || isChronos) ? (
             <AetherisLowerSections
               project={project}
               activeResearchTab={activeResearchTab}
@@ -2073,32 +1933,32 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     {/* Left Column */}
                     <div className="flex flex-col gap-6 w-full lg:w-auto lg:min-w-[320px] xl:min-w-[380px]">
-                      <img src="./design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                      <img src="./design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
-                      <img src="./design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="./Images/Project 01/design_system/searchbar/State=Default.svg" alt="Search Default" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="./Images/Project 01/design_system/searchbar/State=Typing.svg" alt="Search Typing" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
+                      <img src="./Images/Project 01/design_system/searchbar/State=Suggestions.svg" alt="Search Suggestions" className="w-full max-w-[380px] h-auto object-contain drop-shadow-lg hover:-translate-y-1 transition-transform" />
 
                       <div className="mt-8">
-                        <img src="./design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                        <img src="./Images/Project 01/design_system/button_primary.svg" alt="Button Primary" className="w-full max-w-[240px] h-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                       </div>
                     </div>
 
                     {/* Right Column */}
                     <div className="flex flex-col gap-8 items-start w-full lg:w-auto">
                       {/* Pianta Card - reduced size */}
-                      <img src="./design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
+                      <img src="./Images/Project 01/design_system/card_pianta.svg" alt="Card Pianta" className="w-full max-w-[240px] h-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-300" />
 
                       {/* Tags */}
-                      <img src="./design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                      <img src="./Images/Project 01/design_system/tag.svg" alt="Tag" className="h-10 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
 
                       {/* Language and Scopri Pianta */}
                       <div className="flex items-center gap-8">
-                        <img src="./design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
-                        <img src="./design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src = '/design_system/button_scopri_pianta.png'} />
+                        <img src="./Images/Project 01/design_system/language.svg" alt="Language" className="h-28 w-auto object-contain drop-shadow-xl hover:scale-105 transition-transform" />
+                        <img src="./Images/Project 01/design_system/button_scopri_piante.svg" alt="Button Scopri Piante" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform" onError={(e) => e.currentTarget.src = './Images/Project 01/design_system/button_scopri_pianta.png'} />
                       </div>
 
                       {/* Percorso */}
                       <div className="mt-4 -ml-12 lg:-ml-20 xl:-ml-36">
-                        <img src="./design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
+                        <img src="./Images/Project 01/design_system/button_percorso.png" alt="Button Percorso" className="h-14 sm:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform origin-left" />
                       </div>
                     </div>
                   </div>
@@ -2109,7 +1969,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
                         <img
                           key={variant}
-                          src={`/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
+                          src={`./Images/Project 01/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
                           alt={`Categoria ${variant}`}
                           className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
                         />
