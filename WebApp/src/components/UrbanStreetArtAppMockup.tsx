@@ -3,33 +3,33 @@ import { motion } from 'framer-motion';
 import { Menu, ShoppingCart, User, Search, Battery, Wifi, Signal } from 'lucide-react';
 
 const column1Images = [
-  "/Images/Project 02/Street Art Photos/sicily_streetart_1.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_3.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_5.jpg"
+  "./Images/Project 02/Street Art Photos/sicily_streetart_1.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_3.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_5.jpg"
 ];
 
 const column2Images = [
-  "/Images/Project 02/Street Art Photos/sicily_streetart_2.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_4.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_6.jpg"
+  "./Images/Project 02/Street Art Photos/sicily_streetart_2.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_4.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_6.jpg"
 ];
 
 const column3Images = [
-  "/Images/Project 02/Street Art Photos/sicily_streetart_3.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_6.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_1.jpg"
+  "./Images/Project 02/Street Art Photos/sicily_streetart_3.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_6.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_1.jpg"
 ];
 
 const column4Images = [
-  "/Images/Project 02/Street Art Photos/sicily_streetart_5.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_2.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_4.jpg"
+  "./Images/Project 02/Street Art Photos/sicily_streetart_5.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_2.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_4.jpg"
 ];
 
 const column5Images = [
-  "/Images/Project 02/Street Art Photos/sicily_streetart_4.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_1.jpg",
-  "/Images/Project 02/Street Art Photos/sicily_streetart_5.jpg"
+  "./Images/Project 02/Street Art Photos/sicily_streetart_4.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_1.jpg",
+  "./Images/Project 02/Street Art Photos/sicily_streetart_5.jpg"
 ];
 
 // Double the arrays for infinite scrolling

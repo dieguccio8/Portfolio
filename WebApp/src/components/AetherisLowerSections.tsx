@@ -463,10 +463,10 @@ export function AetherisLowerSections({
       <div className="relative z-10 w-full shrink-0 block">
         <StickyCard002
           cards={[
-            { id: 1, image: "/Images/Project 01/mockup_totem_3.jpg", alt: "Totem Mockup 3" },
-            { id: 2, image: "/Images/Project 01/mockup_totem.jpg", alt: "Totem Mockup" },
-            { id: 3, image: "/Images/Project 01/mockup_cartello_zone_2.jpeg", alt: "Cartello Zone Mockup" },
-            { id: 4, image: "/Images/Project 01/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
+            { id: 1, image: "./Images/Project 01/mockup_totem_3.jpg", alt: "Totem Mockup 3" },
+            { id: 2, image: "./Images/Project 01/mockup_totem.jpg", alt: "Totem Mockup" },
+            { id: 3, image: "./Images/Project 01/mockup_cartello_zone_2.jpeg", alt: "Cartello Zone Mockup" },
+            { id: 4, image: "./Images/Project 01/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
           ]}
         />
       </div>

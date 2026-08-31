@@ -683,7 +683,7 @@ export default function App() {
                   data-delay="0"
                 >
                   <img
-                    src="./project_cards_cover/orto_botanico.svg"
+                    src="./Images/Home/project_cards_cover/ORTO BOTANICO.svg"
                     alt="Orto Botanico"
                     className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
@@ -708,7 +708,7 @@ export default function App() {
                   data-delay="120"
                 >
                   <img
-                    src="./project_cards_cover/uss.svg"
+                    src="./Images/Home/project_cards_cover/USS.svg"
                     alt="Urban StreetArt Sicily"
                     className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
@@ -733,7 +733,7 @@ export default function App() {
                   data-delay="240"
                 >
                   <img
-                    src="./project_cards_cover/italo.svg"
+                    src="./Images/Home/project_cards_cover/ITALO.svg"
                     alt="Italo Treni"
                     className="w-full h-full object-cover grayscale-0 brightness-100 md:grayscale md:brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-[0.16,1,0.3,1]"
                   />
