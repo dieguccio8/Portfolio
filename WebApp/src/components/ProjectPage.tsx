@@ -593,6 +593,33 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           </section>
         )}
 
+        {/* 2.4 Empty Spacer Section with Train at Top */}
+        {isChronos && (
+          <section className="w-full h-screen relative z-10 bg-transparent pointer-events-none flex flex-col justify-start">
+             {/* Added mt-16 md:mt-24 to create distance from the previous section */}
+             <div className="w-full relative h-[20px] sm:h-[30px] lg:h-[40px] overflow-hidden flex items-center border-b border-[#B50D3A]/20 opacity-90 mt-16 md:mt-24">
+                 <style>{`
+                   @keyframes train-scroll {
+                     0% { transform: translateX(-50%); }
+                     100% { transform: translateX(0); }
+                   }
+                 `}</style>
+                 <div className="absolute inset-y-0 left-0 flex w-max h-full gap-4 sm:gap-6 md:gap-8"
+                      style={{ animation: 'train-scroll 20s linear infinite' }}
+                 >
+                    {[...Array(4)].map((_, i) => (
+                      <img 
+                        key={i}
+                        src={import.meta.env.BASE_URL + "train_divider.svg"} 
+                        alt="Italo Train" 
+                        className="h-full w-auto object-cover flex-shrink-0"
+                      />
+                    ))}
+                 </div>
+             </div>
+          </section>
+        )}
+
         {/* 2.5 Decorative Section for Chronos */}
         {isChronos && (
           <section 
@@ -708,6 +735,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             </div>
           </section>
         )}
+
+
 
         {/* 3. CASE STUDY GRID */}
         {!(isAetheris || isKinetics) && (
