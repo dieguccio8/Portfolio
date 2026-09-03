@@ -52,6 +52,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
 import ThreeDMarquee from './ui/3d-marquee';
 import CardFanCarousel from './ui/card-fan-carousel';
+import WireframeComparisonCarousel from './WireframeComparisonCarousel';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -145,6 +146,42 @@ interface ProjectPageProps {
   lang?: 'it' | 'en';
   setLang?: (lang: 'it' | 'en') => void;
 }
+
+const TrainDividerBanner = React.memo(function TrainDividerBanner() {
+  const trainCount = 6;
+  const trainSrc = import.meta.env.BASE_URL + "train_divider.svg";
+  
+  return (
+    <div className="w-full relative h-[22px] sm:h-[32px] lg:h-[42px] overflow-hidden flex items-center border-b border-[#B50D3A]/20 opacity-90 mt-16 md:mt-24 pointer-events-none select-none">
+      <div className="flex w-max h-full animate-train-scroll-seamless">
+        {/* Set 1 */}
+        <div className="flex items-center h-full shrink-0 gap-6 sm:gap-8 pr-6 sm:pr-8">
+          {[...Array(trainCount)].map((_, i) => (
+            <img 
+              key={`t1-${i}`}
+              src={trainSrc}
+              alt="Italo Train" 
+              className="h-full w-auto aspect-[2153/145] object-contain flex-shrink-0"
+              loading="eager"
+            />
+          ))}
+        </div>
+        {/* Set 2 (Identical clone for 100% seamless infinite loop) */}
+        <div className="flex items-center h-full shrink-0 gap-6 sm:gap-8 pr-6 sm:pr-8" aria-hidden="true">
+          {[...Array(trainCount)].map((_, i) => (
+            <img 
+              key={`t2-${i}`}
+              src={trainSrc}
+              alt="Italo Train" 
+              className="h-full w-auto aspect-[2153/145] object-contain flex-shrink-0"
+              loading="eager"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+});
 
 export default function ProjectPage({ project, onClose, onNavigateToProject, allProjects, lang = 'it', setLang }: ProjectPageProps) {
   // Back to top on mount or project change
@@ -597,41 +634,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {isChronos && (
           <section className="w-full h-screen relative z-10 bg-transparent flex flex-col justify-start">
              {/* Dynamic Train Divider Banner */}
-             <div className="w-full relative h-[22px] sm:h-[32px] lg:h-[42px] overflow-hidden flex items-center border-b border-[#B50D3A]/20 opacity-90 mt-16 md:mt-24 pointer-events-none">
-                 <style>{`
-                   @keyframes train-scroll-seamless {
-                     0% { transform: translate3d(-50%, 0, 0); }
-                     100% { transform: translate3d(0, 0, 0); }
-                   }
-                 `}</style>
-                 <div 
-                   className="flex w-max h-full will-change-transform"
-                   style={{ animation: 'train-scroll-seamless 18s linear infinite' }}
-                 >
-                   {/* Set 1 */}
-                   <div className="flex items-center h-full shrink-0 gap-6 sm:gap-8 pr-6 sm:pr-8">
-                     {[...Array(6)].map((_, i) => (
-                       <img 
-                         key={`t1-${i}`}
-                         src={import.meta.env.BASE_URL + "train_divider.svg"} 
-                         alt="Italo Train" 
-                         className="h-full w-auto object-contain flex-shrink-0"
-                       />
-                     ))}
-                   </div>
-                   {/* Set 2 (Identical clone for 100% seamless infinite loop) */}
-                   <div className="flex items-center h-full shrink-0 gap-6 sm:gap-8 pr-6 sm:pr-8" aria-hidden="true">
-                     {[...Array(6)].map((_, i) => (
-                       <img 
-                         key={`t2-${i}`}
-                         src={import.meta.env.BASE_URL + "train_divider.svg"} 
-                         alt="Italo Train" 
-                         className="h-full w-auto object-contain flex-shrink-0"
-                       />
-                     ))}
-                   </div>
-                 </div>
-             </div>
+             <TrainDividerBanner />
 
              {/* Introduction Text */}
              <div className="flex-1 flex items-center justify-center px-6 sm:px-12 md:px-16 w-full max-w-[1600px] mx-auto z-20">
@@ -765,6 +768,37 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     }
                   ]}
                 />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 2.6 Sviluppo Wireframe Section for Chronos */}
+        {isChronos && (
+          <section className="w-full min-h-screen relative z-20 flex items-center justify-center py-16 sm:py-20 px-6 sm:px-12 border-t border-white/5">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 w-full max-w-6xl mx-auto">
+              {/* Left Column: Sviluppo Wireframe Narrative (Fixed width prevents any horizontal shift) */}
+              <div className="w-full lg:w-[520px] shrink-0 flex flex-col items-start text-left gap-6">
+                <div className="flex flex-col items-start gap-3">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase font-sans">
+                    Sviluppo Wireframe
+                  </h2>
+                  <div className="w-12 h-1 bg-[#B50D3A] mt-1 rounded-full" />
+                </div>
+
+                <div className="flex flex-col gap-5 text-neutral-300 font-urbanist text-lg sm:text-xl leading-relaxed font-light">
+                  <p>
+                    Sono stati analizzati i flussi principali degli utenti e le funzionalità più utilizzate.
+                  </p>
+                  <p className="text-neutral-400 text-base sm:text-lg leading-relaxed">
+                    Successivamente è stato sviluppato un wireframe a bassa fedeltà per definire la struttura della schermata, la disposizione dei contenuti e la gerarchia delle informazioni.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Column: Wireframe Carousel (Fixed width prevents any layout shift) */}
+              <div className="w-full lg:w-[340px] shrink-0 flex justify-center items-center">
+                <WireframeComparisonCarousel />
               </div>
             </div>
           </section>

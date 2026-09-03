@@ -280,3 +280,21 @@ body::after {
 .gradient-border-stop-hover:hover {
   animation-play-state: paused;
 }
+
+/* ─── Train Marquee Seamless Loop (Global static rule prevents re-render resets) ─── */
+@keyframes train-scroll-seamless {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-train-scroll-seamless {
+  animation: train-scroll-seamless 13s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
