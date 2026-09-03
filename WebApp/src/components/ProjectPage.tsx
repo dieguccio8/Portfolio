@@ -593,11 +593,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           </section>
         )}
 
-        {/* 2.4 Empty Spacer Section with Train at Top */}
+        {/* 2.4 Introduction Section for Chronos */}
         {isChronos && (
-          <section className="w-full h-screen relative z-10 bg-transparent pointer-events-none flex flex-col justify-start">
+          <section className="w-full h-screen relative z-10 bg-transparent flex flex-col justify-start">
              {/* Added mt-16 md:mt-24 to create distance from the previous section */}
-             <div className="w-full relative h-[20px] sm:h-[30px] lg:h-[40px] overflow-hidden flex items-center border-b border-[#B50D3A]/20 opacity-90 mt-16 md:mt-24">
+             <div className="w-full relative h-[20px] sm:h-[30px] lg:h-[40px] overflow-hidden flex items-center border-b border-[#B50D3A]/20 opacity-90 mt-16 md:mt-24 pointer-events-none">
                  <style>{`
                    @keyframes train-scroll {
                      0% { transform: translateX(-50%); }
@@ -617,6 +617,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     ))}
                  </div>
              </div>
+
+             {/* Introduction Text */}
+             <div className="flex-1 flex items-center justify-center px-6 sm:px-12 md:px-16 w-full max-w-[1600px] mx-auto z-20">
+               <p className="text-white font-urbanist text-xl md:text-2xl lg:text-3xl leading-[1.4] font-light tracking-tight text-center max-w-4xl">
+                  <span className="font-semibold text-[#B50D3A]">Il redesign dell'applicazione di Italo Treno</span> si concentra sull'abbattimento del carico cognitivo durante la ricerca, selezione e pagamento delle tratte ad alta velocità.
+               </p>
+             </div>
           </section>
         )}
 
@@ -626,34 +633,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             className="w-full h-screen relative z-20 flex items-center justify-center overflow-hidden"
             style={{ background: 'linear-gradient(to bottom, #050505 0%, #3B0615 50%, #050505 100%)' }}
           >
-            {/* Geometric Crosses overlay */}
-            <div className="absolute inset-0 z-10 pointer-events-none">
-              {[
-              { top: '10%', left: '15%', size: 'text-2xl', opacity: 'opacity-10', rotate: 'rotate-45' },
-              { top: '25%', left: '75%', size: 'text-4xl', opacity: 'opacity-20', rotate: 'rotate-45' },
-              { top: '80%', left: '20%', size: 'text-xl', opacity: 'opacity-5', rotate: 'rotate-45' },
-              { top: '65%', left: '85%', size: 'text-6xl', opacity: 'opacity-10', rotate: 'rotate-45' },
-              { top: '45%', left: '40%', size: 'text-3xl', opacity: 'opacity-20', rotate: 'rotate-45' },
-              { top: '15%', left: '50%', size: 'text-7xl', opacity: 'opacity-5', rotate: 'rotate-45' },
-              { top: '85%', left: '60%', size: 'text-2xl', opacity: 'opacity-[0.15]', rotate: 'rotate-45' },
-              { top: '35%', left: '10%', size: 'text-5xl', opacity: 'opacity-10', rotate: 'rotate-45' },
-              { top: '55%', left: '80%', size: 'text-lg', opacity: 'opacity-[0.15]', rotate: 'rotate-45' },
-              { top: '75%', left: '35%', size: 'text-4xl', opacity: 'opacity-10', rotate: 'rotate-45' },
-              { top: '20%', left: '30%', size: 'text-sm', opacity: 'opacity-30', rotate: 'rotate-45' },
-              { top: '90%', left: '10%', size: 'text-6xl', opacity: 'opacity-5', rotate: 'rotate-45' },
-              { top: '50%', left: '65%', size: 'text-5xl', opacity: 'opacity-5', rotate: 'rotate-45' },
-              { top: '8%', left: '90%', size: 'text-3xl', opacity: 'opacity-10', rotate: 'rotate-45' },
-              { top: '92%', left: '85%', size: 'text-4xl', opacity: 'opacity-10', rotate: 'rotate-45' },
-            ].map((decor, i) => (
-              <div 
-                key={i} 
-                className={`absolute font-mono text-white select-none pointer-events-none ${decor.size} ${decor.opacity} ${decor.rotate}`}
-                style={{ top: decor.top, left: decor.left }}
-              >
-                +
-              </div>
-            ))}
-            </div>
+
             {/* Analisi UX/UI (Problem Statement) - Centered in this section */}
             <div className="relative z-20 flex flex-col items-center gap-12 w-full max-w-[90rem] px-6 pointer-events-auto mt-20">
               <div className="flex flex-col items-center gap-4 text-center">
@@ -667,65 +647,104 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     {
                       content: (
                         <>
-                          <div className="flex flex-col gap-4 relative z-10">
-                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
-                              <AlertTriangle className="w-6 h-6 text-[#B50D3A]" />
-                            </div>
-                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Navigazione<br/>Labirintica</h4>
+                          <div className="absolute inset-0 z-0 pointer-events-none opacity-20"
+                               style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
                           </div>
-                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Eccessiva ridondanza dei menu con voci duplicate e sezioni superflue che rallentano il flusso d'acquisto disorientando l'utente.</p>
-                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 01</span>
-                          
-                          {/* Background Texture/Gradient */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+
+                          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-20 bg-[#B50D3A] opacity-[0.25] blur-[40px] rounded-full pointer-events-none z-0" />
+                          <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#B50D3A]/80 to-transparent z-10" />
+
+                          <div className="flex flex-col items-center justify-center w-full h-full gap-8 relative z-10 pt-4">
+                            <div className="w-16 h-16 rounded-full bg-white/[0.02] flex items-center justify-center border border-white/[0.05] shadow-inner shrink-0">
+                              <AlertTriangle className="w-7 h-7 text-[#B50D3A]" />
+                            </div>
+                            
+                            <div className="flex flex-col items-center gap-4 text-center">
+                              <h4 className="text-white font-medium text-2xl md:text-[32px] tracking-tight leading-[1.1]">Navigazione<br/>Labirintica</h4>
+                              <p className="text-neutral-400 text-[15px] leading-relaxed font-light max-w-[280px]">
+                                Eccessiva ridondanza dei menu con voci duplicate e sezioni superflue che rallentano il flusso d'acquisto disorientando l'utente.
+                              </p>
+                              <span className="text-[11px] font-mono font-bold text-[#B50D3A] uppercase tracking-[0.2em] mt-6">Problema 01</span>
+                            </div>
+                          </div>
                         </>
                       )
                     },
                     {
                       content: (
                         <>
-                          <div className="flex flex-col gap-4 relative z-10">
-                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
-                              <Compass className="w-6 h-6 text-[#B50D3A]" />
-                            </div>
-                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Gerarchia<br/>Visiva Assente</h4>
+                          <div className="absolute inset-0 z-0 pointer-events-none opacity-20"
+                               style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
                           </div>
-                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Testi monocromatici e dimensionamento errato (prezzi minuscoli, titoli non centrati) rendono faticosa la scansione rapida.</p>
-                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 02</span>
-                          
-                          <div className="absolute inset-0 bg-gradient-to-bl from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+
+                          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-20 bg-[#B50D3A] opacity-[0.25] blur-[40px] rounded-full pointer-events-none z-0" />
+                          <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#B50D3A]/80 to-transparent z-10" />
+
+                          <div className="flex flex-col items-center justify-center w-full h-full gap-8 relative z-10 pt-4">
+                            <div className="w-16 h-16 rounded-full bg-white/[0.02] flex items-center justify-center border border-white/[0.05] shadow-inner shrink-0">
+                              <Compass className="w-7 h-7 text-[#B50D3A]" />
+                            </div>
+                            
+                            <div className="flex flex-col items-center gap-4 text-center">
+                              <h4 className="text-white font-medium text-2xl md:text-[32px] tracking-tight leading-[1.1]">Gerarchia<br/>Visiva Assente</h4>
+                              <p className="text-neutral-400 text-[15px] leading-relaxed font-light max-w-[280px]">
+                                Testi monocromatici e dimensionamento errato (prezzi minuscoli, titoli non centrati) rendono faticosa la scansione rapida.
+                              </p>
+                              <span className="text-[11px] font-mono font-bold text-[#B50D3A] uppercase tracking-[0.2em] mt-6">Problema 02</span>
+                            </div>
+                          </div>
                         </>
                       )
                     },
                     {
                       content: (
                         <>
-                          <div className="flex flex-col gap-4 relative z-10">
-                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
-                              <Image className="w-6 h-6 text-[#B50D3A]" />
-                            </div>
-                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Frizioni<br/>Cromatiche</h4>
+                          <div className="absolute inset-0 z-0 pointer-events-none opacity-20"
+                               style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
                           </div>
-                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Uso fuorviante dei colori: il rosso viene usato per evidenziare messaggi positivi. Scarso contrasto sulle call to action primarie.</p>
-                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 03</span>
-                          
-                          <div className="absolute inset-0 bg-gradient-to-tr from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+
+                          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-20 bg-[#B50D3A] opacity-[0.25] blur-[40px] rounded-full pointer-events-none z-0" />
+                          <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#B50D3A]/80 to-transparent z-10" />
+
+                          <div className="flex flex-col items-center justify-center w-full h-full gap-8 relative z-10 pt-4">
+                            <div className="w-16 h-16 rounded-full bg-white/[0.02] flex items-center justify-center border border-white/[0.05] shadow-inner shrink-0">
+                              <Image className="w-7 h-7 text-[#B50D3A]" />
+                            </div>
+                            
+                            <div className="flex flex-col items-center gap-4 text-center">
+                              <h4 className="text-white font-medium text-2xl md:text-[32px] tracking-tight leading-[1.1]">Frizioni<br/>Cromatiche</h4>
+                              <p className="text-neutral-400 text-[15px] leading-relaxed font-light max-w-[280px]">
+                                Uso fuorviante dei colori: il rosso viene usato per evidenziare messaggi positivi. Scarso contrasto sulle call to action primarie.
+                              </p>
+                              <span className="text-[11px] font-mono font-bold text-[#B50D3A] uppercase tracking-[0.2em] mt-6">Problema 03</span>
+                            </div>
+                          </div>
                         </>
                       )
                     },
                     {
                       content: (
                         <>
-                          <div className="flex flex-col gap-4 relative z-10">
-                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
-                              <Smartphone className="w-6 h-6 text-[#B50D3A]" />
-                            </div>
-                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Discontinuità<br/>d'Interfaccia</h4>
+                          <div className="absolute inset-0 z-0 pointer-events-none opacity-20"
+                               style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
                           </div>
-                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Spaziature incoerenti, layout frammentato e icone fuori standard che minano pesantemente la percezione qualitativa dell'app.</p>
-                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 04</span>
-                          
-                          <div className="absolute inset-0 bg-gradient-to-tl from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+
+                          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-20 bg-[#B50D3A] opacity-[0.25] blur-[40px] rounded-full pointer-events-none z-0" />
+                          <div className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#B50D3A]/80 to-transparent z-10" />
+
+                          <div className="flex flex-col items-center justify-center w-full h-full gap-8 relative z-10 pt-4">
+                            <div className="w-16 h-16 rounded-full bg-white/[0.02] flex items-center justify-center border border-white/[0.05] shadow-inner shrink-0">
+                              <Smartphone className="w-7 h-7 text-[#B50D3A]" />
+                            </div>
+                            
+                            <div className="flex flex-col items-center gap-4 text-center">
+                              <h4 className="text-white font-medium text-2xl md:text-[32px] tracking-tight leading-[1.1]">Discontinuità<br/>d'Interfaccia</h4>
+                              <p className="text-neutral-400 text-[15px] leading-relaxed font-light max-w-[280px]">
+                                Spaziature incoerenti, layout frammentato e icone fuori standard che minano pesantemente la percezione qualitativa dell'app.
+                              </p>
+                              <span className="text-[11px] font-mono font-bold text-[#B50D3A] uppercase tracking-[0.2em] mt-6">Problema 04</span>
+                            </div>
+                          </div>
                         </>
                       )
                     }
@@ -800,39 +819,6 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </div>
                 ) : isChronos ? (
                   <div className="flex flex-col gap-10">
-                    {/* Intro with high speed train image */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                      <div className="md:col-span-7 flex flex-col gap-4">
-                        <span className="text-sm font-raleway uppercase tracking-widest text-[#9E1C1F] font-bold">01 / Introduzione</span>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
-                          Un'esperienza di acquisto biglietti che viaggia alla velocità del brand.
-                        </h3>
-                        <p className="text-sm sm:text-base leading-relaxed text-neutral-400 font-light">
-                          Il redesign dell'applicazione di Italo Treno si concentra sull'abbattimento del carico cognitivo durante la ricerca, selezione e pagamento delle tratte ad alta velocità.
-                        </p>
-                      </div>
-                      <div className="md:col-span-5 h-56 sm:h-64 rounded-2xl overflow-hidden border border-white/10 shadow-xl relative group bg-[#111]">
-                        <img
-                          src="https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=600&auto=format&fit=crop"
-                          alt="Italo Treno ad Alta Velocità"
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-                      </div>
-                    </div>
-
-                    {/* Context & Challenge */}
-                    <div className="flex flex-col gap-4 pt-10 border-t border-white/5">
-                      <span className="text-sm font-raleway uppercase tracking-widest text-[#9E1C1F] font-bold">02 / Context & Challenge</span>
-                      <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase font-sans">
-                        L'Attrito Invisibile.
-                      </h2>
-                      <p className="text-base leading-relaxed text-neutral-300 font-light">
-                        Italo è sinonimo di viaggi rapidi e premium. Ma una grande promessa brand perde valore se l'app frena gli utenti proprio al momento dell'acquisto. La vera sfida? Non si trattava di "fare un restyling estetico", ma di abbattere i muri cognitivi e risolvere un problema strutturale di navigazione. Obiettivo: eliminare ogni frizione nel funnel di acquisto.
-                      </p>
-                    </div>
-
                   </div>
                 ) : (
                   <div className="flex flex-col gap-16 w-full">
@@ -928,14 +914,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               copiedColor={copiedColor}
               handleCopyHex={handleCopyHex}
             />
-          ) : (isAetheris || isChronos) ? (
+          ) : isAetheris ? (
             <AetherisLowerSections
               project={project}
               activeResearchTab={activeResearchTab}
               setActiveResearchTab={(val) => setActiveResearchTab(val as any)}
               lang={lang}
             />
-          ) : (
+          ) : isChronos ? null : (
             isDetailed && (
               <div className="flex flex-col gap-16">
                 {/* Sezione Tipologie di Ricerca */}

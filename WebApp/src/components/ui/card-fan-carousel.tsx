@@ -129,7 +129,7 @@ export default function CardFanCarousel({ cards }: CardFanCarouselProps) {
         <div ref={containerRef} className="fan-layout relative w-full h-[450px]">
           {cards.map((card, index) => {
             const contentNode = card.content ? (
-              <div className="relative w-full h-full bg-[#0a0a0a] border border-white/10 rounded-[2rem] p-6 md:p-8 flex flex-col justify-between shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-colors">
+              <div className="relative w-full h-full bg-[#0a0a0a] border border-white/10 rounded-[2rem] overflow-hidden p-6 md:p-8 flex flex-col justify-between shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-colors">
                 {card.content}
               </div>
             ) : (
