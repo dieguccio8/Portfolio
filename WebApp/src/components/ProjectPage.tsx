@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+import { Environment, Center, Resize, Html } from '@react-three/drei';
+import { Model } from './IphoneMockup3D';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowLeft,
@@ -46,11 +50,30 @@ import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from './ScrollProgress';
 import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
+import ThreeDMarquee from './ui/3d-marquee';
+import CardFanCarousel from './ui/card-fan-carousel';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
 import { Button3D } from './ui/3d-button';
+import { GridVignetteBackground } from './ui/vignette-grid-background';
 
+function RotatingPhone({ children, initialRotationY = 0 }: { children: React.ReactNode, initialRotationY?: number }) {
+  const groupRef = React.useRef<THREE.Group>(null);
+  
+  useEffect(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = initialRotationY;
+    }
+  }, [initialRotationY]);
+
+  useFrame((state, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.4;
+    }
+  });
+  return <group ref={groupRef}>{children}</group>;
+}
 
 function BeforeAfterSlider() {
   const [sliderPos, setSliderPos] = useState(50);
@@ -292,8 +315,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
         {/* Chronos Logo Card */}
         {isChronos && !isMenuOpen && (
-          <div className="fixed top-6 right-6 z-[100] h-16 md:h-20 px-8 md:px-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-            <img src="./Images/Project 03/italo_logo.webp" alt="Italo Treni Logo" className="h-10 md:h-12 w-auto object-contain" />
+          <div className="fixed top-6 right-6 z-[100] h-12 md:h-14 px-6 md:px-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
+            <img src="./Images/Project 03/italo_logo.webp" alt="Italo Treni Logo" className="h-7 md:h-8 w-auto object-contain" />
           </div>
         )}
 
@@ -419,11 +442,69 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
                 />
               ) : isChronos ? (
-                <img
-                  src="./Images/Project 03/hero.jpg"
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-all duration-1000 ease-[0.16,1,0.3,1]"
-                />
+                <>
+                  <div className="absolute inset-0 z-0 bg-[#050505] overflow-hidden">
+                    {/* Glowing Blob */}
+                    <div className="block md:hidden absolute inset-0 z-0 bg-[#050505]">
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#B5103B] rounded-full blur-[100px] opacity-40 z-0" />
+                      <GridVignetteBackground className="opacity-100 absolute inset-0 z-10 bg-[image:linear-gradient(to_right,rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.15)_1px,transparent_1px)]" horizontalVignetteSize={50} verticalVignetteSize={50} intensity={100} />
+                      <div className="absolute inset-0 z-20 flex items-center justify-center p-8">
+                        <img src="./Images/Project 03/app_mobile/new/Home.jpg" alt="Italo App Mobile" className="w-[80%] max-w-[280px] rounded-3xl shadow-2xl border-2 border-neutral-800" />
+                      </div>
+                    </div>
+                    <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-[#B5103B] rounded-full blur-[150px] md:blur-[200px] opacity-30 z-0" />
+                    <GridVignetteBackground className="hidden md:block opacity-100 absolute inset-0 z-10 bg-[image:linear-gradient(to_right,rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.15)_1px,transparent_1px)]" horizontalVignetteSize={50} verticalVignetteSize={50} intensity={100} />
+                  </div>
+                  <div className="hidden md:flex absolute inset-0 z-10 pointer-events-auto items-center justify-center pt-20">
+                    <Canvas camera={{ position: [0, 0, 300], fov: 45 }} className="w-full h-full">
+                      <Suspense fallback={<Html center><div className="text-white text-xl">Caricamento 3D...</div></Html>}>
+                        <Environment preset="city" />
+                        <ambientLight intensity={0.4} />
+                        {/* Main subtle light */}
+                        <directionalLight position={[10, 20, 15]} intensity={1} />
+                        {/* Strong red lights to match the blob */}
+                        <directionalLight position={[-10, -10, -10]} intensity={3} color="#B5103B" />
+                        <pointLight position={[0, 0, 10]} intensity={200} distance={100} color="#B5103B" />
+                        <pointLight position={[0, -20, -10]} intensity={300} distance={150} color="#B5103B" />
+                        
+                        <group>
+                          {/* Left Phone - Facing forward, tilted right */}
+                          <group position={[-55, 30, -20]} rotation={[0, 0, 0.25]}>
+                            <Resize scale={140}>
+                              <Center>
+                                <RotatingPhone initialRotationY={Math.PI + 0.2}>
+                                  <Model imagePath="./Images/Project 03/app_mobile/new/Biglietti.jpg" />
+                                </RotatingPhone>
+                              </Center>
+                            </Resize>
+                          </group>
+                          
+                          {/* Center Phone - Facing backward */}
+                          <group position={[0, 10, 20]} rotation={[0.05, 0, -0.05]}>
+                            <Resize scale={150}>
+                              <Center>
+                                <RotatingPhone initialRotationY={0}>
+                                  <Model imagePath="./Images/Project 03/app_mobile/new/Home.jpg" />
+                                </RotatingPhone>
+                              </Center>
+                            </Resize>
+                          </group>
+                          
+                          {/* Right Phone - Facing forward, tilted left */}
+                          <group position={[55, 5, -20]} rotation={[0, 0, -0.25]}>
+                            <Resize scale={140}>
+                              <Center>
+                                <RotatingPhone initialRotationY={Math.PI - 0.2}>
+                                  <Model imagePath="./Images/Project 03/app_mobile/new/Cerca.jpg" />
+                                </RotatingPhone>
+                              </Center>
+                            </Resize>
+                          </group>
+                        </group>
+                      </Suspense>
+                    </Canvas>
+                  </div>
+                </>
               ) : isKinetics ? (
                 <video
                   src="./Video/Project 02/hero_video_02_wide.mp4"
@@ -461,16 +542,16 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   {/* Sleek Horizontal Project Ledger for Aetheris (Pills) */}
                   <div className="flex flex-row flex-wrap justify-center items-center gap-3 sm:gap-4 w-full">
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : 'text-[#068B35]'}`}>Year:</span>
+                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : isChronos ? 'text-[#B40E3C]' : 'text-[#068B35]'}`}>Year:</span>
                       <span className="text-sm sm:text-sm font-semibold text-white">{project.year}</span>
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : 'text-[#068B35]'}`}>Role:</span>
+                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : isChronos ? 'text-[#B40E3C]' : 'text-[#068B35]'}`}>Role:</span>
                       <span className="text-sm sm:text-sm font-semibold text-white">{project.role}</span>
                     </div>
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-sm">
-                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : 'text-[#068B35]'}`}>Type:</span>
-                      <span className="text-sm sm:text-sm font-semibold text-white">Team Project</span>
+                      <span className={`text-sm font-raleway uppercase tracking-wider ${isKinetics ? 'text-[#FCD306]' : isChronos ? 'text-[#B40E3C]' : 'text-[#068B35]'}`}>Type:</span>
+                      <span className="text-sm sm:text-sm font-semibold text-white">{isChronos ? 'Personal Project' : 'Team Project'}</span>
                     </div>
                   </div>
                 </div>
@@ -507,6 +588,122 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 <p className="text-white font-urbanist text-xl md:text-2xl lg:text-[28px] leading-[1.4] font-light tracking-tight">
                   <span className="font-semibold text-[#FCD306]">Rebranding dell'identità visiva di Urban StreetArt Sicily:</span> pagina Instagram dedicata alla diffusione dell'arte urbana in Sicilia, con l'obiettivo di trasformarla in un vero e proprio portale digitale.
                 </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 2.5 Decorative Section for Chronos */}
+        {isChronos && (
+          <section 
+            className="w-full h-screen relative z-20 flex items-center justify-center overflow-hidden"
+            style={{ background: 'linear-gradient(to bottom, #050505 0%, #3B0615 50%, #050505 100%)' }}
+          >
+            {/* Geometric Crosses overlay */}
+            <div className="absolute inset-0 z-10 pointer-events-none">
+              {[
+              { top: '10%', left: '15%', size: 'text-2xl', opacity: 'opacity-10', rotate: 'rotate-45' },
+              { top: '25%', left: '75%', size: 'text-4xl', opacity: 'opacity-20', rotate: 'rotate-45' },
+              { top: '80%', left: '20%', size: 'text-xl', opacity: 'opacity-5', rotate: 'rotate-45' },
+              { top: '65%', left: '85%', size: 'text-6xl', opacity: 'opacity-10', rotate: 'rotate-45' },
+              { top: '45%', left: '40%', size: 'text-3xl', opacity: 'opacity-20', rotate: 'rotate-45' },
+              { top: '15%', left: '50%', size: 'text-7xl', opacity: 'opacity-5', rotate: 'rotate-45' },
+              { top: '85%', left: '60%', size: 'text-2xl', opacity: 'opacity-[0.15]', rotate: 'rotate-45' },
+              { top: '35%', left: '10%', size: 'text-5xl', opacity: 'opacity-10', rotate: 'rotate-45' },
+              { top: '55%', left: '80%', size: 'text-lg', opacity: 'opacity-[0.15]', rotate: 'rotate-45' },
+              { top: '75%', left: '35%', size: 'text-4xl', opacity: 'opacity-10', rotate: 'rotate-45' },
+              { top: '20%', left: '30%', size: 'text-sm', opacity: 'opacity-30', rotate: 'rotate-45' },
+              { top: '90%', left: '10%', size: 'text-6xl', opacity: 'opacity-5', rotate: 'rotate-45' },
+              { top: '50%', left: '65%', size: 'text-5xl', opacity: 'opacity-5', rotate: 'rotate-45' },
+              { top: '8%', left: '90%', size: 'text-3xl', opacity: 'opacity-10', rotate: 'rotate-45' },
+              { top: '92%', left: '85%', size: 'text-4xl', opacity: 'opacity-10', rotate: 'rotate-45' },
+            ].map((decor, i) => (
+              <div 
+                key={i} 
+                className={`absolute font-mono text-white select-none pointer-events-none ${decor.size} ${decor.opacity} ${decor.rotate}`}
+                style={{ top: decor.top, left: decor.left }}
+              >
+                +
+              </div>
+            ))}
+            </div>
+            {/* Analisi UX/UI (Problem Statement) - Centered in this section */}
+            <div className="relative z-20 flex flex-col items-center gap-12 w-full max-w-[90rem] px-6 pointer-events-auto mt-20">
+              <div className="flex flex-col items-center gap-4 text-center">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase font-sans drop-shadow-lg">
+                  Criticità
+                </h2>
+              </div>
+              <div className="w-full relative z-30">
+                <CardFanCarousel 
+                  cards={[
+                    {
+                      content: (
+                        <>
+                          <div className="flex flex-col gap-4 relative z-10">
+                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
+                              <AlertTriangle className="w-6 h-6 text-[#B50D3A]" />
+                            </div>
+                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Navigazione<br/>Labirintica</h4>
+                          </div>
+                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Eccessiva ridondanza dei menu con voci duplicate e sezioni superflue che rallentano il flusso d'acquisto disorientando l'utente.</p>
+                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 01</span>
+                          
+                          {/* Background Texture/Gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+                        </>
+                      )
+                    },
+                    {
+                      content: (
+                        <>
+                          <div className="flex flex-col gap-4 relative z-10">
+                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
+                              <Compass className="w-6 h-6 text-[#B50D3A]" />
+                            </div>
+                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Gerarchia<br/>Visiva Assente</h4>
+                          </div>
+                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Testi monocromatici e dimensionamento errato (prezzi minuscoli, titoli non centrati) rendono faticosa la scansione rapida.</p>
+                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 02</span>
+                          
+                          <div className="absolute inset-0 bg-gradient-to-bl from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+                        </>
+                      )
+                    },
+                    {
+                      content: (
+                        <>
+                          <div className="flex flex-col gap-4 relative z-10">
+                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
+                              <Image className="w-6 h-6 text-[#B50D3A]" />
+                            </div>
+                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Frizioni<br/>Cromatiche</h4>
+                          </div>
+                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Uso fuorviante dei colori: il rosso viene usato per evidenziare messaggi positivi. Scarso contrasto sulle call to action primarie.</p>
+                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 03</span>
+                          
+                          <div className="absolute inset-0 bg-gradient-to-tr from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+                        </>
+                      )
+                    },
+                    {
+                      content: (
+                        <>
+                          <div className="flex flex-col gap-4 relative z-10">
+                            <div className="w-12 h-12 rounded-full bg-[#B50D3A]/10 flex items-center justify-center border border-[#B50D3A]/30">
+                              <Smartphone className="w-6 h-6 text-[#B50D3A]" />
+                            </div>
+                            <h4 className="text-white font-bold text-xl md:text-2xl tracking-tight leading-tight">Discontinuità<br/>d'Interfaccia</h4>
+                          </div>
+                          <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-light relative z-10">Spaziature incoerenti, layout frammentato e icone fuori standard che minano pesantemente la percezione qualitativa dell'app.</p>
+                          <span className="text-xs font-mono text-[#B50D3A]/60 uppercase tracking-widest relative z-10">Problema 04</span>
+                          
+                          <div className="absolute inset-0 bg-gradient-to-tl from-[#B50D3A]/5 via-transparent to-transparent pointer-events-none" />
+                        </>
+                      )
+                    }
+                  ]}
+                />
               </div>
             </div>
           </section>
@@ -606,6 +803,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         Italo è sinonimo di viaggi rapidi e premium. Ma una grande promessa brand perde valore se l'app frena gli utenti proprio al momento dell'acquisto. La vera sfida? Non si trattava di "fare un restyling estetico", ma di abbattere i muri cognitivi e risolvere un problema strutturale di navigazione. Obiettivo: eliminare ogni frizione nel funnel di acquisto.
                       </p>
                     </div>
+
                   </div>
                 ) : (
                   <div className="flex flex-col gap-16 w-full">
@@ -718,7 +916,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                   </div>
                   <div className="relative z-10 flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
-                      <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
+                      <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'} font-bold`}>
                         {lang === 'it'
                           ? (isAetheris ? '01 / Ricerca ed Analisi' : '02 / Ricerca ed Analisi')
                           : (isAetheris ? '01 / Research & Analysis' : '02 / Research & Analysis')
@@ -753,7 +951,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         {activeResearchTab === 'desk' && (
                           <motion.div
                             layoutId="active-research-bg"
-                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
+                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : isChronos ? 'bg-[#B40E3C]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                           />
                         )}
@@ -767,7 +965,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         {activeResearchTab === 'sondaggi' && (
                           <motion.div
                             layoutId="active-research-bg"
-                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
+                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : isChronos ? 'bg-[#B40E3C]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                           />
                         )}
@@ -781,7 +979,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         {activeResearchTab === 'interviste' && (
                           <motion.div
                             layoutId="active-research-bg"
-                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
+                            className={`absolute inset-0 ${isAetheris ? 'bg-[#068B35]' : isChronos ? 'bg-[#B40E3C]' : 'bg-[#E8302A]'} ${isAetheris ? 'rounded-full' : 'rounded-xl'}`}
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                           />
                         )}
@@ -911,12 +1109,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                         : (isAetheris ? "Randomly" : "Walking around randomly")
                                       }
                                     </span>
-                                    <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                                    <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                                       {isAetheris ? "70%" : "65%"}
                                     </span>
                                   </div>
                                   <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                                    <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '70%' : '65%' }} />
+                                    <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : isChronos ? 'bg-[#B40E3C]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '70%' : '65%' }} />
                                   </div>
                                 </div>
 
@@ -973,12 +1171,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                                 <div className="flex flex-col gap-1">
                                   <div className="flex justify-between text-sm font-raleway text-neutral-400">
                                     <span>{lang === 'it' ? 'Sì' : 'Yes'}</span>
-                                    <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                                    <span className={`font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                                       {isAetheris ? "75%" : "80%"}
                                     </span>
                                   </div>
                                   <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                                    <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '75%' : '80%' }} />
+                                    <div className={`h-full rounded-full ${isAetheris ? 'bg-[#068B35]' : isChronos ? 'bg-[#B40E3C]' : 'bg-[#E8302A]'}`} style={{ width: isAetheris ? '75%' : '80%' }} />
                                   </div>
                                 </div>
 
@@ -1156,8 +1354,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                       <div className="flex flex-col gap-4">
                         {/* Soluzione 1 */}
-                        <div className="p-4 bg-[#131514] rounded-xl border border-[#068B35]/20 hover:border-[#068B35]/40 transition-all flex gap-4 shadow-sm">
-                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-sm font-raleway mt-0.5">1</div>
+                        <div className={`p-4 bg-[#131514] rounded-xl border transition-all flex gap-4 shadow-sm ${isAetheris ? "border-[#068B35]/20 hover:border-[#068B35]/40" : isChronos ? "border-[#B40E3C]/20 hover:border-[#B40E3C]/40" : "border-[#E8302A]/20 hover:border-[#E8302A]/40"}`}>
+                          <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-sm font-raleway mt-0.5 border ${isAetheris ? "bg-[#068B35]/20 text-emerald-300 border-[#068B35]/30" : isChronos ? "bg-[#B40E3C]/20 text-rose-300 border-[#B40E3C]/30" : "bg-[#E8302A]/20 text-rose-300 border-[#E8302A]/30"}`}>1</div>
                           <p className="text-sm sm:text-sm text-neutral-300 leading-relaxed">
                             {lang === 'it' ? (
                               isAetheris
@@ -1172,8 +1370,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </div>
 
                         {/* Soluzione 2 */}
-                        <div className="p-4 bg-[#131514] rounded-xl border border-[#068B35]/20 hover:border-[#068B35]/40 transition-all flex gap-4 shadow-sm">
-                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-sm font-raleway mt-0.5">2</div>
+                        <div className={`p-4 bg-[#131514] rounded-xl border transition-all flex gap-4 shadow-sm ${isAetheris ? "border-[#068B35]/20 hover:border-[#068B35]/40" : isChronos ? "border-[#B40E3C]/20 hover:border-[#B40E3C]/40" : "border-[#E8302A]/20 hover:border-[#E8302A]/40"}`}>
+                          <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-sm font-raleway mt-0.5 border ${isAetheris ? "bg-[#068B35]/20 text-emerald-300 border-[#068B35]/30" : isChronos ? "bg-[#B40E3C]/20 text-rose-300 border-[#B40E3C]/30" : "bg-[#E8302A]/20 text-rose-300 border-[#E8302A]/30"}`}>2</div>
                           <p className="text-sm sm:text-sm text-neutral-300 leading-relaxed">
                             {lang === 'it' ? (
                               isAetheris
@@ -1188,8 +1386,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                         </div>
 
                         {/* Soluzione 3 */}
-                        <div className="p-4 bg-[#131514] rounded-xl border border-[#068B35]/20 hover:border-[#068B35]/40 transition-all flex gap-4 shadow-sm">
-                          <div className="w-6 h-6 rounded-full bg-[#068B35]/20 text-emerald-300 border border-[#068B35]/30 flex items-center justify-center shrink-0 text-sm font-raleway mt-0.5">3</div>
+                        <div className={`p-4 bg-[#131514] rounded-xl border transition-all flex gap-4 shadow-sm ${isAetheris ? "border-[#068B35]/20 hover:border-[#068B35]/40" : isChronos ? "border-[#B40E3C]/20 hover:border-[#B40E3C]/40" : "border-[#E8302A]/20 hover:border-[#E8302A]/40"}`}>
+                          <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-sm font-raleway mt-0.5 border ${isAetheris ? "bg-[#068B35]/20 text-emerald-300 border-[#068B35]/30" : isChronos ? "bg-[#B40E3C]/20 text-rose-300 border-[#B40E3C]/30" : "bg-[#E8302A]/20 text-rose-300 border-[#E8302A]/30"}`}>3</div>
                           <p className="text-sm sm:text-sm text-neutral-300 leading-relaxed">
                             {lang === 'it' ? (
                               isAetheris
@@ -1211,7 +1409,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 {/* Sezione User Persona */}
                 <div className="pt-10 border-t border-white/5 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
-                    <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'} font-bold`}>
+                    <span className={`text-sm font-raleway uppercase tracking-widest ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'} font-bold`}>
                       {lang === 'it'
                         ? (isAetheris ? '04 / Target User' : '05 / Target User')
                         : (isAetheris ? '04 / Target User' : '05 / Target User')
@@ -1231,12 +1429,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     </p>
                   </div>
 
-                  <div className={`bg-[#131514] border rounded-[2.5rem] overflow-hidden p-6 sm:p-8 md:p-10 flex flex-col gap-8 relative mt-2 shadow-xl ${isAetheris ? 'border-[#068B35]/20' : 'border-[#E8302A]/20'
+                  <div className={`bg-[#131514] border rounded-[2.5rem] overflow-hidden p-6 sm:p-8 md:p-10 flex flex-col gap-8 relative mt-2 shadow-xl ${isAetheris ? 'border-[#068B35]/20' : isChronos ? 'border-[#B40E3C]/20' : 'border-[#E8302A]/20'
                     }`}>
                     {/* Top Header Row: Image on the left, Name & Info on the right */}
                     <div className="flex flex-col sm:flex-row gap-6 items-center justify-between border-b border-white/5 pb-6">
                       <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
-                        <div className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 shadow-md shrink-0 ${isAetheris ? 'border-[#068B35]/50' : 'border-[#E8302A]/50'
+                        <div className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 shadow-md shrink-0 ${isAetheris ? 'border-[#068B35]/50' : isChronos ? 'border-[#B40E3C]/50' : 'border-[#E8302A]/50'
                           }`}>
                           <img
                             src={isAetheris
@@ -1272,7 +1470,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
                       {/* Left Quote */}
                       <div className="bg-[#1A1D1B]/40 border border-white/5 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col justify-center relative">
-                        <div className={`text-3xl font-serif leading-none mb-1 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>“</div>
+                        <div className={`text-3xl font-serif leading-none mb-1 ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>“</div>
                         <p className="text-sm sm:text-sm italic text-neutral-200 leading-relaxed font-light">
                           {lang === 'it' ? (
                             isAetheris
@@ -1284,12 +1482,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                               : "I want to discover the stories and voices of street artists and navigate urban artworks smoothly right on site."
                           )}
                         </p>
-                        <div className={`text-3xl font-serif leading-none text-right mt-1 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>”</div>
+                        <div className={`text-3xl font-serif leading-none text-right mt-1 ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>”</div>
                       </div>
 
                       {/* Right Bio & Contesto */}
                       <div className="bg-[#1A1D1B]/40 border border-white/5 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col gap-2.5 justify-center">
-                        <span className={`text-sm font-raleway uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                        <span className={`text-sm font-raleway uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                           {lang === 'it' ? "Bio & Contesto" : "Bio & Context"}
                         </span>
                         <p className="text-sm sm:text-sm leading-relaxed text-neutral-300 font-light">
@@ -1360,12 +1558,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                     {/* Comportamento e Abitudini */}
                     <div className="flex flex-col gap-3 border-t border-white/5 pt-6">
-                      <span className={`text-sm font-raleway uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                      <span className={`text-sm font-raleway uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                         {lang === 'it' ? "Comportamento & Abitudini" : "Behaviors & Habits"}
                       </span>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                          <span className={`text-xs font-raleway uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                          <span className={`text-xs font-raleway uppercase font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                             {lang === 'it' ? "Pianificazione" : "Planning"}
                           </span>
                           <p className="text-sm leading-relaxed text-neutral-300 font-light">
@@ -1381,7 +1579,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           </p>
                         </div>
                         <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                          <span className={`text-xs font-raleway uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                          <span className={`text-xs font-raleway uppercase font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                             {lang === 'it' ? "Orientamento" : "Navigation"}
                           </span>
                           <p className="text-sm leading-relaxed text-neutral-300 font-light">
@@ -1397,7 +1595,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                           </p>
                         </div>
                         <div className="p-4 bg-[#1A1D1B]/40 rounded-xl border border-white/5 flex flex-col gap-1.5 shadow-sm">
-                          <span className={`text-xs font-raleway uppercase font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                          <span className={`text-xs font-raleway uppercase font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                             {lang === 'it' ? "Socialità" : "Social Habits"}
                           </span>
                           <p className="text-sm leading-relaxed text-neutral-300 font-light">
@@ -1418,15 +1616,15 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     {/* Obiettivi & Frustrazioni */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-white/5 pt-6">
                       <div className="flex flex-col gap-2">
-                        <span className={`text-sm font-raleway uppercase tracking-widest font-bold flex items-center gap-1.5 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'
+                        <span className={`text-sm font-raleway uppercase tracking-widest font-bold flex items-center gap-1.5 ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'
                           }`}>
                           <Target className="w-3.5 h-3.5" />
                           {lang === 'it' ? "Obiettivi e Motivazioni" : "Goals & Motivations"}
                         </span>
                         <ul className="flex flex-col gap-2">
-                          <li className={`p-3 bg-[#1A1D1B]/40 rounded-xl border flex gap-2.5 items-start shadow-sm ${isAetheris ? 'border-[#068B35]/15' : 'border-[#E8302A]/15'
+                          <li className={`p-3 bg-[#1A1D1B]/40 rounded-xl border flex gap-2.5 items-start shadow-sm ${isAetheris ? 'border-[#068B35]/15' : isChronos ? 'border-[#B40E3C]/15' : 'border-[#E8302A]/15'
                             }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
+                            <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${isAetheris ? 'bg-[#068B35]' : isChronos ? 'bg-[#B40E3C]' : 'bg-[#E8302A]'}`} />
                             <div className="flex flex-col">
                               <span className="text-sm font-bold text-white">
                                 {lang === 'it' ? (
@@ -1448,9 +1646,9 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                               </span>
                             </div>
                           </li>
-                          <li className={`p-3 bg-[#1A1D1B]/40 rounded-xl border flex gap-2.5 items-start shadow-sm ${isAetheris ? 'border-[#068B35]/15' : 'border-[#E8302A]/15'
+                          <li className={`p-3 bg-[#1A1D1B]/40 rounded-xl border flex gap-2.5 items-start shadow-sm ${isAetheris ? 'border-[#068B35]/15' : isChronos ? 'border-[#B40E3C]/15' : 'border-[#E8302A]/15'
                             }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${isAetheris ? 'bg-[#068B35]' : 'bg-[#E8302A]'}`} />
+                            <span className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1.5 ${isAetheris ? 'bg-[#068B35]' : isChronos ? 'bg-[#B40E3C]' : 'bg-[#E8302A]'}`} />
                             <div className="flex flex-col">
                               <span className="text-sm font-bold text-white">
                                 {lang === 'it' ? (
@@ -1565,7 +1763,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 {/* Sezione Wireframe */}
                 <div className={`pt-10 border-t flex flex-col gap-6 ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
                   <div className="flex flex-col gap-3">
-                    <span className={`text-sm font-raleway uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                    <span className={`text-sm font-raleway uppercase tracking-widest font-bold ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                       {lang === 'it'
                         ? (isAetheris ? '05 / Architettura ed Ergonomia' : '06 / Architettura ed Ergonomia')
                         : (isAetheris ? '05 / Architecture & Ergonomics' : '06 / Architecture & Ergonomics')
@@ -1969,7 +2167,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
                         <img
                           key={variant}
-                          src={`./Images/Project 01/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
+                          src={`/Images/Project 01/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
                           alt={`Categoria ${variant}`}
                           className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
                         />
@@ -2072,7 +2270,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8 md:pt-12">
           {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
           {isAetheris && (
-            <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-16 w-full" id="orto-interactive-prototypes-section">
+            <>
+              {/* 3D Marquee Section */}
+              <div className="pt-16 pb-8 md:pb-12 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
+                <ThreeDMarquee />
+              </div>
+
+              <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-16 w-full" id="orto-interactive-prototypes-section">
 
               {/* Left Column: Prototypes */}
               <div className="lg:col-span-5 flex flex-col gap-6 items-center w-full">
@@ -2206,6 +2410,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               </div>
 
             </div>
+            </>
           )}
         </div>
 
@@ -2243,7 +2448,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
                 <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
                   <div>
-                    <span className={`text-xs font-raleway uppercase tracking-widest block mb-1 ${isAetheris ? 'text-[#068B35]' : 'text-[#E8302A]'}`}>
+                    <span className={`text-xs font-raleway uppercase tracking-widest block mb-1 ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
                       {p.year} / {p.category}
                     </span>
                     <h4 className="text-lg font-bold text-white uppercase">{p.title}</h4>

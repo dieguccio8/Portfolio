@@ -51,7 +51,7 @@ export const defaultSolutionsFeatures = [
 export interface FeatureData {
   title: string;
   description: string;
-  icon: React.ElementType;
+  icon: React.ElementType<any>;
 }
 
 const SpotlightFeatureCard: React.FC<{ 
@@ -152,6 +152,7 @@ const SpotlightFeatureCard: React.FC<{
             <div className="bg-[#121312] p-4 relative z-10 flex shrink-0 rounded-full overflow-hidden">
               <div className={`absolute inset-0 bg-gradient-to-br ${iconGradientFrom} ${iconGradientTo} opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100`}></div>
               {/* Added key for React reconciliation so animation plays on icon change */}
+              {/* @ts-ignore - Dynamic icon component type causes TS strict mode errors */}
               <Icon key={feature.title} className={`w-6 h-6 ${iconTextColor} group-hover:text-white relative z-20 transition-colors duration-300`} />
             </div>
           </div>

@@ -393,8 +393,13 @@ export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {
             <Canvas camera={{ position: [0, 0, 300], fov: 45 }} className="!absolute inset-0 w-full h-full z-0">
               <Suspense fallback={<Html center><div className="text-white text-xl">Caricamento 3D in corso...</div></Html>}>
                 <Environment preset="city" />
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
+                <ambientLight intensity={0.4} />
+                {/* Main subtle light */}
+                <directionalLight position={[10, 20, 15]} intensity={1} />
+                {/* Strong green lights to match the theme */}
+                <directionalLight position={[-10, -10, -10]} intensity={3} color="#0A8232" />
+                <pointLight position={[0, 0, 10]} intensity={200} distance={100} color="#0A8232" />
+                <pointLight position={[0, -20, -10]} intensity={300} distance={150} color="#0A8232" />
                 
                 <AnimatedScene containerRef={containerRef} titleRef={titleRef} cardsRef={cardsRef} imagePath={imagePath} />
                 

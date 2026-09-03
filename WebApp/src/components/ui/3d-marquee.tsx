@@ -20,14 +20,14 @@ interface ThreeDMarqueeProps {
 }
 
 const defaultImages = [
-  '/project-01/app/mobile/Dettagli pianta - 6.jpg',
-  '/project-01/app/mobile/Home.jpg',
-  '/project-01/app/mobile/Mappa.jpg',
-  '/project-01/app/mobile/Ricerca piante.jpg',
-  '/project-01/app/mobile/Scansione QR Code.jpg',
-  '/project-01/app/mobile/Scelta percorso - Percorso breve.jpg',
-  '/project-01/app/mobile/Scelta percorso - Percorso scoperta.jpg',
-  '/project-01/app/mobile/Scelta percorso - Visualizzazione mappa.jpg',
+  './Images/Project 01/app/mobile/Dettagli pianta - 6.jpg',
+  './Images/Project 01/app/mobile/Home.jpg',
+  './Images/Project 01/app/mobile/Mappa.jpg',
+  './Images/Project 01/app/mobile/Ricerca piante.jpg',
+  './Images/Project 01/app/mobile/Scansione QR Code.jpg',
+  './Images/Project 01/app/mobile/Scelta percorso - Percorso breve.jpg',
+  './Images/Project 01/app/mobile/Scelta percorso - Percorso scoperta.jpg',
+  './Images/Project 01/app/mobile/Scelta percorso - Visualizzazione mappa.jpg',
 ]
 
 const ThreeDMarquee = ({

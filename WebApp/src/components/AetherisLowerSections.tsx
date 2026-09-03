@@ -389,7 +389,7 @@ export function AetherisLowerSections({
       </div>
 
       {/* 03.5 / LOOPING MOCKUPS (Restored) */}
-      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] -mt-[10vh] md:-mt-[25vh]">
+      <div className="relative z-30 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] -mt-[10vh] md:-mt-[25vh]">
         <div className="relative w-full h-full">
           <img
             src="./Images/Project 01/mockup_mobile.jpg"
@@ -459,7 +459,6 @@ export function AetherisLowerSections({
         </div>
       </div>
 
-      {/* NEW StickyCard002 Gallery Instead of Single Image */}
       <div className="relative z-10 w-full shrink-0 block">
         <StickyCard002
           cards={[
@@ -469,6 +468,11 @@ export function AetherisLowerSections({
             { id: 4, image: "./Images/Project 01/mockup_cartello_pianta_2.jpg", alt: "Cartello Pianta Mockup 2" }
           ]}
         />
+      </div>
+
+      {/* NEW 3D IPHONE MOCKUP SECTION */}
+      <div className="w-full relative mt-32">
+        <IphoneMockup3D />
       </div>
     </div>
   );

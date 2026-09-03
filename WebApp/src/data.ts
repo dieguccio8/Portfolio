@@ -45,7 +45,7 @@ export const PROJECTS: Project[] = [
     id: 'chronos',
     title: 'Italo Treni',
     category: 'High-Performance Interface Concept',
-    year: '2025',
+    year: '2024',
     description: 'Concept di interfaccia per la prenotazione rapida di treni ad alta velocità. Ottimizzazione dei flussi transazionali ed elevata accessibilità visiva.',
     longDescription: 'Un radicale redesign concettuale dell\'esperienza di biglietteria digitale per Italo Treni. Il focus primario è la riduzione drastica dei passaggi necessari per acquistare un biglietto dell\'alta velocità, eliminando il rumore visivo a favore di una fluidità ottimale e di un design system altamente inclusivo e accessibile.',
     challenge: 'I portali di viaggio tradizionali sono spesso affollati di promozioni, popup e passaggi superflui che confondono l\'utente. La sfida era condensare la ricerca del viaggio, la selezione del posto, i servizi aggiuntivi e il pagamento in un unico flusso lineare e privo di attrito.',
