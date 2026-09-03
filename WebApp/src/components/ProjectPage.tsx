@@ -54,6 +54,7 @@ import ThreeDMarquee from './ui/3d-marquee';
 import CardFanCarousel from './ui/card-fan-carousel';
 import WireframeComparisonCarousel from './WireframeComparisonCarousel';
 import ItaloDesignSystemSection from './ItaloDesignSystemSection';
+import ItaloBeforeAfterSection from './ItaloBeforeAfterSection';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -782,7 +783,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               <div className="w-full lg:w-[520px] shrink-0 flex flex-col items-start text-left gap-6 relative">
                 {/* Background Ambient Glow Blob */}
                 <div 
-                  className="absolute -top-32 -left-32 sm:-top-44 sm:-left-44 w-[600px] sm:w-[750px] lg:w-[850px] h-[600px] sm:h-[750px] lg:h-[850px] rounded-full bg-[radial-gradient(circle_at_center,rgba(181,13,58,0.32)_0%,rgba(158,28,31,0.15)_45%,transparent_70%)] blur-[90px] sm:blur-[130px] -z-10 pointer-events-none"
+                  className="absolute -top-32 -left-32 sm:-top-44 sm:-left-44 w-[600px] sm:w-[750px] lg:w-[850px] h-[600px] sm:h-[750px] lg:h-[850px] rounded-full bg-[radial-gradient(circle_at_center,rgba(181,13,58,0.28)_0%,rgba(158,28,31,0.12)_45%,transparent_70%)] blur-[35px] sm:blur-[50px] transform-gpu -z-10 pointer-events-none"
                   aria-hidden="true"
                 />
 
@@ -814,6 +815,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {/* 2.7 Design System Section for Chronos */}
         {isChronos && (
           <ItaloDesignSystemSection lang={lang} />
+        )}
+
+        {/* 2.8 Prima & Dopo Before/After Comparison Section for Chronos */}
+        {isChronos && (
+          <ItaloBeforeAfterSection lang={lang} />
         )}
 
 
