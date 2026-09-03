@@ -596,25 +596,40 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {/* 2.4 Introduction Section for Chronos */}
         {isChronos && (
           <section className="w-full h-screen relative z-10 bg-transparent flex flex-col justify-start">
-             {/* Added mt-16 md:mt-24 to create distance from the previous section */}
-             <div className="w-full relative h-[20px] sm:h-[30px] lg:h-[40px] overflow-hidden flex items-center border-b border-[#B50D3A]/20 opacity-90 mt-16 md:mt-24 pointer-events-none">
+             {/* Dynamic Train Divider Banner */}
+             <div className="w-full relative h-[22px] sm:h-[32px] lg:h-[42px] overflow-hidden flex items-center border-b border-[#B50D3A]/20 opacity-90 mt-16 md:mt-24 pointer-events-none">
                  <style>{`
-                   @keyframes train-scroll {
-                     0% { transform: translateX(-50%); }
-                     100% { transform: translateX(0); }
+                   @keyframes train-scroll-seamless {
+                     0% { transform: translate3d(-50%, 0, 0); }
+                     100% { transform: translate3d(0, 0, 0); }
                    }
                  `}</style>
-                 <div className="absolute inset-y-0 left-0 flex w-max h-full gap-4 sm:gap-6 md:gap-8"
-                      style={{ animation: 'train-scroll 20s linear infinite' }}
+                 <div 
+                   className="flex w-max h-full will-change-transform"
+                   style={{ animation: 'train-scroll-seamless 18s linear infinite' }}
                  >
-                    {[...Array(4)].map((_, i) => (
-                      <img 
-                        key={i}
-                        src={import.meta.env.BASE_URL + "train_divider.svg"} 
-                        alt="Italo Train" 
-                        className="h-full w-auto object-cover flex-shrink-0"
-                      />
-                    ))}
+                   {/* Set 1 */}
+                   <div className="flex items-center h-full shrink-0 gap-6 sm:gap-8 pr-6 sm:pr-8">
+                     {[...Array(6)].map((_, i) => (
+                       <img 
+                         key={`t1-${i}`}
+                         src={import.meta.env.BASE_URL + "train_divider.svg"} 
+                         alt="Italo Train" 
+                         className="h-full w-auto object-contain flex-shrink-0"
+                       />
+                     ))}
+                   </div>
+                   {/* Set 2 (Identical clone for 100% seamless infinite loop) */}
+                   <div className="flex items-center h-full shrink-0 gap-6 sm:gap-8 pr-6 sm:pr-8" aria-hidden="true">
+                     {[...Array(6)].map((_, i) => (
+                       <img 
+                         key={`t2-${i}`}
+                         src={import.meta.env.BASE_URL + "train_divider.svg"} 
+                         alt="Italo Train" 
+                         className="h-full w-auto object-contain flex-shrink-0"
+                       />
+                     ))}
+                   </div>
                  </div>
              </div>
 

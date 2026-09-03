@@ -147,7 +147,7 @@ export default function CardFanCarousel({ cards }: CardFanCarouselProps) {
       </div>
 
       {needsPagination && (
-        <div className="flex items-center justify-center gap-6 mt-8 z-30">
+        <div className="flex items-center justify-center gap-6 mt-12 z-30">
           <button className={`${ARROW_CLASSES} w-12 h-12`} onClick={() => cycle("left")} aria-label="Previous">
             {chevron("left")}
           </button>
