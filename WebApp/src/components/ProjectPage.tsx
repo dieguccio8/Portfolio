@@ -53,6 +53,7 @@ import { FloatingPaths } from './ui/background-paths';
 import ThreeDMarquee from './ui/3d-marquee';
 import CardFanCarousel from './ui/card-fan-carousel';
 import WireframeComparisonCarousel from './WireframeComparisonCarousel';
+import ItaloDesignSystemSection from './ItaloDesignSystemSection';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -778,15 +779,21 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           <section className="w-full min-h-screen relative z-20 flex items-center justify-center py-16 sm:py-20 px-6 sm:px-12 border-t border-white/5">
             <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 w-full max-w-6xl mx-auto">
               {/* Left Column: Sviluppo Wireframe Narrative (Fixed width prevents any horizontal shift) */}
-              <div className="w-full lg:w-[520px] shrink-0 flex flex-col items-start text-left gap-6">
-                <div className="flex flex-col items-start gap-3">
+              <div className="w-full lg:w-[520px] shrink-0 flex flex-col items-start text-left gap-6 relative">
+                {/* Background Ambient Glow Blob */}
+                <div 
+                  className="absolute -top-32 -left-32 sm:-top-44 sm:-left-44 w-[600px] sm:w-[750px] lg:w-[850px] h-[600px] sm:h-[750px] lg:h-[850px] rounded-full bg-[radial-gradient(circle_at_center,rgba(181,13,58,0.32)_0%,rgba(158,28,31,0.15)_45%,transparent_70%)] blur-[90px] sm:blur-[130px] -z-10 pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                <div className="flex flex-col items-start gap-3 relative z-10">
                   <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white uppercase font-sans">
                     Sviluppo Wireframe
                   </h2>
                   <div className="w-12 h-1 bg-[#B50D3A] mt-1 rounded-full" />
                 </div>
 
-                <div className="flex flex-col gap-5 text-neutral-300 font-urbanist text-lg sm:text-xl leading-relaxed font-light">
+                <div className="flex flex-col gap-5 text-neutral-300 font-urbanist text-lg sm:text-xl leading-relaxed font-light relative z-10">
                   <p>
                     Sono stati analizzati i flussi principali degli utenti e le funzionalità più utilizzate.
                   </p>
@@ -802,6 +809,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               </div>
             </div>
           </section>
+        )}
+
+        {/* 2.7 Design System Section for Chronos */}
+        {isChronos && (
+          <ItaloDesignSystemSection lang={lang} />
         )}
 
 

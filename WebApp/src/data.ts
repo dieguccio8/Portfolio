@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
       { hex: '#FFFFFF', name: 'Pure White' },
       { hex: '#111111', name: 'Carbon Slate' }
     ],
-    typography: 'Outfit (Moderna e pulita per UI) & Fira Code (Metadati orari ed emissioni)',
+    typography: 'Instrument Sans (Moderna, pulita e geometrica per UI)',
     tags: ['TypeScript', 'Optimistic UI', 'Archiving', 'Minimal UI']
   }
 ];
