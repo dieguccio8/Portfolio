@@ -75,6 +75,11 @@ html, body {
   *, *::before, *::after {
     cursor: none !important;
   }
+  [data-hide-cursor],
+  [data-hide-cursor] *,
+  iframe {
+    cursor: auto !important;
+  }
 }
 
 /* ─── Noise Grain Texture (fixed, behind everything except cursor) ────────── */

@@ -94,7 +94,14 @@ export default function WireframeComparisonCarousel() {
   };
 
   return (
-    <div className="w-[340px] flex flex-col items-center gap-4 select-none shrink-0">
+    <div className="w-[340px] flex flex-col items-center gap-3 select-none shrink-0">
+      {/* Helper tip above image */}
+      <div className="flex items-center justify-center">
+        <span className="text-[11px] font-urbanist font-medium tracking-wide text-white/60 bg-white/5 border border-white/10 px-3 py-1 rounded-full backdrop-blur-sm">
+          Trascina per confrontare
+        </span>
+      </div>
+
       {/* Frameless Pure Image Comparison Container (Height-constrained to fit laptop viewports) */}
       <div
         ref={containerRef}
@@ -114,10 +121,6 @@ export default function WireframeComparisonCarousel() {
             className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
             loading="eager"
           />
-          {/* Right Badge: Wireframe */}
-          <div className="absolute top-3 right-2.5 z-30 px-2 py-0.5 bg-[#B50D3A]/90 backdrop-blur-md border border-white/20 rounded text-[9px] font-mono font-bold tracking-wider text-white uppercase pointer-events-none shadow-[0_2px_8px_rgba(181,13,58,0.5)]">
-            Wireframe
-          </div>
         </div>
 
         {/* Over Layer (Left Side): VECCHIA APP (Clipped from 0% to sliderPos%) */}
@@ -133,10 +136,6 @@ export default function WireframeComparisonCarousel() {
             className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
             loading="eager"
           />
-          {/* Left Badge: Vecchia App */}
-          <div className="absolute top-3 left-2.5 z-30 px-2 py-0.5 bg-black/80 backdrop-blur-md border border-white/15 rounded text-[9px] font-mono font-medium tracking-wider text-white/90 uppercase pointer-events-none">
-            Vecchia App
-          </div>
         </div>
 
         {/* Draggable Vertical Divider Line */}
@@ -148,13 +147,6 @@ export default function WireframeComparisonCarousel() {
           <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-[#B50D3A] border border-white/90 shadow-[0_2px_10px_rgba(0,0,0,0.6)] flex items-center justify-center text-white text-[11px] font-black pointer-events-none">
             <span>↔</span>
           </div>
-        </div>
-
-        {/* Bottom helper tip */}
-        <div className="absolute bottom-2.5 inset-x-0 flex justify-center z-30 pointer-events-none opacity-50">
-          <span className="text-[9px] font-urbanist font-medium tracking-wide bg-black/75 px-2.5 py-0.5 rounded-full text-white/80 backdrop-blur-sm border border-white/10">
-            Trascina per confrontare
-          </span>
         </div>
       </div>
 

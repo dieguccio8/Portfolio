@@ -13,39 +13,54 @@ export function CustomCursor({ color = '#E8302A' }: { color?: string }) {
   const ringX = useSpring(dotX, RING_SPRING);
   const ringY = useSpring(dotY, RING_SPRING);
   const rafRef = useRef<number>(0);
+  const isHiddenByHover = useRef<boolean>(false);
 
   useEffect(() => {
     if (!window.matchMedia('(pointer: fine)').matches) return;
 
-    const move = (e: MouseEvent) => {
+    const handleHide = () => {
+      isHiddenByHover.current = true;
+      setIsVisible(false);
+    };
+
+    const handleShow = () => {
+      isHiddenByHover.current = false;
       setIsVisible(true);
+    };
+
+    const move = (e: MouseEvent) => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
+        const el = e.target as HTMLElement;
+        if (isHiddenByHover.current || (el && el.closest('[data-hide-cursor], iframe'))) {
+          setIsVisible(false);
+          return;
+        }
+        setIsVisible(true);
         dotX.set(e.clientX);
         dotY.set(e.clientY);
+
+        if (!el) return;
+        const isBtn = el.closest('button, a, [role="button"]');
+        const isImg = !isBtn && el.closest('img, [data-cursor="image"]');
+        const isText = !isBtn && !isImg && el.closest('p, h1, h2, h3, h4, li');
+        if (isBtn) setMode('button');
+        else if (isImg) setMode('image');
+        else if (isText) setMode('text');
+        else setMode('default');
       });
     };
 
-    const detectMode = (e: MouseEvent) => {
-      const el = e.target as HTMLElement;
-      if (!el) return;
-      const isBtn = el.closest('button, a, [role="button"]');
-      const isImg = el.closest('img, [data-cursor="image"]');
-      const isText = !isBtn && !isImg && el.closest('p, h1, h2, h3, h4, li');
-      if (isBtn) setMode('button');
-      else if (isImg) setMode('image');
-      else if (isText) setMode('text');
-      else setMode('default');
-    };
-
     document.addEventListener('mousemove', move, { passive: true });
-    document.addEventListener('mousemove', detectMode, { passive: true });
     document.addEventListener('mouseenter', () => setIsVisible(true));
     document.addEventListener('mouseleave', () => setIsVisible(false));
+    window.addEventListener('hide-custom-cursor', handleHide);
+    window.addEventListener('show-custom-cursor', handleShow);
 
     return () => {
       document.removeEventListener('mousemove', move);
-      document.removeEventListener('mousemove', detectMode);
+      window.removeEventListener('hide-custom-cursor', handleHide);
+      window.removeEventListener('show-custom-cursor', handleShow);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [dotX, dotY]);

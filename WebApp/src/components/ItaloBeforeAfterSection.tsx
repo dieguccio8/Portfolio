@@ -129,9 +129,19 @@ export default function ItaloBeforeAfterSection({ lang }: ItaloBeforeAfterSectio
         <div className="w-12 h-1 bg-[#B50D3A] mt-1 rounded-full" />
       </div>
 
+      {/* Preload images for instant switching without lag */}
+      <div className="hidden" aria-hidden="true">
+        {screens.map((s) => (
+          <div key={s.id}>
+            <img src={`${oldBasePath}${s.oldImg}`} alt="" loading="eager" decoding="async" />
+            <img src={`${newBasePath}${s.newImg}`} alt="" loading="eager" decoding="async" />
+          </div>
+        ))}
+      </div>
+
       {/* Horizontal Capsule Tab Menu */}
-      <div className="flex justify-center w-full mb-14 sm:mb-18">
-        <div className="flex bg-[#121315] border border-white/10 p-1.5 rounded-2xl shrink-0 shadow-2xl relative w-fit max-w-full overflow-x-auto scrollbar-none transform-gpu">
+      <div className="flex justify-center w-full mb-12 sm:mb-16">
+        <div className="flex bg-[#121315] border border-white/10 p-1.5 rounded-2xl shrink-0 shadow-lg relative w-fit max-w-full overflow-x-auto scrollbar-none">
           {screens.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -139,15 +149,15 @@ export default function ItaloBeforeAfterSection({ lang }: ItaloBeforeAfterSectio
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase cursor-pointer ${
+                className={`flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-colors duration-200 relative z-10 whitespace-nowrap uppercase cursor-pointer ${
                   isActive ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="active-before-after-tab-bg"
-                    className="absolute inset-0 bg-[#B50D3A] rounded-xl shadow-[0_0_20px_rgba(181,13,58,0.4)]"
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                    className="absolute inset-0 bg-[#B50D3A] rounded-xl shadow-[0_0_15px_rgba(181,13,58,0.4)]"
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                   />
                 )}
                 <span className="relative flex items-center gap-2">
@@ -161,66 +171,58 @@ export default function ItaloBeforeAfterSection({ lang }: ItaloBeforeAfterSectio
       </div>
 
       {/* Comparison Container */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeScreen.id}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="w-full flex flex-col gap-12 sm:gap-16 items-center transform-gpu"
-        >
-          {/* Side-by-Side Comparison Mockups */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 w-full max-w-3xl justify-items-center items-start transform-gpu">
-            
-            {/* Left Card: PRIMA (Old Design) */}
-            <div className="flex flex-col items-center gap-4 w-full max-w-[230px] sm:max-w-[260px] md:max-w-[280px]">
-              {/* Badge */}
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-400 text-[11px] sm:text-xs font-mono tracking-wider uppercase font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-500" />
-                {lang === 'it' ? 'Prima / Vecchia App' : 'Before / Legacy App'}
-              </div>
-
-              {/* Phone Frame */}
-              <div className="w-full rounded-[2.2rem] bg-gradient-to-b from-neutral-800/90 via-neutral-900 to-black p-2 sm:p-2.5 border border-white/10 shadow-xl relative overflow-hidden transform-gpu">
-                <div className="w-full rounded-[1.8rem] overflow-hidden bg-neutral-950 aspect-[504/1092] flex items-center justify-center">
-                  <img
-                    src={`${oldBasePath}${activeScreen.oldImg}`}
-                    alt={`${activeScreen.labelIt} - Prima`}
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-              </div>
+      <div className="w-full flex flex-col gap-12 sm:gap-16 items-center">
+        {/* Side-by-Side Comparison Mockups */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 w-full max-w-3xl justify-items-center items-start">
+          
+          {/* Left Card: PRIMA (Old Design) */}
+          <div className="flex flex-col items-center gap-4 w-full max-w-[230px] sm:max-w-[260px] md:max-w-[280px]">
+            {/* Badge */}
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-400 text-[11px] sm:text-xs font-mono tracking-wider uppercase font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-neutral-500" />
+              {lang === 'it' ? 'Prima / Vecchia App' : 'Before / Legacy App'}
             </div>
 
-            {/* Right Card: DOPO (New Redesign) */}
-            <div className="flex flex-col items-center gap-4 w-full max-w-[230px] sm:max-w-[260px] md:max-w-[280px]">
-              {/* Badge */}
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#B50D3A]/20 border border-[#B50D3A]/50 text-white text-[11px] sm:text-xs font-mono tracking-wider uppercase font-semibold shadow-[0_0_15px_rgba(181,13,58,0.3)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#B50D3A] animate-pulse" />
-                {lang === 'it' ? 'Dopo / Nuovo Redesign' : 'After / Redesign'}
-              </div>
-
-              {/* Phone Frame with Red Neon Border */}
-              <div className="w-full rounded-[2.2rem] bg-gradient-to-b from-neutral-800/90 via-neutral-900 to-black p-2 sm:p-2.5 border border-[#B50D3A]/50 shadow-[0_0_30px_rgba(181,13,58,0.18)] relative overflow-hidden transform-gpu">
-                <div className="w-full rounded-[1.8rem] overflow-hidden bg-neutral-950 aspect-[393/852] flex items-center justify-center">
-                  <img
-                    src={`${newBasePath}${activeScreen.newImg}`}
-                    alt={`${activeScreen.labelIt} - Dopo`}
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
+            {/* Phone Frame */}
+            <div className="w-full rounded-[2.2rem] bg-gradient-to-b from-neutral-800/90 via-neutral-900 to-black p-2 sm:p-2.5 border border-white/10 shadow-lg relative overflow-hidden">
+              <div className="w-full rounded-[1.8rem] overflow-hidden bg-neutral-950 aspect-[504/1092] flex items-center justify-center">
+                <img
+                  key={`old-${activeScreen.id}`}
+                  src={`${oldBasePath}${activeScreen.oldImg}`}
+                  alt={`${activeScreen.labelIt} - Prima`}
+                  className="w-full h-full object-cover transition-opacity duration-200"
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
             </div>
-
           </div>
 
-        </motion.div>
-      </AnimatePresence>
+          {/* Right Card: DOPO (New Redesign) */}
+          <div className="flex flex-col items-center gap-4 w-full max-w-[230px] sm:max-w-[260px] md:max-w-[280px]">
+            {/* Badge */}
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#B50D3A]/20 border border-[#B50D3A]/50 text-white text-[11px] sm:text-xs font-mono tracking-wider uppercase font-semibold shadow-[0_0_12px_rgba(181,13,58,0.25)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B50D3A]" />
+              {lang === 'it' ? 'Dopo / Nuovo Redesign' : 'After / Redesign'}
+            </div>
+
+            {/* Phone Frame with Red Neon Border */}
+            <div className="w-full rounded-[2.2rem] bg-gradient-to-b from-neutral-800/90 via-neutral-900 to-black p-2 sm:p-2.5 border border-[#B50D3A]/50 shadow-[0_0_20px_rgba(181,13,58,0.15)] relative overflow-hidden">
+              <div className="w-full rounded-[1.8rem] overflow-hidden bg-neutral-950 aspect-[393/852] flex items-center justify-center">
+                <img
+                  key={`new-${activeScreen.id}`}
+                  src={`${newBasePath}${activeScreen.newImg}`}
+                  alt={`${activeScreen.labelIt} - Dopo`}
+                  className="w-full h-full object-cover transition-opacity duration-200"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
   );
 }

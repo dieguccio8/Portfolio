@@ -34,7 +34,8 @@ import {
   Menu,
   X,
   ChevronUp,
-  ChevronDown
+  ChevronDown,
+  MousePointerClick
 } from 'lucide-react';
 import { Project } from '../types';
 import UserJourney from './UserJourney';
@@ -55,6 +56,7 @@ import CardFanCarousel from './ui/card-fan-carousel';
 import WireframeComparisonCarousel from './WireframeComparisonCarousel';
 import ItaloDesignSystemSection from './ItaloDesignSystemSection';
 import ItaloBeforeAfterSection from './ItaloBeforeAfterSection';
+import ItaloPrototypeSection from './ItaloPrototypeSection';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -248,6 +250,24 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
   const nextProject = allProjects[(currentIndex + 1) % allProjects.length];
   const [activeResearchTab, setActiveResearchTab] = useState<'desk' | 'sondaggi' | 'interviste'>('desk');
   const [activeProtoTab, setActiveProtoTab] = useState<'mobile' | 'totem'>('mobile');
+  const ortoSectionRef = React.useRef<HTMLDivElement>(null);
+  const [shouldLoadOrtoIframe, setShouldLoadOrtoIframe] = useState(false);
+  const [isOrtoLoaded, setIsOrtoLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!ortoSectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadOrtoIframe(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '350px' }
+    );
+    observer.observe(ortoSectionRef.current);
+    return () => observer.disconnect();
+  }, [project.id]);
   const [copiedLink, setCopiedLink] = useState(false);
   const [wireframeImages, setWireframeImages] = useState<{ [key: string]: string }>(() => {
     try {
@@ -820,6 +840,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         {/* 2.8 Prima & Dopo Before/After Comparison Section for Chronos */}
         {isChronos && (
           <ItaloBeforeAfterSection lang={lang} />
+        )}
+
+        {/* 2.9 Provalo Interactive Prototype Section for Chronos */}
+        {isChronos && (
+          <ItaloPrototypeSection lang={lang} />
         )}
 
 
@@ -2358,140 +2383,184 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 <ThreeDMarquee />
               </div>
 
-              <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mb-16 w-full" id="orto-interactive-prototypes-section">
+              <div ref={ortoSectionRef} className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center justify-items-center mb-16 w-full" id="orto-interactive-prototypes-section">
 
-              {/* Left Column: Prototypes */}
-              <div className="lg:col-span-5 flex flex-col gap-6 items-center w-full">
-                {/* Menu Orizzontale Capsule */}
-                <div className="flex justify-center w-full">
-                  <div className="flex bg-[#131514] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none">
-                    <button
-                      onClick={() => setActiveProtoTab('mobile')}
-                      className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
-                        }`}
-                    >
-                      {activeProtoTab === 'mobile' && (
-                        <motion.div
-                          layoutId="active-proto-tab-bg"
-                          className="absolute inset-0 bg-[#068B35] rounded-xl"
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        />
-                      )}
-                      <span className="relative flex items-center gap-1.5">
-                        <Smartphone className="w-3.5 h-3.5" />
-                        {lang === 'it' ? 'Versione Mobile' : 'Mobile Version'}
-                      </span>
-                    </button>
+                {/* Left Column: Prototypes */}
+                <div className="flex flex-col gap-6 items-center justify-center w-full">
+                  {/* Menu Orizzontale Capsule */}
+                  <div className="flex justify-center w-full">
+                    <div className="flex bg-[#131514] border border-white/5 p-1 rounded-2xl shrink-0 shadow-inner relative w-fit max-w-full overflow-x-auto scrollbar-none">
+                      <button
+                        onClick={() => setActiveProtoTab('mobile')}
+                        className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'mobile' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                          }`}
+                      >
+                        {activeProtoTab === 'mobile' && (
+                          <motion.div
+                            layoutId="active-proto-tab-bg"
+                            className="absolute inset-0 bg-[#068B35] rounded-xl"
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        <span className="relative flex items-center gap-1.5">
+                          <Smartphone className="w-3.5 h-3.5" />
+                          {lang === 'it' ? 'Versione Mobile' : 'Mobile Version'}
+                        </span>
+                      </button>
 
-                    <button
-                      onClick={() => setActiveProtoTab('totem')}
-                      className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
-                        }`}
-                    >
-                      {activeProtoTab === 'totem' && (
+                      <button
+                        onClick={() => setActiveProtoTab('totem')}
+                        className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm sm:text-sm font-semibold tracking-wide transition-all duration-300 relative z-10 whitespace-nowrap uppercase font-raleway cursor-pointer ${activeProtoTab === 'totem' ? 'text-white font-bold' : 'text-neutral-400 hover:text-white'
+                          }`}
+                      >
+                        {activeProtoTab === 'totem' && (
+                          <motion.div
+                            layoutId="active-proto-tab-bg"
+                            className="absolute inset-0 bg-[#068B35] rounded-xl"
+                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                          />
+                        )}
+                        <span className="relative flex items-center gap-1.5">
+                          <Compass className="w-3.5 h-3.5" />
+                          {lang === 'it' ? 'Versione Totem' : 'Totem Version'}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Prototype Containers */}
+                  <div
+                    data-hide-cursor="true"
+                    onMouseEnter={() => window.dispatchEvent(new CustomEvent('hide-custom-cursor'))}
+                    onMouseLeave={() => window.dispatchEvent(new CustomEvent('show-custom-cursor'))}
+                    className="relative w-[340px] sm:w-[380px] md:w-[400px] h-[650px] sm:h-[740px] lg:h-[800px] mt-2 flex justify-center items-center"
+                  >
+                    {/* Elegant Preloader Skeleton while Figma loads in the background */}
+                    <AnimatePresence>
+                      {!isOrtoLoaded && (
                         <motion.div
-                          layoutId="active-proto-tab-bg"
-                          className="absolute inset-0 bg-[#068B35] rounded-xl"
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        />
+                          initial={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.4 }}
+                          className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center pointer-events-none"
+                        >
+                          <div className="relative mb-6">
+                            <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02]">
+                              {activeProtoTab === 'totem' ? (
+                                <Compass className="w-7 h-7 text-[#068B35]" />
+                              ) : (
+                                <Smartphone className="w-7 h-7 text-[#068B35]" />
+                              )}
+                            </div>
+                          </div>
+                          <span className="text-sm font-raleway font-medium text-white/80 tracking-wide mb-1">
+                            {lang === 'it' ? 'Caricamento prototipo Figma...' : 'Loading Figma prototype...'}
+                          </span>
+                          <span className="text-xs font-raleway text-white/40">
+                            {lang === 'it' ? 'Ottimizzazione del flusso interattivo' : 'Optimizing interactive flow'}
+                          </span>
+                        </motion.div>
                       )}
-                      <span className="relative flex items-center gap-1.5">
-                        <Compass className="w-3.5 h-3.5" />
-                        {lang === 'it' ? 'Versione Totem' : 'Totem Version'}
-                      </span>
-                    </button>
+                    </AnimatePresence>
+
+                    {shouldLoadOrtoIframe ? (
+                      <>
+                        <motion.div
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{
+                            opacity: activeProtoTab === 'totem' ? 1 : 0,
+                            y: activeProtoTab === 'totem' ? 0 : 15
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute inset-0 w-full h-full flex justify-center items-center"
+                          style={{
+                            pointerEvents: activeProtoTab === 'totem' ? 'auto' : 'none',
+                            zIndex: activeProtoTab === 'totem' ? 10 : 1
+                          }}
+                        >
+                          <iframe
+                            id="totem-prototype-iframe"
+                            style={{ border: 'none', width: '100%', height: '100%' }}
+                            width="100%"
+                            height="100%"
+                            loading="lazy"
+                            allow="clipboard-read; clipboard-write; fullscreen"
+                            onLoad={() => setIsOrtoLoaded(true)}
+                            className={`transition-opacity duration-500 ease-in-out ${isOrtoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
+                            allowFullScreen
+                          />
+                        </motion.div>
+
+                        <motion.div
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{
+                            opacity: activeProtoTab === 'mobile' ? 1 : 0,
+                            y: activeProtoTab === 'mobile' ? 0 : 15
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute inset-0 w-full h-full flex justify-center items-center"
+                          style={{
+                            pointerEvents: activeProtoTab === 'mobile' ? 'auto' : 'none',
+                            zIndex: activeProtoTab === 'mobile' ? 10 : 1
+                          }}
+                        >
+                          <iframe
+                            id="mobile-prototype-iframe"
+                            style={{ border: 'none', width: '100%', height: '100%' }}
+                            width="100%"
+                            height="100%"
+                            loading="lazy"
+                            allow="clipboard-read; clipboard-write; fullscreen"
+                            onLoad={() => setIsOrtoLoaded(true)}
+                            className={`transition-opacity duration-500 ease-in-out ${isOrtoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
+                            allowFullScreen
+                          />
+                        </motion.div>
+                      </>
+                    ) : null}
                   </div>
                 </div>
 
-                {/* Prototype Containers */}
-                <div className="relative w-full h-[550px] sm:h-[700px] lg:h-[800px] mt-2 flex justify-center items-center">
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{
-                      opacity: activeProtoTab === 'totem' ? 1 : 0,
-                      y: activeProtoTab === 'totem' ? 0 : 15
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 w-full h-full flex justify-center items-center"
-                    style={{
-                      pointerEvents: activeProtoTab === 'totem' ? 'auto' : 'none',
-                      zIndex: activeProtoTab === 'totem' ? 10 : 1
-                    }}
-                  >
-                    <iframe
-                      id="totem-prototype-iframe"
-                      style={{ border: 'none', width: '100%', height: '100%' }}
-                      width="100%"
-                      height="100%"
-                      src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
-                      allowFullScreen
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{
-                      opacity: activeProtoTab === 'mobile' ? 1 : 0,
-                      y: activeProtoTab === 'mobile' ? 0 : 15
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 w-full h-full flex justify-center items-center"
-                    style={{
-                      pointerEvents: activeProtoTab === 'mobile' ? 'auto' : 'none',
-                      zIndex: activeProtoTab === 'mobile' ? 10 : 1
-                    }}
-                  >
-                    <iframe
-                      id="mobile-prototype-iframe"
-                      style={{ border: 'none', width: '100%', height: '100%' }}
-                      width="100%"
-                      height="100%"
-                      src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1&hide-ui=1&embed-host=share&bg-color=050505"
-                      allowFullScreen
-                    />
-                  </motion.div>
+                {/* Right Column: Text & Button */}
+                <div className="flex justify-center items-center w-full">
+                  <div className="flex flex-col items-start text-left gap-6 lg:gap-8 max-w-[420px] w-full">
+                    <h2 className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight text-[#068B35] font-raleway leading-none uppercase text-left">
+                      Provalo
+                    </h2>
+                    <p className="text-xl md:text-2xl lg:text-3xl text-white font-medium leading-relaxed font-raleway text-left">
+                      {lang === 'it'
+                        ? "Puoi provare il prototipo dall'anteprima a sinistra o cliccando sul pulsante qui sotto"
+                        : "You can test the prototype from the preview on the left or by clicking the button below"}
+                    </p>
+                    <div className="mt-2 flex items-start">
+                      <a
+                        href={activeProtoTab === 'totem'
+                          ? "https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=1"
+                          : "https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1"
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-fit group"
+                      >
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="relative flex items-center gap-3 px-8 py-4 bg-[#068B35] hover:bg-[#057A2E] text-white rounded-full shadow-[0_0_20px_rgba(6,139,53,0.35)] transition-colors duration-300 overflow-hidden cursor-pointer"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                          <span className="relative font-raleway font-semibold tracking-wide text-sm md:text-base">
+                            {lang === 'it' ? "Prova il Prototipo" : "Try the Prototype"}
+                          </span>
+                          <ArrowUpRight className="relative w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
+                        </motion.button>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              {/* Right Column: Text & Button */}
-              <div className="lg:col-span-7 flex flex-col justify-center items-start gap-6 lg:gap-8 px-4 lg:px-8">
-                <h2 className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight text-[#068B35] font-raleway leading-none">
-                  Provalo
-                </h2>
-                <p className="text-2xl md:text-3xl lg:text-4xl text-white font-medium leading-[1.3] max-w-xl font-raleway">
-                  {lang === 'it'
-                    ? "Puoi provare il prototipo dall'anteprima a sinistra o cliccando sul pulsante qui sotto"
-                    : "You can test the prototype from the preview on the left or by clicking the button below"}
-                </p>
-                <div className="mt-8 flex flex-col gap-8 w-full max-w-sm">
-                  <a href="https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1" target="_blank" rel="noopener noreferrer" className="block w-fit group">
-                    <motion.button
-                      animate={{
-                        boxShadow: [
-                          "0px 0px 15px rgba(6,139,53,0.1)",
-                          "0px 0px 35px rgba(6,139,53,0.4)",
-                          "0px 0px 15px rgba(6,139,53,0.1)"
-                        ],
-                        scale: [1, 1.02, 1]
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="relative flex items-center gap-3 px-8 py-4 bg-[#068B35] hover:bg-[#057A2E] text-white rounded-full transition-colors duration-300 overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                      <span className="relative font-raleway font-semibold tracking-wide text-sm md:text-base">
-                        {lang === 'it' ? "Prova il Prototipo" : "Try the Prototype"}
-                      </span>
-                      <ArrowUpRight className="relative w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-transform duration-300" />
-                    </motion.button>
-                  </a>
-                </div>
               </div>
-
-            </div>
             </>
           )}
         </div>
