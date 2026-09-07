@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Italo - Redesign App</title>
+  <!-- Google Fonts: Instrument Sans & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="style.css?v=2.0">
+  <link rel="icon" type="image/png" href="assets/italo-logo-red.png">
+</head>
+<body>
+
+  <!-- DESKTOP TOP BAR (PREVIEW CONTROLS) -->
+  <header class="preview-toolbar" id="previewToolbar">
+    <div class="toolbar-title">
+      <span class="dot"></span> Italo App Redesign
+    </div>
+    <div class="toolbar-screens">
+      <button class="toolbar-btn active" data-screen="home">Home</button>
+      <button class="toolbar-btn" data-screen="cerca">Cerca</button>
+      <button class="toolbar-btn" data-screen="acquisto">Acquisto</button>
+      <button class="toolbar-btn" data-screen="biglietti">Biglietti</button>
+      <button class="toolbar-btn" data-screen="offerte">Offerte</button>
+    </div>
+    <button class="toolbar-toggle" id="toggleFrameBtn">📱 Cornice iPhone</button>
+  </header>
+
+  <main class="stage">
+    <div class="phone-frame" id="phoneFrame">
+      
+      <!-- STATUS BAR & DYNAMIC ISLAND -->
+      <div class="status-bar">
+        <div class="status-time" id="clockTime">09:41</div>
+        <div class="dynamic-island" id="dynamicIsland"></div>
+        <div class="status-icons">
+          <div class="signal-bars">
+            <span class="signal-bar"></span>
+            <span class="signal-bar"></span>
+            <span class="signal-bar"></span>
+            <span class="signal-bar"></span>
+          </div>
+          <span>5G</span>
+          <div class="battery-pill">
+            <div class="battery-level"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- APP HEADER -->
+      <header class="app-header">
+        <div class="header-logo" id="headerHomeBtn" title="Torna alla Home">
+          <img src="assets/italo-logo-white.png" alt="Italo Logo">
+        </div>
+        <div class="header-actions">
+          <button class="header-btn" id="btnProfile" title="Profilo Utente" aria-label="Profilo">
+            <span class="material-symbols-rounded fill-1" style="font-size: 26px;">manage_accounts</span>
+          </button>
+          <button class="header-btn" id="btnNotifications" title="Notifiche" aria-label="Notifiche">
+            <span class="material-symbols-rounded fill-1" style="font-size: 25px;">notifications</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- SCROLLABLE APP BODY -->
+      <div class="app-content" id="appScrollContent">
+
+        <!-- ================================================================
+             SCHERMATA 1: HOME
+             ================================================================ -->
+        <section class="screen-view active" id="view-home">
+          <!-- Alert box ritardi -->
+          <div class="alert-card">
+            <span class="material-symbols-rounded fill-1" style="color: var(--italo-red); font-size: 22px; flex-shrink: 0;">warning</span>
+            <div class="alert-text">
+              Il tuo viaggio Roma - Napoli potrebbe subire dei ritardi
+            </div>
+          </div>
+
+          <h1 class="screen-title">Dove vuoi andare?</h1>
+
+          <!-- Card ricerca principale -->
+          <div class="booking-card">
+            <!-- Segment tabs -->
+            <div class="segment-tabs">
+              <button class="segment-tab active" id="tabBiglietti">Biglietti</button>
+              <button class="segment-tab" id="tabCarnet">Carnet</button>
+            </div>
+
+            <!-- Stazioni partenza e arrivo -->
+            <div class="stations-container">
+              <div class="station-input-wrapper">
+                <input type="text" class="station-input" id="inputPartenza" placeholder="Inserisci la stazione di partenza" value="Catania Centrale">
+              </div>
+              <button class="swap-btn" id="btnSwapStations" title="Inverti stazioni" type="button">
+                <span class="material-symbols-rounded" style="font-size: 20px; color: #444;">swap_vert</span>
+              </button>
+              <div class="station-input-wrapper">
+                <input type="text" class="station-input" id="inputArrivo" placeholder="Inserisci la stazione di arrivo" value="Taormina Giardini">
+              </div>
+            </div>
+
+            <!-- Selezione date -->
+            <div class="dates-row">
+              <button class="date-pill" id="btnDataAndata" type="button" onclick="window.openCalendarModal && window.openCalendarModal('andata')">
+                <span class="pill-label">Data di andata</span>
+                <span class="pill-val" id="valDataAndata">23 Ottobre 2025</span>
+              </button>
+              <button class="date-pill" id="btnDataRitorno" type="button" onclick="window.openCalendarModal && window.openCalendarModal('ritorno')">
+                <span class="pill-label">Aggiungi</span>
+                <span class="pill-val" id="valDataRitorno">Ritorno</span>
+              </button>
+            </div>
+
+            <!-- Stepper passeggeri (Riprogettato) -->
+            <div class="passenger-card">
+              <div class="passenger-info">
+                <span class="passenger-label">Passeggeri</span>
+                <div class="passenger-badge">
+                  <span id="passengerCountDisplay">1</span> Adulto
+                </div>
+              </div>
+              <div class="stepper-controls">
+                <button class="stepper-btn" id="btnDecPassengers" type="button" aria-label="Diminuisci">
+                  <span class="material-symbols-rounded">remove</span>
+                </button>
+                <button class="stepper-btn" id="btnIncPassengers" type="button" aria-label="Aumenta">
+                  <span class="material-symbols-rounded">add</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Cerca CTA -->
+            <button class="search-submit-btn" id="btnCercaBiglietti" type="button">
+              Cerca
+            </button>
+          </div>
+
+          <!-- Sezione Offerte -->
+          <div class="section-title">
+            <span>Offerte</span>
+            <span class="material-symbols-rounded" style="font-size: 20px; opacity: 0.6;">open_in_new</span>
+          </div>
+
+          <!-- Card carosello offerte Home -->
+          <div class="offer-promo-card">
+            <div class="offer-image-container">
+              <img src="assets/italo-friends.png" id="homeOfferImg" alt="Italo Offerte">
+            </div>
+            <div class="offer-promo-body">
+              <p class="offer-desc-text" id="homeOfferText">
+                , viaggia in compagnia e risparmia più della metà.
+              </p>
+              <div class="carousel-nav-btns">
+                <button class="carousel-btn" id="btnHomePrevOffer" type="button">Indietro</button>
+                <button class="carousel-btn" id="btnHomeNextOffer" type="button">Avanti</button>
+              </div>
+              <div class="carousel-dots">
+                <span class="carousel-dot active" id="dot0"></span>
+                <span class="carousel-dot" id="dot1"></span>
+                <span class="carousel-dot" id="dot2"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             SCHERMATA 2: CERCA (RISULTATI BIGLIETTI)
+             ================================================================ -->
+        <section class="screen-view" id="view-cerca">
+          <h2 class="screen-title">Scegli il biglietto che fa per te</h2>
+
+          <div class="filter-row" id="filterSortBtn">
+            <span>Ordina</span>
+            <span class="material-symbols-rounded" style="font-size: 18px;">expand_more</span>
+          </div>
+
+          <div class="train-list">
+            <!-- Train Card 1 -->
+            <div class="train-card">
+              <div class="train-card-header">
+                <div class="train-brand">
+                  <img src="assets/italo-logo-red.png" class="train-logo-small" alt="Italo">
+                  <span class="train-number">9950</span>
+                </div>
+                <div class="train-category">
+                  <span>Alta velocità</span>
+                  <span class="material-symbols-rounded fill-1" style="font-size: 16px; color: #888;">bolt</span>
+                </div>
+              </div>
+
+              <div class="train-route-row">
+                <span class="material-symbols-rounded" style="font-size: 18px; color: #111;">schedule</span>
+                <span class="route-text">
+                  CT <span class="highlight-time">07:43</span> → TAO <span class="highlight-time">10:14</span>
+                </span>
+              </div>
+              <div class="train-duration">2h 31min</div>
+
+              <button class="train-cta-btn" data-train="9950" data-dep="07:43" data-arr="10:14" data-price="298,00€">
+                Scopri di più
+              </button>
+            </div>
+
+            <!-- Train Card 2 -->
+            <div class="train-card">
+              <div class="train-card-header">
+                <div class="train-brand">
+                  <img src="assets/italo-logo-red.png" class="train-logo-small" alt="Italo">
+                  <span class="train-number">7392</span>
+                </div>
+                <div class="train-category">
+                  <span>Alta velocità</span>
+                  <span class="material-symbols-rounded fill-1" style="font-size: 16px; color: #888;">bolt</span>
+                </div>
+              </div>
+
+              <div class="train-route-row">
+                <span class="material-symbols-rounded" style="font-size: 18px; color: #111;">schedule</span>
+                <span class="route-text">
+                  CT <span class="highlight-time">08:55</span> → TAO <span class="highlight-time">11:26</span>
+                </span>
+              </div>
+              <div class="train-duration">2h 31min</div>
+
+              <button class="train-cta-btn" data-train="7392" data-dep="08:55" data-arr="11:26" data-price="245,00€">
+                Scopri di più
+              </button>
+            </div>
+
+            <!-- Train Card 3 -->
+            <div class="train-card">
+              <div class="train-card-header">
+                <div class="train-brand">
+                  <img src="assets/italo-logo-red.png" class="train-logo-small" alt="Italo">
+                  <span class="train-number">4839</span>
+                </div>
+                <div class="train-category">
+                  <span>Alta velocità</span>
+                  <span class="material-symbols-rounded fill-1" style="font-size: 16px; color: #888;">bolt</span>
+                </div>
+              </div>
+
+              <div class="train-route-row">
+                <span class="material-symbols-rounded" style="font-size: 18px; color: #111;">schedule</span>
+                <span class="route-text">
+                  CT <span class="highlight-time">13:40</span> → TAO <span class="highlight-time">16:11</span>
+                </span>
+              </div>
+              <div class="train-duration">2h 31min</div>
+
+              <button class="train-cta-btn" data-train="4839" data-dep="13:40" data-arr="16:11" data-price="210,00€">
+                Scopri di più
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             SCHERMATA 3: COMPLETA L'ACQUISTO
+             ================================================================ -->
+        <section class="screen-view" id="view-acquisto">
+          <h2 class="screen-title">Completa l’acquisto</h2>
+
+          <!-- Selected train summary card -->
+          <div class="checkout-summary-card">
+            <div class="train-card-header">
+              <div class="train-brand">
+                <img src="assets/italo-logo-red.png" class="train-logo-small" alt="Italo">
+                <span class="train-number" id="chkTrainNum">9950</span>
+              </div>
+              <div class="train-category">
+                <span>Alta velocità</span>
+                <span class="material-symbols-rounded fill-1" style="font-size: 16px; color: #888;">bolt</span>
+              </div>
+            </div>
+
+            <div class="train-route-row">
+              <span class="material-symbols-rounded" style="font-size: 18px; color: #111;">schedule</span>
+              <span class="route-text">
+                CT <span class="highlight-time" id="chkDepTime">07:43</span> → TAO <span class="highlight-time" id="chkArrTime">10:14</span>
+              </span>
+            </div>
+            <div class="train-duration">2h 31min</div>
+
+            <button class="checkout-btn-details" type="button">Scopri di più</button>
+          </div>
+
+          <!-- Metodi di pagamento -->
+          <div class="payment-methods-card">
+            <h3 class="payment-methods-title">Scegli metodo di pagamento</h3>
+            <div class="payment-options-list">
+              <div class="payment-option-item" data-method="card">
+                <div class="payment-icon">
+                  <img src="assets/pay-card.png" alt="Carta di credito">
+                </div>
+                <span class="payment-name">Carta di credito</span>
+                <span class="payment-radio"></span>
+              </div>
+
+              <div class="payment-option-item selected" data-method="apple">
+                <div class="payment-icon">
+                  <img src="assets/pay-apple.png" alt="Apple Pay">
+                </div>
+                <span class="payment-name">Apple Pay</span>
+                <span class="payment-radio"></span>
+              </div>
+
+              <div class="payment-option-item" data-method="google">
+                <div class="payment-icon">
+                  <img src="assets/pay-google.png" alt="Google Pay">
+                </div>
+                <span class="payment-name">Google Pay</span>
+                <span class="payment-radio"></span>
+              </div>
+
+              <div class="payment-option-item" data-method="paypal">
+                <div class="payment-icon">
+                  <img src="assets/pay-paypal.png" alt="PayPal">
+                </div>
+                <span class="payment-name">PayPal</span>
+                <span class="payment-radio"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Totale e CTA Acquista -->
+          <div class="total-summary-box">
+            <div class="total-label">Totale da pagare</div>
+            <div class="total-amount" id="chkPrice">298,00€</div>
+          </div>
+
+          <button class="btn-purchase" id="btnFinalizePurchase" type="button">
+            Acquista
+          </button>
+        </section>
+
+        <!-- ================================================================
+             SCHERMATA 4: I TUOI BIGLIETTI
+             ================================================================ -->
+        <section class="screen-view" id="view-biglietti">
+          <h2 class="screen-title">I tuoi biglietti</h2>
+
+          <div class="segment-tabs">
+            <button class="segment-tab active" id="tabMyTickets">Biglietti</button>
+            <button class="segment-tab" id="tabMyCarnet">Carnet</button>
+          </div>
+
+          <!-- Biglietto Card -->
+          <div class="ticket-wrapper">
+            <div class="ticket-card">
+              <!-- Banner superiore In partenza oggi! -->
+              <div class="ticket-header-banner">
+                <span class="status-dot-green"></span>
+                <span class="ticket-banner-text">In partenza oggi!</span>
+              </div>
+
+              <!-- Tratta e orari -->
+              <div class="ticket-main-info">
+                <div class="ticket-stations-row">
+                  <div class="station-column">
+                    <div class="station-title">Taormina<br>Giardini</div>
+                  </div>
+                  <div class="ticket-brand-center">
+                    <img src="assets/italo-logo-dark.png" alt="Italo">
+                  </div>
+                  <div class="station-column text-right">
+                    <div class="station-title">Catania<br>Centrale</div>
+                  </div>
+                </div>
+
+                <div class="ticket-time-schedule">
+                  <div class="time-col">
+                    <div class="time-val" id="tktDepTime">07:43</div>
+                    <div class="date-val">Gio, 23 Ott</div>
+                  </div>
+                  <div class="duration-col">3 h 11 min</div>
+                  <div class="time-col text-right">
+                    <div class="time-val" id="tktArrTime">10:14</div>
+                    <div class="date-val">Gio, 23 Ott</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Divisore con perforazione e tagli notch -->
+              <div class="ticket-divider-row">
+                <div class="notch-cutout left"></div>
+                <div class="perforation-dashed-line"></div>
+                <div class="notch-cutout right"></div>
+              </div>
+
+              <!-- QR code e passeggero -->
+              <div class="ticket-qr-section">
+                <div class="qr-code-box" id="qrCodeTrigger" title="Ingrandisci QR code">
+                  <img src="assets/ticket-qr.png" class="qr-code-img" alt="QR Code">
+                  <span class="qr-hint">Tocca per<br>ingrandire</span>
+                </div>
+                <div class="passenger-details">
+                  <div class="passenger-name">Nome Cognome</div>
+                  <div class="passenger-type">1 Adulto</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controlli carosello e dots -->
+          <div class="carousel-nav-btns">
+            <button class="carousel-btn" id="btnTktPrev" type="button">Indietro</button>
+            <button class="carousel-btn" id="btnTktNext" type="button">Avanti</button>
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
+
+          <button class="btn-buy-more" id="btnBuyMore" type="button">
+            Acquista biglietti o carnet
+          </button>
+        </section>
+
+        <!-- ================================================================
+             SCHERMATA 5: OFFERTE ITALO
+             ================================================================ -->
+        <section class="screen-view" id="view-offerte">
+          <h2 class="screen-title">Offerte Italo</h2>
+
+          <div class="offers-list">
+            <!-- Offerta 1: Italo Friends -->
+            <div class="offer-card-item">
+              <div class="offer-tag-title">Italo Friends</div>
+              <div class="offer-detail-card">
+                <div class="offer-detail-img">
+                  <img src="assets/italo-friends.png" alt="Italo Friends">
+                </div>
+                <div class="offer-detail-content">
+                  <img src="assets/italo-logo-red.png" class="offer-brand-logo" alt="Italo">
+                  <p class="offer-desc">
+                    Viaggia in compagnia e risparmia più della metà.
+                  </p>
+                  <button class="btn-offer-accordion" data-target="drawerFriends" type="button">
+                    <span>Scopri di più</span>
+                    <span class="material-symbols-rounded" style="font-size: 20px; transition: transform 0.2s;">expand_more</span>
+                  </button>
+                </div>
+                <div class="offer-accordion-drawer" id="drawerFriends">
+                  Sconto speciale per gruppi da 2 a 5 persone nei viaggi in Prima o Smart. Valido su tutte le tratte della rete Italo con prenotazione fino a 3 giorni prima.
+                </div>
+              </div>
+            </div>
+
+            <!-- Offerta 2: Italo Autunno -->
+            <div class="offer-card-item">
+              <div class="offer-tag-title">Italo Autunno</div>
+              <div class="offer-detail-card">
+                <div class="offer-detail-img">
+                  <img src="assets/italo-autunno.png" alt="Italo Autunno">
+                </div>
+                <div class="offer-detail-content">
+                  <img src="assets/italo-logo-red.png" class="offer-brand-logo" alt="Italo">
+                  <p class="offer-desc">
+                    Scopri l’Italia che cambia colore. Sconti fino al 40% su alcune tratte
+                  </p>
+                  <button class="btn-offer-accordion" data-target="drawerAutunno" type="button">
+                    <span>Scopri di più</span>
+                    <span class="material-symbols-rounded" style="font-size: 20px; transition: transform 0.2s;">expand_more</span>
+                  </button>
+                </div>
+                <div class="offer-accordion-drawer" id="drawerAutunno">
+                  Approfitta della stagione autunnale per visitare le città d'arte italiane: Roma, Firenze, Venezia, Napoli e Milano con tariffe scontate fino al 40% in ambiente Smart.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ================================================================
+           BOTTOM FLOATING RED NAVIGATION BAR
+           ================================================================ -->
+      <nav class="bottom-nav-container" aria-label="Navigazione principale">
+        <div class="bottom-nav-bar">
+          <!-- 1. Home -->
+          <button class="nav-item active" data-nav="home" aria-label="Home">
+            <svg viewBox="0 0 21.33 23.33">
+              <path d="M 0.00 20.67 L 0.00 8.67 C 0.00 8.24 0.09 7.84 0.28 7.47 C 0.47 7.09 0.73 6.78 1.07 6.53 L 9.07 0.53 C 9.53 0.18 10.07 0.00 10.67 0.00 C 11.27 0.00 11.80 0.18 12.27 0.53 L 20.27 6.53 C 20.60 6.78 20.86 7.09 21.05 7.47 C 21.24 7.84 21.33 8.24 21.33 8.67 L 21.33 20.67 C 21.33 21.40 21.07 22.03 20.55 22.55 C 20.03 23.07 19.40 23.33 18.67 23.33 L 14.67 23.33 C 14.29 23.33 13.97 23.21 13.72 22.95 C 13.46 22.69 13.33 22.38 13.33 22.00 L 13.33 15.33 C 13.33 14.96 13.21 14.64 12.95 14.38 C 12.69 14.13 12.38 14.00 12.00 14.00 L 9.33 14.00 C 8.96 14.00 8.64 14.13 8.38 14.38 C 8.13 14.64 8.00 14.96 8.00 15.33 L 8.00 22.00 C 8.00 22.38 7.87 22.69 7.62 22.95 C 7.36 23.21 7.04 23.33 6.67 23.33 L 2.67 23.33 C 1.93 23.33 1.31 23.07 0.78 22.55 C 0.26 22.03 0.00 21.40 0.00 20.67 Z" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <!-- 2. Biglietti -->
+          <button class="nav-item" data-nav="biglietti" aria-label="Biglietti">
+            <svg viewBox="0 0 26.67 21.33">
+              <path d="M 6.67 6.00 L 9.33 6.00 L 9.33 3.33 L 6.67 3.33 L 6.67 6.00 L 9.33 12.00 L 9.33 9.33 L 6.67 9.33 L 6.67 12.00 L 9.33 18.00 L 9.33 15.33 L 6.67 15.33 L 6.67 18.00 L 1.33 18.00 C 0.97 18.00 0.65 17.88 0.39 17.62 C 0.13 17.36 0.00 17.04 0.00 16.67 L 0.00 4.67 C 0.00 4.29 0.13 3.97 0.39 3.71 C 0.65 3.46 0.97 3.33 1.33 3.33 L 6.67 3.33 Z M 26.67 4.67 L 26.67 16.67 C 26.67 17.04 26.54 17.36 26.28 17.62 C 26.02 17.88 25.70 18.00 25.33 18.00 L 12.00 18.00 L 12.00 3.33 L 25.33 3.33 C 25.70 3.33 26.02 3.46 26.28 3.71 C 26.54 3.97 26.67 4.29 26.67 4.67 Z" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <!-- 3. Cerca / Stato treno -->
+          <button class="nav-item" data-nav="cerca" aria-label="Cerca">
+            <svg viewBox="0 0 21.33 25.34">
+              <path d="M 0.00 18.00 L 0.00 5.33 C 0.00 4.16 0.31 3.22 0.92 2.52 C 1.53 1.82 2.34 1.28 3.33 0.92 C 4.33 0.55 5.47 0.31 6.75 0.18 C 8.03 0.06 9.34 0.00 10.67 0.00 C 12.13 0.00 13.52 0.06 14.82 0.18 C 16.12 0.31 17.25 0.55 18.22 0.92 C 19.18 1.28 19.95 1.82 20.50 2.52 C 21.06 3.22 21.33 4.16 21.33 5.33 L 21.33 18.00 C 21.33 19.31 20.88 20.42 19.98 21.32 C 19.09 22.22 17.98 22.67 16.67 22.67 L 17.33 23.33 C 17.71 23.71 17.80 24.14 17.60 24.62 C 17.40 25.10 17.03 25.34 16.50 25.33 C 16.35 25.33 16.20 25.31 16.05 25.25 C 15.91 25.20 15.78 25.11 15.67 25.00 L 13.33 22.67 L 8.00 22.67 L 5.67 25.00 C 5.56 25.11 5.43 25.20 5.28 25.25 C 5.14 25.31 4.99 25.34 4.84 25.33 C 4.32 25.33 3.96 25.10 3.75 24.62 C 3.54 24.14 3.62 23.71 4.00 23.33 L 4.67 22.67 C 3.36 22.67 2.25 22.22 1.35 21.32 C 0.45 20.42 0.00 19.31 0.00 18.00 Z M 2.67 10.67 L 18.67 10.67 L 18.67 5.33 C 18.67 4.78 18.39 4.31 17.83 3.92 C 17.28 3.53 16.33 3.20 15.00 2.92 C 13.67 2.64 12.22 2.50 10.67 2.50 C 9.11 2.50 7.67 2.64 6.33 2.92 C 5.00 3.20 4.06 3.53 3.50 3.92 C 2.94 4.31 2.67 4.78 2.67 5.33 Z M 5.33 18.67 C 5.89 18.67 6.36 18.47 6.76 18.08 C 7.15 17.68 7.35 17.21 7.35 16.67 C 7.35 16.12 7.15 15.65 6.76 15.26 C 6.36 14.86 5.89 14.67 5.33 14.67 C 4.78 14.67 4.31 14.86 3.91 15.26 C 3.52 15.65 3.32 16.12 3.32 16.67 C 3.32 17.21 3.52 17.68 3.91 18.08 C 4.31 18.47 4.78 18.67 5.33 18.67 Z M 16.00 18.67 C 16.56 18.67 17.03 18.47 17.42 18.08 C 17.82 17.68 18.02 17.21 18.02 16.67 C 18.02 16.12 17.82 15.65 17.42 15.26 C 17.03 14.86 16.56 14.67 16.00 14.67 C 15.44 14.67 14.97 14.86 14.58 15.26 C 14.19 15.65 13.99 16.12 13.99 16.67 C 13.99 17.21 14.19 17.68 14.58 18.08 C 14.97 18.47 15.44 18.67 16.00 18.67 Z" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <!-- 4. Club Italo / Corona -->
+          <button class="nav-item" data-nav="club" aria-label="Club Italo">
+            <svg viewBox="0 0 26.67 24.00">
+              <path d="M 5.33 24.00 C 4.96 24.00 4.64 23.87 4.38 23.62 C 4.13 23.36 4.00 23.04 4.00 22.67 C 4.00 22.29 4.13 21.97 4.38 21.72 C 4.64 21.46 4.96 21.33 5.33 21.33 L 21.33 21.33 C 21.71 21.33 22.03 21.46 22.28 21.72 C 22.54 21.97 22.67 22.29 22.67 22.67 C 22.67 23.04 22.54 23.36 22.28 23.62 C 22.03 23.88 21.71 24.00 21.33 24.00 Z M 2.67 18.67 C 2.30 18.67 1.98 18.54 1.72 18.28 C 1.46 18.02 1.33 17.71 1.33 17.33 L 1.33 6.67 C 1.33 6.42 1.40 6.20 1.55 6.02 C 1.70 5.84 1.89 5.72 2.12 5.68 C 2.35 5.63 2.59 5.66 2.82 5.77 C 3.05 5.87 3.23 6.05 3.35 6.28 L 7.33 13.97 L 12.28 4.07 C 12.40 3.84 12.58 3.66 12.82 3.55 C 13.05 3.44 13.29 3.44 13.52 3.55 C 13.75 3.66 13.93 3.84 14.05 4.07 L 19.00 13.97 L 22.98 6.28 C 23.10 6.05 23.28 5.87 23.52 5.77 C 23.75 5.66 23.98 5.63 24.22 5.68 C 24.45 5.72 24.64 5.84 24.78 6.02 C 24.93 6.20 25.00 6.42 25.00 6.67 L 25.00 17.33 C 25.00 17.71 24.87 18.02 24.62 18.28 C 24.36 18.54 24.04 18.67 23.67 18.67 Z" fill="currentColor"/>
+            </svg>
+          </button>
+
+          <!-- 5. Offerte -->
+          <button class="nav-item" data-nav="offerte" aria-label="Offerte">
+            <svg viewBox="0 0 26.00 18.00">
+              <path d="M 2.60 18.00 C 1.89 18.00 1.27 17.75 0.76 17.25 C 0.26 16.74 0.00 16.14 0.00 15.43 L 0.00 2.57 C 0.00 1.86 0.25 1.26 0.76 0.76 C 1.27 0.25 1.89 0.00 2.60 0.00 L 23.40 0.00 C 24.11 0.00 24.73 0.25 25.24 0.76 C 25.75 1.26 26.00 1.87 26.00 2.57 L 26.00 15.43 C 26.00 16.14 25.75 16.74 25.24 17.25 C 24.73 17.75 24.12 18.00 23.40 18.00 Z M 10.40 13.50 L 17.55 9.00 L 10.40 4.50 Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- MODALE CALENDARIO SELEZIONE RITORNO -->
+      <div class="modal-backdrop" id="calendarModalBackdrop">
+        <div class="calendar-modal-card" id="calendarModalCard">
+          <!-- Header mese, frecce e chiusura -->
+          <div class="calendar-header">
+            <button type="button" class="calendar-nav-btn" id="calendarPrevMonth" aria-label="Mese precedente">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="calendar-title-wrapper">
+              <h3 class="calendar-month-title" id="calendarMonthTitle">Ottobre 2025</h3>
+              <span class="calendar-target-subtitle" id="calendarTargetSubtitle">Data di Ritorno</span>
+            </div>
+            <div class="calendar-header-actions">
+              <button type="button" class="calendar-nav-btn" id="calendarNextMonth" aria-label="Mese successivo">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="calendar-nav-btn calendar-close-btn" id="calendarCloseBtn" aria-label="Chiudi calendario" onclick="window.closeCalendarModal && window.closeCalendarModal()">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="calendar-divider"></div>
+
+          <!-- Giorni della settimana -->
+          <div class="calendar-weekdays">
+            <span>LUN</span>
+            <span>MAR</span>
+            <span>MER</span>
+            <span>GIO</span>
+            <span>VEN</span>
+            <span>SAB</span>
+            <span>DOM</span>
+          </div>
+
+          <!-- Griglia giorni del mese -->
+          <div class="calendar-days-grid" id="calendarDaysGrid"></div>
+
+          <!-- Azione Conferma -->
+          <div class="calendar-action-row">
+            <button type="button" class="calendar-confirm-btn" id="calendarConfirmBtn">
+              Conferma
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODALE QR CODE INGRANDITO -->
+      <div class="modal-backdrop" id="qrModalBackdrop">
+        <div class="modal-content-box">
+          <h3 style="font-size: 17px; margin-bottom: 4px;">Codice Biglietto</h3>
+          <p style="font-size: 13px; color: #666;">Mostra al controllore a bordo treno</p>
+          <img src="assets/ticket-qr.png" class="modal-qr-img" alt="QR Code Ingrandito">
+          <div style="font-weight: 700; font-size: 16px; margin-bottom: 2px;">Nome Cognome</div>
+          <div style="font-size: 12px; color: #888; margin-bottom: 12px;">Codice PNR: <span style="font-family: monospace; font-weight: bold; color: #111;">IT9950X</span></div>
+          <button class="modal-btn-close" id="btnCloseQrModal">Chiudi</button>
+        </div>
+      </div>
+
+      <!-- MODALE ACQUISTO COMPLETATO -->
+      <div class="modal-backdrop" id="purchaseModalBackdrop">
+        <div class="modal-content-box">
+          <div style="width: 56px; height: 56px; background: #ECFDF5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3 style="font-size: 18px; margin-bottom: 6px; font-weight: 700;">Acquisto Completato!</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Il tuo biglietto è stato emesso ed è ora disponibile nella sezione "I tuoi biglietti".</p>
+          <button class="modal-btn-close" id="btnGoToTickets">Visualizza Biglietto</button>
+        </div>
+      </div>
+
+      <!-- TOAST FLOATING NOTIFICATION -->
+      <div class="toast-notice" id="toastNotice">
+        Notifica aggiornata
+      </div>
+
+    </div>
+  </main>
+
+  <script src="app.js?v=2.0"></script>
+</body>
+</html>
