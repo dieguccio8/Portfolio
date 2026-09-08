@@ -82,6 +82,14 @@ export default function App() {
     return null;
   });
 
+  const [preloadFigma, setPreloadFigma] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPreloadFigma(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const url = new URL(window.location.href);
     if (activeProjectPage) {
@@ -1567,7 +1575,26 @@ export default function App() {
           )}
 
         </AnimatePresence>
-        
+        {/* Background Idle Prewarmer for Figma Prototypes so assets are cached before navigation */}
+        {preloadFigma && !activeProjectPage && (
+          <iframe
+            src="https://embed.figma.com/proto/itW6BttAowSoBwLm60A802/Italo---Progetto-esame-finale?node-id=2319-5721&scaling=scale-down&content-scaling=fixed&page-id=43%3A60&starting-point-node-id=2270%3A3059&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=000000"
+            tabIndex={-1}
+            aria-hidden="true"
+            title="Preload Figma Prototype"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '380px',
+              height: '750px',
+              opacity: 0.001,
+              pointerEvents: 'none',
+              zIndex: -9999,
+              border: 'none',
+            }}
+          />
+        )}
 
       </div>
     </SmoothScroll>
