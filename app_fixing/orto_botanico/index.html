@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Orto Botanico di Catania</title>
+  <meta name="description" content="Guida multimediale e percorsi interattivi dell'Orto Botanico dell'Università degli Studi di Catania">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="app_assets/logo_orto_botanico.png">
+</head>
+<body>
+
+  <!-- Mobile Device Frame Simulator -->
+  <div class="device-container" id="deviceContainer">
+    
+    <!-- iPhone Notch & Status Bar -->
+    <div class="phone-header-notch">
+      <span class="notch-time" id="statusClock">09:41</span>
+      <div class="dynamic-island"></div>
+      <div class="notch-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none">
+          <path d="M1 9.5H3V1.5H1V9.5ZM5 9.5H7V3.5H5V9.5ZM9 9.5H11V5.5H9V9.5ZM13 9.5H15V7.5H13V9.5Z" fill="#000000"/>
+        </svg>
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="none">
+          <path d="M7.5 2C10 2 12.3 3 13.9 4.6L14.9 3.6C13 1.7 10.4 0.5 7.5 0.5C4.6 0.5 2 1.7 0.1 3.6L1.1 4.6C2.7 3 5 2 7.5 2ZM7.5 5.5C9 5.5 10.4 6.1 11.5 7.1L12.5 6.1C11.1 4.8 9.4 4 7.5 4C5.6 4 3.9 4.8 2.5 6.1L3.5 7.1C4.6 6.1 6 5.5 7.5 5.5ZM7.5 9C8.3 9 9 9.7 9 10.5H6C6 9.7 6.7 9 7.5 9Z" fill="#000000"/>
+        </svg>
+        <svg width="25" height="11" viewBox="0 0 25 11" fill="none">
+          <rect x="0.5" y="0.5" width="21" height="10" rx="3.5" stroke="#000000"/>
+          <rect x="2" y="2" width="16" height="7" rx="2" fill="#000000"/>
+          <path d="M23 4V7" stroke="#000000" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Inner Scrollable Viewport -->
+    <div class="app-viewport" id="appViewport">
+
+      <!-- ================= 1. HOME SCREEN ================= -->
+      <section class="screen active" id="screen-home">
+        <header class="app-header">
+          <div class="header-logo" onclick="navigateTo('home')">
+            <img src="app_assets/logo_orto_botanico.png" alt="Orto Botanico di Catania">
+          </div>
+          <div class="header-actions">
+            <button class="btn-icon-circle" id="homeBtnQr" aria-label="Scansiona QR Code" onclick="navigateTo('qr')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3"/>
+                <rect x="7" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="7" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
+            <button class="btn-icon-circle" id="homeBtnLang" aria-label="Cambia Lingua" onclick="openLanguageModal()">
+              <div class="flag-it"><span></span><span></span><span></span></div>
+            </button>
+          </div>
+        </header>
+
+        <!-- Fast Action Dual Cards -->
+        <div class="action-pills-row">
+          <div class="action-pill" id="btnGoPlants" onclick="navigateTo('search')">
+            <div class="action-pill-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C12 19.8 21.5 19 21.5 7C21.5 5.5 20.5 2 17 2C13.5 2 12.5 5 12.5 7C12.5 8 13 9 14.5 9.5C13 11 11.5 12 9 12.5C10 10.5 12 9 14 8.5L17 8Z"/>
+              </svg>
+            </div>
+            <div class="action-pill-text-wrap">
+              <span class="action-pill-title" data-i18n="discover_plants_title">Scopri le piante!</span>
+              <span class="action-pill-sub" data-i18n="discover_plants_sub">Catalogo completo</span>
+            </div>
+          </div>
+          <div class="action-pill" id="btnGoMap" onclick="navigateTo('map')">
+            <div class="action-pill-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/>
+              </svg>
+            </div>
+            <div class="action-pill-text-wrap">
+              <span class="action-pill-title" data-i18n="view_map_title">Visualizza la mappa</span>
+              <span class="action-pill-sub" data-i18n="view_map_sub">Mappa interattiva</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-overline" data-i18n="home_overline">Esplora il Giardino</div>
+        <h1 class="section-title-large" data-i18n="home_title">Scegli il percorso<br>più adatto a te</h1>
+
+        <!-- Route Cards Container -->
+        <div id="homeRoutesList">
+          <!-- Card 1: Percorso Breve -->
+          <div class="route-card" onclick="openRoute('breve')">
+            <div class="route-card-header">
+              <div class="route-card-lead">
+                <div class="route-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="10" cy="18" r="2.2"/>
+                    <circle cx="6" cy="15" r="1.8"/>
+                    <circle cx="15" cy="5" r="2.2"/>
+                    <circle cx="12" cy="8" r="1.8"/>
+                    <path d="M19 13C17.9 13 17 13.9 17 15C17 16.1 17.9 17 19 17C20.1 17 21 16.1 21 15C21 13.9 20.1 13 19 13ZM19 8C17.9 8 17 8.9 17 10C17 11.1 17.9 12 19 12C20.1 12 21 11.1 21 10C21 8.9 20.1 8 19 8ZM5 6C3.9 6 3 6.9 3 8C3 9.1 3.9 10 5 10C6.1 10 7 9.1 7 8C7 6.9 6.1 6 5 6Z"/>
+                  </svg>
+                </div>
+                <div class="route-card-title-group">
+                  <div class="route-card-title">Percorso Breve</div>
+                  <div class="route-card-hint">Ideale per una prima visita panoramica</div>
+                </div>
+              </div>
+              <div class="route-card-chevron">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="route-card-badges">
+              <div class="info-pill">
+                <div class="info-pill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z"/>
+                  </svg>
+                </div>
+                <div class="info-pill-content">
+                  <span class="info-pill-label" data-i18n="duration">Durata</span>
+                  <span class="info-pill-value">15-25 min</span>
+                </div>
+              </div>
+              <div class="info-pill">
+                <div class="info-pill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C12 19.8 21.5 19 21.5 7C21.5 5.5 20.5 2 17 2C13.5 2 12.5 5 12.5 7C12.5 8 13 9 14.5 9.5C13 11 11.5 12 9 12.5C10 10.5 12 9 14 8.5L17 8Z"/>
+                  </svg>
+                </div>
+                <div class="info-pill-content">
+                  <span class="info-pill-label" data-i18n="plants">Piante</span>
+                  <span class="info-pill-value">4 Specie</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Percorso Scoperta -->
+          <div class="route-card" onclick="openRoute('scoperta')">
+            <div class="route-card-header">
+              <div class="route-card-lead">
+                <div class="route-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L14.2 8.3L20.5 10.5L14.2 12.7L12 19L9.8 12.7L3.5 10.5L9.8 8.3L12 2ZM19 16L20.1 19.1L23.2 20.2L20.1 21.3L19 24.4L17.9 21.3L14.8 20.2L17.9 19.1L19 16Z"/>
+                  </svg>
+                </div>
+                <div class="route-card-title-group">
+                  <div class="route-card-title">Percorso Scoperta</div>
+                  <div class="route-card-hint">Un viaggio immersivo tra le collezioni</div>
+                </div>
+              </div>
+              <div class="route-card-chevron">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="route-card-badges">
+              <div class="info-pill">
+                <div class="info-pill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z"/>
+                  </svg>
+                </div>
+                <div class="info-pill-content">
+                  <span class="info-pill-label" data-i18n="duration">Durata</span>
+                  <span class="info-pill-value">35-45 min</span>
+                </div>
+              </div>
+              <div class="info-pill">
+                <div class="info-pill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C12 19.8 21.5 19 21.5 7C21.5 5.5 20.5 2 17 2C13.5 2 12.5 5 12.5 7C12.5 8 13 9 14.5 9.5C13 11 11.5 12 9 12.5C10 10.5 12 9 14 8.5L17 8Z"/>
+                  </svg>
+                </div>
+                <div class="info-pill-content">
+                  <span class="info-pill-label" data-i18n="plants">Piante</span>
+                  <span class="info-pill-value">8 Specie</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Percorso Studio -->
+          <div class="route-card" onclick="openRoute('studio')">
+            <div class="route-card-header">
+              <div class="route-card-lead">
+                <div class="route-card-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM6 4H11V12L8.5 10.5L6 12V4ZM18 20H6V19H18V20ZM18 17H6V16H18V17ZM18 14H13V12H18V14ZM18 9H13V7H18V9ZM18 6H13V4H18V6Z"/>
+                  </svg>
+                </div>
+                <div class="route-card-title-group">
+                  <div class="route-card-title">Percorso Studio</div>
+                  <div class="route-card-hint">Ricognizione scientifica approfondita</div>
+                </div>
+              </div>
+              <div class="route-card-chevron">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="route-card-badges">
+              <div class="info-pill">
+                <div class="info-pill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z"/>
+                  </svg>
+                </div>
+                <div class="info-pill-content">
+                  <span class="info-pill-label" data-i18n="duration">Durata</span>
+                  <span class="info-pill-value">60-80 min</span>
+                </div>
+              </div>
+              <div class="info-pill">
+                <div class="info-pill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C12 19.8 21.5 19 21.5 7C21.5 5.5 20.5 2 17 2C13.5 2 12.5 5 12.5 7C12.5 8 13 9 14.5 9.5C13 11 11.5 12 9 12.5C10 10.5 12 9 14 8.5L17 8Z"/>
+                  </svg>
+                </div>
+                <div class="info-pill-content">
+                  <span class="info-pill-label" data-i18n="plants">Piante</span>
+                  <span class="info-pill-value">12 Specie</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 2. ROUTE DETAIL SCREEN ================= -->
+      <section class="screen" id="screen-route-detail">
+        <header class="app-header">
+          <button class="btn-back-circle" onclick="goBack()" aria-label="Torna indietro">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="header-actions">
+            <button class="btn-icon-circle" onclick="navigateTo('qr')" aria-label="QR Code">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3"/>
+                <rect x="7" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="7" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
+            <button class="btn-icon-circle" onclick="openLanguageModal()" aria-label="Lingua">
+              <div class="flag-it"><span></span><span></span><span></span></div>
+            </button>
+          </div>
+        </header>
+
+        <!-- Fast Action Dual Cards -->
+        <div class="action-pills-row">
+          <div class="action-pill" onclick="navigateTo('search')">
+            <div class="action-pill-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C12 19.8 21.5 19 21.5 7C21.5 5.5 20.5 2 17 2C13.5 2 12.5 5 12.5 7C12.5 8 13 9 14.5 9.5C13 11 11.5 12 9 12.5C10 10.5 12 9 14 8.5L17 8Z"/>
+              </svg>
+            </div>
+            <div class="action-pill-text-wrap">
+              <span class="action-pill-title" data-i18n="discover_plants_title">Scopri le piante!</span>
+              <span class="action-pill-sub" data-i18n="discover_plants_sub">Catalogo completo</span>
+            </div>
+          </div>
+          <div class="action-pill" onclick="navigateTo('map')">
+            <div class="action-pill-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/>
+              </svg>
+            </div>
+            <div class="action-pill-text-wrap">
+              <span class="action-pill-title" data-i18n="view_map_title">Visualizza la mappa</span>
+              <span class="action-pill-sub" data-i18n="view_map_sub">Mappa interattiva</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="route-detail-hero">
+          <h1 class="route-detail-title" id="routeDetailTitle">Percorso Breve</h1>
+          <div class="route-detail-badges">
+            <div class="badge-detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z"/>
+              </svg>
+              <span id="routeDetailDuration">Durata: 15-25 min</span>
+            </div>
+            <div class="badge-detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C12 19.8 21.5 19 21.5 7C21.5 5.5 20.5 2 17 2C13.5 2 12.5 5 12.5 7C12.5 8 13 9 14.5 9.5C13 11 11.5 12 9 12.5C10 10.5 12 9 14 8.5L17 8Z"/>
+              </svg>
+              <span id="routeDetailPlantsCount">Piante: 4</span>
+            </div>
+            <div class="badge-detail">
+              <span>🔄</span>
+              <span>Itinerario ad anello</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="route-highlight-box">
+          <p class="route-description" id="routeDetailDescription">
+            Ideale per <strong>famiglie</strong>, <strong>visitatori di fretta</strong> o chi vuole una prima introduzione all’Orto Botanico. Si ammirano le <strong>piante più iconiche</strong>. Un’esperienza veloce ma ricca di fascino!
+          </p>
+        </div>
+
+        <div class="route-timeline-container">
+          <h3 class="plants-subhead">
+            <span>🌿</span>
+            <span id="routePlantListTitle">Le piante che incontrerai:</span>
+          </h3>
+          <div class="route-timeline-list" id="routeDetailPlantsList">
+            <!-- Dynamic route timeline cards -->
+          </div>
+        </div>
+
+        <button class="btn-primary-green" id="btnStartRoute" onclick="startActiveRoute()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span data-i18n="start_route">Inizia il percorso</span>
+        </button>
+
+        <!-- Route Map Preview Component -->
+        <div class="route-map-preview-card" onclick="startActiveRoute()">
+          <img id="routeMapImg" src="app_assets/maps/map_percorso_breve.png" alt="Mappa Percorso">
+          <div class="route-map-overlay-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2Z"/>
+            </svg>
+            <span>Tocca per visualizzare il percorso attivo</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3. ACTIVE ROUTE MAP VIEW ================= -->
+      <section class="screen screen-active-map" id="screen-active-map">
+        <div class="active-map-floating-header">
+          <button class="btn-back-circle" onclick="goBack()" aria-label="Indietro">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          
+          <div class="active-route-pill-badge">
+            <div class="route-live-dot"></div>
+            <span class="active-route-name" id="activeRouteNameBadge">Percorso Breve attivo</span>
+          </div>
+
+          <button class="btn-icon-circle" onclick="navigateTo('qr')" aria-label="QR Code">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3"/>
+              <rect x="7" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+              <rect x="13" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+              <rect x="7" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+              <rect x="13" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="active-map-container" id="activeMapContainer">
+          <div class="active-map-image-wrap" id="activeMapPlane">
+            <img src="app_assets/maps/map_active_route_clean.png" alt="Percorso Attivo Mappa">
+          </div>
+        </div>
+
+        <div class="active-map-bottom-dock">
+          <div class="dock-progress-row">
+            <span>📍 Tappa 1 • Ingresso Principale</span>
+            <span>Tracciato guidato</span>
+          </div>
+          <button class="btn-termina-percorso" onclick="endActiveRoute()" data-i18n="end_route">Termina percorso</button>
+        </div>
+      </section>
+
+      <!-- ================= 4. GENERAL INTERACTIVE MAP SCREEN ================= -->
+      <section class="screen" id="screen-map">
+        <header class="app-header">
+          <button class="btn-back-circle" onclick="goBack()" aria-label="Torna indietro">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="header-actions">
+            <button class="btn-icon-circle" onclick="navigateTo('qr')" aria-label="QR Code">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3"/>
+                <rect x="7" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="7" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
+            <button class="btn-icon-circle" onclick="openLanguageModal()" aria-label="Lingua">
+              <div class="flag-it"><span></span><span></span><span></span></div>
+            </button>
+          </div>
+        </header>
+
+        <div class="map-hint-banner">
+          <h2 class="map-screen-title" data-i18n="map_pinch_help">Usa le dita per spostarti o zoommare</h2>
+        </div>
+
+        <!-- Legenda Section -->
+        <div class="legenda-section">
+          <div class="legenda-header" data-i18n="legend">Legenda</div>
+          <div class="legenda-chips-grid" id="legendaChips">
+            <!-- Populated from APP_DATA.legendItems -->
+          </div>
+        </div>
+
+        <!-- Interactive Map Viewer Component -->
+        <div class="map-viewport-wrapper" id="generalMapViewport">
+          <div class="map-controls-floating">
+            <button class="map-ctrl-btn" onclick="mapZoom(1.25)" title="Zoom Avanti">+</button>
+            <button class="map-ctrl-btn" onclick="mapZoom(0.8)" title="Zoom Indietro">−</button>
+            <button class="map-ctrl-btn" onclick="mapReset()" title="Centra Mappa">⟲</button>
+            <button class="map-ctrl-btn" onclick="focusOnYou()" title="La mia posizione" style="color: #ea3323;">📍</button>
+          </div>
+
+          <div class="map-interactive-plane" id="generalMapPlane">
+            <img src="app_assets/maps/map_viewport.png" alt="Mappa Orto Botanico">
+            <!-- Dynamic Map Markers overlay -->
+            <div id="mapMarkersLayer"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 5. PLANT SEARCH & CATALOG SCREEN ================= -->
+      <section class="screen" id="screen-search">
+        <header class="search-header-row">
+          <button class="btn-back-circle" onclick="goBack()" aria-label="Indietro">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="search-input-box">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="plantSearchInput" placeholder="Trova una pianta o settore..." autocomplete="off">
+            <button class="search-clear-btn" id="searchClearBtn" onclick="clearPlantSearch()">✕</button>
+          </div>
+        </header>
+
+        <!-- Category Horizontal Filter Scroll -->
+        <div class="category-filters-scroll" id="categoryFilters">
+          <!-- Dynamic category pills -->
+        </div>
+
+        <div class="results-count-bar">
+          <span class="results-count-text" id="resultsCountText" data-i18n="all_plants">Tutte le piante</span>
+          <span style="font-size: 11px; color: var(--text-tertiary);" id="plantsFoundCount">5 specie</span>
+        </div>
+
+        <!-- Plants Card List -->
+        <div class="plants-list" id="plantsListContainer">
+          <!-- Dynamic plant cards -->
+        </div>
+      </section>
+
+      <!-- ================= 6. PLANT DETAILS SCREEN ================= -->
+      <section class="screen" id="screen-plant-detail">
+        <header class="app-header">
+          <button class="btn-back-circle" onclick="goBack()" aria-label="Torna indietro">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="header-actions">
+            <button class="btn-icon-circle" onclick="navigateTo('qr')" aria-label="QR Code">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3"/>
+                <rect x="7" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="7" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="7" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+                <rect x="13" y="13" width="4" height="4" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
+            <button class="btn-icon-circle" onclick="openLanguageModal()" aria-label="Lingua">
+              <div class="flag-it"><span></span><span></span><span></span></div>
+            </button>
+          </div>
+        </header>
+
+        <!-- Fast Action Dual Cards -->
+        <div class="action-pills-row">
+          <div class="action-pill" onclick="navigateTo('search')">
+            <div class="action-pill-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C12 19.8 21.5 19 21.5 7C21.5 5.5 20.5 2 17 2C13.5 2 12.5 5 12.5 7C12.5 8 13 9 14.5 9.5C13 11 11.5 12 9 12.5C10 10.5 12 9 14 8.5L17 8Z"/>
+              </svg>
+            </div>
+            <div class="action-pill-text-wrap">
+              <span class="action-pill-title" data-i18n="discover_plants_title">Scopri le piante!</span>
+              <span class="action-pill-sub" data-i18n="discover_plants_sub">Catalogo completo</span>
+            </div>
+          </div>
+          <div class="action-pill" onclick="navigateTo('map')">
+            <div class="action-pill-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/>
+              </svg>
+            </div>
+            <div class="action-pill-text-wrap">
+              <span class="action-pill-title" data-i18n="view_map_title">Visualizza la mappa</span>
+              <span class="action-pill-sub" data-i18n="view_map_sub">Mappa interattiva</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Big Plant Photo Hero -->
+        <div class="plant-detail-hero">
+          <img id="plantDetailImg" src="app_assets/plants/agathis_hero.png" alt="Pianta">
+        </div>
+
+        <!-- Primary CTA: Visualizza nella mappa -->
+        <button class="btn-visualizza-mappa" id="btnPlantShowOnMap" onclick="showPlantOnMap()">
+          <span class="btn-map-icon">📍</span>
+          <span data-i18n="view_on_map">Visualizza nella mappa</span>
+        </button>
+
+        <!-- Plant Header: Circle Number + Name + Sector Tag -->
+        <div class="plant-header-block">
+          <div class="plant-title-line">
+            <span class="plant-num-circle" id="plantDetailNum">1</span>
+            <h1 class="plant-detail-name" id="plantDetailName">Agathis Australis</h1>
+          </div>
+          <div class="plant-sector-wrapper">
+            <div id="plantDetailSectorBadge" class="plant-detail-sector-tag" style="background-color: var(--category-tropicale);">
+              <span id="plantDetailSectorIcon">🌴</span>
+              <span id="plantDetailSectorLabel">Tropicale</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editorial Content (Clean, elegant, no card fatigue) -->
+        <div class="plant-editorial-body">
+          <div class="plant-detail-desc" id="plantDetailDesc">
+            <!-- Filled dynamically -->
+          </div>
+
+          <div class="plant-editorial-section">
+            <h2 class="plant-section-heading" data-i18n="habitat">Habitat</h2>
+            <div class="plant-detail-habitat" id="plantDetailHabitat">
+              <!-- Filled dynamically -->
+            </div>
+          </div>
+
+          <div class="plant-editorial-section">
+            <h2 class="plant-section-heading" data-i18n="curiosities">Curiosità</h2>
+            <div class="plant-curiosita-list" id="plantDetailCuriosita">
+              <!-- Filled dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 7. QR CODE SCANNER SCREEN ================= -->
+      <section class="screen screen-qr-scanner" id="screen-qr">
+        <!-- Viewfinder Background -->
+        <img class="qr-scanner-bg" id="qrBgImg" src="app_assets/qr_scanner_bg.png" alt="Sfondo Scansione">
+
+        <header class="qr-scanner-header">
+          <button class="btn-back-circle" onclick="goBack()" aria-label="Indietro">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="btn-torch" id="btnTorch" onclick="toggleTorch()" aria-label="Torcia">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 2V11H10V22L17 10H13L16 2H7Z"/>
+            </svg>
+          </button>
+        </header>
+
+        <!-- Scanner Target Frame & Laser Overlay -->
+        <div class="qr-scanner-overlay">
+          <div class="qr-target-box" onclick="simulateScan(1)">
+            <div class="qr-corner qr-corner-tl"></div>
+            <div class="qr-corner qr-corner-tr"></div>
+            <div class="qr-corner qr-corner-bl"></div>
+            <div class="qr-corner qr-corner-br"></div>
+            <div class="qr-laser-line"></div>
+          </div>
+
+          <!-- Exact QR instruction prompt card from PDF -->
+          <div class="qr-prompt-card" onclick="simulateScan(1)">
+            <div class="qr-prompt-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="6" height="6"></rect>
+                <rect x="15" y="3" width="6" height="6"></rect>
+                <rect x="15" y="15" width="6" height="6"></rect>
+                <rect x="3" y="15" width="6" height="6"></rect>
+                <path d="M10 7h4v4h-4zM7 10v4M10 14h4v3M14 10h3v4"></path>
+              </svg>
+            </div>
+            <div class="qr-prompt-text" data-i18n="qr_prompt">
+              Inquadra il QR code sul cartellino della pianta
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Demo Scan Testing Row -->
+        <div class="qr-test-actions">
+          <div class="qr-test-title" data-i18n="qr_test_title">Simula scansione cartellino:</div>
+          <div class="qr-test-buttons-row">
+            <button class="btn-qr-chip" onclick="simulateScan(1)">#1 Agathis</button>
+            <button class="btn-qr-chip" onclick="simulateScan(2)">#2 Papyrus</button>
+            <button class="btn-qr-chip" onclick="simulateScan(3)">#3 Cereus</button>
+            <button class="btn-qr-chip" onclick="simulateScan(4)">#4 Mirto</button>
+            <button class="btn-qr-chip" onclick="simulateScan(5)">#5 Carrubo</button>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /app-viewport -->
+
+    <!-- Map Pin Bottom Sheet -->
+    <div class="map-bottom-sheet" id="mapBottomSheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-content">
+        <div class="sheet-thumb" id="sheetThumb">
+          <img src="app_assets/plants/agathis_australis.png" alt="Pianta">
+        </div>
+        <div class="sheet-details">
+          <div class="sheet-title" id="sheetTitle">Agathis Australis</div>
+          <div class="sheet-sub" id="sheetSub">Settore Tropicale</div>
+        </div>
+        <button class="sheet-btn" id="sheetBtnAction" onclick="openPlantFromSheet()">Dettagli</button>
+      </div>
+    </div>
+
+    <!-- Language Selector Modal -->
+    <div class="modal-overlay" id="languageModal" onclick="closeLanguageModal(event)">
+      <div class="modal-card" onclick="event.stopPropagation()">
+        <h3 class="modal-title">Seleziona Lingua</h3>
+        <div class="lang-option selected" id="optLangIt" onclick="setLanguage('it')">
+          <div class="lang-lead">
+            <div class="flag-it"><span></span><span></span><span></span></div>
+            <div class="lang-name">Italiano</div>
+          </div>
+          <div class="lang-check">✓</div>
+        </div>
+        <div class="lang-option" id="optLangEn" onclick="setLanguage('en')">
+          <div class="lang-lead">
+            <div class="flag-en">🇬🇧</div>
+            <div class="lang-name">English</div>
+          </div>
+          <div class="lang-check">✓</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /device-container -->
+
+  <!-- Desktop simulator switcher -->
+  <div class="desktop-controls-bar">
+    <span>Orto Botanico di Catania</span>
+    <button class="toggle-device-mode-btn" onclick="toggleDeviceView()">📱 / 🖥️ Schermo Intero</button>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
