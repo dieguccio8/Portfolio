@@ -106,6 +106,25 @@ body::after {
   will-change: transform, opacity;
 }
 
+@media (min-width: 768px) and (max-height: 800px) {
+  .orto-research-sticky {
+    padding-bottom: 2rem;
+  }
+
+  .orto-research-aurora {
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+
+  .orto-research-tabs {
+    margin-top: 2rem;
+  }
+
+  .orto-research-content {
+    margin-top: 2.5rem;
+  }
+}
+
 /* ─── Prefers reduced motion: disable all animations ────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -244,6 +263,18 @@ body::after {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+}
+
+@media (min-width: 48rem) {
+  .orto-feature-cards .rounded-\[2rem\] {
+    padding: calc(var(--spacing) * 5);
+  }
+}
+
+@media (min-width: 80rem) {
+  .orto-feature-cards .rounded-\[2rem\] {
+    padding: calc(var(--spacing) * 6);
   }
 }
 

@@ -235,7 +235,11 @@ export function AetherisLowerSections({
       // We offset slightly to land squarely in the middle of each section's trigger zone
       const progress = index === 0 ? 0.15 : index === 1 ? 0.5 : 0.85;
       const scrollPos = start + (end - start) * progress;
-      window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+      if ((window as any).__lenis) {
+        (window as any).__lenis.scrollTo(scrollPos);
+      } else {
+        window.scrollTo({ top: scrollPos, behavior: 'smooth' });
+      }
     }
   };
 
@@ -244,8 +248,8 @@ export function AetherisLowerSections({
 
       {/* 01 / RESEARCH & ANALYSIS */}
       <div ref={pinRef} className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
-        <div className="sticky top-0 w-full h-auto overflow-hidden flex flex-col pb-20">
-          <AuroraBackground className="!bg-transparent h-auto w-full pt-32 sm:pt-40 pb-20">
+        <div className="orto-research-sticky sticky top-0 w-full h-[100svh] overflow-hidden flex flex-col pb-10 sm:pb-20">
+          <AuroraBackground className="orto-research-aurora !bg-transparent h-full w-full pt-24 sm:pt-40 pb-10 sm:pb-20">
             <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">
               <div className="flex flex-col gap-4">
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-raleway">
@@ -254,7 +258,7 @@ export function AetherisLowerSections({
               </div>
 
               {/* Tab Selector */}
-              <div className="flex gap-8 sm:gap-12 shrink-0 self-start relative overflow-x-auto scrollbar-none w-full sm:w-auto border-b border-white/10 pb-3 px-2 mt-16">
+              <div className="orto-research-tabs flex gap-8 sm:gap-12 shrink-0 self-start relative overflow-x-auto scrollbar-none w-full sm:w-auto border-b border-white/10 pb-3 px-2 mt-8 sm:mt-16">
                 {['desk', 'sondaggi', 'interviste'].map((tab, index) => (
                   <button
                     key={tab}
@@ -277,7 +281,7 @@ export function AetherisLowerSections({
               </div>
 
               {/* Dynamic Content Area */}
-              <div className="flex-1 relative w-full mt-24">
+              <div className="orto-research-content flex-1 relative w-full mt-10 sm:mt-24">
                 <AnimatePresence mode="wait">
                   {activeResearchTab === 'desk' && (
                     <motion.div
@@ -286,19 +290,22 @@ export function AetherisLowerSections({
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -50 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+                      className="relative flex md:grid md:grid-cols-3 gap-6 max-w-5xl mx-auto overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none pb-4 md:pb-0"
                     >
                       <HighlightCard animatedBorder={true}
+                        className="min-w-[260px] md:min-w-0 snap-center"
                         title="Orientamento"
                         description={["Nessuna guida per non esperti."]}
                         icon={<MapPin className="w-8 h-8 text-white" />}
                       />
                       <HighlightCard animatedBorder={true}
+                        className="min-w-[260px] md:min-w-0 snap-center"
                         title="Coinvolgimento"
                         description={["Esperienza passiva e veloce (5 min)."]}
                         icon={<Clock className="w-8 h-8 text-white" />}
                       />
                       <HighlightCard animatedBorder={true}
+                        className="min-w-[260px] md:min-w-0 snap-center"
                         title="Informazioni"
                         description={["Mancano spiegazioni oltre al nome scientifico."]}
                         icon={<FileQuestion className="w-8 h-8 text-white" />}
@@ -313,10 +320,10 @@ export function AetherisLowerSections({
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -50 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                      className="relative flex md:grid md:grid-cols-2 gap-8 max-w-4xl mx-auto overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none pb-4 md:pb-0"
                     >
                       {/* Chart 1 */}
-                      <HighlightCard animatedBorder={true} title="Come ti orienti?">
+                      <HighlightCard animatedBorder={true} title="Come ti orienti?" className="min-w-[260px] md:min-w-0 snap-center">
                         <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
                           <div className="w-1/2">
                             <NeonGauge percentage="20%" color="#FFFFFF" label="Segnaletica" level={0.2} />
@@ -328,7 +335,7 @@ export function AetherisLowerSections({
                       </HighlightCard>
 
                       {/* Chart 2 */}
-                      <HighlightCard animatedBorder={true} title="Useresti QR code interattivi?">
+                      <HighlightCard animatedBorder={true} title="Useresti QR code interattivi?" className="min-w-[260px] md:min-w-0 snap-center">
                         <div className="flex w-full justify-between gap-8 mt-2 mb-8 max-w-[320px] mx-auto">
                           <div className="w-1/2">
                             <NeonGauge percentage="25%" color="#FFFFFF" label="Forse" level={0.25} />
@@ -348,9 +355,9 @@ export function AetherisLowerSections({
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -50 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="relative grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                      className="relative flex md:grid md:grid-cols-2 gap-8 max-w-4xl mx-auto overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none pb-4 md:pb-0"
                     >
-                      <HighlightCard animatedBorder={true} title="Utilità di un Totem Digitale?">
+                      <HighlightCard animatedBorder={true} title="Utilità di un Totem Digitale?" className="min-w-[260px] md:min-w-0 snap-center">
                         <div className="flex flex-col items-center gap-4 text-center">
                           <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-raleway border border-[#068B35]/20 shrink-0">Q1</span>
                           <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">
@@ -359,7 +366,7 @@ export function AetherisLowerSections({
                         </div>
                       </HighlightCard>
 
-                      <HighlightCard animatedBorder={true} title="Mancanze Informative?">
+                      <HighlightCard animatedBorder={true} title="Mancanze Informative?" className="min-w-[260px] md:min-w-0 snap-center">
                         <div className="flex flex-col items-center gap-4 text-center">
                           <span className="w-12 h-12 rounded-full bg-[#068B35]/10 text-[#068B35] flex items-center justify-center font-bold font-raleway border border-[#068B35]/20 shrink-0">Q2</span>
                           <p className="text-sm leading-relaxed text-neutral-400 font-light border-l-2 border-[#068B35] pl-4 italic">

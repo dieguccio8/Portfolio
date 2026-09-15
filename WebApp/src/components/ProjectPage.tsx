@@ -63,6 +63,8 @@ import AuroraBackground from './ui/aurora-background';
 import { Button3D } from './ui/3d-button';
 import { GridVignetteBackground } from './ui/vignette-grid-background';
 
+const getAssetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+
 function RotatingPhone({ children, initialRotationY = 0 }: { children: React.ReactNode, initialRotationY?: number }) {
   const groupRef = React.useRef<THREE.Group>(null);
   
@@ -593,7 +595,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
               )}
               {!isKinetics && (
                 <h1 className={`font-black tracking-tighter uppercase mb-2 ${(isAetheris || isChronos) ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-raleway font-bold text-white' : 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans text-white'}`}>
-                  {!(isAetheris || isChronos) ? project.title : null}
+                  {isAetheris ? <span className="sr-only">{project.title}</span> : !(isAetheris || isChronos) ? project.title : null}
                 </h1>
               )}
               {(isAetheris || isChronos || isKinetics) && (
@@ -2274,7 +2276,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       {["Arido", "Bagni", "Fontanella", "Mediterraneo", "Orto Generale", "Orto Siculo", "Tropicale", "Tu sei qui"].map((variant) => (
                         <img
                           key={variant}
-                          src={`/Images/Project 01/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`}
+                          src={getAssetUrl(`Images/Project 01/design_system/button_categorie/State=Unselected, Variant=${variant}, Size=Large.svg`)}
                           alt={`Categoria ${variant}`}
                           className="w-full h-auto max-h-10 lg:max-h-12 object-contain drop-shadow-sm hover:scale-105 transition-transform"
                         />
@@ -2305,9 +2307,9 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="flex flex-col gap-2 relative z-10 w-full">
                       <span className="font-raleway text-[11px] text-[#068B35] font-bold uppercase tracking-wider mb-2">H1 / Raleway, Semibold, 62px</span>
-                      <h1 style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
+                      <div style={{ fontFamily: "'Raleway', sans-serif" }} className="text-white text-4xl md:text-[56px] lg:text-[62px] font-semibold leading-tight tracking-tight">
                         {lang === 'it' ? "Scegli il percorso" : "Choose the path"}
-                      </h1>
+                      </div>
                     </div>
                   </div>
                 </div>

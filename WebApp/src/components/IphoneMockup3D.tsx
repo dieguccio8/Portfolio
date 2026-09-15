@@ -288,7 +288,13 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       z: 0
     });
 
-    const endX = isMobile ? 0 : isTablet ? -60 : -120;
+    const endX = isMobile
+      ? 0
+      : isTablet
+        ? -80
+        : window.innerWidth < 1536
+          ? -150
+          : -145;
     const endY = 0;
     
     // Setup initial position
@@ -312,6 +318,7 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       x: endX,
       y: endY,
       z: 0,
+      duration: 1,
       ease: "power1.inOut"
     }, 0);
 
@@ -320,6 +327,7 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       x: 0,
       y: 0.3, // Slightly oriented towards the right
       z: 0,
+      duration: 1,
       ease: "power1.inOut" // Smooth start and end to the rotation
     }, 0);
     
@@ -332,17 +340,16 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       }, 0);
     }
     
-    // Animate cards entering from right
+    // Animate cards entering from the right, keeping their final lane to the right of the 3D phone.
     if (cardsRef.current) {
-      // Set initial state: far to the right
-      gsap.set(cardsRef.current, { opacity: 0, x: 800 });
+      gsap.set(cardsRef.current, { opacity: 0, xPercent: 105 });
       
       tl.to(cardsRef.current, {
-        x: 0,
+        xPercent: 0,
         opacity: 1,
-        ease: "power2.out",
-        duration: 0.9 // Slower, matches the phone's 1.0 duration better
-      }, 0.1); // Starts almost immediately, following the phone
+        ease: "power1.inOut",
+        duration: 1
+      }, 0);
     }
 
 
@@ -370,22 +377,22 @@ export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {
 
   return (
     <ErrorBoundary fallback={(err) => <div className="text-red-500 p-4 border border-red-500 rounded bg-red-900/20">Error 3D: {err.message}</div>}>
-      <div ref={containerRef} className="w-full h-[300vh] relative">
+      <div ref={containerRef} id="orto-iphone-3d-section" className="w-full h-[300vh] relative">
         <div className="sticky top-0 w-full h-screen overflow-hidden">
           <AuroraBackground className="!bg-transparent h-full w-full">
             <div className="absolute inset-0 pointer-events-none flex flex-col justify-center pl-[5%] md:pl-[10%] lg:pl-[12%] pr-[5%] z-10">
               <div ref={titleRef} className="flex flex-col gap-6 max-w-xl md:max-w-2xl">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-max leading-none">
+                <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white max-w-max leading-none">
                    Cos'è<br />
                    <span className="text-[#068b35] whitespace-nowrap">Bussola Verde?</span>
-                </h1>
+                </h2>
                 <p className="text-lg md:text-xl text-neutral-400 font-light leading-relaxed">
                   Un ecosistema digitale che trasforma il parco in un percorso su misura, rendendo il visitatore esploratore attivo.
                 </p>
               </div>
             </div>
             
-            <div ref={cardsRef} className="absolute right-[2%] md:right-[5%] lg:right-[8%] xl:right-[10%] top-[50%] -translate-y-1/2 w-[95vw] max-w-[320px] md:max-w-none md:w-[55vw] lg:w-[58vw] xl:w-[55vw] z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+            <div ref={cardsRef} className="orto-feature-cards absolute right-[2%] md:right-[3%] lg:right-[4%] xl:right-[5%] top-[50%] -translate-y-1/2 w-[95vw] max-w-[320px] md:max-w-none md:w-[44vw] lg:w-[45vw] xl:w-[44vw] 2xl:w-[42vw] z-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-5 xl:gap-6 [&_h3]:md:text-xl [&_h3]:xl:text-2xl [&_p]:md:text-[11px] [&_p]:xl:text-xs">
                <HighlightCard animatedBorder={true} title="Interattività" description={["Pannelli digitali e QR accrescono la conoscenza."]} icon={<Compass className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Percorsi Agili" description={["Itinerari scelti tramite i Totem all'ingresso."]} icon={<ArrowRight className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Accessibilità" description={["App user-friendly e mappe inclusive per tutti."]} icon={<MapIcon className="w-6 h-6 text-[#068B35]" />} />
