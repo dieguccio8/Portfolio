@@ -4,7 +4,7 @@
     {
       "label": "Portfolio: preview automatica",
       "type": "shell",
-      "command": "cd \"${workspaceFolder}/WebApp\" && npm run dev -- --host 127.0.0.1 --strictPort",
+      "command": "cd \"${workspaceFolder}/WebApp\" && EXISTING_PID=\"$(lsof -tiTCP:3000 -sTCP:LISTEN | head -n 1)\"; if [ -n \"$EXISTING_PID\" ]; then EXISTING_CMD=\"$(ps -p \"$EXISTING_PID\" -o command=)\"; if echo \"$EXISTING_CMD\" | grep -Eiq \"node|npm|vite\"; then kill \"$EXISTING_PID\"; sleep 1; fi; fi; npm run dev -- --host 127.0.0.1 --strictPort",
       "isBackground": true,
       "runOptions": {
         "runOn": "folderOpen"
