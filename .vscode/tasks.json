@@ -4,10 +4,7 @@
     {
       "label": "Portfolio: preview automatica",
       "type": "shell",
-      "command": "npm run dev -- --open /Portfolio/?project=aetheris",
-      "options": {
-        "cwd": "${workspaceFolder}/WebApp"
-      },
+      "command": "cd \"${workspaceFolder}/WebApp\" && npm run dev -- --host 127.0.0.1 --strictPort",
       "isBackground": true,
       "runOptions": {
         "runOn": "folderOpen"
