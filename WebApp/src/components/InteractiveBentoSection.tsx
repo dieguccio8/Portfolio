@@ -52,7 +52,7 @@ export default function InteractiveBentoSection({
             con gradiente in cima per sfumare perfettamente con la sezione precedente */}
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[100vw] bg-gradient-to-b from-transparent via-[#050505] via-15% to-[#050505] -z-10" />
         
-        <div className="w-full flex flex-col xl:flex-row gap-8 lg:gap-16 xl:gap-24 justify-center xl:items-center py-4 md:py-8 px-4 md:px-0 relative z-10">
+        <div className="w-full flex flex-col xl:flex-row gap-8 lg:gap-16 xl:gap-24 justify-center xl:items-center py-4 md:py-8 xl:pt-24 xl:pb-12 px-4 md:px-0 relative z-10">
           
           {/* Left Side: Timeline */}
           <div className="flex-1 w-full max-w-lg">
@@ -60,7 +60,7 @@ export default function InteractiveBentoSection({
           </div>
           
           {/* Right Side: Bento Grid */}
-          <div className="flex-1 w-full max-w-xl mt-12 xl:mt-0">
+          <div className="flex-1 w-full max-w-xl mt-12 xl:mt-20 2xl:mt-24">
             <BentoGrid 
               activePhase={activePhase} 
               problemsFeatures={problemsFeatures}

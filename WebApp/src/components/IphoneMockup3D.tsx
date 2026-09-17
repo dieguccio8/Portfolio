@@ -293,8 +293,8 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       : isTablet
         ? -80
         : window.innerWidth < 1536
-          ? -150
-          : -145;
+          ? -140
+          : -125;
     const endY = 0;
     
     // Setup initial position
@@ -377,8 +377,8 @@ export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {
 
   return (
     <ErrorBoundary fallback={(err) => <div className="text-red-500 p-4 border border-red-500 rounded bg-red-900/20">Error 3D: {err.message}</div>}>
-      <div ref={containerRef} id="orto-iphone-3d-section" className="w-full h-[300vh] relative">
-        <div className="sticky top-0 w-full h-screen overflow-hidden">
+      <div ref={containerRef} id="orto-iphone-3d-section" className="relative left-1/2 w-screen -translate-x-1/2 h-[300svh]">
+        <div className="sticky top-0 w-screen h-[100svh] overflow-hidden">
           <AuroraBackground className="!bg-transparent h-full w-full">
             <div className="absolute inset-0 pointer-events-none flex flex-col justify-center pl-[5%] md:pl-[10%] lg:pl-[12%] pr-[5%] z-10">
               <div ref={titleRef} className="flex flex-col gap-6 max-w-xl md:max-w-2xl">
@@ -392,7 +392,7 @@ export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {
               </div>
             </div>
             
-            <div ref={cardsRef} className="orto-feature-cards absolute right-[2%] md:right-[3%] lg:right-[4%] xl:right-[5%] top-[50%] -translate-y-1/2 w-[95vw] max-w-[320px] md:max-w-none md:w-[44vw] lg:w-[45vw] xl:w-[44vw] 2xl:w-[42vw] z-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-5 xl:gap-6 [&_h3]:md:text-xl [&_h3]:xl:text-2xl [&_p]:md:text-[11px] [&_p]:xl:text-xs">
+            <div ref={cardsRef} className="orto-feature-cards absolute right-[2%] md:right-[4%] lg:right-[19%] xl:right-[24%] 2xl:right-[28%] top-[50%] -translate-y-1/2 w-[95vw] max-w-[320px] md:max-w-none md:w-[44vw] lg:w-[43vw] xl:w-[40vw] 2xl:w-[38vw] z-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-5 xl:gap-6 [&_h3]:md:text-xl [&_h3]:xl:text-2xl [&_p]:md:text-[11px] [&_p]:xl:text-xs">
                <HighlightCard animatedBorder={true} title="Interattività" description={["Pannelli digitali e QR accrescono la conoscenza."]} icon={<Compass className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Percorsi Agili" description={["Itinerari scelti tramite i Totem all'ingresso."]} icon={<ArrowRight className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Accessibilità" description={["App user-friendly e mappe inclusive per tutti."]} icon={<MapIcon className="w-6 h-6 text-[#068B35]" />} />

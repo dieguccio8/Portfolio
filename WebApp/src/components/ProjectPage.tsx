@@ -2381,11 +2381,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           {isAetheris && (
             <>
               {/* 3D Marquee Section */}
-              <div className="pt-16 pb-8 md:pb-12 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
+              <div className="pt-16 pb-16 md:pb-24 lg:pb-32 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
                 <ThreeDMarquee />
               </div>
 
-              <div ref={ortoSectionRef} className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center justify-items-center mb-16 w-full" id="orto-interactive-prototypes-section">
+              <div ref={ortoSectionRef} className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center justify-items-center mt-8 md:mt-12 mb-16 w-full" id="orto-interactive-prototypes-section">
 
                 {/* Left Column: Prototypes */}
                 <div className="flex flex-col gap-6 items-center justify-center w-full">
