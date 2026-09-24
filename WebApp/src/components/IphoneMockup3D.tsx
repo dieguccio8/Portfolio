@@ -289,12 +289,12 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
     });
 
     const endX = isMobile
-      ? 0
+      ? -95
       : isTablet
         ? -80
         : window.innerWidth < 1536
-          ? -140
-          : -125;
+          ? -170
+          : -170;
     const endY = 0;
     
     // Setup initial position
@@ -313,12 +313,12 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       }
     });
 
-    // Animate position from top-right to bottom-left
+    // Clear the cards' column early, before their entrance begins.
     tl.to(groupRef.current.position, {
       x: endX,
       y: endY,
       z: 0,
-      duration: 1,
+      duration: 0.20,
       ease: "power1.inOut"
     }, 0);
 
@@ -327,7 +327,7 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       x: 0,
       y: 0.3, // Slightly oriented towards the right
       z: 0,
-      duration: 1,
+      duration: 0.26,
       ease: "power1.inOut" // Smooth start and end to the rotation
     }, 0);
     
@@ -336,24 +336,30 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       tl.to(titleRef.current, {
         xPercent: -150,
         opacity: 0,
-        ease: "none"
+        duration: 0.22,
+        ease: "power1.in"
       }, 0);
     }
     
-    // Animate cards entering from the right, keeping their final lane to the right of the 3D phone.
+    // Animate each card from the right in sequence.
     if (cardsRef.current) {
-      gsap.set(cardsRef.current, { opacity: 0, xPercent: 105 });
+      const cards = Array.from(cardsRef.current.children);
+      gsap.set(cardsRef.current, { opacity: 1 });
+      gsap.set(cards, { opacity: 0, x: 180 });
       
-      tl.to(cardsRef.current, {
-        xPercent: 0,
+      tl.to(cards, {
+        x: 0,
         opacity: 1,
         ease: "power1.inOut",
-        duration: 1
-      }, 0);
+        duration: 0.12,
+        stagger: 0.01,
+      }, isMobile ? 0.12 : 0.18);
     }
 
+    // Keep the completed composition visible through the rest of the section.
+    tl.to({}, { duration: 0.55 });
 
-
+    requestAnimationFrame(() => ScrollTrigger.refresh());
   }, { scope: containerRef, dependencies: [] });
 
   return (
@@ -375,6 +381,19 @@ export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {
   const titleRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver(() => ScrollTrigger.refresh());
+    resizeObserver.observe(containerRef.current);
+    const frameId = requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
   return (
     <ErrorBoundary fallback={(err) => <div className="text-red-500 p-4 border border-red-500 rounded bg-red-900/20">Error 3D: {err.message}</div>}>
       <div ref={containerRef} id="orto-iphone-3d-section" className="relative left-1/2 w-screen -translate-x-1/2 h-[300svh]">
@@ -392,7 +411,7 @@ export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {
               </div>
             </div>
             
-            <div ref={cardsRef} className="orto-feature-cards absolute right-[2%] md:right-[4%] lg:right-[19%] xl:right-[24%] 2xl:right-[28%] top-[50%] -translate-y-1/2 w-[95vw] max-w-[320px] md:max-w-none md:w-[44vw] lg:w-[43vw] xl:w-[40vw] 2xl:w-[38vw] z-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-5 xl:gap-6 [&_h3]:md:text-xl [&_h3]:xl:text-2xl [&_p]:md:text-[11px] [&_p]:xl:text-xs">
+            <div ref={cardsRef} style={{ opacity: 0 }} className="orto-feature-cards absolute right-[2%] md:right-[4%] lg:right-[19%] xl:right-[24%] 2xl:right-[28%] top-[50%] -translate-y-1/2 w-[95vw] max-w-[320px] md:max-w-none md:w-[44vw] lg:w-[43vw] xl:w-[40vw] 2xl:w-[38vw] z-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 lg:gap-5 xl:gap-6 [&_h3]:md:text-xl [&_h3]:xl:text-2xl [&_p]:md:text-[11px] [&_p]:xl:text-xs">
                <HighlightCard animatedBorder={true} title="Interattività" description={["Pannelli digitali e QR accrescono la conoscenza."]} icon={<Compass className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Percorsi Agili" description={["Itinerari scelti tramite i Totem all'ingresso."]} icon={<ArrowRight className="w-6 h-6 text-[#068B35]" />} />
                <HighlightCard animatedBorder={true} title="Accessibilità" description={["App user-friendly e mappe inclusive per tutti."]} icon={<MapIcon className="w-6 h-6 text-[#068B35]" />} />
