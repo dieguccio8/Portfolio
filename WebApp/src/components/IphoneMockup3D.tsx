@@ -283,7 +283,8 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
     
     // Initial position for entering from right
     gsap.set(groupRef.current.position, {
-      x: isMobile ? 80 : 150,
+      // The phone leads the composition so the following cards never cross it.
+      x: isMobile ? 55 : isTablet ? 70 : 100,
       y: 0,
       z: 0
     });
@@ -309,16 +310,16 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
         trigger: containerRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1, // Smooth premium scrub
+        scrub: 1.25,
       }
     });
 
-    // Clear the cards' column early, before their entrance begins.
+    // Phone and cards share the same duration/easing for one right-to-left motion.
     tl.to(groupRef.current.position, {
       x: endX,
       y: endY,
       z: 0,
-      duration: 0.20,
+      duration: 0.68,
       ease: "power1.inOut"
     }, 0);
 
@@ -327,7 +328,7 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       x: 0,
       y: 0.3, // Slightly oriented towards the right
       z: 0,
-      duration: 0.26,
+      duration: 0.68,
       ease: "power1.inOut" // Smooth start and end to the rotation
     }, 0);
     
@@ -336,28 +337,34 @@ function AnimatedScene({ containerRef, titleRef, cardsRef, imagePath }: { contai
       tl.to(titleRef.current, {
         xPercent: -150,
         opacity: 0,
-        duration: 0.22,
-        ease: "power1.in"
+        duration: 0.34,
+        ease: "power1.inOut"
       }, 0);
     }
     
-    // Animate each card from the right in sequence.
+    // Move the text group as one unit, while its cards fade in with a subtle cadence.
     if (cardsRef.current) {
       const cards = Array.from(cardsRef.current.children);
-      gsap.set(cardsRef.current, { opacity: 1 });
-      gsap.set(cards, { opacity: 0, x: 180 });
+      const cardsStartX = isMobile ? 360 : isTablet ? 600 : 900;
+      gsap.set(cardsRef.current, { opacity: 1, x: cardsStartX });
+      gsap.set(cards, { opacity: 0 });
       
-      tl.to(cards, {
+      tl.to(cardsRef.current, {
         x: 0,
+        duration: 0.68,
+        ease: "power1.inOut",
+      }, 0);
+
+      tl.to(cards, {
         opacity: 1,
         ease: "power1.inOut",
-        duration: 0.12,
-        stagger: 0.01,
-      }, isMobile ? 0.12 : 0.18);
+        duration: 0.28,
+        stagger: 0.035,
+      }, 0.12);
     }
 
     // Keep the completed composition visible through the rest of the section.
-    tl.to({}, { duration: 0.55 });
+    tl.to({}, { duration: 0.35 });
 
     requestAnimationFrame(() => ScrollTrigger.refresh());
   }, { scope: containerRef, dependencies: [] });

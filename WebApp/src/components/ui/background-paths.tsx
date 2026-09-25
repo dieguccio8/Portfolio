@@ -29,23 +29,12 @@ export function FloatingPaths({ position }: { position: number }) {
                 <g transform="translate(0, -120)">
                 <title>Background Paths Mobile</title>
                 {paths.map((path) => (
-                    <motion.path
+                    <path
                         key={`mob-${path.id}`}
                         d={path.d}
                         stroke="currentColor"
                         strokeWidth={path.width}
                         strokeOpacity={0.1 + path.id * 0.03}
-                        initial={{ pathLength: 0.3, opacity: 0.6 }}
-                        animate={{
-                            pathLength: 1,
-                            opacity: [0.3, 0.6, 0.3],
-                            pathOffset: [0, 1, 0],
-                        }}
-                        transition={{
-                            duration: 20 + Math.random() * 10,
-                            repeat: Number.POSITIVE_INFINITY,
-                            ease: "linear",
-                        }}
                     />
                 ))}
                 </g>
@@ -60,23 +49,12 @@ export function FloatingPaths({ position }: { position: number }) {
                 <g transform="translate(0, -120)">
                 <title>Background Paths Desktop</title>
                 {paths.map((path) => (
-                    <motion.path
+                    <path
                         key={`desk-${path.id}`}
                         d={path.d}
                         stroke="currentColor"
                         strokeWidth={path.width}
                         strokeOpacity={0.1 + path.id * 0.03}
-                        initial={{ pathLength: 0.3, opacity: 0.6 }}
-                        animate={{
-                            pathLength: 1,
-                            opacity: [0.3, 0.6, 0.3],
-                            pathOffset: [0, 1, 0],
-                        }}
-                        transition={{
-                            duration: 20 + Math.random() * 10,
-                            repeat: Number.POSITIVE_INFINITY,
-                            ease: "linear",
-                        }}
                     />
                 ))}
                 </g>

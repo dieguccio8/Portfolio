@@ -14,7 +14,7 @@ export function OrtoMobileMockupShowcaseSection() {
   return (
     <section
       id="mobile-mockup-showcase"
-      className="relative z-30 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] -mt-[10vh] md:-mt-[25vh]"
+      className="relative z-30 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh]"
     >
       <div className="relative w-full h-full">
         <img

@@ -82,14 +82,6 @@ export default function App() {
     return null;
   });
 
-  const [preloadFigma, setPreloadFigma] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setPreloadFigma(true);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
   useEffect(() => {
     const url = new URL(window.location.href);
     if (activeProjectPage) {
@@ -653,8 +645,10 @@ export default function App() {
         <div className="relative w-full bg-[#050505] overflow-hidden border-t border-[#2A2A2A]">
           {/* Shared Floating Paths background spanning both sections */}
           <div className="absolute inset-0 pointer-events-none opacity-40 scale-[2.2] -translate-y-[35%] md:translate-y-0 md:scale-100 origin-center">
-            <FloatingPaths position={1} />
-            <FloatingPaths position={-1} />
+            <div className="home-paths-drift absolute inset-[-8%]">
+              <FloatingPaths position={1} />
+              <FloatingPaths position={-1} />
+            </div>
           </div>
 
           {/* SECTION 3: CREATIVE PARTNERSHIP / COLLABORATION SECTION */}
@@ -776,43 +770,13 @@ export default function App() {
           {/* SECTION 4: INLINE CONTACT / GET IN TOUCH */}
           <section className="relative w-full text-white py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-14 border-t border-white/5" id="direct-contact-section">
             {/* Soft floating primary radial glow orbs scattered in the background with slow drifting animations */}
-            <motion.div
-              animate={{
-                x: [0, -40, 30, 0],
-                y: [0, 50, -30, 0],
-                scale: [1, 1.15, 0.9, 1],
-              }}
-              transition={{
-                duration: 23,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+            <div
               className="absolute top-[5%] right-[-25%] w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(232,48,42,0.14)_0%,rgba(232,48,42,0.02)_40%,transparent_80%)] pointer-events-none z-0"
             />
-            <motion.div
-              animate={{
-                x: [0, 30, -40, 0],
-                y: [0, -30, 45, 0],
-                scale: [1, 0.95, 1.05, 1],
-              }}
-              transition={{
-                duration: 18,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+            <div
               className="absolute top-[45%] left-[-20%] w-[750px] h-[750px] bg-[radial-gradient(circle,rgba(232,48,42,0.10)_0%,rgba(232,48,42,0.01)_40%,transparent_80%)] pointer-events-none z-0"
             />
-            <motion.div
-              animate={{
-                x: [0, -25, 35, 0],
-                y: [0, 40, -25, 0],
-                scale: [1, 1.1, 0.95, 1],
-              }}
-              transition={{
-                duration: 25,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+            <div
               className="absolute bottom-[-15%] left-[20%] w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(232,48,42,0.12)_0%,rgba(232,48,42,0.02)_40%,transparent_80%)] pointer-events-none z-0"
             />
 
@@ -1575,27 +1539,6 @@ export default function App() {
           )}
 
         </AnimatePresence>
-        {/* Background Idle Prewarmer for Figma Prototypes so assets are cached before navigation */}
-        {preloadFigma && !activeProjectPage && (
-          <iframe
-            src="https://embed.figma.com/proto/itW6BttAowSoBwLm60A802/Italo---Progetto-esame-finale?node-id=2319-5721&scaling=scale-down&content-scaling=fixed&page-id=43%3A60&starting-point-node-id=2270%3A3059&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=000000"
-            tabIndex={-1}
-            aria-hidden="true"
-            title="Preload Figma Prototype"
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '380px',
-              height: '750px',
-              opacity: 0.001,
-              pointerEvents: 'none',
-              zIndex: -9999,
-              border: 'none',
-            }}
-          />
-        )}
-
       </div>
     </SmoothScroll>
   );

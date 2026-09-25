@@ -373,3 +373,28 @@ body::after {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+/* One composited layer replaces dozens of independently animated SVG paths. */
+@keyframes home-paths-drift {
+  0%, 100% {
+    transform: translate3d(-5%, -2.5%, 0) rotate(-0.8deg) scale(1.04);
+  }
+  50% {
+    transform: translate3d(5%, 2.5%, 0) rotate(0.8deg) scale(1.08);
+  }
+}
+
+.home-paths-drift {
+  animation: home-paths-drift 16s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-paths-drift {
+    animation: none;
+    transform: scale(1.02);
+  }
+}
