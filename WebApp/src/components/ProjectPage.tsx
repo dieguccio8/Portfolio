@@ -54,6 +54,7 @@ import ItaloDesignSystemSection from './ItaloDesignSystemSection';
 import ItaloBeforeAfterSection from './ItaloBeforeAfterSection';
 import ItaloPrototypeSection from './ItaloPrototypeSection';
 import { ProjectHeroSection } from './ProjectHeroSection';
+import { OrtoDesignSystemSection } from './OrtoDesignSystemSection';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -243,22 +244,12 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
   const [activeResearchTab, setActiveResearchTab] = useState<'desk' | 'sondaggi' | 'interviste'>('desk');
   const [activeProtoTab, setActiveProtoTab] = useState<'mobile' | 'totem'>('mobile');
   const ortoSectionRef = React.useRef<HTMLDivElement>(null);
-  const [shouldLoadOrtoIframe, setShouldLoadOrtoIframe] = useState(false);
+  const [shouldLoadOrtoIframe, setShouldLoadOrtoIframe] = useState(project.id === 'aetheris');
   const [isOrtoLoaded, setIsOrtoLoaded] = useState(false);
 
   useEffect(() => {
-    if (!ortoSectionRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoadOrtoIframe(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '350px' }
-    );
-    observer.observe(ortoSectionRef.current);
-    return () => observer.disconnect();
+    // Mount the Orto prototypes immediately so they are ready before the user reaches this section.
+    setShouldLoadOrtoIframe(project.id === 'aetheris');
   }, [project.id]);
   const [copiedLink, setCopiedLink] = useState(false);
   const [wireframeImages, setWireframeImages] = useState<{ [key: string]: string }>(() => {
@@ -2028,7 +2019,14 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
           {/* COLOR PALETTE & TYPOGRAPHY STYLE GUIDE */}
           {isAetheris ? (
-            <div className="flex flex-col gap-6 text-left" id="orto-design-system-section">
+            <>
+              <OrtoDesignSystemSection
+                lang={lang}
+                copiedColor={copiedColor}
+                onCopyHex={handleCopyHex}
+              />
+              {false && (
+            <div className="flex flex-col gap-6 text-left">
               {/* Header section removed per request */}
 
               {/* Design System Bento Grid */}
@@ -2187,6 +2185,8 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
 
             </div>
+              )}
+            </>
           ) : (
             !isKinetics && (
               <div className={`flex flex-col gap-6 pt-10 border-t ${isAetheris ? 'border-white/5' : 'border-neutral-100'}`}>
@@ -2304,7 +2304,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                     data-hide-cursor="true"
                     onMouseEnter={() => window.dispatchEvent(new CustomEvent('hide-custom-cursor'))}
                     onMouseLeave={() => window.dispatchEvent(new CustomEvent('show-custom-cursor'))}
-                    className="relative w-[340px] sm:w-[380px] md:w-[400px] h-[650px] sm:h-[740px] lg:h-[800px] mt-2 flex justify-center items-center"
+                    className="relative w-[340px] sm:w-[380px] md:w-[400px] h-[650px] sm:h-[740px] lg:h-[800px] mt-2 flex justify-center items-center overflow-hidden"
                   >
                     {/* Elegant Preloader Skeleton while Figma loads in the background */}
                     <AnimatePresence>
@@ -2354,7 +2354,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             style={{ border: 'none', width: '100%', height: '100%' }}
                             width="100%"
                             height="100%"
-                            loading="lazy"
+                            loading="eager"
                             allow="clipboard-read; clipboard-write; fullscreen"
                             onLoad={() => setIsOrtoLoaded(true)}
                             className={`transition-opacity duration-500 ease-in-out ${isOrtoLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -2381,11 +2381,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                             style={{ border: 'none', width: '100%', height: '100%' }}
                             width="100%"
                             height="100%"
-                            loading="lazy"
+                            loading="eager"
                             allow="clipboard-read; clipboard-write; fullscreen"
                             onLoad={() => setIsOrtoLoaded(true)}
-                            className={`transition-opacity duration-500 ease-in-out ${isOrtoLoaded ? 'opacity-100' : 'opacity-0'}`}
-                            src="https://embed.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
+                            className={`orto-mobile-prototype-crop transition-opacity duration-500 ease-in-out ${isOrtoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            src="https://embed.figma.com/proto/mI6bKgIz6OfwPeo7GeoaDK/ORTO-BOTANICO?node-id=154-6774&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=0&hide-ui=1&embed-host=share&bg-color=050505"
                             allowFullScreen
                           />
                         </motion.div>
@@ -2409,7 +2409,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                       <a
                         href={activeProtoTab === 'totem'
                           ? "https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=1509-1744&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&show-proto-sidebar=1"
-                          : "https://www.figma.com/proto/gnhkgpC09NhaH8PuuA87HM/UI-UX-Orto-Botanico?node-id=154-6774&t=TiqHn75nSyihqQRA-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774&show-proto-sidebar=1"
+                          : "https://www.figma.com/proto/mI6bKgIz6OfwPeo7GeoaDK/ORTO-BOTANICO?node-id=154-6774&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=154%3A6774"
                         }
                         target="_blank"
                         rel="noopener noreferrer"

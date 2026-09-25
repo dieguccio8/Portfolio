@@ -392,6 +392,12 @@ body::after {
   -webkit-backface-visibility: hidden;
 }
 
+/* Crop the Figma chrome and surrounding canvas, leaving only the mobile device. */
+.orto-mobile-prototype-crop {
+  transform-origin: top left;
+  transform: translate3d(-5.5%, -7.1%, 0) scale(1.12);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-paths-drift {
     animation: none;
