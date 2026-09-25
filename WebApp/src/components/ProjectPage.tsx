@@ -47,7 +47,6 @@ import { SmoothScroll } from './SmoothScroll';
 import { ScrollProgress } from './ScrollProgress';
 import { ScrollReveal } from './ScrollReveal';
 import { FloatingPaths } from './ui/background-paths';
-import ThreeDMarquee from './ui/3d-marquee';
 import CardFanCarousel from './ui/card-fan-carousel';
 import WireframeComparisonCarousel from './WireframeComparisonCarousel';
 import ItaloDesignSystemSection from './ItaloDesignSystemSection';
@@ -55,6 +54,8 @@ import ItaloBeforeAfterSection from './ItaloBeforeAfterSection';
 import ItaloPrototypeSection from './ItaloPrototypeSection';
 import { ProjectHeroSection } from './ProjectHeroSection';
 import { OrtoDesignSystemSection } from './OrtoDesignSystemSection';
+import { OrtoAppShowcaseSection } from './OrtoAppShowcaseSection';
+import { OrtoInteractivePrototypeSection } from './OrtoInteractivePrototypeSection';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -2249,12 +2250,11 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
           {isAetheris && (
             <>
-              {/* 3D Marquee Section */}
-              <div className="pt-16 pb-16 md:pb-24 lg:pb-32 w-[100vw] relative left-1/2 -translate-x-1/2 overflow-hidden">
-                <ThreeDMarquee />
-              </div>
+              <OrtoAppShowcaseSection />
 
-              <div ref={ortoSectionRef} className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center justify-items-center mt-8 md:mt-12 mb-16 w-full" id="orto-interactive-prototypes-section">
+              <OrtoInteractivePrototypeSection lang={lang} />
+              {false && (
+              <div ref={ortoSectionRef} className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center justify-items-center mt-8 md:mt-12 mb-16 w-full">
 
                 {/* Left Column: Prototypes */}
                 <div className="flex flex-col gap-6 items-center justify-center w-full">
@@ -2432,6 +2432,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
                 </div>
 
               </div>
+              )}
             </>
           )}
         </div>
