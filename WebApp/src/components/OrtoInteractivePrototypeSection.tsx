@@ -33,7 +33,7 @@ export function OrtoInteractivePrototypeSection({ lang }: { lang: string }) {
           data-hide-cursor="true"
           onMouseEnter={() => window.dispatchEvent(new CustomEvent('hide-custom-cursor'))}
           onMouseLeave={() => window.dispatchEvent(new CustomEvent('show-custom-cursor'))}
-          className={`relative h-[650px] sm:h-[740px] lg:h-[800px] mt-2 flex justify-center items-center overflow-hidden bg-[#050505] transition-[width] duration-300 ${activeTab === 'totem' ? 'w-[min(94vw,460px)] md:w-[480px]' : 'w-[340px] sm:w-[380px] md:w-[400px]'}`}
+          className={`relative mt-2 flex justify-center items-center overflow-hidden bg-transparent transition-[width,height] duration-300 ${activeTab === 'totem' ? 'w-[min(92vw,384px)] h-[692px]' : 'w-[340px] sm:w-[380px] md:w-[400px] h-[650px] sm:h-[740px] lg:h-[800px]'}`}
         >
           <AnimatePresence>
             {!isLoaded && (
@@ -49,8 +49,8 @@ export function OrtoInteractivePrototypeSection({ lang }: { lang: string }) {
             )}
           </AnimatePresence>
 
-          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: activeTab === 'totem' ? 1 : 0, y: activeTab === 'totem' ? 0 : 15 }} transition={{ duration: 0.3 }} className="absolute inset-0 w-full h-full flex justify-center items-center overflow-hidden bg-[#050505]" style={{ pointerEvents: activeTab === 'totem' ? 'auto' : 'none', zIndex: activeTab === 'totem' ? 10 : 1 }}>
-            <iframe id="totem-prototype-iframe" title="Prototipo totem Orto Botanico" style={{ border: 'none', width: '100%', height: '100%' }} width="100%" height="100%" loading="eager" allow="clipboard-read; clipboard-write; fullscreen" onLoad={() => setIsLoaded(true)} className={`transition-opacity duration-500 ease-in-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`} src="https://embed.figma.com/proto/mI6bKgIz6OfwPeo7GeoaDK/ORTO-BOTANICO?node-id=10026-27922&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share" allowFullScreen />
+          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: activeTab === 'totem' ? 1 : 0, y: activeTab === 'totem' ? 0 : 15 }} transition={{ duration: 0.3 }} className="absolute inset-0 w-full h-full flex justify-center items-center overflow-hidden bg-transparent" style={{ pointerEvents: activeTab === 'totem' ? 'auto' : 'none', zIndex: activeTab === 'totem' ? 10 : 1 }}>
+            <iframe id="totem-prototype-iframe" title="Prototipo totem Orto Botanico" style={{ border: 'none' }} width="480" height="800" loading="eager" allow="clipboard-read; clipboard-write; fullscreen" onLoad={() => setIsLoaded(true)} className={`orto-totem-prototype-crop transition-opacity duration-500 ease-in-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`} src="https://embed.figma.com/proto/mI6bKgIz6OfwPeo7GeoaDK/ORTO-BOTANICO?node-id=10026-27922&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share&bg-color=050505" allowFullScreen />
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: activeTab === 'mobile' ? 1 : 0, y: activeTab === 'mobile' ? 0 : 15 }} transition={{ duration: 0.3 }} className="absolute inset-0 w-full h-full flex justify-center items-center" style={{ pointerEvents: activeTab === 'mobile' ? 'auto' : 'none', zIndex: activeTab === 'mobile' ? 10 : 1 }}>

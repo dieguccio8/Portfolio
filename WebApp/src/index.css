@@ -398,6 +398,19 @@ body::after {
   transform: translate3d(-5.5%, -7.1%, 0) scale(1.12);
 }
 
+/* Crop Figma's prototype chrome while preserving the interactive totem frame. */
+.orto-totem-prototype-crop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 480px !important;
+  height: 800px !important;
+  max-width: none;
+  transform-origin: top left;
+  transform: translate3d(-67px, -64px, 0) scale(1.08);
+  background: #050505;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-paths-drift {
     animation: none;
