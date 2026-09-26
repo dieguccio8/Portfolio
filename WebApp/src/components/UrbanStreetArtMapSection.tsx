@@ -268,7 +268,12 @@ export const UrbanStreetArtMapSection: React.FC = () => {
 
   return (
     // Rimosso overflow-hidden per permettere al bagliore sfocato di sfumare dolcemente sopra e sotto senza tagli netti
-    <div className="relative w-[100vw] left-1/2 -translate-x-1/2 min-h-[100vh] py-20 bg-transparent flex items-center justify-center">
+    <section
+      id="urban-streetart-adaptability"
+      data-project-section="08-adaptability"
+      aria-label="Adattabilità Urban StreetArt Sicily"
+      className="relative w-[100vw] left-1/2 -translate-x-1/2 min-h-[100vh] py-20 bg-transparent flex items-center justify-center"
+    >
       <AdattabilitaMarquee />
       
       {/* Dynamic Background Image for Region */}
@@ -311,6 +316,6 @@ export const UrbanStreetArtMapSection: React.FC = () => {
           <DynamicLogo region={region} onClick={cycleRegion} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

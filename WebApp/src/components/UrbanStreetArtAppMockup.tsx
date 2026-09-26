@@ -41,7 +41,12 @@ const col5 = [...column5Images, ...column5Images];
 
 export const UrbanStreetArtAppMockup: React.FC = () => {
   return (
-    <div className="relative w-full flex flex-col xl:flex-row items-center justify-center gap-12 xl:gap-20 py-32 px-6 xl:px-12 max-w-[1800px] mx-auto">
+    <section
+      id="urban-streetart-responsive-app"
+      data-project-section="07-responsive-app"
+      aria-label="Applicazione responsive Urban StreetArt Sicily"
+      className="relative w-full flex flex-col xl:flex-row items-center justify-center gap-12 xl:gap-20 py-32 px-6 xl:px-12 max-w-[1800px] mx-auto"
+    >
       
       {/* Background Ambient Blobs */}
       <div className="absolute top-1/4 left-[10%] w-[500px] h-[500px] bg-[#FCD306]/20 rounded-full blur-[140px] pointer-events-none z-0" />
@@ -241,6 +246,6 @@ export const UrbanStreetArtAppMockup: React.FC = () => {
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white rounded-full z-50 pointer-events-none" />
       </div>
 
-    </div>
+    </section>
   );
 };

@@ -11,6 +11,7 @@ import AuroraBackground from './ui/aurora-background';
 import IphoneMockup3D from './IphoneMockup3D';
 import { UrbanStreetArtAppMockup } from './UrbanStreetArtAppMockup';
 import { UrbanStreetArtMapSection } from './UrbanStreetArtMapSection';
+import { UrbanStreetArtMagazineSection } from './UrbanStreetArtMagazineSection';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -256,13 +257,7 @@ export default function KineticsLowerSections({
       <UrbanStreetArtMapSection />
 
       {/* MAGAZINE MOCKUP */}
-      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh]">
-        <img 
-          src="./Images/Project 02/Mockup/mockup_magazine.jpg" 
-          alt="Urban StreetArt Sicily Magazine Mockup" 
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
+      <UrbanStreetArtMagazineSection />
     </div>
   );
 }
