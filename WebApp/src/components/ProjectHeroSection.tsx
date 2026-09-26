@@ -38,7 +38,12 @@ export function ProjectHeroSection({
   heroImage,
 }: ProjectHeroSectionProps) {
   return (
-    <section id="project-hero" className={`relative w-full pt-20 min-h-[100svh] flex flex-col justify-end p-6 sm:p-12 md:p-16 overflow-hidden ${isKinetics ? 'bg-[#0D0D0D]' : ''}`}>
+    <section
+      id={isKinetics ? 'urban-streetart-hero' : 'project-hero'}
+      data-project-section={isKinetics ? '01-hero' : undefined}
+      aria-label={isKinetics ? 'Hero Urban StreetArt Sicily' : undefined}
+      className={`relative w-full pt-20 min-h-[100svh] flex flex-col justify-end p-6 sm:p-12 md:p-16 overflow-hidden ${isKinetics ? 'bg-[#0D0D0D]' : ''}`}
+    >
       <div className="absolute inset-0 z-0">
         {isAetheris ? (
           <video

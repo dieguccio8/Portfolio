@@ -40,7 +40,6 @@ import InteractiveBentoSection from './InteractiveBentoSection';
 import KineticsLowerSections from './KineticsLowerSections';
 
 import { AetherisLowerSections } from './AetherisLowerSections';
-import { LogoMorph } from './LogoMorph';
 import IphoneMockup3D from './IphoneMockup3D';
 import { CustomCursor } from './CustomCursor';
 import { SmoothScroll } from './SmoothScroll';
@@ -56,6 +55,7 @@ import { ProjectHeroSection } from './ProjectHeroSection';
 import { OrtoDesignSystemSection } from './OrtoDesignSystemSection';
 import { OrtoAppShowcaseSection } from './OrtoAppShowcaseSection';
 import { OrtoInteractivePrototypeSection } from './OrtoInteractivePrototypeSection';
+import { UrbanStreetArtIntroductionSection } from './UrbanStreetArtIntroductionSection';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -481,39 +481,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
             category={getLocalizedField('category')}
             heroImage={wireframeImages[`hero_${project.id}`]}
           />
-        {/* Marquee Introduzione per Project 02 (Kinetics) */}
-        {isKinetics && (
-          <div className="relative left-1/2 -translate-x-1/2 w-[100vw] overflow-hidden border-b-2 border-[#0D0D0D] py-2 sm:py-3 z-20 flex items-center bg-[#FCD306]">
-            <motion.div
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
-              className="flex whitespace-nowrap gap-8 text-[#0D0D0D] font-urbanist font-black text-xl sm:text-2xl uppercase tracking-widest"
-            >
-              {[...Array(20)].map((_, i) => (
-                <React.Fragment key={i}>
-                  <span>INTRODUZIONE</span>
-                  <span className="text-[#0D0D0D] text-lg sm:text-xl">✦</span>
-                </React.Fragment>
-              ))}
-            </motion.div>
-          </div>
-        )}
-
-        {/* Nuova sezione: Logo Prima/Dopo o Problem Statement */}
-        {isKinetics && (
-          <section className="w-full relative z-20 flex flex-col items-center justify-center min-h-screen py-20 px-6 sm:px-12 md:px-16 max-w-[1600px] mx-auto">
-            <div className="w-full max-w-5xl p-10 md:p-16 lg:p-0 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-              <div className="flex flex-col items-center justify-center gap-8">
-                <LogoMorph />
-              </div>
-              <div className="flex items-center">
-                <p className="text-white font-urbanist text-xl md:text-2xl lg:text-[28px] leading-[1.4] font-light tracking-tight">
-                  <span className="font-semibold text-[#FCD306]">Rebranding dell'identità visiva di Urban StreetArt Sicily:</span> pagina Instagram dedicata alla diffusione dell'arte urbana in Sicilia, con l'obiettivo di trasformarla in un vero e proprio portale digitale.
-                </p>
-              </div>
-            </div>
-          </section>
-        )}
+        {isKinetics && <UrbanStreetArtIntroductionSection />}
 
         {/* 2.4 Introduction Section for Chronos */}
         {isChronos && (

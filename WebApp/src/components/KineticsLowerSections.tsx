@@ -1,4 +1,6 @@
 import React from 'react';
+import { UrbanStreetArtObjectiveSection } from './UrbanStreetArtObjectiveSection';
+import { UrbanStreetArtMockupShowcaseSection } from './UrbanStreetArtMockupShowcaseSection';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, AlertTriangle, Check, ArrowRight, Star, MapPin, Clock, FileQuestion } from 'lucide-react';
 import { StickyCard002 } from './ui/sticky-card';
@@ -181,7 +183,6 @@ export default function KineticsLowerSections({
   setActiveResearchTab,
   lang
 }: Props) {
-  const [mobileImageIndex, setMobileImageIndex] = React.useState(0);
   const pinRef = React.useRef<HTMLDivElement>(null);
 
   // Using a ref to hold the current tab for the GSAP callback
@@ -221,13 +222,6 @@ export default function KineticsLowerSections({
     });
   }, { scope: pinRef });
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setMobileImageIndex(prev => (prev + 1) % 3);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
   // Update tab click to use GSAP ScrollTo plugin if available, or just window.scrollTo
   const handleTabClick = (tab: string, index: number) => {
     if (!pinRef.current) return;
@@ -244,58 +238,11 @@ export default function KineticsLowerSections({
 
   return (
     <div className="flex flex-col gap-24 sm:gap-32 w-full">
-      {/* YELLOW OBJECTIVE SECTION */}
-      <div className="relative w-[100vw] left-1/2 -translate-x-1/2 bg-[#FCD306] z-10 mt-12 -mb-4 sm:-mb-8 min-h-screen py-20 flex flex-col items-center justify-center text-[#111111] px-6 overflow-hidden">
-        
-        {/* Decorative Triangles (Strictly following original logo mark aspect ratio and orientation) */}
-        <svg viewBox="0 0 230 208" className="absolute top-0 right-0 w-64 md:w-[600px] h-auto opacity-[0.05] translate-x-1/4 pointer-events-none">
-          <path d="M229.9 0L229.8 208L0 0Z" fill="#111111"/>
-        </svg>
-        <svg viewBox="0 0 230 208" className="absolute bottom-0 left-0 w-48 md:w-[400px] h-auto opacity-[0.1] -translate-x-1/4 translate-y-1/4 pointer-events-none">
-          <path d="M229.9 0L229.8 208L0 0Z" fill="#ffffff"/>
-        </svg>
-        <svg viewBox="0 0 230 208" className="absolute top-1/4 left-[8%] w-12 md:w-20 h-auto opacity-40 pointer-events-none">
-          <path d="M229.9 0L229.8 208L0 0Z" fill="#111111"/>
-        </svg>
-        <svg viewBox="0 0 230 208" className="absolute bottom-1/4 right-[10%] w-10 md:w-16 h-auto opacity-50 pointer-events-none hidden md:block">
-          <path d="M229.9 0L229.8 208L0 0Z" fill="#ffffff"/>
-        </svg>
+      <UrbanStreetArtObjectiveSection />
 
-        <div className="relative z-10 flex flex-col items-center">
-          <h2 className="text-7xl sm:text-[100px] md:text-[140px] font-urbanist font-black tracking-tighter leading-none mb-6 sm:mb-8 text-center uppercase">
-            Obiettivo
-          </h2>
-          <p className="max-w-4xl text-center text-lg sm:text-xl md:text-3xl font-light leading-[1.4] tracking-tight text-[#111111]/90">
-            Creare un’identità visiva forte, contemporanea e coerente, capace di rappresentare l’energia dell’arte urbana e rendere il progetto riconoscibile su tutti i canali digitali.
-          </p>
-        </div>
-      </div>
+      <LogoGridConstruction />
 
-      {/* 02 / LOGO CONSTRUCTION GRID */}
-      <div className="relative z-20 w-full">
-        <LogoGridConstruction />
-      </div>
-
-      {/* 03.5 / LOOPING MOCKUPS (Restored) */}
-      <div className="relative z-10 flex flex-col justify-center items-center w-[100vw] left-1/2 -translate-x-1/2 h-[60vh] md:h-[100vh] mt-0">
-        <div className="relative w-full h-full">
-          <img
-            src="./Images/Project 02/Mockup/mockup_tshirt.jpg"
-            alt="Urban StreetArt Sicily Mockup T-Shirt"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 0 ? 'opacity-100' : 'opacity-0'}`}
-          />
-          <img
-            src="./Images/Project 02/Mockup/mockup_cappello.jpg"
-            alt="Urban StreetArt Sicily Mockup Cappello"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 1 ? 'opacity-100' : 'opacity-0'}`}
-          />
-          <img
-            src="./Images/Project 02/Mockup/mockup_totebag.jpg"
-            alt="Urban StreetArt Sicily Mockup Tote Bag"
-            className={`absolute inset-0 w-full h-full object-cover object-[center_75%] transition-opacity duration-1000 shadow-2xl ${mobileImageIndex === 2 ? 'opacity-100' : 'opacity-0'}`}
-          />
-        </div>
-      </div>
+      <UrbanStreetArtMockupShowcaseSection />
 
       {/* DESIGN SYSTEM SECTION */}
       <div className="-mt-24 sm:-mt-32 w-full">

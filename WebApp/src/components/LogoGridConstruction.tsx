@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useMotionTemplate, useSpring } from 'framer-motion';
 
 export default function LogoGridConstruction() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-10%" });
 
   // Spotlight animation state
@@ -44,9 +44,12 @@ export default function LogoGridConstruction() {
   };
 
   return (
-    <div 
+    <section
       ref={containerRef}
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-12"
+      id="urban-streetart-logo-construction"
+      data-project-section="04-logo-construction"
+      aria-label="Costruzione del logo Urban StreetArt Sicily"
+      className="relative z-20 w-full min-h-screen flex items-center justify-center overflow-hidden py-12"
     >
       <div className="relative w-[60%] max-w-[500px] flex items-center justify-center">
         
@@ -153,6 +156,6 @@ export default function LogoGridConstruction() {
         className="absolute z-40 w-[80%] max-w-[700px] h-[80%] cursor-crosshair"
       />
 
-    </div>
+    </section>
   );
 }
