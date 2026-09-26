@@ -56,6 +56,7 @@ import { OrtoDesignSystemSection } from './OrtoDesignSystemSection';
 import { OrtoAppShowcaseSection } from './OrtoAppShowcaseSection';
 import { OrtoInteractivePrototypeSection } from './OrtoInteractivePrototypeSection';
 import { UrbanStreetArtIntroductionSection } from './UrbanStreetArtIntroductionSection';
+import { ProjectFooter } from './ProjectFooter';
 
 import HighlightCard from './ui/highlight-card';
 import AuroraBackground from './ui/aurora-background';
@@ -315,8 +316,6 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
     setCopiedColor(hex);
     setTimeout(() => setCopiedColor(null), 2000);
   };
-
-  const otherProjects = allProjects.filter(p => p.id !== project.id);
 
   const isAetheris = project.id === 'aetheris';
   const isKinetics = project.id === 'kinetics';
@@ -2410,65 +2409,13 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
         </div>
 
-        {/* 4. OTHER PROJECTS NAVIGATOR (Bottom hopper) */}
-        <section className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 mt-20 border-t pt-16 ${isAetheris ? 'border-white/5' : 'border-white/5'}`}>
-          <span className={`text-sm font-raleway uppercase tracking-[0.25em] block mb-4 text-center ${isAetheris ? 'text-[#068B35] font-bold' : 'text-[#E8302A]'}`}>
-            {lang === 'it' ? 'Prossima Esplorazione' : 'Next Project Exploration'}
-          </span>
-          <h3 className={`text-2xl sm:text-3xl font-bold tracking-tight text-center mb-10 ${isAetheris ? 'text-white font-raleway' : 'text-white'}`}>
-            {lang === 'it' ? 'Esplora altre opere' : 'Explore other works'}
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-            {otherProjects.map((p) => (
-              <div
-                key={p.id}
-                onClick={() => onNavigateToProject(p)}
-                className={`group relative h-48 rounded-[1.5rem] overflow-hidden border cursor-pointer shadow-xl hover:scale-[1.02] transition-all duration-300 ${isAetheris
-                  ? 'border-[#068B35]/15 bg-[#131514] hover:border-[#068B35]/40'
-                  : 'border-white/10 bg-neutral-950 hover:border-white/30'
-                  }`}
-              >
-                <img
-                  src={p.heroImage}
-                  alt={p.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover grayscale brightness-[0.3] group-hover:grayscale-0 group-hover:brightness-50 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-                  <div>
-                    <span className={`text-xs font-raleway uppercase tracking-widest block mb-1 ${isAetheris ? 'text-[#068B35]' : isChronos ? 'text-[#B40E3C]' : 'text-[#E8302A]'}`}>
-                      {p.year} / {p.category}
-                    </span>
-                    <h4 className="text-lg font-bold text-white uppercase">{p.title}</h4>
-                  </div>
-                  <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all ${isAetheris
-                    ? 'bg-white/5 border-[#068B35]/30 text-emerald-400 group-hover:bg-[#068B35] group-hover:text-white'
-                    : 'bg-white/5 border-white/10 text-white/60 group-hover:bg-white group-hover:text-black'
-                    }`}>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 5. BACK TO HOME CTA */}
-        <section className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 mt-16 text-center">
-          <button
-            onClick={onClose}
-            className={`px-8 py-3 font-bold uppercase tracking-widest text-sm rounded-full inline-flex items-center gap-2 hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-lg ${isAetheris
-              ? 'bg-[#131514] text-[#068B35] border border-[#068B35]/30 hover:bg-[#068B35]/10 hover:border-[#068B35]/55 hover:text-emerald-400 shadow-xl'
-              : 'bg-white text-black hover:bg-neutral-100'
-              }`}
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>{lang === 'it' ? 'Torna alla Home' : 'Back to Home'}</span>
-          </button>
-        </section>
+        <ProjectFooter
+          currentProjectId={project.id}
+          projects={allProjects}
+          lang={lang}
+          onNavigateToProject={onNavigateToProject}
+          onBackToHome={onClose}
+        />
 
       </div>
     </SmoothScroll>

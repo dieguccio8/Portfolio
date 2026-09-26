@@ -417,3 +417,39 @@ body::after {
     transform: scale(1.02);
   }
 }
+/* Shared project footer cards */
+.project-footer-card {
+  border-color: var(--project-card-color);
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 420ms ease,
+    border-color 420ms ease;
+}
+
+.project-footer-card__art {
+  filter: grayscale(1);
+  transition: filter 420ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-footer-card:hover,
+.project-footer-card:focus-visible {
+  transform: translateY(-4px) scale(1.012);
+  box-shadow: 0 0 28px var(--project-card-glow);
+}
+
+.project-footer-card:hover .project-footer-card__art,
+.project-footer-card:focus-visible .project-footer-card__art {
+  filter: grayscale(0);
+  transform: scale(1.012);
+}
+
+.project-footer-card:focus-visible {
+  outline: 2px solid var(--project-card-color);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-footer-card,
+  .project-footer-card__art {
+    transition-duration: 0.01ms;
+  }
+}
