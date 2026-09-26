@@ -108,7 +108,7 @@ export function OrtoResearchMethodologySection({ activeResearchTab, setActiveRes
   };
 
   return (
-    <section ref={pinRef} id="research-methodology" className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] -mt-4 z-10">
+    <section ref={pinRef} id="research-methodology" className="relative left-1/2 -translate-x-1/2 w-[100vw] h-[300vh] z-10">
       <div className="orto-research-sticky sticky top-0 w-full h-[100svh] overflow-hidden flex flex-col pb-10 sm:pb-20">
         <AuroraBackground className="orto-research-aurora !bg-transparent h-full w-full pt-24 sm:pt-40 pb-10 sm:pb-20">
           <div className="w-full max-w-7xl mx-auto px-5 relative z-10 flex flex-col h-full">

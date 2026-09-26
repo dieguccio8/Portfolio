@@ -405,6 +405,14 @@ export default function IphoneMockup3D({ imagePath }: { imagePath?: string } = {
     <ErrorBoundary fallback={(err) => <div className="text-red-500 p-4 border border-red-500 rounded bg-red-900/20">Error 3D: {err.message}</div>}>
       <div ref={containerRef} id="orto-iphone-3d-section" className="relative left-1/2 w-screen -translate-x-1/2 h-[300svh]">
         <div className="sticky top-0 w-screen h-[100svh] overflow-hidden">
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 z-30 h-[clamp(8rem,20vh,15rem)] pointer-events-none bg-gradient-to-b from-[#050505] via-[#050505]/80 to-transparent"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 z-30 h-[clamp(8rem,20vh,15rem)] pointer-events-none bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"
+          />
           <AuroraBackground className="!bg-transparent h-full w-full">
             <div className="absolute inset-0 pointer-events-none flex flex-col justify-center pl-[5%] md:pl-[10%] lg:pl-[12%] pr-[5%] z-10">
               <div ref={titleRef} className="flex flex-col gap-6 max-w-xl md:max-w-2xl">

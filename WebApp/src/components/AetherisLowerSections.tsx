@@ -18,7 +18,9 @@ export function AetherisLowerSections({
   setActiveResearchTab,
 }: Props) {
   return (
-    <div className="flex flex-col gap-24 sm:gap-32 w-full">
+    <div className="flex flex-col gap-24 md:gap-32 w-full pt-24 md:pt-32">
+
+      <OrtoInteractivePhoneSection />
 
       <OrtoResearchMethodologySection
         activeResearchTab={activeResearchTab}
@@ -26,7 +28,7 @@ export function AetherisLowerSections({
       />
 
       {/* 02 / ANALYSIS & STRATEGY: PROBLEMS VS SOLUTIONS */}
-      <section id="problems-solutions" className="relative z-20 w-full -mt-[10vh] md:-mt-[25vh]">
+      <section id="problems-solutions" className="relative z-20 w-full">
         <InteractiveBentoSection />
       </section>
 
@@ -35,8 +37,6 @@ export function AetherisLowerSections({
       <OrtoUserPersonaSection />
 
       <OrtoTotemShowcaseSection />
-
-      <OrtoInteractivePhoneSection />
     </div>
   );
 }

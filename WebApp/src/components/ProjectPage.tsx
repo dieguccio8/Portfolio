@@ -857,7 +857,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
         )}
 
         {/* 4. FULL-WIDTH LOWER CASE STUDY SECTIONS */}
-        <div className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 flex flex-col gap-16 w-full pb-12 ${(isAetheris || isKinetics) ? '' : 'mt-16'}`}>
+        <div className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 flex flex-col gap-16 w-full ${isAetheris ? 'pb-0' : 'pb-12'} ${(isAetheris || isKinetics) ? '' : 'mt-16'}`}>
           {isKinetics ? (
             <KineticsLowerSections
               project={project}
@@ -2016,7 +2016,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
           )}
 
         </div>
-        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8">
+        <div className={`max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 ${isAetheris ? 'pt-24 md:pt-32' : 'pt-8'}`}>
 
           {/* COLOR PALETTE & TYPOGRAPHY STYLE GUIDE */}
           {isAetheris ? (
@@ -2246,7 +2246,7 @@ export default function ProjectPage({ project, onClose, onNavigateToProject, all
 
 
 
-        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10 pt-8 md:pt-12">
+        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 md:px-16 w-full relative z-10">
           {/* SEZIONE PROVALO (Sperimenta l’Esperienza) */}
           {isAetheris && (
             <>
